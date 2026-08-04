@@ -1,0 +1,119 @@
+generated: '2026-08-04'
+method: derived
+source: >-
+  openapi/crusoe-cloud-api-gateway-v1-openapi.json, https://docs.crusoecloud.com/reference/api/,
+  https://docs.crusoecloud.com/notifications/overview
+api: Crusoe Cloud API Gateway
+base_url: https://api.cloud.crusoe.ai/v1
+alternate_host: https://api.crusoecloud.com/v1
+authentication:
+  style: signed bearer token
+  detail: authentication/crusoe-authentication.yml
+  headers: [Authorization, X-Crusoe-Timestamp]
+versioning:
+  scheme: uri-path
+  current: v1
+  preview_track: v1alpha5
+  published_specs:
+  - https://api.cloud.crusoe.ai/v1/openapi.json
+  - https://api.cloud.crusoe.ai/v1alpha5/openapi.json
+  note: >-
+    Both v1 and v1alpha5 are served concurrently and are near-identical (150 paths / 232 operations
+    each). No version header, no date-pinning, no sunset headers observed.
+idempotency:
+  supported: false
+  evidence: >-
+    No Idempotency-Key header, no idempotency parameter, and no idempotency language anywhere in either
+    published Swagger document or in the API reference. Retries of create operations are not documented
+    as safe.
+  note: >-
+    Recorded honestly as absent — no Idempotency pointer is wired in apis.yml, because there is no
+    idempotency contract to point at.
+pagination:
+  styles:
+  - style: opaque-token
+    params: [next_token, prev_token, page_size]
+    response_fields: [next_token, prev_token]
+    used_by: [getAuditLogs, Foundry endpoints, Ccr listing endpoints]
+  - style: page-number
+    params: [page, limit, sort, sort_by]
+    used_by: [selected Foundry and usage endpoints]
+  note: >-
+    Pagination is not uniform across the surface — most collection endpoints (listInstances, listDisks,
+    listProjects, and the rest of the IaaS core) take no pagination parameters at all and return the
+    full collection under a top-level items array.
+collection_envelope:
+  shape: '{ "items": [ ... ] }'
+  note: List responses wrap results in an items array rather than returning a bare JSON array.
+async_operations:
+  supported: true
+  model: >-
+    Long-running create/update/delete calls on VMs, disks, snapshots, custom images, load balancers,
+    VPC resources, Kubernetes clusters and node pools, and Slurm clusters return an Operation object
+    (HTTP 200/202) rather than the finished resource. The caller polls the matching *Operation endpoint
+    until the operation reaches a terminal state.
+  operation_endpoints:
+  - getComputeVMsInstancesOperation
+  - getStorageDisksOperation
+  - getStorageSnapshotsOperation
+  - getCustomImagesOperation
+  - getKubernetesClustersOperation
+  - getKubernetesNodePoolsOperation
+  - getSlurmClusterOperation
+  - getSlurmNodesetOperation
+  - getExternalLoadBalancerOperation
+  - getNetworkingLoadBalancersOperation
+  - getNetworkingVPCNetworksOperation
+  - getNetworkingVPCSubnetsOperation
+  - getNetworkingVPCFirewallRulesOperation
+  - getAutoClusterOperation
+  response_schema: AsyncOperationResponse
+  operation_id_param: operation_id (path)
+scoping:
+  primary: project_id
+  detail: >-
+    175 of 232 operations carry a project_id path parameter; 16 carry organization_id and 12 carry
+    org_id. Projects sit inside organizations, and a default project is configured once in the CLI /
+    MCP profile.
+error_envelope:
+  format: custom
+  rfc9457: false
+  shape: '{ "code": "<http status as string>", "message": "<snake_case reason>" }'
+  required: [code, message]
+  content_type: application/json
+  detail: errors/crusoe-problem-types.yml
+rate_limiting:
+  api_gateway:
+    documented: false
+    headers_observed: none
+    note: >-
+      No published rate-limit policy and no X-RateLimit-* headers declared in the spec. A single
+      operation declares a 429 response; there is no documented Retry-After contract.
+  mcp_server:
+    client_side_limit: 60 requests per minute
+    enforced_by: '@crusoeai/cloud-mcp (client-side, to protect the caller''s API quota)'
+    source: https://docs.crusoecloud.com/reference/mcp-server
+  quotas:
+    supported: true
+    note: Organization- and project-level resource quotas are first-class and readable via the API.
+    operations: [listOrgQuotas, listProjectQuotas]
+    docs: https://docs.crusoecloud.com/usage-billing/viewing-quotas
+request_tracing:
+  request_id_header: none documented
+  audit_trail:
+    supported: true
+    operation: getAuditLogs
+    docs_note: who did what and when, across the organization
+content_types:
+  consumes: [application/json]
+  produces: [application/json]
+event_delivery:
+  supported: true
+  surface: webhooks
+  detail: asyncapi/crusoe-webhooks.yml
+cross_links:
+  authentication: authentication/crusoe-authentication.yml
+  errors: errors/crusoe-problem-types.yml
+  lifecycle: lifecycle/crusoe-lifecycle.yml
+  data_model: data-model/crusoe-data-model.yml
+  webhooks: asyncapi/crusoe-webhooks.yml

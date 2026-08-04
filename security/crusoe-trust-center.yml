@@ -1,0 +1,39 @@
+generated: '2026-08-04'
+method: searched
+probe: false
+source: https://trust.crusoe.ai/
+url: https://trust.crusoe.ai/
+note: >-
+  trust.crusoe.ai returns HTTP 200 but renders client-side, so the certification list is not present in
+  the served HTML. The certifications below are taken from Crusoe's own published newsroom/blog posts
+  and from the company-published llms.txt at https://www.crusoe.ai/llms.txt, not from the trust-center
+  DOM. The SOC 2 report itself is gated behind a request on the trust center.
+certifications:
+- name: SOC 2 Type II
+  source: https://www.crusoe.ai/resources/blog/crusoe-cloud-achieves-soc-2-type-ii
+- name: SOC 2 Type I
+  source: https://www.crusoe.ai/llms.txt
+- name: ISO 27001
+  source: https://www.crusoe.ai/resources/newsroom/crusoe-achieves-iso-27001-and-iso-42001-certifications
+- name: ISO 42001
+  detail: AI management system / responsible AI governance
+  source: https://www.crusoe.ai/resources/newsroom/crusoe-achieves-iso-27001-and-iso-42001-certifications
+- name: GDPR
+  source: https://www.crusoe.ai/llms.txt
+evidence:
+- source: https://trust.crusoe.ai/
+  http_status: 200
+  kind: trust-center
+  note: client-rendered; title "Crusoe Trust Center"
+- source: https://www.crusoe.ai/llms.txt
+  http_status: 200
+  kind: provider-published-llms-txt
+  quote: 'Compliance: SOC 2 Type I and Type II, GDPR, ISO 27001, ISO 42001 (AI governance)'
+- source: https://www.crusoe.ai/resources/blog/crusoe-cloud-achieves-soc-2-type-ii
+  kind: provider-blog
+- source: https://www.crusoe.ai/resources/newsroom/crusoe-achieves-iso-27001-and-iso-42001-certifications
+  kind: provider-newsroom
+related:
+  data_processing_terms: https://legal.crusoe.ai/#data-processing
+  acceptable_use_policy: https://legal.crusoe.ai/#aup
+  security_txt: well-known/crusoe-security.txt

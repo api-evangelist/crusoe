@@ -1,0 +1,127 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Crusoe Cloud API Gateway
+  version: 1.0.0
+extends: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+x-generated: '2026-08-04'
+x-method: generated
+x-source: >-
+  Derived from the harvested Swagger 2.0 document plus Crusoe's published API reference, notifications,
+  changelog, and deprecation-notice pages. The harvested spec is never mutated; every enhancement lives
+  here as an action.
+actions:
+- target: $.info
+  description: Record provenance and the API Evangelist artifact set for this contract.
+  update:
+    x-apievangelist-slug: crusoe
+    x-apievangelist-harvested: '2026-08-04'
+    x-apievangelist-source: https://api.cloud.crusoe.ai/v1/openapi.json
+    x-apievangelist-artifacts:
+      authentication: authentication/crusoe-authentication.yml
+      conventions: conventions/crusoe-conventions.yml
+      errors: errors/crusoe-problem-types.yml
+      lifecycle: lifecycle/crusoe-lifecycle.yml
+      conformance: conformance/crusoe-conformance.yml
+      data_model: data-model/crusoe-data-model.yml
+      webhooks: asyncapi/crusoe-webhooks.yml
+      mcp: mcp/crusoe-mcp.yml
+      tool_crosswalk: mcp/crusoe-tool-crosswalk.yml
+      skills: skills/_index.yml
+      agentic_access: agentic-access/crusoe-agentic-access.yml
+    x-apievangelist-contact: https://docs.crusoecloud.com/resources/support
+- target: $.info
+  description: >-
+    Add the missing terms/licence/contact block. The published document carries only a title,
+    description, and version — no contact, no licence, no terms of service.
+  update:
+    termsOfService: https://legal.crusoe.ai/#terms-of-service
+    contact:
+      name: Crusoe Cloud Support
+      url: https://docs.crusoecloud.com/resources/support
+      email: support@crusoecloud.com
+- target: $
+  description: >-
+    Declare the security schemes the API actually requires. The published Swagger document declares NO
+    securityDefinitions and NO global security, yet 221 of 232 operations return a 401. Without this,
+    no generated client or agent can authenticate from the contract alone. Modelled from
+    https://docs.crusoecloud.com/reference/api/.
+  update:
+    securityDefinitions:
+      CrusoeSignedRequest:
+        type: apiKey
+        name: Authorization
+        in: header
+        description: >-
+          Bearer <version:access_key_id:base64_encoded_signature>. The signature is an HMAC-SHA256 over
+          http_path, canonicalized_query_params, http_verb and the X-Crusoe-Timestamp value, joined by
+          newlines, keyed with the raw-urlsafe-base64-decoded secret key, then base64 encoded. Signature
+          version is 1.0. Must be sent together with an X-Crusoe-Timestamp RFC 3339 header.
+        x-apievangelist-note: >-
+          Modelled by API Evangelist from Crusoe's published API reference — this is NOT a provider
+          declaration. Crusoe should publish it in their own spec.
+        x-signature-version: '1.0'
+        x-companion-header: X-Crusoe-Timestamp
+        x-docs: https://docs.crusoecloud.com/reference/api/
+    security:
+    - CrusoeSignedRequest: []
+- target: $.externalDocs
+  description: Attach the documentation entry points.
+  update:
+    description: Crusoe Cloud documentation
+    url: https://docs.crusoecloud.com/
+- target: $.info
+  description: >-
+    Record the lifecycle facts that are published in prose but absent from the contract — the two live
+    version tracks, the absence of Sunset/Deprecation headers, and the deprecation-notice page.
+  update:
+    x-lifecycle:
+      current_version: v1
+      preview_version: v1alpha5
+      versioning_scheme: uri-path
+      sunset_header: false
+      deprecation_header: false
+      deprecation_notices: https://docs.crusoecloud.com/resources/deprecation_notices
+      changelog: https://docs.crusoecloud.com/resources/changelog
+      status_page: https://status.crusoecloud.com
+      sla: https://legal.crusoe.ai/#service-level-agreements
+- target: $.info
+  description: >-
+    Record the cross-cutting runtime semantics an agent needs and the contract does not state —
+    including the honest negative results (no idempotency, no rate-limit headers, no request-id).
+  update:
+    x-conventions:
+      idempotency: none
+      rate_limit_headers: none
+      request_id_header: none
+      pagination: mixed (opaque next_token/prev_token/page_size on some collections; page/limit on
+        others; most collections unpaginated)
+      collection_envelope: '{ "items": [ ... ] }'
+      async_operations: >-
+        Long-running mutations return an AsyncOperationResponse; poll the matching *Operation endpoint
+        until terminal.
+      error_envelope: '{ "code": "<http status string>", "message": "<snake_case reason>" }'
+      error_envelope_exception: >-
+        The Observability timeseries operations are gRPC-gateway proxied and return rpcStatus
+        ({code:int32, message, details[]}) instead.
+      rfc9457: false
+- target: $.info
+  description: Record the event/notification surface, which is documented but absent from the contract.
+  update:
+    x-events:
+      surface: webhooks
+      docs: https://docs.crusoecloud.com/notifications/overview
+      asyncapi_published: false
+      channels: [console, email, slack, webhook]
+      api_managed: false
+      catalog: asyncapi/crusoe-webhooks.yml
+- target: $.info
+  description: Record the agent-facing surface bound to this contract.
+  update:
+    x-agent-surfaces:
+      mcp_server: '@crusoeai/cloud-mcp'
+      mcp_transport: stdio
+      mcp_read_only: true
+      mcp_tool_count: 41
+      mcp_rest_coverage: 41 of 232 operations
+      agent_card: none published
+      llms_txt: https://docs.crusoecloud.com/llms.txt

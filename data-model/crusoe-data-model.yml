@@ -1,0 +1,204 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+api: Crusoe Cloud API Gateway
+note: >-
+  Entity graph derived from the 286 Swagger definitions and the id-reference fields they carry
+  (*_id properties and $ref links). Identifiers are opaque UUIDs — Crusoe publishes no typed id
+  prefixes, so no prefix table is recorded. Relationship rows are only emitted where a real field
+  in a real definition carries the reference.
+root:
+  organization:
+    entity: Entity
+    note: Top-level tenant. Holds billing, users, reservations, quotas, audit logs, SSO/SCIM, S3 keys.
+  project:
+    entity: Project
+    note: >-
+      The scoping unit for nearly all resources — 175 of 232 operations take a project_id path
+      parameter. Every compute, storage, networking, and orchestration resource belongs to exactly
+      one project.
+entities:
+- name: Entity
+  domain: organizations
+  description: Organization / account record, including billing address, tax id, and enabled features.
+  operations: [getOrganizations, updateOrganization]
+- name: Project
+  domain: organizations
+  description: Resource-scoping container inside an organization.
+  operations: [listProjects, getProject, createProject, updateProject, deleteProject]
+- name: Identity
+  domain: users
+  description: An authenticated user, their org role, role bindings, and SSO enforcement state.
+  operations: [getUserIdentity, updateUserIdentity]
+- name: Role
+  domain: iam
+  description: Named role with allowed scopes.
+  operations: [listRoles]
+- name: RoleBinding
+  domain: iam
+  description: Binding of a role to a customer within a scope object.
+  operations: [listRoleBindings, applyRoleBindings]
+- name: SSHKey
+  domain: users
+  description: User SSH public key injected into VMs at create time.
+  operations: [getSSHKeys, createSSHKey, deleteSSHKey]
+- name: SSOProvider
+  domain: identity
+  description: Organization SSO provider configuration (issuer URI, client id, email domains).
+  operations: [listSSOProviders, createSSOProvider, deleteSSOProvider]
+- name: SCIMIntegrationResponse
+  domain: identity
+  description: SCIM provisioning integration with its identity provider and token ids.
+  operations: [listSCIMIntegrations, getSCIMIntegration, createSCIMIntegration, updateSCIMIntegration, deleteSCIMIntegration]
+- name: InstanceV1
+  domain: compute
+  description: A virtual machine, with its disks, network interfaces, host channel adapters, location,
+    and billing/commitment terms.
+  operations: [listInstances, getInstance, createInstance, bulkCreateInstance, updateInstance, deleteInstance]
+- name: InstanceTemplate
+  domain: compute
+  description: Reusable VM configuration — image, disks, ssh keys, placement and maintenance policy.
+  operations: [listInstanceTemplates, getInstanceTemplate, createInstanceTemplate, deleteInstanceTemplate]
+- name: InstanceGroup
+  domain: compute
+  description: A managed set of instances created from a template, with desired and running counts.
+  operations: [listInstanceGroups, getInstanceGroup, createInstanceGroup, patchInstanceGroup, deleteInstanceGroup]
+- name: Image
+  domain: compute
+  description: Public curated VM image.
+  operations: [listImages, getImage]
+- name: DiskV1
+  domain: storage
+  description: Block storage volume, optionally attached to an instance.
+  operations: [listDisks, getDisk, createDisk, resizeDisk, deleteDisk]
+- name: DiskSnapshot
+  domain: storage
+  description: Point-in-time snapshot created from a disk.
+  operations: [listDiskSnapshots, getDiskSnapshot, createDiskSnapshot, renameDiskSnapshot, deleteDiskSnapshot]
+- name: Repository
+  domain: container-registry
+  description: Crusoe Container Registry repository, optionally mirroring an upstream registry.
+  operations: [listCcrRepositories, getCcrRepository, createCcrRepository, updateCcrRepositoryCredentials, deleteCcrRepository]
+- name: VPCNetwork
+  domain: networking
+  description: Virtual private cloud network with a CIDR, gateway, and subnets.
+  operations: [listVPCNetworks, getVPCNetwork, createVPCNetwork, patchVPCNetwork, deleteVPCNetwork]
+- name: VPCSubnet
+  domain: networking
+  description: Subnet inside a VPC network, in one location, with NAT gateways.
+  operations: [listVPCSubnets, getVPCSubnet, createVPCSubnet, patchVPCSubnet, deleteVPCSubnet]
+- name: VPCFirewallRule
+  domain: networking
+  description: Directional allow/deny rule scoped to a VPC network.
+  operations: [listVPCFirewallRules, getVPCFirewallRule, createVPCFirewallRule, patchVPCFirewallRule, deleteVPCFirewallRule]
+- name: ExternalLoadBalancer
+  domain: networking
+  description: Public load balancer with listen ports, backends, health checks, and a VIP.
+  operations: [listExternalLoadBalancers, getExternalLoadBalancer, createExternalLoadBalancer, updateExternalLoadBalancer, deleteExternalLoadBalancer]
+- name: LoadBalancer
+  domain: networking
+  description: Internal load balancer.
+  operations: [listLoadBalancers, getLoadBalancer, createLoadBalancer, patchLoadBalancer, deleteLoadBalancer]
+- name: IBNetwork
+  domain: networking
+  description: InfiniBand network with per-location capacities.
+  operations: [listIBNetworks, getIBNetwork]
+- name: IBPartition
+  domain: networking
+  description: InfiniBand partition carved out of an IB network for a cluster.
+  operations: [listIBPartitions, getIBPartition, createIBPartition, deleteIBPartition]
+- name: KubernetesCluster
+  domain: orchestration
+  description: Crusoe Managed Kubernetes control plane with add-ons, auth config, and node pools.
+  operations: [listClusters, getCluster, createCluster, updateCluster, deleteCluster, getClusterCredentials]
+- name: KubernetesNodePool
+  domain: orchestration
+  description: Group of nodes attached to a CMK cluster, backed by instances in a subnet.
+  operations: [listNodePools, getNodePool, createNodePool, updateNodePool, deleteNodePool, rotateNodePool]
+- name: SlurmNodeset
+  domain: orchestration
+  description: Nodeset inside a Slurm cluster, bound to a subnet and an IB transport partition.
+  operations: [listSlurmNodesets, getSlurmNodeset, createSlurmNodeset, updateSlurmNodeset, deleteSlurmNodeset]
+- name: Reservation
+  domain: capacity
+  description: Capacity reservation with contract dates, quantity, product line, and bound VM ids.
+  operations: [getReservations, getReservation]
+- name: NvlinkDomainSummaryResponse
+  domain: networking
+  description: NVLink domain with total and available nodes in a location.
+  operations: [listNvlinkDomains]
+- name: SelfServeDeploymentDetail
+  domain: foundry
+  description: Reserved-capacity inference deployment of a model on a flavor, with replica counts.
+  operations: [listFoundryDeployments, getFoundryDeployment, createFoundryDeployment, updateFoundryDeployment, deleteFoundryDeployment]
+- name: LoRAAdapterDeployment
+  domain: foundry
+  description: Fine-tuned LoRA adapter produced by a fine-tuning job and served on an endpoint.
+  operations: [listFoundryLoras, getFoundryLora, createFoundryLora, deleteFoundryLora]
+- name: DeployedModelEntry
+  domain: foundry
+  description: A model available for inference, with architecture, context length, and billing mode.
+  operations: [listFoundryDeployedModels, renameFoundryDeployedModel, updateFoundryDeployedModel]
+- name: SelfServeFlavor
+  domain: foundry
+  description: GPU flavor a self-serve deployment can run on, with per-hour price.
+  operations: [listFoundryFlavors]
+- name: CredentialResponse
+  domain: foundry
+  description: Vendor credential stored against a project for Foundry use.
+  operations: [listFoundryCredentials, getFoundryCredential, createFoundryCredential, updateFoundryCredential, deleteFoundryCredential]
+relationships:
+- {from: Project, to: Entity, kind: belongs_to, via: organization_id}
+- {from: Identity, to: RoleBinding, kind: has_many, via: role_bindings}
+- {from: RoleBinding, to: Role, kind: belongs_to, via: role_id}
+- {from: InstanceV1, to: Project, kind: belongs_to, via: project_id (path)}
+- {from: InstanceV1, to: AttachedDiskV1, kind: has_many, via: disks}
+- {from: InstanceV1, to: NetworkInterface, kind: has_many, via: network_interfaces}
+- {from: InstanceV1, to: InstanceGroup, kind: belongs_to, via: instance_group_id}
+- {from: InstanceV1, to: InstanceTemplate, kind: belongs_to, via: instance_template_id}
+- {from: InstanceV1, to: NvlinkDomainSummaryResponse, kind: belongs_to, via: nvlink_domain_id}
+- {from: InstanceGroup, to: InstanceTemplate, kind: belongs_to, via: template_id}
+- {from: InstanceGroup, to: InstanceDetails, kind: has_many, via: instances}
+- {from: InstanceGroup, to: Project, kind: belongs_to, via: project_id}
+- {from: InstanceTemplate, to: IBPartition, kind: belongs_to, via: ib_partition_id}
+- {from: InstanceTemplate, to: Reservation, kind: belongs_to, via: reservation_id}
+- {from: InstanceTemplate, to: Project, kind: belongs_to, via: project_id}
+- {from: DiskV1, to: InstanceV1, kind: belongs_to, via: attached_to}
+- {from: DiskSnapshot, to: DiskV1, kind: belongs_to, via: created_from}
+- {from: AttachedDiskV1, to: InstanceV1, kind: belongs_to, via: attachment on instance.disks}
+- {from: NetworkInterface, to: VPCNetwork, kind: belongs_to, via: network}
+- {from: NetworkInterface, to: VPCSubnet, kind: belongs_to, via: subnet}
+- {from: VPCNetwork, to: VPCSubnet, kind: has_many, via: subnets}
+- {from: VPCSubnet, to: VPCNetwork, kind: belongs_to, via: vpc_network_id}
+- {from: VPCSubnet, to: NATGateway, kind: has_many, via: nat_gateways}
+- {from: VPCFirewallRule, to: VPCNetwork, kind: belongs_to, via: vpc_network_id}
+- {from: ExternalLoadBalancer, to: VPCNetwork, kind: belongs_to, via: vpc_id}
+- {from: ExternalLoadBalancer, to: Project, kind: belongs_to, via: project_id}
+- {from: LoadBalancer, to: NetworkInterface, kind: has_many, via: network_interfaces}
+- {from: IBPartition, to: IBNetwork, kind: belongs_to, via: ib_network_id}
+- {from: KubernetesCluster, to: KubernetesNodePool, kind: has_many, via: node_pools}
+- {from: KubernetesCluster, to: Project, kind: belongs_to, via: project_id}
+- {from: KubernetesNodePool, to: KubernetesCluster, kind: belongs_to, via: cluster_id}
+- {from: KubernetesNodePool, to: InstanceV1, kind: has_many, via: instance_ids}
+- {from: KubernetesNodePool, to: VPCSubnet, kind: belongs_to, via: subnet}
+- {from: KubernetesNodePool, to: Image, kind: belongs_to, via: image_id}
+- {from: KubernetesNodePool, to: Reservation, kind: belongs_to, via: reservation_id}
+- {from: KubernetesNodePool, to: NvlinkDomainSummaryResponse, kind: belongs_to, via: nvlink_domain_id}
+- {from: SlurmNodeset, to: VPCSubnet, kind: belongs_to, via: subnet_id}
+- {from: SlurmNodeset, to: IBPartition, kind: belongs_to, via: transport_partition_id}
+- {from: Reservation, to: InstanceV1, kind: has_many, via: vm_ids}
+- {from: Reservation, to: Project, kind: has_many, via: projects}
+- {from: SCIMIntegrationResponse, to: Entity, kind: belongs_to, via: organization_id}
+- {from: SSOProvider, to: Entity, kind: belongs_to, via: org_id}
+- {from: Role, to: Entity, kind: belongs_to, via: org_id}
+- {from: LoRAAdapterDeployment, to: Project, kind: belongs_to, via: project_id}
+- {from: CredentialResponse, to: Project, kind: belongs_to, via: project_id}
+- {from: CredentialResponse, to: Entity, kind: belongs_to, via: org_id}
+identifiers:
+  format: opaque UUID
+  prefixes_published: false
+counts:
+  definitions: 286
+  entities_with_ids: 45
+  entities_catalogued: 31
+  relationships: 45

@@ -1,0 +1,85 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+api: Crusoe Cloud API Gateway
+format: custom
+rfc9457: false
+content_type: application/json
+envelope:
+  shape: '{ "code": "<string>", "message": "<string>" }'
+  required: [code, message]
+  fields:
+  - name: code
+    type: string
+    note: The HTTP status code, repeated as a string (e.g. "401") — not an application-specific code.
+  - name: message
+    type: string
+    note: A short snake_case reason token (e.g. bad_credential, not_found, too_many_requests).
+  note: >-
+    The envelope is flat and does NOT follow RFC 9457 problem+json — there is no type URI, no title,
+    no detail, and no instance. It also carries no machine-readable application error code beyond the
+    HTTP status, so a client cannot distinguish two different 400s programmatically.
+problems:
+- status: 400
+  name: badReqError
+  description: Error Bad Request
+  example_message: bad_request
+  operations_declaring: 129
+- status: 401
+  name: authError
+  description: Error Authentication Failed
+  example_message: bad_credential
+  operations_declaring: 221
+  note: >-
+    Declared on 221 of 232 operations even though the spec declares no securityDefinitions — the auth
+    contract exists only in the docs. See authentication/crusoe-authentication.yml.
+- status: 403
+  name: permissionsError
+  description: Error Permissions
+  example_message: unauthorized
+  operations_declaring: 184
+- status: 404
+  name: notFoundError
+  description: Error Not Found
+  example_message: not_found
+  operations_declaring: 56
+- status: 429
+  name: rateLimitError
+  description: Error Rate Limit Exceeded
+  example_message: too_many_requests
+  operations_declaring: 1
+  source_operation: openapi/crusoe-cloud-api-gateway-v1-openapi.json#scrapeMetrics
+  note: >-
+    Only the Observability metrics-scrape operation declares a 429. No Retry-After or X-RateLimit-*
+    header is described anywhere in the spec, so rate-limit backoff is undiscoverable from the contract.
+- status: 500
+  name: serverError
+  description: Error Internal Server
+  example_message: internal_error
+  operations_declaring: 232
+  note: Declared on every operation in the API.
+- status: default
+  name: rpcStatus
+  description: gRPC-gateway status envelope
+  shape: '{ "code": <int32>, "message": "<string>", "details": [protobufAny] }'
+  operations_declaring: 4
+  used_by: [queryTimeseries, queryTimeseriesRange, queryTimeseriesSimplified, queryTimeseriesWithParameters]
+  note: >-
+    The Observability timeseries endpoints are proxied through a gRPC gateway and therefore return a
+    DIFFERENT error envelope from the rest of the API — an integer code with a details[] array of
+    protobuf Any values. This is a real inconsistency in the error contract, not a documentation gap.
+coverage:
+  operations_total: 232
+  operations_with_4xx: 232
+  distinct_error_shapes: 3
+gaps:
+- No RFC 9457 application/problem+json media type anywhere in the surface.
+- No stable application-level error code vocabulary — `code` only mirrors the HTTP status.
+- No published error-reference page in the docs to enrich titles or remediation guidance.
+- Two incompatible error envelopes coexist (flat code/message vs gRPC rpcStatus).
+related:
+  hardware_error_codes: asyncapi/crusoe-webhooks.yml
+  note: >-
+    Crusoe does publish a real code vocabulary for infrastructure faults (NVIDIA XID codes and
+    GPUFellOffTheBus / HCAFellOffTheBus), but those are delivered over the notification/webhook channel,
+    not in API error responses. They are catalogued in asyncapi/crusoe-webhooks.yml.

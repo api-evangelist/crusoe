@@ -1,0 +1,52 @@
+generated: '2026-08-04'
+method: generated
+source: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+note: >-
+  Crusoe publishes no AGENTS.md or provider-authored skill files, so these are API Evangelist–authored
+  operating instructions grounded entirely in operationIds verified against the published Swagger
+  document. Every operationId referenced in every skill was grepped out of the spec.
+api: Crusoe Cloud API Gateway
+base_url: https://api.cloud.crusoe.ai/v1
+skills:
+- file: crusoe-launch-gpu-vm.md
+  name: Launch a GPU VM on Crusoe Cloud
+  description: Check capacity, pick an image, create a VM, and poll the async operation to running.
+  api: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+  operations: [listLocations, listSliceCapacities, listImages, createInstance,
+    getComputeVMsInstancesOperation, getInstance, listInstances]
+- file: crusoe-manage-block-storage.md
+  name: Create, attach, resize and snapshot Crusoe Cloud block storage
+  description: Provision a disk, attach it to a VM, resize it, and snapshot it, polling storage operations.
+  api: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+  operations: [createDisk, listDisks, getDisk, resizeDisk, updateInstanceAttachDisks,
+    updateInstanceDetachDisks, createDiskSnapshot, listDiskSnapshots, getDiskSnapshot,
+    getStorageDisksOperation, getStorageSnapshotsOperation]
+- file: crusoe-provision-kubernetes-cluster.md
+  name: Provision a Crusoe Managed Kubernetes cluster with a GPU node pool
+  description: Create a CMK cluster and node pool, fetch kubeconfig, and run rotation/AutoClusters day-2 ops.
+  api: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+  operations: [listKubernetesVersions, createCluster, getKubernetesClustersOperation, createNodePool,
+    getKubernetesNodePoolsOperation, listKubernetesNodePoolVMs, getClusterCredentials, rotateNodePool,
+    getAutoClustersConfig, updateAutoClustersConfig, remediateVM]
+- file: crusoe-deploy-inference-model.md
+  name: Deploy a model on the Crusoe Intelligence Foundry
+  description: List models and flavors, create a reserved-capacity self-serve deployment, and manage LoRAs.
+  api: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+  operations: [listFoundryDeployedModels, listFoundryFlavors, createFoundryDeployment,
+    getFoundryDeploymentProgress, streamFoundryDeploymentProgress, updateFoundryDeployment,
+    deleteFoundryDeployment, listFoundryLoras, createFoundryLora]
+- file: crusoe-audit-usage-and-quotas.md
+  name: Audit Crusoe Cloud usage, quotas, spend and access
+  description: Read-only inventory of an organization — quotas, usage, billing, reservations, audit logs, IAM.
+  api: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+  operations: [getUserIdentity, getOrganizations, listProjects, listOrgQuotas, listProjectQuotas,
+    getUsage, getBillingCosts, getReservations, getReservationsGPUTracking, getAuditLogs, listRoles,
+    listRoleBindings]
+cross_links:
+  authentication: authentication/crusoe-authentication.yml
+  conventions: conventions/crusoe-conventions.yml
+  errors: errors/crusoe-problem-types.yml
+  data_model: data-model/crusoe-data-model.yml
+  webhooks: asyncapi/crusoe-webhooks.yml
+  agentic_access: agentic-access/crusoe-agentic-access.yml
+  mcp: mcp/crusoe-mcp.yml

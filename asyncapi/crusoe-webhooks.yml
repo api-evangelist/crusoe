@@ -1,0 +1,131 @@
+generated: '2026-08-04'
+method: searched
+source: https://docs.crusoecloud.com/notifications/overview
+spec_type: none
+asyncapi_published: false
+asyncapi_note: >-
+  Crusoe publishes no AsyncAPI document and no event-schema registry. The webhook catalog below is
+  captured from the Notifications documentation. Nothing here is inferred — every event category,
+  field, and error code is published by Crusoe.
+surface:
+  name: Crusoe Cloud Notifications
+  docs: https://docs.crusoecloud.com/notifications/overview
+  availability: all Crusoe Cloud users
+  configured_in: Crusoe Cloud Console (bell icon → All Notifications → Configure Slack/Webhook Notifications)
+  api_managed: false
+  note: >-
+    Endpoints are created in the Console UI only — there is no endpoint-management operation in the
+    Crusoe Cloud API Gateway OpenAPI, so webhook subscriptions cannot be provisioned programmatically.
+    Delivery is fronted by Svix (the docs instruct enterprise Slack admins to authorize the Svix app).
+channels:
+- name: console
+  default: true
+  description: All notifications appear in the Console notification sidebar and history.
+- name: email
+  default: true
+  description: Sent automatically to all users in the organization for critical resource health alerts.
+- name: slack
+  default: false
+  description: Routed to a Slack channel via an incoming webhook URL or the Connect to Slack flow.
+- name: webhook
+  default: false
+  description: Generic HTTP POST endpoint for PagerDuty, Opsgenie, or custom automation.
+  transport: HTTP POST
+  content_type: application/json
+  subscription: per-endpoint selection of event types
+delivery:
+  method: HTTP POST
+  body: JSON
+  schema_published: false
+  signature_verification: not documented
+  retry_policy: not documented
+  example_payload:
+    event_type: node_replacement_initiated
+    cluster_id: cluster-abc123
+    cluster_name: training-cluster-prod
+    vm_id: vm-xyz789
+    vm_name: worker-node-42
+    error_code: XID 79
+    description: GPU has fallen off the PCIe bus. AutoClusters has initiated node replacement.
+    action: REPLACE_NODE
+    timestamp: '2026-02-11T14:32:00Z'
+    command_center_url: https://console.crusoecloud.com/orchestration/clusters/cluster-abc123/command-center
+  example_source: https://docs.crusoecloud.com/notifications/overview
+common_fields:
+- {name: vm_id, description: Unique identifier of the affected node}
+- {name: vm_name, description: Human-readable name of the affected node}
+- {name: cluster_name, description: Cluster containing the affected node}
+- {name: cluster_id, description: Unique identifier of the cluster}
+- {name: event_type, description: Category of the event (replacement, maintenance, failure)}
+- {name: error_code, description: Specific hardware error code, if applicable}
+- {name: description, description: Brief explanation of what was detected}
+- {name: action, description: Remediation action taken (automatic or manual)}
+- {name: timestamp, description: When the event was detected}
+- {name: command_center_url, description: Direct link to the relevant Console view}
+event_categories:
+- id: autoclusters-remediation
+  name: AutoClusters remediation events
+  requires: AutoClusters enabled on a Crusoe Managed Kubernetes cluster
+  docs: https://docs.crusoecloud.com/orchestration/cmk/autoclusters
+  events:
+  - id: node_replacement_initiated
+    description: A critical hardware failure was detected and remediation started; includes error code
+      and affected node.
+  - id: node_replacement_completed
+    description: A faulty node was drained, removed, and replaced with a healthy node from the spare pool.
+  - id: node_replacement_failed
+    description: Remediation could not complete (e.g. no spare nodes available). Crusoe Cloud Support is
+      automatically notified.
+  - id: detection_only
+    description: A hardware issue was detected but did not meet the threshold for automatic remediation;
+      the error code is included for review.
+  trigger_codes:
+  - {code: GPUFellOffTheBus, description: GPU lost from PCIe bus}
+  - {code: HCAFellOffTheBus, description: Host Channel Adapter (InfiniBand) lost}
+  - {code: XID 48, description: Uncorrectable double-bit ECC memory error}
+  - {code: XID 64, description: ECC page retirement or row remapper recording failure}
+  - {code: XID 74, description: NVLink interconnect error}
+  - {code: XID 79, description: GPU fell off the PCIe bus}
+  - {code: XID 119, description: GSP not responding to driver RPC requests}
+  - {code: XID 120, description: Driver failed to recover from GSP timeout}
+  detection_only_codes:
+  - {code: XID 76, description: Internal micro-controller breakpoint}
+  - {code: XID 94, description: Contained ECC error}
+  - {code: XID 95, description: Uncontained ECC error}
+  - {code: XID 137, description: Unexpected completion}
+  - {code: XID 140, description: Unrecovered ECC error}
+  - {code: XID 143, description: GPU initialization failure}
+- id: gpu-xid-standalone
+  name: GPU XID alerts for standalone VMs
+  remediation: informational only, no automatic remediation
+  trigger_codes:
+  - {code: XID 48, description: Uncorrectable double-bit ECC memory error}
+  - {code: XID 64, description: ECC page retirement or row remapper recording failure}
+  - {code: XID 74, description: NVLink interconnect error}
+  - {code: XID 79, description: GPU fell off the PCIe bus}
+  - {code: XID 95, description: Uncontained ECC error}
+  - {code: XID 119, description: GSP not responding to driver RPC requests}
+  - {code: XID 120, description: Driver failed to recover from GSP timeout}
+  - {code: XID 140, description: Unrecovered ECC error}
+  - {code: XID 143, description: GPU initialization failure}
+- id: critical-failure
+  name: Critical failure events
+  description: >-
+    Critical hardware failures requiring manual intervention on nodes not covered by AutoClusters
+    (non-GPU nodes, or clusters without AutoClusters enabled).
+- id: budget-alerts
+  name: Budget alerts
+  description: Fired when spend reaches a predefined threshold.
+  docs: https://docs.crusoecloud.com/usage-billing/budget-alerts
+planned:
+- Inference service notifications
+- Organization-level alerts
+gaps:
+- No AsyncAPI or JSON Schema document for any event payload.
+- No published webhook signature/verification scheme.
+- No published retry or delivery-guarantee policy.
+- Webhook endpoints cannot be created, listed, or deleted through the REST API.
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://docs.crusoecloud.com/notifications/overview
+  http_status: 200

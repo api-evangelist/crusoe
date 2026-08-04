@@ -1,0 +1,102 @@
+generated: '2026-08-04'
+method: derived
+source: >-
+  openapi/crusoe-cloud-api-gateway-v1-openapi.json, https://docs.crusoecloud.com/reference/api/,
+  https://trust.crusoe.ai/, https://www.crusoe.ai/llms.txt
+standards:
+- id: openapi-3
+  conforms: false
+  evidence: >-
+    Both published documents are Swagger 2.0 (`"swagger": "2.0"`), not OpenAPI 3.x. Consumers needing
+    3.x must convert.
+- id: swagger-2.0
+  conforms: true
+  evidence: api.cloud.crusoe.ai/v1/openapi.json declares swagger 2.0 with 150 paths and 232 operations
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 securityDefinition in either spec and no OAuth flow documented for the API
+- id: oidc
+  conforms: partial
+  evidence: >-
+    Organization SSO is supported for console sign-in via Okta, and Google/GitHub social sign-in was
+    added 2026-07-07, but no OIDC discovery document is served on any Crusoe host and OIDC is not a
+    machine API auth path.
+- id: scim2
+  conforms: true
+  evidence: >-
+    SCIM integration endpoints published on the API Gateway (createSCIMIntegration, listSCIMIntegrations,
+    updateSCIMIntegration, deleteSCIMIntegration, plus integration token management)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Error responses use a flat {code, message} JSON object with content type application/json; no
+    application/problem+json anywhere in the surface
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation headers declared; deprecation is prose-only
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: https://www.crusoe.ai/.well-known/security.txt returns 200 with Contact, Expires,
+    Preferred-Languages, Canonical and Hiring fields
+- id: idempotency-key
+  conforms: false
+  evidence: no Idempotency-Key header or equivalent anywhere in the spec or docs
+- id: s3-api
+  conforms: true
+  evidence: >-
+    Crusoe Cloud Object Storage is documented as S3-compatible, with S3-style access keys managed via
+    the S3Keys endpoints and bucket operations including versioning and object lock
+- id: openai-api-compatibility
+  conforms: true
+  evidence: >-
+    Managed Inference is published as an OpenAI-compatible endpoint at api.inference.crusoecloud.com,
+    documented for use with the OpenAI SDKs
+- id: model-context-protocol
+  conforms: true
+  evidence: >-
+    First-party read-only MCP server published as @crusoeai/cloud-mcp (stdio transport) plus a Claude
+    Desktop .mcpb extension bundle
+- id: a2a-agent-card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json probed on every Crusoe host — 404 on
+    www.crusoe.ai, api.cloud.crusoe.ai, api.crusoecloud.com and docs.crusoecloud.com; 200-with-HTML
+    SPA catch-all on console.crusoecloud.com (rejected); 401 on api.inference.crusoecloud.com
+- id: llms-txt
+  conforms: true
+  evidence: >-
+    llms.txt published on both the docs host (https://docs.crusoecloud.com/llms.txt) and the marketing
+    host (https://www.crusoe.ai/llms.txt); the docs site advertises it with a link rel="alternate"
+- id: kubernetes
+  conforms: true
+  evidence: Crusoe Managed Kubernetes clusters, node pools, and version listing exposed via the API
+- id: prometheus-query-api
+  conforms: partial
+  evidence: >-
+    Observability timeseries endpoints mirror the Prometheus HTTP API shape
+    (/metrics/timeseries/api/v1/query and /query-range) behind a gRPC gateway
+- id: grpc-gateway
+  conforms: true
+  evidence: >-
+    The Observability timeseries operations return the gRPC-gateway rpcStatus envelope
+    ({code, message, details[protobufAny]}) rather than the flat error envelope used elsewhere
+compliance_program:
+  published: true
+  trust_center: https://trust.crusoe.ai/
+  detail: security/crusoe-trust-center.yml
+  certifications:
+  - SOC 2 Type I
+  - SOC 2 Type II
+  - ISO 27001
+  - ISO 42001
+  - GDPR
+  note: >-
+    ISO 42001 (AI management systems) is notable — Crusoe claims to be among the first AI-cloud
+    providers to hold it. Certification claims are sourced from Crusoe's own newsroom/blog and its
+    published llms.txt; the SOC 2 report itself is request-gated behind the trust center.
+gaps:
+- Swagger 2.0 rather than OpenAPI 3.x.
+- No securityDefinitions in the spec at all, so no generated client can authenticate from the contract.
+- No RFC 9457 error format and no application-level error code vocabulary.
+- No idempotency contract on create operations.
+- No AsyncAPI for the notification/webhook surface.

@@ -1,0 +1,173 @@
+generated: '2026-08-04'
+method: derived
+source: mcp/crusoe-mcp.yml + openapi/crusoe-cloud-api-gateway-v1-openapi.json
+note: >-
+  Binds each documented Crusoe Cloud MCP tool to the REST operation(s) that back it. The MCP server is
+  stdio-only and its live tools/list (with inputSchema) could not be probed over HTTP, so mappings are
+  made by name and semantics against verified operationIds in the published Swagger document — every
+  operationId below was grepped out of the spec. Confidence is recorded honestly: `high` where the tool
+  name and the operation are unambiguous 1:1, `medium` where the tool fans out or the naming diverges.
+  A bound tool's real input contract is that operation's parameters + body in the spec.
+surfaces:
+  openapi:
+    file: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+    spec: Swagger 2.0
+    base_url: https://api.cloud.crusoe.ai/v1
+    gated: false
+    operations: 232
+  mcp:
+    manifest: mcp/crusoe-mcp.yml
+    transport: stdio
+    package: '@crusoeai/cloud-mcp'
+    gated: true
+    gated_reason: >-
+      stdio transport, credentials required from ~/.crusoe/config; no anonymous tools/list endpoint
+      exists, so live inputSchemas require authenticated local introspection.
+  graphql:
+    present: false
+crosswalk:
+- {tool: get_user_identity, category: core, rest: [getUserIdentity], binding: rest, confidence: high}
+- tool: get_organization
+  category: core
+  rest: [getOrganizations]
+  binding: rest
+  confidence: high
+  note: REST returns the organization list for the caller; the tool narrows it to the active org.
+- {tool: list_capacities, category: core, rest: [listSliceCapacities], binding: rest, confidence: high}
+- tool: get_current_project
+  category: core
+  rest: [getProject]
+  binding: rest
+  confidence: medium
+  note: Resolves the project_id from the local profile / CRUSOE_PROJECT_ID before calling getProject.
+- {tool: list_available_projects, category: core, rest: [listProjects], binding: rest, confidence: high}
+- tool: use_project
+  category: core
+  rest: []
+  binding: session
+  confidence: high
+  note: Session-local state change in the MCP server; no REST call.
+- tool: get_resource_relationships
+  category: core
+  rest: [listInstances, listDisks, listVPCNetworks, listVPCSubnets]
+  binding: composite
+  confidence: low
+  note: >-
+    Server-side composite that fans out across compute/storage/networking list operations and joins
+    them into a topology graph. The exact fan-out is not published; the listed operations are the
+    resources the docs name (VMs, disks, VPCs). Treated as composite, not a 1:1 binding.
+- {tool: list_vms, category: compute, rest: [listInstances], binding: rest, confidence: high}
+- {tool: get_vm, category: compute, rest: [getInstance], binding: rest, confidence: high}
+- {tool: list_instance_groups, category: compute, rest: [listInstanceGroups], binding: rest, confidence: high}
+- {tool: get_instance_group, category: compute, rest: [getInstanceGroup], binding: rest, confidence: high}
+- {tool: list_instance_templates, category: compute, rest: [listInstanceTemplates], binding: rest, confidence: high}
+- {tool: get_instance_template, category: compute, rest: [getInstanceTemplate], binding: rest, confidence: high}
+- tool: list_group_instances
+  category: compute
+  rest: [getInstanceGroup]
+  binding: rest
+  confidence: medium
+  note: >-
+    InstanceGroup carries an instances[] array of InstanceDetails; there is no dedicated REST
+    list-members operation.
+- {tool: list_disks, category: storage, rest: [listDisks], binding: rest, confidence: high}
+- {tool: get_disk, category: storage, rest: [getDisk], binding: rest, confidence: high}
+- {tool: list_disk_snapshots, category: storage, rest: [listDiskSnapshots], binding: rest, confidence: high}
+- {tool: get_disk_snapshot, category: storage, rest: [getDiskSnapshot], binding: rest, confidence: high}
+- {tool: list_images, category: storage, rest: [listImages], binding: rest, confidence: high}
+- {tool: get_image, category: storage, rest: [getImage], binding: rest, confidence: high}
+- {tool: list_custom_images, category: storage, rest: [listCustomImages], binding: rest, confidence: high}
+- {tool: get_custom_image, category: storage, rest: [getCustomImage], binding: rest, confidence: high}
+- {tool: list_vpc_networks, category: networking, rest: [listVPCNetworks], binding: rest, confidence: high}
+- {tool: get_vpc_network, category: networking, rest: [getVPCNetwork], binding: rest, confidence: high}
+- {tool: list_vpc_subnets, category: networking, rest: [listVPCSubnets], binding: rest, confidence: high}
+- {tool: get_vpc_subnet, category: networking, rest: [getVPCSubnet], binding: rest, confidence: high}
+- {tool: list_firewall_rules, category: networking, rest: [listVPCFirewallRules], binding: rest, confidence: high}
+- {tool: get_firewall_rule, category: networking, rest: [getVPCFirewallRule], binding: rest, confidence: high}
+- tool: list_load_balancers
+  category: networking
+  rest: [listExternalLoadBalancers, listLoadBalancers]
+  binding: rest
+  confidence: medium
+  note: >-
+    REST splits external and internal load balancers into two resources; the single MCP tool name does
+    not say which it returns, so both are recorded.
+- tool: get_load_balancer
+  category: networking
+  rest: [getExternalLoadBalancer, getLoadBalancer]
+  binding: rest
+  confidence: medium
+  note: Same external/internal ambiguity as list_load_balancers.
+- {tool: list_kubernetes_clusters, category: orchestration, rest: [listClusters], binding: rest, confidence: high}
+- {tool: get_kubernetes_cluster, category: orchestration, rest: [getCluster], binding: rest, confidence: high}
+- {tool: list_kubernetes_node_pools, category: orchestration, rest: [listNodePools], binding: rest, confidence: high}
+- {tool: get_kubernetes_node_pool, category: orchestration, rest: [getNodePool], binding: rest, confidence: high}
+- {tool: list_kubernetes_node_pool_instances, category: orchestration, rest: [listKubernetesNodePoolVMs], binding: rest, confidence: high}
+- {tool: list_kubernetes_versions, category: orchestration, rest: [listKubernetesVersions], binding: rest, confidence: high}
+- {tool: list_audit_logs, category: operations, rest: [getAuditLogs], binding: rest, confidence: high}
+- {tool: list_org_quotas, category: operations, rest: [listOrgQuotas], binding: rest, confidence: high}
+- {tool: list_project_quotas, category: operations, rest: [listProjectQuotas], binding: rest, confidence: high}
+- tool: get_gpu_tracking
+  category: operations
+  rest: [getReservationsGPUTracking, getLatestGPUTracking]
+  binding: rest
+  confidence: medium
+  note: REST exposes both a series and a latest-snapshot variant.
+- tool: get_usage_by_project
+  category: operations
+  rest: [getUsage]
+  binding: rest
+  confidence: medium
+  note: getUsage is organization-scoped with project filtering; the tool name implies the per-project view.
+mcp_only:
+- tool: use_project
+  reason: Session state held inside the MCP server; not an API concept.
+- tool: get_resource_relationships
+  reason: >-
+    Server-side composite that joins several REST resources into a topology graph. No single REST
+    operation returns this shape.
+rest_only:
+- capability: All write operations
+  reason: The MCP server disables create/update/delete by design.
+  operation_count: 99
+  examples: [createInstance, deleteInstance, createDisk, resizeDisk, createCluster, deleteCluster,
+    createVPCNetwork, createVPCFirewallRule, createSlurmCluster, createFoundryDeployment]
+- capability: Intelligence Foundry (models, self-serve deployments, LoRAs, credentials, flavors)
+  operation_count: 24
+  examples: [listFoundryDeployedModels, listFoundryDeployments, listFoundryLoras, listFoundryFlavors,
+    listFoundryCredentials, getFoundryDeploymentProgress]
+  reason: No MCP tool covers the Foundry surface at all.
+- capability: Container registry (Ccr)
+  operation_count: 13
+  examples: [listCcrRepositories, getCcrRepository, listCcrImages, listCcrManifests, getCcrRepositoryUsage]
+- capability: Object storage (S3 buckets and keys)
+  operation_count: 13
+  examples: [listS3Buckets, getS3Bucket, listS3Keys, getS3BucketsCount, listS3SupportedLocations]
+- capability: Slurm clusters and nodesets
+  operation_count: 13
+  examples: [listSlurmClusters, getSlurmCluster, listSlurmNodesets, getSlurmNodeset]
+- capability: Observability / metrics timeseries
+  operation_count: 5
+  examples: [queryTimeseries, queryTimeseriesRange, queryTimeseriesSimplified, scrapeMetrics]
+- capability: Identity administration (SSO, SCIM, MFA, roles, tokens, SSH keys)
+  operation_count: 28
+  examples: [listSSOProviders, listSCIMIntegrations, getMFA, listRoles, listRoleBindings, getSSHKeys, getTokens]
+- capability: Billing
+  operation_count: 3
+  examples: [getBillingCosts, getBillingOptions, getBillingExportProductline]
+- capability: Async operation polling
+  operation_count: 28
+  examples: [getComputeVMsInstancesOperation, getStorageDisksOperation, getKubernetesClustersOperation]
+  reason: The read-only MCP surface never starts a long-running operation, so it never polls one.
+- capability: Reservations, IB networks and partitions, NVLink domains, locations, feature flags
+  operation_count: 13
+  examples: [getReservations, listIBNetworks, listIBPartitions, listNvlinkDomains, listLocations, getFeatureFlags]
+coverage:
+  tools_named: 41
+  tools_bound_to_rest: 40
+  tools_mcp_only: 2
+  rest_operations_total: 232
+  rest_operations_with_a_tool: 41
+  rest_operations_without_a_tool: 191
+  read_operations_total: 133
+  read_operations_with_a_tool: 41

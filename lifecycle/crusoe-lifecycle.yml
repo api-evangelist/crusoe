@@ -1,0 +1,72 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://docs.crusoecloud.com/reference/api/, https://docs.crusoecloud.com/resources/deprecation_notices,
+  https://docs.crusoecloud.com/resources/changelog, https://legal.crusoe.ai/#service-level-agreements
+versioning:
+  scheme: uri-path
+  current: v1
+  preview: v1alpha5
+  docs: https://docs.crusoecloud.com/reference/api/
+  specs:
+  - https://api.cloud.crusoe.ai/v1/openapi.json
+  - https://api.cloud.crusoe.ai/v1alpha5/openapi.json
+  note: >-
+    The docs version selector offers "Crusoe Cloud v1 (Latest)", "v1alpha5", and "Managed AI v1". Both
+    Crusoe Cloud tracks are live and serve near-identical surfaces (150 paths / 232 operations each).
+    No published policy on how long an alpha track is supported or when it is retired.
+deprecation:
+  policy_url: https://docs.crusoecloud.com/resources/deprecation_notices
+  policy_published: true
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    A dedicated "Deprecation notices" page exists, but it announces product/image end-of-life rather
+    than API-operation deprecation, and there is no stated notice period. No RFC 8594 Sunset or
+    Deprecation response headers are declared in either published spec.
+  notices:
+  - subject: Ubuntu 20.04 curated images
+    kind: image end-of-life
+    upstream_eol: '2025-05-31'
+    removed_from_catalog: '2025-11-03'
+    guidance: Migrate to Ubuntu 22.04 or later, or purchase Canonical ESM licenses.
+    source: https://docs.crusoecloud.com/resources/deprecation_notices
+  - subject: A100 instances in us-west1-a
+    kind: capacity withdrawal
+    announced: '2026-04-28'
+    source: https://docs.crusoecloud.com/resources/changelog
+deprecated_operations: []
+deprecated_operations_note: >-
+  Zero operations in either published Swagger document carry `deprecated: true`. Deprecation is
+  communicated only in prose on the deprecation-notices page.
+changelog:
+  url: https://docs.crusoecloud.com/resources/changelog
+  artifact: changelog/crusoe-changelog.yml
+  cadence: dated entries, roughly weekly to monthly
+status_page:
+  url: https://status.crusoecloud.com
+  subscribable: true
+  note: Support docs direct customers to check status.crusoecloud.com before filing an incident ticket.
+sla:
+  url: https://legal.crusoe.ai/#service-level-agreements
+  published: true
+  scope: >-
+    SLAs cover in-scope Crusoe Cloud infrastructure and managed services including the Console, API,
+    CLI, and Terraform provider. Solutions/recipes published on GitHub and the Cookbook, and customer
+    applications, are explicitly out of scope and best-effort only.
+  reported_uptime: 99.98% cluster uptime (company-published, https://www.crusoe.ai/llms.txt)
+  support_tiers: https://docs.crusoecloud.com/resources/support_tiers
+support:
+  docs: https://docs.crusoecloud.com/resources/support
+  email: support@crusoecloud.com
+  portal: https://support.crusoecloud.com
+  guidelines: https://legal.crusoe.ai/#tss
+maturity:
+  crusoe_cloud_api: generally available (v1)
+  object_storage: generally available since 2026-04-30
+  mcp_server: preview
+  self_serve_deployments: generally available since 2026-07-14
+  serverless_fine_tuning: generally available since 2026-07-14
+x-evidence:
+  fetched: '2026-08-04'
+  http_status: 200

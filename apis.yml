@@ -1,18 +1,124 @@
 aid: crusoe
 name: Crusoe
-description: 'Crusoe is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Crusoe is a vertically integrated "AI factory" company that designs, builds, and operates
+  energy-first AI infrastructure, and sells it as Crusoe Cloud — a GPU cloud for training, fine-tuning,
+  and inference. The public developer surface is the Crusoe Cloud API Gateway, a REST API at
+  api.cloud.crusoe.ai covering virtual machines, instance groups and templates, block storage disks and
+  snapshots, S3-compatible object storage, custom images, a container registry, VPC networking and load
+  balancers, InfiniBand partitions and NVLink domains, Crusoe Managed Kubernetes and Slurm clusters,
+  capacity reservations, IAM role bindings, SCIM/SSO, quotas, audit logs, usage and billing. Alongside
+  it, the Intelligence Foundry exposes an OpenAI-compatible Managed Inference API for serverless
+  inference, serverless fine-tuning, and self-serve deployments of open models. Crusoe also ships a
+  first-party CLI, a Terraform provider, a Go API client, and a read-only Crusoe Cloud MCP server for
+  AI assistants. Founded 2018, headquartered in Denver, Colorado.
+image: https://www.crusoe.ai/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/crusoe/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
-- Company
-apis: []
+- ai-infrastructure
+- cloud-computing
+- gpu-compute
+- machine-learning
+- inference
+- kubernetes
+- object-storage
+- infrastructure-as-a-service
+- energy
+- mcp
+apis:
+- name: Crusoe Cloud API Gateway
+  description: >-
+    REST API exposing all publicly available Crusoe Cloud endpoints — compute (VMs, instance groups,
+    instance templates, images, custom images), storage (disks, snapshots, S3 buckets and keys),
+    networking (VPC networks, subnets, firewall rules, load balancers, IB partitions, NVLink domains),
+    orchestration (Crusoe Managed Kubernetes clusters and node pools, Slurm clusters and nodesets,
+    AutoClusters), the Intelligence Foundry, container registry, identity and access (role bindings,
+    SSH keys, tokens, MFA, SSO, SCIM), and organization management (projects, quotas, usage, billing,
+    audit logs). Requests are authenticated with an HMAC-SHA256 signed Authorization header plus an
+    X-Crusoe-Timestamp header. Current version is v1; v1alpha5 remains published as the preview track.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - ai-infrastructure
+  - cloud-computing
+  - gpu-compute
+  - kubernetes
+  - object-storage
+  - infrastructure-as-a-service
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-cloud-api-gateway-v1-openapi.json
+  - type: OpenAPI
+    url: openapi/crusoe-cloud-api-gateway-v1alpha5-openapi.json
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+  - type: Overlay
+    url: overlays/crusoe-cloud-api-gateway-v1-overlay.yaml
+- name: Crusoe Managed Inference API
+  description: >-
+    OpenAI-compatible inference API from the Crusoe Intelligence Foundry. Send chat/completions and
+    embeddings requests to Crusoe-hosted open models (DeepSeek, Llama, Gemma, GLM, Kimi, Nemotron and
+    others) without managing GPU infrastructure, or run reserved-capacity self-serve deployments and
+    LoRA-based serverless fine-tuning jobs. Authenticated with an Inference API key issued from the
+    Crusoe Cloud console. The endpoint requires credentials for every request, including discovery
+    paths, so no anonymous machine-readable contract is published for it.
+  humanURL: https://docs.crusoecloud.com/serverless-inference/overview
+  baseURL: https://api.inference.crusoecloud.com/v1
+  tags:
+  - inference
+  - machine-learning
+  - openai-compatible
+  - fine-tuning
+  properties:
+  - type: Documentation
+    url: https://docs.crusoecloud.com/serverless-inference/overview
+  - type: GettingStarted
+    url: https://docs.crusoecloud.com/quickstart/getting-started-with-serverless-inference
+  - type: Pricing
+    url: https://www.crusoe.ai/cloud/pricing
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+- name: Crusoe Cloud MCP Server
+  description: >-
+    First-party, read-only Model Context Protocol server published by Crusoe as the npm package
+    @crusoeai/cloud-mcp and as a downloadable Claude Desktop extension bundle. Runs over stdio, inherits
+    credentials from the local ~/.crusoe/config CLI profile, and exposes read-only tools for identity,
+    projects, capacities, VMs, instance groups and templates, disks, snapshots, images, custom images,
+    VPC networks, subnets, firewall rules, load balancers, Kubernetes clusters and node pools, audit
+    logs, quotas, GPU tracking, usage, and a resource-relationship topology graph. All write operations
+    are disabled by design; a client-side limit of 60 requests per minute is enforced. Currently in
+    preview.
+  humanURL: https://docs.crusoecloud.com/reference/mcp-server
+  baseURL: https://api.crusoecloud.com/v1
+  tags:
+  - mcp
+  - agent-native
+  - ai-infrastructure
+  - cloud-computing
+  properties:
+  - type: MCPServer
+    url: mcp/crusoe-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/crusoe-tool-crosswalk.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/mcp-server
+  - type: Packages
+    url: https://www.npmjs.com/package/@crusoeai/cloud-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +126,85 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.hiive.com/securities/crusoe-stock
+  url: https://www.crusoe.ai/
+- type: DeveloperPortal
+  url: https://www.crusoe.ai/developers
+- type: Documentation
+  url: https://docs.crusoecloud.com/
+- type: APIReference
+  url: https://docs.crusoecloud.com/api/
+- type: GettingStarted
+  url: https://docs.crusoecloud.com/quickstart/overview
+- type: Support
+  url: https://docs.crusoecloud.com/resources/support
+- type: Blog
+  url: https://www.crusoe.ai/resources/blog
+- type: GitHubOrganization
+  url: https://github.com/crusoecloud
+- type: Pricing
+  url: https://www.crusoe.ai/cloud/pricing
+- type: SignUp
+  url: https://console.crusoecloud.com/signup
+- type: Login
+  url: https://console.crusoecloud.com/
+- type: TermsOfService
+  url: https://legal.crusoe.ai/#terms-of-service
+- type: PrivacyPolicy
+  url: https://legal.crusoe.ai/#cloud-privacy-policy
+- type: StatusPage
+  url: https://status.crusoecloud.com
+- type: ChangeLog
+  url: changelog/crusoe-changelog.yml
+- type: Deprecation
+  url: https://docs.crusoecloud.com/resources/deprecation_notices
+- type: Lifecycle
+  url: lifecycle/crusoe-lifecycle.yml
+- type: Security
+  url: https://www.crusoe.ai/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: security/crusoe-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/crusoe-trust-center.yml
+- type: Compliance
+  url: https://trust.crusoe.ai/
+- type: DomainSecurity
+  url: security/crusoe-domain-security.yml
+- type: SecurityTxt
+  url: well-known/crusoe-security.txt
+- type: WellKnown
+  url: well-known/crusoe-well-known.yml
+- type: Authentication
+  url: authentication/crusoe-authentication.yml
+- type: Conventions
+  url: conventions/crusoe-conventions.yml
+- type: Conformance
+  url: conformance/crusoe-conformance.yml
+- type: ErrorCatalog
+  url: errors/crusoe-problem-types.yml
+- type: DataModel
+  url: data-model/crusoe-data-model.yml
+- type: Packages
+  url: packages/crusoe-packages.yml
+- type: SDKs
+  url: packages/crusoe-packages.yml
+- type: CLI
+  url: cli/crusoe-cli.yml
+- type: MCPServer
+  url: mcp/crusoe-mcp.yml
+- type: Webhooks
+  url: asyncapi/crusoe-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/crusoe-agentic-access.yml
+- type: LLMsTxt
+  url: llms/crusoe-llms.txt
+- type: Overlay
+  url: overlays/crusoe-cloud-api-gateway-v1-overlay.yaml
+- type: SLA
+  url: https://legal.crusoe.ai/#service-level-agreements
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 29
+  pass: local-v1

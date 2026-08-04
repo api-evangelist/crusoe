@@ -1,0 +1,344 @@
+# Crusoe Cloud
+
+> Crusoe Cloud documentation
+- [Overview](/.md): Crusoe provides flexible options for running AI workloads. You can train, deploy, and run inference workloads using Crusoe's managed infrastructure or your own infrastructure.
+- [Create an account](/create-an-account.md): Create an account on Crusoe Cloud
+- [Install the Crusoe Cloud MCP Server](/reference/mcp-server.md): The Crusoe Cloud Model Context Protocol (MCP) Server enables AI assistants (such as Claude Desktop) to securely query and inspect your Crusoe Cloud AI infrastructure.
+
+## Quickstarts
+
+- [Quickstarts](/quickstart/overview.md): Step-by-step guides for getting started with Crusoe Cloud infrastructure and Managed Intelligence
+
+### Managed AI
+
+- [Serverless Inference](/serverless-inference.md): Generate an API key and send requests to hosted models over an OpenAI-compatible API
+- [Deploy with self-serve deployments](/quickstart/self-serve-deployments.md): The full reference for deploying with self-serve deployments—including fine-tuned models—in Python and curl.
+- [Serverless Fine-Tuning](/managed-ai/serverless-fine-tuning.md): Upload a dataset and fine-tune an open model through the Intelligence Foundry without managing GPU infrastructure
+
+### Infrastructure Cloud
+
+- [Installing and configuring the CLI](/installing-the-cli.md): Install and configure the Crusoe Cloud CLI
+- [Getting Started with Terraform](/infrastructure-cloud/terraform.md): Get Started with Terraform for use with Crusoe Cloud.
+- [Creating a VM](/quickstart/creating-a-vm.md): Learn how to create and access your VMs
+- [Spin up your first GPU cluster](/quickstart/spin-up-gpu-cluster.md): Provision a multi-node GPU cluster on Crusoe Infrastructure Cloud with Kubernetes (CMK) or Slurm to train models, serve inference, and run data processing pipelines.
+- [Managed AI](/managed-ai/overview.md): Choose a Crusoe Managed AI product to run, adapt, or deploy AI models without managing GPU infrastructure
+- [Usage and billing](/serverless-inference/usage-billing-models.md): Usage and billing information for Serverless Inference, Serverless Fine-Tuning, and Self-Serve Deployments
+
+## Serverless Fine-Tuning
+
+- [Serverless Fine-Tuning](/serverless-fine-tuning/overview.md): Fine-tune open models on Crusoe without managing GPU infrastructure
+- [How Serverless Fine-Tuning works](/serverless-fine-tuning/how-it-works.md): Concepts, lifecycle, and architecture behind serverless fine-tuning on Crusoe
+- [Serverless Fine-Tuning quickstart](/serverless-fine-tuning/quickstart.md): Get from zero to a fine-tuned LoRA adapter in one end-to-end pass.
+- [Fine-tune a model](/serverless-fine-tuning/fine-tune-a-model.md): The full reference for dataset formats, hyperparameters, and every serverless fine-tuning operation in Python and curl.
+
+## Managed Inference
+
+
+### Serverless Inference
+
+- [Serverless Inference](/serverless-inference/overview.md): Choose how to run inference on hosted models based on your traffic patterns and latency requirements
+- [Getting Started with Serverless Inference](/quickstart/getting-started-with-serverless-inference.md): Getting Started with Serverless Inference
+- [Metrics](/serverless-inference/inference-metrics.md): Learn about available metrics for models served through Serverless Inference
+
+### Self-Serve Deployments
+
+- [Self-Serve Deployments](/self-serve-deployments/overview.md): Reserved-capacity inference deployments on Crusoe's managed infrastructure with predictable performance and no shared rate limits
+- [Deploy a self-serve deployment](/self-serve-deployments/quickstart.md): The full reference for creating, running, and managing self-serve inference deployments—including fine-tuned models—in Python and curl.
+- [Infrastructure Cloud](/infrastructure-cloud/overview.md): Run training and inference workloads on Crusoe's Infrastructure Cloud — your own managed infrastructure on Crusoe
+- [Installing and configuring the CLI](/installing-the-cli.md): Install and configure the Crusoe Cloud CLI
+- [Getting Started with Terraform](/infrastructure-cloud/terraform.md): Get Started with Terraform for use with Crusoe Cloud.
+- [Creating a VM](/quickstart/creating-a-vm.md): Learn how to create and access your VMs
+- [Spin up your first GPU cluster](/quickstart/spin-up-gpu-cluster.md): Provision a multi-node GPU cluster on Crusoe Infrastructure Cloud with Kubernetes (CMK) or Slurm to train models, serve inference, and run data processing pipelines.
+
+## IaaS
+
+
+### Compute
+
+
+#### Virtual Machines
+
+- [Overview](/compute/virtual-machines/overview.md): Learn about Crusoe Cloud's virtual machines (VMs)
+- [Manage your SSH keys](/compute/virtual-machines/managing-ssh-keys.md): Use SSH keys to access Crusoe Cloud VMs.
+- [Manage your VMs](/compute/virtual-machines/managing-vms.md): Learn how to create new virtual machines, change the state of existing virtual machines, and delete unused virtual machines
+- [Accessing your VMs](/compute/virtual-machines/accessing-vms.md): Learn how to access your virtual machines over SSH and via the serial console
+- [Managing lifecycle scripts](/compute/virtual-machines/managing-lifecycle-scripts.md): Learn how react to VM state changes with lifecycle scripts
+- [VM Telemetry](/compute/virtual-machines/vm-telemetry.md): Metrics, logs, and bug reports for Crusoe virtual machines via Command Center.
+- [Optimizing GPU performance](/compute/virtual-machines/optimizing-gpus.md): Optimize GPU performance with additional directives
+- [Burn-in validation](/compute/virtual-machines/burn-in-validation.md): Learn how GPU nodes are tested before deployment.
+
+#### Instance Templates
+
+- [Overview](/compute/instance-templates/overview.md): Learn about configuring Crusoe Cloud Virtual Machines (VMs) using Instance Templates
+- [Managing Templates](/compute/instance-templates/managing-templates.md): Learn how to manage your instance templates
+
+#### Images
+
+- [Overview](/compute/images/overview.md): Learn about Crusoe Cloud's virtual machines (VMs)
+- [Managing Images](/compute/images/managing-images.md): Learn how to manage and consume VM images
+
+### Storage
+
+
+#### Object Storage
+
+- [Overview](/storage/object-storage/overview.md): Learn about Crusoe Cloud Object Storage - S3-compatible object storage for AI/ML workloads
+- [Managing Object Storage API Keys](/storage/object-storage/managing-storage-api-keys.md): Learn how to create, list, and delete Object Storage API keys for Crusoe Cloud Object Storage
+- [Managing Buckets](/storage/object-storage/managing-buckets.md): Learn how to create, list, view, delete, and configure buckets in Crusoe Cloud Object Storage
+- [Using S3 Tools](/storage/object-storage/using-s3-tools.md): Learn how to configure and use s3cmd, rclone, boto3, and other S3-compatible tools with Crusoe Cloud Object Storage
+- [Troubleshooting](/storage/object-storage/troubleshooting.md): Common issues and solutions for Crusoe Cloud Object Storage
+
+#### Disks
+
+- [Overview](/storage/disks/overview.md): Learn about Crusoe Cloud's disk types
+- [Managing Ephemeral Disks](/storage/disks/managing-ephemeral-disks.md): Learn about Crusoe Cloud's ephemeral disks
+- [Managing Persistent Disks](/storage/disks/managing-persistent-disks.md): Learn about Crusoe Cloud's persistent disks
+- [Managing Shared Disks](/storage/disks/managing-shared-disks.md): Learn about Crusoe Cloud's Shared Disks
+- [Setting up the VAST NFS driver](/storage/disks/setup-nfs-driver.md): Install the VAST NFS driver on VMs that mount Crusoe Cloud Shared Disks
+- [Shared Disks Metrics](/storage/disks/shared-disks-metrics.md): Learn about Crusoe Cloud's Shared Disk Metrics
+- [Troubleshooting](/storage/disks/troubleshooting.md): Common issues and fixes for Crusoe Cloud disks
+
+### Networking
+
+- [VPC Network overview](/networking/overview.md): Learn about Crusoe Cloud's networking features, including VPC and InfiniBand networks and firewall rules
+
+#### VPC Networks
+
+- [Overview](/networking/vpc-networks/overview.md): Learn about VPC Networks
+- [Managing VPC Networks](/networking/vpc-networks/managing-vpc-networks.md): Learn how to manage VPC networks and subnets
+- [Managing VPC Subnets](/networking/vpc-networks/managing-vpc-subnets.md): Learn how to manage VPC subnets
+
+#### Firewall Rules
+
+- [Overview](/networking/firewall-rules/overview.md): Learn about VPC Firewall Rules
+- [Managing firewall rules](/networking/firewall-rules/managing-firewall-rules.md): Learn how to create new firewall rules and delete unused firewall rules.
+
+#### InfiniBand
+
+- [Managing InfiniBand networking](/networking/infiniband/managing-infiniband-networks.md): Manage your InfiniBand Networks
+- [Validating Infiniband Performance](/networking/infiniband/validating-infiniband-performance.md): Validate Infiniband performance to ensure high performance GPU to GPU communication
+- [InfiniBand Metrics](/networking/infiniband/ib-metrics.md): Learn about Crusoe Cloud's InfiniBand Metrics
+
+#### Load Balancers
+
+- [Overview](/networking/load-balancers/overview.md): Learn about Load Balancing on Crusoe Cloud
+- [Managing Load Balancers](/networking/load-balancers/managing-load-balancers.md): Learn how to manage your Load Balancers
+- [Load Balancer Metrics](/networking/load-balancers/load-balancer-metrics.md): Learn about Crusoe Cloud's Load Balancer Metrics
+
+#### NVLink
+
+- [Setting up IMEX](/networking/nv-link/imex-setup.md): Setting up IMEX for you GB200
+
+### Orchestration
+
+
+#### Crusoe Managed Kubernetes (CMK)
+
+- [Overview](/orchestration/cmk/overview.md): Learn about Crusoe Managed Kubernetes
+- [Shared Responsibility Model](/orchestration/cmk/shared-responsibility.md): Understand the responsibility boundaries of CMK
+- [Cluster Details](/orchestration/cmk/cluster-details.md): Further details on CMK control planes and nodepools
+- [Managing your Clusters](/orchestration/cmk/managing-clusters.md): Learn how to manage your CMK clusters
+- [CMK Add-ons](/orchestration/cmk/cmk-addons.md): Components, plugins and add-ons available with CMK
+- [Managing your Node Pools](/orchestration/cmk/managing-nodepools.md): Learn how to manage the node pools associated with your cluster
+- [CMK Telemetry](/orchestration/cmk/cmk-telemetry.md): Metrics, logs, and bug reports for Crusoe Managed Kubernetes clusters via Command Center.
+- [AutoClusters](/orchestration/cmk/autoclusters.md): Learn how to use AutoClusters to automatically remediate hardware failures.
+- [Active Health Checks](/orchestration/cmk/active-stress-testing.md): Learn about proactive GPU health testing for CMK clusters
+- [Support Access](/orchestration/cmk/support-access.md): Learn how to grant and revoke Crusoe support access to your CMK cluster
+- [Removing All Support Access](/orchestration/cmk/removing-all-access.md): A complete checklist for revoking all Crusoe support access to your CMK cluster
+
+#### Crusoe Managed Slurm
+
+- [Overview](/orchestration/slurm/overview.md): Learn about Crusoe Managed Slurm for high-performance computing on Crusoe Cloud
+- [Quickstart](/orchestration/slurm/quickstart.md): Create a Managed Slurm cluster and run your first GPU job
+- [User management](/orchestration/slurm/user-management.md): Learn how to manage users and groups for your Managed Slurm cluster
+- [Managing Partitions](/orchestration/slurm/managing-partitions.md): Learn how to manage partitions in a Managed Slurm cluster
+- [Node Health Checks](/orchestration/slurm/node-health-checks.md): Built-in node health checks and how to add your own health, prolog, and epilog checks for Managed Slurm
+- [Managing Volumes](/orchestration/slurm/volume-management.md): Add additional Crusoe filesystem disks to your Managed Slurm cluster
+- [Set up Slurm on Kubernetes](/orchestration/slurm/kubernetes-setup.md): Install and configure Managed Slurm directly on a Crusoe Managed Kubernetes cluster, without the Slurm CLI or API
+- [Slurm Metrics](/orchestration/slurm/slurm-metrics.md): Monitor your Managed Slurm cluster with metrics
+- [Advanced: Kubernetes Operations](/orchestration/slurm/advanced-kubernetes.md): Direct kubectl access and CRD-level configuration for Managed Slurm
+
+### Container Registry
+
+- [Overview](/container-registry/overview.md): Learn about the Crusoe Container Registry (CCR).
+- [Quickstart with Docker](/container-registry/quickstart.md): Pull, tag, and push an image to Crusoe Container Registry (CCR).
+- [Managing Repositories](/container-registry/managing-repositories.md): Create and manage your CCR repositories.
+- [Managing Images](/container-registry/managing-images.md): Manage images in your CCR repositories.
+- [Pulling Images into a Kubernetes Cluster](/container-registry/using-with-k8s.md): Pull images from Crusoe Container Registry in a Kubernetes cluster
+- [CCR Token Rotation in Kubernetes](/container-registry/token-rotator.md): Use the Crusoe Registry Token Rotator in a Kubernetes Cluster
+
+## Observability
+
+
+### Command Center
+
+- [Overview](/command-center/overview.md): Monitor, diagnose, and optimize your AI infrastructure on Crusoe Cloud with Command Center.
+- [Get started](/command-center/get-started.md): Install the Crusoe Watch Agent, generate a monitoring token, and access Command Center features.
+- [Infrastructure and Topology Overview](/command-center/topology.md): View fleet-wide health and utilization by instance type, and visualize CMK cluster topology.
+- [Instance Health](/command-center/instance-health.md): Monitor health status for CMK nodes and standalone VMs in Command Center.
+- [Metrics](/command-center/metrics.md): Collect, view, and query infrastructure and custom application metrics for your CMK cluster and VMs.
+- [Logs](/command-center/logs.md): Search and filter logs collected from your CMK clusters and VMs.
+- [Telemetry Conduit](/command-center/telemetry-conduit.md): Export all collected infrastructure and custom metrics to external observability platforms.
+
+### Notifications
+
+- [Notifications](/notifications/overview.md): Get notified about events across your Crusoe Cloud organization via email and in-console, and set up notification routing to Slack or webhooks.
+
+## Usage and billing
+
+- [Viewing usage](/usage-billing/viewing-usage.md): View usage for your Crusoe Cloud account
+- [Viewing billing](/usage-billing/viewing-billing.md): Viewing Billing for your Crusoe Cloud account
+- [Setting up Budget Alerts](/usage-billing/budget-alerts.md): Configuring budget alerts for Crusoe Cloud resources
+
+### Reservations
+
+- [Overview](/usage-billing/reservations/overview.md): Learn about associating Crusoe Cloud Virtual Machines (VMs) with Reservations
+- [Managing reservations](/usage-billing/reservations/managing-reservations.md): Learn how to manage your reservations
+- [Spot](/usage-billing/spot.md): Spot Overview
+- [Viewing quotas](/usage-billing/viewing-quotas.md): Viewing quotas for your Crusoe Cloud account
+
+## Identity and security
+
+- [Managing Users](/identity-and-security/managing-organization-users.md): Managing users in your Crusoe Cloud organization
+- [Log in to Crusoe Cloud with Single Sign-On (SSO)](/identity-and-security/sso.md): Secure your organization's access to Crusoe Cloud by enabling Single Sign-On (SSO) through your existing identity provider.
+- [Audit Logs](/identity-and-security/audit-logs.md): Audit logs give a record of activity in your organization
+- [Set up multi-factor authentication](/identity-and-security/mfa.md): Multi-factor authentication promotes secure sign-in to the Crusoe Cloud Console
+- [Manage your API keys](/identity-and-security/managing-api-keys.md): API keys allow for programmatic access to Crusoe Cloud resources
+
+## Resources
+
+- [Changelog](/resources/changelog.md): List of changes to Crusoe Cloud
+- [Contact Support](/resources/support.md): Find help for Crusoe Cloud issues
+- [Deprecation notices](/resources/deprecation_notices.md): See deprecation notices for Crusoe Cloud products.
+- [Troubleshooting](/resources/troubleshooting.md): Some tips and tricks for troubleshooting issues with VMs
+- [TSS Support Tiers](/resources/support_tiers.md): This document is incorporated by reference into the Technical Support Service Guidelines.
+
+## Third-Party Integrations
+
+
+### dstack
+
+- [Overview](/third-party-integrations/dstack/overview.md): Learn about using dstack for GPU orchestration on Crusoe Cloud
+- [Quickstart](/third-party-integrations/dstack/quickstart.md): Set up dstack with Crusoe Cloud and run your first GPU workload
+- [Clusters](/third-party-integrations/dstack/clusters.md): Provision multi-node InfiniBand clusters with dstack and validate them with NCCL tests
+
+## Reference
+
+- [API Reference](/reference/api/.md): Learn how to access and authenticate to Crusoe Cloud's REST API
+
+### CLI reference
+
+- [CLI Reference](/reference/cli/.md): Command line client for Crusoe Cloud API
+- [crusoe completion](/reference/cli/crusoe_completion.md): Generate the autocompletion script for the specified shell
+- [crusoe completion bash](/reference/cli/crusoe_completion_bash.md): Generate the autocompletion script for bash
+- [crusoe completion fish](/reference/cli/crusoe_completion_fish.md): Generate the autocompletion script for fish
+- [crusoe completion powershell](/reference/cli/crusoe_completion_powershell.md): Generate the autocompletion script for powershell
+- [crusoe completion zsh](/reference/cli/crusoe_completion_zsh.md): Generate the autocompletion script for zsh
+- [crusoe compute](/reference/cli/crusoe_compute.md): Subcommand for managing Crusoe Cloud compute resources
+- [crusoe compute images](/reference/cli/crusoe_compute_images.md): Subcommand for viewing Crusoe Cloud VM images
+- [crusoe compute images list](/reference/cli/crusoe_compute_images_list.md): List all Crusoe-managed and custom images available for deployment
+- [crusoe compute templates](/reference/cli/crusoe_compute_templates.md): Subcommand for viewing Crusoe Cloud VM instance templates
+- [crusoe compute templates create](/reference/cli/crusoe_compute_templates_create.md): Create an instance template
+- [crusoe compute templates delete](/reference/cli/crusoe_compute_templates_delete.md): Delete an instance template
+- [crusoe compute templates get](/reference/cli/crusoe_compute_templates_get.md): Get details about an instance template
+- [crusoe compute templates list](/reference/cli/crusoe_compute_templates_list.md): List all instance templates
+- [crusoe compute vms](/reference/cli/crusoe_compute_vms.md): Subcommand for managing Crusoe Cloud VM resources
+- [crusoe compute vms attach-disks](/reference/cli/crusoe_compute_vms_attach-disks.md): Attach disks to a VM
+- [crusoe compute vms bulk-create](/reference/cli/crusoe_compute_vms_bulk-create.md): Create and start multiple VMs from an instance template
+- [crusoe compute vms create](/reference/cli/crusoe_compute_vms_create.md): Create a new VM
+- [crusoe compute vms delete](/reference/cli/crusoe_compute_vms_delete.md): Delete a VM
+- [crusoe compute vms detach-disks](/reference/cli/crusoe_compute_vms_detach-disks.md): Detach disks from a VM
+- [crusoe compute vms get](/reference/cli/crusoe_compute_vms_get.md): Get details about a VM
+- [crusoe compute vms list](/reference/cli/crusoe_compute_vms_list.md): List all VMs
+- [crusoe compute vms reset](/reference/cli/crusoe_compute_vms_reset.md): Reset a VM
+- [crusoe compute vms serial-console](/reference/cli/crusoe_compute_vms_serial-console.md): Connect to serial console on a VM
+- [crusoe compute vms ssh](/reference/cli/crusoe_compute_vms_ssh.md): SSH into a VM
+- [crusoe compute vms start](/reference/cli/crusoe_compute_vms_start.md): Start a VM
+- [crusoe compute vms stop](/reference/cli/crusoe_compute_vms_stop.md): Stop a VM
+- [crusoe compute vms types](/reference/cli/crusoe_compute_vms_types.md): List available VM types
+- [crusoe compute vms update](/reference/cli/crusoe_compute_vms_update.md): Update a VM
+- [crusoe config](/reference/cli/crusoe_config.md): Subcommand for managing Crusoe Cloud CLI configuration
+- [crusoe config get](/reference/cli/crusoe_config_get.md): Get a CLI config parameter for the current profile
+- [crusoe config init](/reference/cli/crusoe_config_init.md): Interactive configuration setup for Crusoe Cloud CLI
+- [crusoe config set](/reference/cli/crusoe_config_set.md): Set a CLI config parameter for the current profile
+- [crusoe keys](/reference/cli/crusoe_keys.md): Subcommand for managing SSH Keys
+- [crusoe keys list](/reference/cli/crusoe_keys_list.md): List all SSH keys registered to the authenticated user
+- [crusoe locations](/reference/cli/crusoe_locations.md): Subcommand for viewing Crusoe locations
+- [crusoe locations list](/reference/cli/crusoe_locations_list.md): List all locations available for deploying resources
+- [crusoe monitoring](/reference/cli/crusoe_monitoring.md): Subcommand for managing monitoring resources
+- [crusoe monitoring tokens](/reference/cli/crusoe_monitoring_tokens.md): Subcommand for managing monitoring tokens
+- [crusoe monitoring tokens create](/reference/cli/crusoe_monitoring_tokens_create.md): Create new monitoring token for a user
+- [crusoe monitoring tokens delete](/reference/cli/crusoe_monitoring_tokens_delete.md): Delete monitoring token for a user
+- [crusoe monitoring tokens list](/reference/cli/crusoe_monitoring_tokens_list.md): List monitoring tokens for a user
+- [crusoe networking](/reference/cli/crusoe_networking.md): Subcommand for managing Crusoe Cloud networking resources
+- [crusoe networking ib-networks](/reference/cli/crusoe_networking_ib-networks.md): Subcommand for managing Infiniband networks
+- [crusoe networking ib-networks get](/reference/cli/crusoe_networking_ib-networks_get.md): Get details about an Infiniband network
+- [crusoe networking ib-networks list](/reference/cli/crusoe_networking_ib-networks_list.md): List all Infiniband networks
+- [crusoe networking ib-partitions](/reference/cli/crusoe_networking_ib-partitions.md): Subcommand for managing Infiniband partitions
+- [crusoe networking ib-partitions create](/reference/cli/crusoe_networking_ib-partitions_create.md): Create a new Infiniband partition
+- [crusoe networking ib-partitions delete](/reference/cli/crusoe_networking_ib-partitions_delete.md): Delete an Infiniband partition
+- [crusoe networking ib-partitions get](/reference/cli/crusoe_networking_ib-partitions_get.md): Get details about an Infiniband partition
+- [crusoe networking ib-partitions list](/reference/cli/crusoe_networking_ib-partitions_list.md): List all Infiniband partitions
+- [crusoe networking vpc-firewall-rules](/reference/cli/crusoe_networking_vpc-firewall-rules.md): Subcommand for managing Crusoe Cloud VPC firewall rules
+- [crusoe networking vpc-firewall-rules create](/reference/cli/crusoe_networking_vpc-firewall-rules_create.md): Create a VPC firewall rule
+- [crusoe networking vpc-firewall-rules delete](/reference/cli/crusoe_networking_vpc-firewall-rules_delete.md): Delete a VPC firewall rule
+- [crusoe networking vpc-firewall-rules get](/reference/cli/crusoe_networking_vpc-firewall-rules_get.md): Get details about a VPC firewall rule
+- [crusoe networking vpc-firewall-rules list](/reference/cli/crusoe_networking_vpc-firewall-rules_list.md): List all VPC firewall rules
+- [crusoe networking vpc-firewall-rules update](/reference/cli/crusoe_networking_vpc-firewall-rules_update.md): Update a VPC firewall rule
+- [crusoe networking vpc-networks](/reference/cli/crusoe_networking_vpc-networks.md): Subcommand for Crusoe Cloud VPC networks
+- [crusoe networking vpc-networks create](/reference/cli/crusoe_networking_vpc-networks_create.md): Create a VPC network
+- [crusoe networking vpc-networks delete](/reference/cli/crusoe_networking_vpc-networks_delete.md): Delete a VPC network
+- [crusoe networking vpc-networks get](/reference/cli/crusoe_networking_vpc-networks_get.md): Get details about a VPC network
+- [crusoe networking vpc-networks list](/reference/cli/crusoe_networking_vpc-networks_list.md): List all VPC networks
+- [crusoe networking vpc-networks update](/reference/cli/crusoe_networking_vpc-networks_update.md): Update a VPC network
+- [crusoe networking vpc-subnets](/reference/cli/crusoe_networking_vpc-subnets.md): Subcommand for managing Crusoe Cloud subnets
+- [crusoe networking vpc-subnets create](/reference/cli/crusoe_networking_vpc-subnets_create.md): Create a VPC subnet
+- [crusoe networking vpc-subnets delete](/reference/cli/crusoe_networking_vpc-subnets_delete.md): Delete a VPC subnet
+- [crusoe networking vpc-subnets get](/reference/cli/crusoe_networking_vpc-subnets_get.md): Get details about a VPC subnet
+- [crusoe networking vpc-subnets list](/reference/cli/crusoe_networking_vpc-subnets_list.md): List all VPC subnets
+- [crusoe networking vpc-subnets update](/reference/cli/crusoe_networking_vpc-subnets_update.md): Update a VPC subnet
+- [crusoe projects](/reference/cli/crusoe_projects.md): Subcommand for managing Crusoe Cloud Project resources
+- [crusoe projects create](/reference/cli/crusoe_projects_create.md): Create a new Project
+- [crusoe projects list](/reference/cli/crusoe_projects_list.md): List all projects
+- [crusoe reservations](/reference/cli/crusoe_reservations.md): Subcommand for viewing Crusoe Cloud reservations
+- [crusoe storage](/reference/cli/crusoe_storage.md): Subcommand for managing Crusoe Cloud storage resources
+- [crusoe storage disks](/reference/cli/crusoe_storage_disks.md): Subcommand for managing Crusoe Cloud Disk resources
+- [crusoe storage disks create](/reference/cli/crusoe_storage_disks_create.md): Create a disk
+- [crusoe storage disks delete](/reference/cli/crusoe_storage_disks_delete.md): Delete a disk
+- [crusoe storage disks get](/reference/cli/crusoe_storage_disks_get.md): Get details about a disk
+- [crusoe storage disks list](/reference/cli/crusoe_storage_disks_list.md): List all disks
+- [crusoe storage disks resize](/reference/cli/crusoe_storage_disks_resize.md): Resize an existing disk
+- [crusoe whoami](/reference/cli/crusoe_whoami.md): Display details about current user
+- [Crusoe Cloud Locations](/reference/locations.md): Crusoe Cloud Locations
+
+## Other Pages
+
+- /api/
+- /api/managed-ai/
+- /api/v1alpha5/
+- /blog
+- /command-center
+- /compute
+- /compute/images
+- /compute/templates
+- /compute/virtual-machines
+- /container-registry
+- /identity-and-security
+- /networking
+- /networking/firewall-rules
+- /networking/infiniband
+- /networking/load-balancers
+- /networking/nv-link
+- /networking/vpc
+- /notifications
+- /orchestration
+- /orchestration/cmk
+- /orchestration/slurm
+- /reference
+- /storage
+- /storage/disks
+- /storage/object-storage
+- /third-party-integrations
+- /third-party-integrations/dstack
+- /usage-billing
+- /usage-billing/reservations

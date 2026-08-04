@@ -1,0 +1,110 @@
+generated: '2026-08-04'
+method: searched
+source: https://docs.crusoecloud.com/reference/api/
+docs:
+- https://docs.crusoecloud.com/reference/api/
+- https://docs.crusoecloud.com/identity-and-security/managing-api-keys
+note: >-
+  The published Swagger 2.0 documents at api.cloud.crusoe.ai/v1/openapi.json and /v1alpha5/openapi.json
+  declare NO securityDefinitions and NO security requirements, even though every operation returns a
+  401 "Error Authentication Failed" response. The auth model below is therefore taken from the docs,
+  not derived from the spec. This is a real contract gap: an agent or generated client reading the spec
+  alone cannot authenticate. See conformance/crusoe-conformance.yml.
+summary:
+  types: [http, apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  declared_in_openapi: false
+schemes:
+- name: CrusoeSignedRequest
+  api: Crusoe Cloud API Gateway
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Bearer <version:access_key_id:base64_encoded_signature>'
+  companion_headers:
+  - name: X-Crusoe-Timestamp
+    format: RFC 3339 timestamp
+    purpose: replay-attack prevention
+  signature:
+    version: '1.0'
+    algorithm: HMAC-SHA256
+    key: raw-urlsafe-base64-decoded secret key
+    encoding: base64
+    payload_fields:
+    - http_path
+    - canonicalized_query_params
+    - http_verb
+    - timestamp_header_value
+    payload_separator: newline
+    canonical_query_params: >-
+      Parameters sorted lexicographically by name and joined with "&"; when there are no query
+      parameters the canonical string is a single newline.
+  credentials:
+    kind: access key ID + secret key pair
+    issued_at: https://console.crusoecloud.com/security/cloud-api-keys
+    secret_visibility: shown once at creation only
+    expiration: optional, set at creation
+    revocation: permanent delete from the console Security page
+  sources:
+  - https://docs.crusoecloud.com/reference/api/
+- name: InferenceApiKey
+  api: Crusoe Managed Inference API
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Bearer <inference_api_key>'
+  note: >-
+    OpenAI-compatible endpoint at api.inference.crusoecloud.com; a plain bearer API key, not the signed
+    request used by the API Gateway. Unauthenticated requests to ANY path on this host, including
+    /.well-known/*, return HTTP 401 {"errors":["Authentication failed"]}.
+  credentials:
+    kind: API key
+    issued_at: https://console.crusoecloud.com/security/inference-api-keys
+    secret_visibility: shown once at creation only
+    expiration: optional, set at creation
+  sources:
+  - https://docs.crusoecloud.com/serverless-inference
+  - https://docs.crusoecloud.com/identity-and-security/managing-api-keys
+- name: ObjectStorageKey
+  api: Crusoe Cloud Object Storage (S3-compatible)
+  type: apiKey
+  in: header
+  note: >-
+    Object Storage issues its own S3-style access keys, managed through the S3Keys endpoints of the API
+    Gateway (createS3Key / listS3Keys / deleteS3Key) and documented separately.
+  docs: https://docs.crusoecloud.com/storage/object-storage/managing-storage-api-keys
+authorization:
+  model: project-scoped RBAC
+  note: >-
+    Almost every API Gateway operation is scoped by a project_id path parameter (175 of 232 operations),
+    and IAM role bindings assign roles to users within an organization. There is no OAuth 2.0 scope
+    surface, so no scopes/ artifact is emitted.
+  operations:
+  - listRoles
+  - listRoleBindings
+  - applyRoleBindings
+enterprise_identity:
+  sso:
+    supported: true
+    providers: [Okta]
+    note: organization-wide SSO enforcement is currently Okta-only
+    operations: [createSSOProvider, listSSOProviders, deleteSSOProvider, updateUserSSOEnforcement]
+  scim:
+    supported: true
+    note: SCIM integration endpoints are published on the API Gateway for user provisioning
+  mfa:
+    supported: true
+  social_login:
+    providers: [Google, GitHub]
+    scope: console sign-in only, not organization SSO enforcement
+    source: https://docs.crusoecloud.com/resources/changelog
+x-evidence:
+  fetched: '2026-08-04'
+  urls:
+  - https://docs.crusoecloud.com/reference/api/
+  - https://docs.crusoecloud.com/identity-and-security/managing-api-keys
+  - https://api.cloud.crusoe.ai/v1/openapi.json
+  http_status: 200

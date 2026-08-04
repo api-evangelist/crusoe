@@ -1,0 +1,74 @@
+generated: '2026-08-04'
+method: searched
+source: https://docs.crusoecloud.com/installing-the-cli
+docs: https://docs.crusoecloud.com/installing-the-cli
+reference: https://docs.crusoecloud.com/reference/cli
+repository: https://github.com/crusoecloud/cli
+name: crusoe
+description: >-
+  First-party command-line interface for managing Crusoe Cloud infrastructure — VMs, storage,
+  networking, and orchestration — backed by the same Crusoe Cloud API Gateway REST API.
+install:
+- manager: homebrew
+  platform: macos
+  command: brew install crusoecloud/cli/crusoe
+  upgrade: brew upgrade crusoe
+- manager: apt
+  platform: linux
+  command: sudo apt install crusoe
+  setup: echo "deb [trusted=yes] https://apt.fury.io/crusoe/ * *" > /etc/apt/sources.list.d/fury.list
+  upgrade: sudo apt upgrade crusoe
+- manager: yum
+  platform: linux
+  command: sudo yum install <path_to_crusoe_rpm.rpm>
+  source: https://github.com/crusoecloud/cli/releases/latest
+- manager: manual
+  platform: windows
+  source: https://github.com/crusoecloud/cli/releases/latest
+  note: download crusoe_Windows_$PLATFORM.tar.gz, untar, add binary to PATH
+configuration:
+  command: crusoe config init
+  file: ~/.crusoe/config
+  format: ini profiles
+  variables:
+  - default_project
+  - access_key_id
+  - secret_key
+  - ssh_public_key_file
+  profile_switching:
+    env: CRUSOE_PROFILE
+  environment_overrides:
+  - CRUSOE_DEFAULT_PROJECT
+  - CRUSOE_ACCESS_KEY_ID
+  - CRUSOE_SECRET_KEY
+  note: >-
+    The Crusoe Cloud MCP server and the Terraform provider read the same ~/.crusoe/config profile, so
+    configuring the CLI configures all three.
+commands:
+- name: config
+  subcommands: [init, get, set]
+  description: Create and inspect the local profile that holds API keys and the default project.
+- name: whoami
+  description: Print the currently authenticated user; the canonical smoke test after install.
+key_flows:
+- name: First-run setup
+  steps:
+  - Install the binary with brew/apt/yum or from a GitHub release
+  - Create an API access key ID and secret key in the console Security page
+  - Run `crusoe config init` and supply the keys plus a default project
+  - Run `crusoe whoami` to confirm authentication
+- name: Create a VM
+  docs: https://docs.crusoecloud.com/quickstart/creating-a-vm
+help:
+  command: crusoe --help
+support: https://docs.crusoecloud.com/resources/support
+x-evidence:
+  fetched: '2026-08-04'
+  urls:
+  - https://docs.crusoecloud.com/installing-the-cli
+  - https://github.com/crusoecloud/cli
+  http_status: 200
+  note: >-
+    The full per-command reference lives behind the docs site's CLI reference page; only the commands
+    explicitly published in the install/configure guide are recorded above. No command surface was
+    invented.

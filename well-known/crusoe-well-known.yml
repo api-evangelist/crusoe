@@ -1,0 +1,115 @@
+generated: '2026-08-04'
+method: searched
+source: live probes of every apis.yml host and OpenAPI host
+note: >-
+  console.crusoecloud.com is a single-page app that answers HTTP 200 with the same HTML shell for every
+  /.well-known/* path, including /.well-known/agent-card.json — those 200s are catch-all responses, not
+  documents, and are recorded here as such. No A2A agent card exists on any Crusoe host.
+hosts:
+- host: https://www.crusoe.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    file: crusoe-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://api.cloud.crusoe.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://api.crusoecloud.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://docs.crusoecloud.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/crusoe-llms.txt
+- host: https://console.crusoecloud.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    note: same document as www.crusoe.ai, but with an earlier Expires (2026-07-01) — already expired
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all HTML shell, not an OIDC discovery document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all HTML shell
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all HTML shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all HTML shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all HTML shell — rejected, not an AgentCard
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all HTML shell — rejected, not an AgentCard
+- host: https://api.inference.crusoecloud.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+    note: every path on this host requires an Inference API key; body is {"errors":["Authentication failed"]}
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401

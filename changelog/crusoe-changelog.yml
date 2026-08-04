@@ -1,0 +1,98 @@
+generated: '2026-08-04'
+method: searched
+source: https://docs.crusoecloud.com/resources/changelog
+url: https://docs.crusoecloud.com/resources/changelog
+scheme: dated entries grouped by change type (Features)
+versioning_link: lifecycle/crusoe-lifecycle.yml
+current_version: v1
+note: >-
+  Crusoe publishes a product changelog, not an API-version changelog — entries describe new instance
+  types, new hosted models, and new console/product capabilities. Breaking API changes are not called
+  out as such, and no entry is tied to an API version bump. Recent window only; the live page is the
+  source of truth.
+entries:
+- date: '2026-07-22'
+  type: features
+  breaking: false
+  highlights:
+  - AMD bug reports can be generated from the Console for AMD GPU instances, for standalone VMs and
+    Crusoe Managed Kubernetes nodes.
+- date: '2026-07-16'
+  type: features
+  breaking: false
+  highlights:
+  - VM disk I/O and NVMe drive health metrics exposed via API, Telemetry Conduit, and Crusoe MCP.
+  - Object Storage connection latency, throughput, and retransmit metrics observed from the VM exposed
+    via API, Telemetry Conduit, and Crusoe MCP.
+- date: '2026-07-14'
+  type: features
+  breaking: false
+  highlights:
+  - Self-Serve Deployments — dedicated reserved-capacity inference deployments on Crusoe managed
+    infrastructure.
+  - Serverless Fine-Tuning — LoRA-based supervised fine-tuning of open models through the Intelligence
+    Foundry.
+- date: '2026-07-07'
+  type: features
+  breaking: false
+  highlights:
+  - Sign-in with Google or GitHub for new and existing users; organization-wide SSO enforcement remains
+    Okta-only.
+- date: '2026-06-26'
+  type: features
+  breaking: false
+  highlights:
+  - AMD MI355x VMs available on Crusoe Cloud.
+- date: '2026-06-24'
+  type: features
+  breaking: false
+  highlights:
+  - Intelligence Foundry adds Kimi K2.6.
+- date: '2026-06-22'
+  type: features
+  breaking: false
+  highlights:
+  - Intelligence Foundry adds GLM 5.2.
+- date: '2026-06-04'
+  type: features
+  breaking: false
+  highlights:
+  - Intelligence Foundry adds Nemotron 3 Ultra 550B.
+- date: '2026-05-07'
+  type: features
+  breaking: false
+  highlights:
+  - New AMD Turin CPU instance types c2a and s2a in eu-norway1-a.
+  - B200 (b200-180gb-sxm-ib-8x) instances extended to eu-norway1-a and us-west1-a.
+- date: '2026-05-05'
+  type: features
+  breaking: false
+  highlights:
+  - Intelligence Foundry adds GLM 5.1.
+- date: '2026-05-01'
+  type: features
+  breaking: false
+  highlights:
+  - Intelligence Foundry adds DeepSeek V4 Pro, DeepSeek V4 Flash, and NVIDIA Nemotron 3 Nano Omni.
+- date: '2026-04-30'
+  type: features
+  breaking: false
+  highlights:
+  - Object Storage generally available on Crusoe Cloud.
+- date: '2026-04-28'
+  type: features
+  breaking: false
+  deprecations:
+  - A100 instances no longer available in us-west1-a.
+  highlights:
+  - B300 VMs available for customer POCs.
+- date: '2026-04-09'
+  type: features
+  breaking: false
+  highlights:
+  - Intelligence Foundry adds Google Gemma 4 31B Instruct.
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://docs.crusoecloud.com/resources/changelog
+  http_status: 200
+  window: 2026-04-09 through 2026-07-22 (most recent 14 dated entries)

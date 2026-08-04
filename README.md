@@ -42,5 +42,46 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Crusoe is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.hiive.com/securities/crusoe-stock
+Crusoe is a vertically integrated "AI factory" company that designs, builds, and operates energy-first
+AI infrastructure, and sells it as **Crusoe Cloud** — a GPU cloud for training, fine-tuning, and
+inference. Founded 2018, headquartered in Denver, Colorado.
+
+## API surface
+
+| API | Base URL | Contract |
+|---|---|---|
+| Crusoe Cloud API Gateway | `https://api.cloud.crusoe.ai/v1` | Swagger 2.0, 150 paths / 232 operations ([v1](https://api.cloud.crusoe.ai/v1/openapi.json), [v1alpha5](https://api.cloud.crusoe.ai/v1alpha5/openapi.json)) |
+| Crusoe Managed Inference API | `https://api.inference.crusoecloud.com/v1` | OpenAI-compatible; auth-gated, no anonymous contract |
+| Crusoe Cloud MCP Server | `npx -y @crusoeai/cloud-mcp` | stdio, read-only, 41 documented tools (preview) |
+
+## Links
+
+- Developers: https://www.crusoe.ai/developers
+- Documentation: https://docs.crusoecloud.com/
+- API reference: https://docs.crusoecloud.com/api/
+- Changelog: https://docs.crusoecloud.com/resources/changelog
+- Status: https://status.crusoecloud.com
+- Trust center: https://trust.crusoe.ai/
+- GitHub: https://github.com/crusoecloud
+- Pricing: https://www.crusoe.ai/cloud/pricing
+- Legal: https://legal.crusoe.ai/
+
+## What this profile captures
+
+`openapi/` (both published Swagger tracks, verbatim) · `llms/` (Crusoe's own `llms.txt` from the docs
+and marketing hosts, verbatim) · `mcp/` (the published MCP server + a crosswalk binding its 41 tools to
+backing `operationId`s) · `authentication/` · `conventions/` · `errors/` · `data-model/` ·
+`lifecycle/` · `changelog/` · `conformance/` · `asyncapi/` (the notification/webhook catalog) ·
+`packages/` · `cli/` · `security/` · `well-known/` · `skills/` · `agentic-access/` · `overlays/`.
+
+## Notable gaps
+
+- The published Swagger documents declare **no `securityDefinitions`** at all, even though 221 of 232
+  operations return a 401. A generated client cannot authenticate from the contract.
+- Swagger 2.0 rather than OpenAPI 3.x.
+- **No idempotency contract** on any create operation.
+- Errors are a flat `{code, message}` envelope with no application-level code vocabulary, and the
+  Observability endpoints return a *different* gRPC-gateway envelope.
+- Webhooks are documented but have **no AsyncAPI, no payload schemas, no signature scheme**, and cannot
+  be provisioned through the API.
+- No A2A agent card on any Crusoe host.

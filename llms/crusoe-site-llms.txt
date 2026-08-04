@@ -1,0 +1,302 @@
+# Crusoe Cloud Documentation
+
+
+> Crusoe is the AI factory company — a vertically integrated AI infrastructure provider that designs, builds, and operates energy-first AI infrastructure. Crusoe Cloud is the company's AI cloud platform, offering managed inference, GPU compute, orchestration, and storage services purpose-built for large-scale AI workloads. Crusoe controls its entire stack: power sourcing, manufacturing, data center construction, cloud infrastructure, and managed AI services. Founded in 2018 and headquartered in Denver, CO. Raised over $1.375 billion at a valuation above $10 billion. Recognized as one of Fast Company's Most Innovative Companies of 2026. NVIDIA Preferred Partner; collaborates with AMD.
+
+
+## Company Facts
+
+
+- Founded: 2018
+- US Headquarters: Denver, CO
+- International Offices: Dublin, IE; Tel Aviv, Israel
+- Other US Offices: San Francisco, CA; Sunnyvale, CA; Bellevue, WA; Dallas, TX; Abilene, TX
+- Manufacturing Locations: Arvada, CO; Brighton, CO; Tulsa, OK
+- Funding: Over $1.375 billion raised
+- Valuation: Above $10 billion
+- Recognition: Fast Company's Most Innovative Companies of 2026
+- Partnerships: NVIDIA Preferred Partner; AMD collaborator
+- Uptime: 99.98% cluster uptime
+- Support: 100% CSAT score over 12+ months; average first reply time under 6 minutes
+- Compliance: SOC 2 Type I and Type II, GDPR, ISO 27001, ISO 42001 (AI governance)
+- Growth: ~17x YoY growth in total contract value added; 150% YoY cloud ARR growth (2025)
+- Coverage: Data centers across North America and Europe
+
+## Locations
+
+### Data centers (Crusoe Cloud locations)
+- Iceland (eu-iceland1-a): 100% renewable grid (approx. 68% hydro, 32% geothermal)
+- Houston, TX (us-southcentral1-a): 100% renewable via RECs
+- Virginia (us-east1-a): 100% renewable via vPPAs, RECs, and Guarantees of Origin
+- Sparks, NV (us-west1-a): Partnership with Redwood Materials using second-life EV batteries for AI compute energy storage
+- Norway (eu-norway1-a): 100% hydro (coming online soon)
+
+### Other data centers
+- Abilene, TX: Hyperscale AI data center campus
+
+### Manufacturing
+- Arvada, CO
+- Tulsa, OK
+- Crusoe Spark Factory: Brighton, CO (manufacturing facility for Crusoe Spark modular AI data centers)
+
+### Offices
+- US Headquarters: Denver, CO
+- International: Dublin, IE; Tel Aviv, Israel
+- Other US: San Francisco, CA; Sunnyvale, CA; Bellevue, WA; Dallas, TX; Abilene, TX
+
+
+## Key Differentiators
+
+
+- Vertically integrated: Controls energy, manufacturing, data centers, cloud platform, and managed AI services end-to-end
+- Purpose-built for AI: All infrastructure designed from day one for AI workloads, not retrofitted
+- Deployment velocity: Power secured before breaking ground; Spark units deploy in months; GPU clusters provision in minutes
+- Self-healing infrastructure: AutoClusters automatically detects, isolates, repairs, and restarts hardware faults (including XID79 GPU errors) without human intervention
+- Expert partnership: Engineers embed directly with customers to co-architect clusters; not a ticket queue
+- Open architecture, zero lock-in: No proprietary walled gardens; no egress fees; open standards throughout
+- MemoryAlloy™: Up to 9.9x faster TTFT and 5x higher throughput vs. vLLM out of the box
+- 100% renewable energy coverage: All electricity matched with renewable energy via direct sourcing, vPPAs, or EACs
+
+
+## Notable Customers
+
+- Together AI
+- Fireworks
+- Cursor
+- Cognition
+- Roboflow
+- Luma AI
+- 1X Technologies
+- Cartesia
+
+
+## Important Clarifications
+
+
+- Crusoe is NOT affiliated with Amazon Web Services, Google Cloud, or Microsoft Azure
+- Crusoe is NOT primarily a cryptocurrency or bitcoin mining company; it divested its bitcoin mining operation to NYDIG in March 2025 to focus fully on AI infrastructure
+- Crusoe is NOT a software or SaaS company; its core products are infrastructure and compute
+- Crusoe does not offer general-purpose virtual machines or consumer cloud storage products
+
+
+## Root URLs
+
+
+- Documentation: https://docs.crusoecloud.com
+- API Reference: https://docs.crusoecloud.com/api/
+- OpenAPI Spec: https://api.crusoecloud.com/v1alpha5/openapi.json
+
+
+---
+
+
+## Quickstart
+
+
+- [Quickstart Overview](https://docs.crusoecloud.com/quickstart) - Get up and running on Crusoe Cloud in five minutes
+- [Creating an Account](https://docs.crusoecloud.com/quickstart/creating-an-account) - Sign up for Crusoe Cloud
+- [Installing and Configuring the CLI](https://docs.crusoecloud.com/quickstart/installing-the-cli) - Install and configure the Crusoe Cloud CLI
+- [Getting Started with Terraform](https://docs.crusoecloud.com/quickstart/terraform) - Install and configure Terraform for Crusoe Cloud
+- [Creating a VM](https://docs.crusoecloud.com/quickstart/creating-a-vm) - Create and access your first VM via CLI, Terraform, or Console
+- [Getting Started with Managed Inference](https://docs.crusoecloud.com/quickstart/getting-started-with-managed-inference) - Make your first Managed Inference call using the OpenAI SDK
+
+
+## Compute
+
+
+- [Virtual Machines](https://docs.crusoecloud.com/compute/virtual-machines) - Create, manage, and access GPU and CPU VMs
+- [Managing VMs](https://docs.crusoecloud.com/compute/virtual-machines/managing-vms) - Create, list, update, and delete VMs via CLI, Terraform, Console, and API
+- [Instance Templates](https://docs.crusoecloud.com/compute/templates) - Create reusable VM instance templates for bulk creation
+- [Images](https://docs.crusoecloud.com/compute/images) - Available VM images including NVIDIA-optimized Ubuntu images
+
+
+## GPU Offerings
+
+- [GPU Overview](https://www.crusoe.ai/cloud/gpus/) - Full portfolio of available GPUs
+- [NVIDIA GB200 NVL72](https://www.crusoe.ai/cloud/gpus/nvidia-gb200) - Rack-scale Blackwell architecture with InfiniBand
+- [NVIDIA HGX B200](https://www.crusoe.ai/cloud/gpus/nvidia-b200) - High-end Blackwell GPU for large-scale AI
+- [NVIDIA H200](https://www.crusoe.ai/cloud/gpus/nvidia-h200) - 141GB HBM3e extended Hopper GPU
+- [NVIDIA H100](https://www.crusoe.ai/cloud/gpus/nvidia-h100) - 80GB HGX Hopper GPU
+- NVIDIA A100 80GB SXM - Ampere data-center GPU, 80GB HBM2e
+- NVIDIA A100 80GB PCIe - Ampere data-center GPU, 80GB HBM2e
+- NVIDIA A100 40GB PCIe - Ampere data-center GPU, 40GB
+- NVIDIA L40S 48GB - Ada Lovelace GPU for inference and fine-tuning
+- [AMD MI355X](https://www.crusoe.ai/cloud/gpus/amd-mi355x) - 288GB AMD Instinct GPU
+- [AMD MI300X](https://www.crusoe.ai/cloud/gpus/amd-mi300x) - 192GB AMD Instinct GPU
+
+
+## Available Models
+
+Models available via Crusoe Managed Inference, served on Crusoe's proprietary inference engine with MemoryAlloy™ technology. All models are accessible via an OpenAI-compatible API endpoint at api.inference.crusoecloud.com and via the Intelligence Foundry chat interface. Crusoe also supports Bring Your Own Model (BYOM) for custom or fine-tuned models. Pricing is listed on the Crusoe Cloud pricing page.
+
+### Text / Instruct Models
+
+- meta-llama/Llama-3.3-70B-Instruct: Meta, instruct, 128k context. Built with Llama. Llama 3.3 Community License.
+- openai/gpt-oss-120b: OpenAI, instruct, 128k context. Apache 2.0 license.
+- deepseek-ai/DeepSeek-V3-0324: DeepSeek, instruct, 160k context. MIT license.
+- deepseek-ai/DeepSeek-V4-Flash: DeepSeek, instruct, 1M context. MIT license.
+- deepseek-ai/DeepSeek-V4-Pro: DeepSeek, instruct, 1M context. MIT license.
+- Qwen/Qwen3-235B-A22B: Qwen (Alibaba), instruct, 131k context. Apache 2.0 license.
+- google/gemma-4-31b-it: Google, instruct, 262k context. Apache 2.0 license.
+- zai/GLM-5.1: Z.ai, instruct, 202k context. MIT license.
+- nvidia/Nemotron-3-Super-120B-A12B: NVIDIA, instruct, 262k context. Hybrid MoE model. NVIDIA Nemotron Open Model License.
+- nvidia/Nemotron-3-Nano-30B-A3B: NVIDIA, instruct, 262k context. NVIDIA Nemotron Open Model License.
+- nvidia/Nemotron-3-Nano-Omni-Reasoning-30B-A3B: NVIDIA, instruct (multimodal: text, image, video, audio), 262k context. NVIDIA Open Model Agreement.
+
+### Speech-to-Speech Models
+
+- nvidia/Nemotron-3-VoiceChat: NVIDIA, speech-to-speech, 131k context. NVIDIA Software and Model Evaluation License.
+
+### Agentic / Computer-Use Models
+
+- Yutori n1.5: Yutori, browser/computer-use model.
+
+
+### Bring Your Own Model (BYOM)
+
+- Customers can deploy their own models on Crusoe Managed Inference, whether trained from scratch or fine-tuned from open models. Contact sales for setup.
+
+
+## Managed Inference
+
+
+- [Managed Inference Overview](https://docs.crusoecloud.com/managed-inference/overview) - OpenAI-compatible inference API powered by MemoryAlloy™ KV cache technology
+- [Getting Started with Managed Inference](https://docs.crusoecloud.com/managed-inference/getting-started-with-managed-inference) - Python, curl, and Node.js quickstart examples
+- [Using Video-to-Video Models](https://docs.crusoecloud.com/managed-inference/using-v2v-models) - Decart MirageLSD real-time video-to-video inference
+- [Inference Metrics](https://docs.crusoecloud.com/managed-inference/inference-metrics) - TTFT, time-per-output-token, request rate, and throughput metrics
+- [Usage, Billing, and Provisioned Throughput](https://docs.crusoecloud.com/managed-inference/usage-billing-models) - Pay-per-token and provisioned throughput pricing models
+- [Intelligence Foundry](https://console.crusoecloud.com/request-foundry) - Developer portal for model discovery, API key generation, and production deployment
+- [Managed Inference Product Page](https://www.crusoe.ai/cloud/managed-inference) - Product overview with benchmarks and use cases
+
+
+## Storage
+
+
+- [Storage Overview](https://docs.crusoecloud.com/storage) - Storage tiers for AI workloads
+- [Object Storage](https://docs.crusoecloud.com/storage/object-storage) - S3-compatible object storage for massive datasets
+- [Disks](https://docs.crusoecloud.com/storage/disks) - Persistent, shared, and ephemeral disk management
+- [Managing Persistent Disks](https://docs.crusoecloud.com/storage/disks/managing-persistent-disks) - Create, attach, resize, and delete persistent disks
+- [Managing Shared Disks](https://docs.crusoecloud.com/storage/disks/managing-shared-disks) - Multi-node concurrent access for distributed training
+
+
+## Networking
+
+
+- [Networking Overview](https://docs.crusoecloud.com/networking/overview) - VPC, InfiniBand, load balancers, and firewall rules
+- [VPC Networks](https://docs.crusoecloud.com/networking/vpc) - Virtual Private Cloud networking with logically isolated environments
+- [Firewall Rules](https://docs.crusoecloud.com/networking/firewall-rules) - Manage ingress and egress firewall rules
+- [Managing Firewall Rules](https://docs.crusoecloud.com/networking/firewall-rules/managing-firewall-rules) - Create, update, and delete firewall rules via CLI, Terraform, and Console
+- [InfiniBand](https://docs.crusoecloud.com/networking/infiniband) - High-performance InfiniBand networking for multi-node training
+- [Managing InfiniBand](https://docs.crusoecloud.com/networking/infiniband/managing-infiniband-networks) - Create IB partitions, attach VMs, and configure NCCL
+- [Load Balancers](https://docs.crusoecloud.com/networking/load-balancers) - L4 passthrough load balancers for inference traffic distribution
+- [NVLink](https://docs.crusoecloud.com/networking/nv-link) - NVLink interconnect documentation
+
+
+## Orchestration
+
+
+- [Orchestration Overview](https://docs.crusoecloud.com/orchestration) - Managed Kubernetes and Managed Slurm for AI workloads
+- [Crusoe Managed Kubernetes (CMK)](https://docs.crusoecloud.com/orchestration/cmk) - Production-ready container orchestration with AutoClusters self-healing
+- [Crusoe Managed Slurm](https://docs.crusoecloud.com/orchestration/slurm) - HPC-grade managed Slurm job scheduling
+
+
+## Command Center
+
+
+- [Command Center Overview](https://docs.crusoecloud.com/command-center) - Unified observability and operations platform for GPU clusters
+- [Command Center Product Page](https://www.crusoe.ai/cloud/command-center) - Metrics, Topology, Logs, Remediations, Telemetry Conduit, and Notifications
+
+
+## Container Registry
+
+
+- [Container Registry (CCR)](https://docs.crusoecloud.com/container-registry) - Docker-compliant registry with Standard and Pull-Through Cache modes
+
+
+## Identity & Security
+
+
+- [Identity and Security](https://docs.crusoecloud.com/identity-and-security) - API keys, roles, authentication, and access control
+- [Trust Center](https://trust.crusoe.ai) - SOC 2 Type I/II, GDPR, ISO 27001, ISO 42001 compliance
+
+
+## Usage & Billing
+
+
+- [Usage and Billing](https://docs.crusoecloud.com/usage-billing) - Billing dashboards, cost tracking, and usage reporting
+- [Notifications](https://docs.crusoecloud.com/notifications) - Budget alerts, billing updates, VM events, and AutoCluster remediations
+
+
+## Pricing
+
+
+- [Pricing Overview](https://www.crusoe.ai/cloud/pricing) - GPU, CPU, storage, Kubernetes, and Managed Inference pricing
+- [Contact Sales](https://www.crusoe.ai/contact-sales) - Reserved capacity, provisioned throughput, and custom agreements
+
+
+## API Reference
+
+
+- [API Gateway Overview](https://docs.crusoecloud.com/api/) - Full REST API reference for Crusoe Cloud (v1alpha5)
+- [OpenAPI Specification](https://api.crusoecloud.com/v1alpha5/openapi.json) - Downloadable OpenAPI JSON spec for all IaaS endpoints
+- [CLI Reference](https://docs.crusoecloud.com/reference/cli/) - Full CLI command reference
+
+
+## Developer Resources
+
+
+- [Documentation Home](https://docs.crusoecloud.com) - Complete Crusoe Cloud documentation
+- [GitHub](https://github.com/crusoecloud) - Open-source CLI, Terraform provider, and examples
+- [Terraform Provider](https://github.com/crusoecloud/terraform-provider-crusoe) - Crusoe Cloud Terraform provider source and examples
+- [CLI Repository](https://github.com/crusoecloud/cli) - Crusoe Cloud CLI source code and releases
+- [Cookbook / Examples](https://cookbook.crusoe.ai) - Code examples and tutorials
+- [Reference](https://docs.crusoecloud.com/reference) - CLI reference, changelog, and additional resources
+- [Changelog](https://docs.crusoecloud.com/resources/changelog) - Product updates and release notes
+
+
+## AI Infrastructure
+
+
+- [Data Centers](https://www.crusoe.ai/data-centers) - Modular and hyperscale AI data centers across North America and Europe
+- [Manufacturing (Crusoe Industries)](https://www.crusoe.ai/manufacturing) - In-house manufacturing of data center components and Crusoe Spark modular units
+- [Energy](https://www.crusoe.ai/energy) - Energy-first approach with solar, hydro, geothermal, wind, gas, battery, and SMR sources
+- [Crusoe Edge Zones](https://www.crusoe.ai/cloud/edge-zones) - Low-latency sovereign AI capacity in targeted geographies
+
+
+## Blog — Featured Posts
+
+
+- [MemoryAlloy™ Technical Deep Dive](https://www.crusoe.ai/resources/blog/crusoe-memoryalloy-reinventing-kv-caching-for-cluster-scale-inference) - Distributed KV cache architecture and cluster-wide memory fabric
+- [Building the World's Favorite AI Cloud](https://www.crusoe.ai/resources/blog/building-the-worlds-favorite-ai-cloud) - BYOM launch, 2025 momentum, and agentic AI vision
+- [Building the Future Foundation for Intelligence](https://www.crusoe.ai/resources/blog/building-the-future-foundation-for-intelligence) - GTC 2026 announcements including Command Center GA and Edge Zones
+- [Scaling AI with Industrial Velocity](https://www.crusoe.ai/resources/blog/going-big-and-small-in-ai-infrastructure) - Spark Factory strategy and modular data center manufacturing
+- [Crusoe and Redwood Materials](https://www.crusoe.ai/resources/blog/crusoe-spark-and-redwood-energy) - Second-life EV battery deployment for AI compute
+- [The Crusoe Cloud Origin Story (Part 1)](https://www.crusoe.ai/resources/blog/the-crusoe-cloud-origin-story-a-new-cloud-for-a-new-era) - Neocloud thesis and building AI infrastructure from scratch
+- [Engineering the AI-First Backbone (Part 2)](https://www.crusoe.ai/resources/blog/the-crusoe-cloud-journey-engineering-the-ai-first-backbone) - Backbone routing architecture and 99.999% uptime goal
+- [NVIDIA L40S on Crusoe Cloud](https://www.crusoe.ai/resources/blog/nvidia-l40s-on-crusoe-cloud) - L40S availability and fine-tuning use cases
+- [AI is a Climate Solution](https://www.crusoe.ai/resources/blog/ai-is-a-climate-risk-and-climate-solution-but-mostly-a-solution) - AI's net climate impact and customer use cases
+- [Crusoe 2024 Impact Report](https://www.crusoe.ai/resources/blog/crusoe-2024-impact-report) - Annual milestones and sustainability metrics
+- [Crusoe Managed Inference Launch](https://www.crusoe.ai/resources/blog/crusoe-managed-inference-optimize-performance) - Product launch details and MemoryAlloy capabilities
+
+
+## Company
+
+
+- [About / Mission](https://www.crusoe.ai/about/company) - Company overview and mission
+- [Impact / Sustainability](https://www.crusoe.ai/about/impact) - Environmental impact and renewable energy commitments
+- [Leadership](https://www.crusoe.ai/about/leadership) - Executive team
+- [Careers](https://www.crusoe.ai/about/careers) - Open positions
+- [Partners](https://www.crusoe.ai/partners) - Partner program and SI/ISV partnerships
+- [Customers](https://www.crusoe.ai/resources/customers) - Customer stories and case studies
+- [Blog](https://www.crusoe.ai/resources/blog) - Technical and product blog
+- [Newsroom](https://www.crusoe.ai/resources/newsroom) - Press releases and news
+- [Events & Webinars](https://www.crusoe.ai/resources/events) - Upcoming and past events
+- [Learning Hub](https://www.crusoe.ai/resources/learning-hub) - Educational resources
+- [Legal Center](https://legal.crusoe.ai) - Terms of service, privacy policy, and legal documents
+
+
+## Support
+
+
+- [Support Portal](https://support.crusoecloud.com/hc/en-us) - 24/7 enterprise support with under 6-minute average first reply time
+- [Cloud Status](https://status.crusoecloud.com) - Real-time service status and incident history

@@ -1,0 +1,183 @@
+generated: '2026-08-04'
+method: searched
+status: published
+source: https://docs.crusoecloud.com/reference/mcp-server
+maturity: preview
+server:
+  name: crusoe-cloud
+  transport: stdio
+  package: '@crusoeai/cloud-mcp'
+  registry: npm
+  package_url: https://www.npmjs.com/package/@crusoeai/cloud-mcp
+  version_seen: 0.1.6
+  command: npx
+  args: ['-y', '@crusoeai/cloud-mcp']
+  hosted: false
+  remote_url: null
+  note: >-
+    Local stdio server only — there is no hosted/remote MCP endpoint, so tools/list cannot be probed
+    over HTTP. The tool list below is transcribed verbatim from Crusoe's own published documentation,
+    which gives names and descriptions but no inputSchema. Live input schemas require running the
+    server locally with credentials.
+  talks_to: https://api.crusoecloud.com
+install:
+- client: claude-code
+  command: claude mcp add crusoe-cloud -- npx -y @crusoeai/cloud-mcp
+- client: claude-desktop
+  method: extension bundle
+  url: https://docs.crusoecloud.com/downloads/cloud-mcp-latest.mcpb
+- client: claude-desktop
+  method: manual config
+  config: '{"mcpServers":{"crusoe-cloud":{"command":"npx","args":["-y","@crusoeai/cloud-mcp"]}}}'
+- client: any
+  method: stdio
+  note: 'Type stdio, command npx, args -y @crusoeai/cloud-mcp'
+requirements:
+  node: '>=18'
+  credentials: API key pair in ~/.crusoe/config (the standard Crusoe CLI profile)
+authentication:
+  model: inherited from local CLI profile
+  storage: ~/.crusoe/config
+  env:
+  - CRUSOE_PROFILE
+  - CRUSOE_PROJECT_ID
+  note: The server does not store credentials separately and never sends them to Crusoe or the AI vendor.
+policy:
+  read_only: true
+  write_operations: disabled by design
+  rate_limit: 60 requests per minute (client-side)
+  truncation: large lists truncated to 50 items by default
+  caveat: >-
+    Crusoe explicitly warns that the read-only guarantee covers only this server's tools — an agent
+    with shell access can still mutate infrastructure by invoking the installed `crusoe` CLI.
+tools:
+- name: get_user_identity
+  category: core
+  description: Get details of the currently authenticated user.
+- name: get_organization
+  category: core
+  description: Get organization details.
+- name: list_capacities
+  category: core
+  description: List available instance types (e.g. a100.8x) and availability.
+- name: get_current_project
+  category: core
+  description: Inspect the active project.
+- name: list_available_projects
+  category: core
+  description: List accessible projects.
+- name: use_project
+  category: core
+  description: Switch the active project for the current session.
+- name: get_resource_relationships
+  category: core
+  description: Generate a topology graph of resources (VMs, disks, VPCs) and how they connect.
+- name: list_vms
+  category: compute
+  description: View virtual machines.
+- name: get_vm
+  category: compute
+  description: View a virtual machine's details.
+- name: list_instance_groups
+  category: compute
+  description: View managed instance groups.
+- name: get_instance_group
+  category: compute
+  description: View a managed instance group's details.
+- name: list_instance_templates
+  category: compute
+  description: Inspect VM templates.
+- name: get_instance_template
+  category: compute
+  description: Inspect a VM template.
+- name: list_group_instances
+  category: compute
+  description: List VMs belonging to a specific group.
+- name: list_disks
+  category: storage
+  description: View block storage volumes.
+- name: get_disk
+  category: storage
+  description: View a block storage volume.
+- name: list_disk_snapshots
+  category: storage
+  description: View storage snapshots.
+- name: get_disk_snapshot
+  category: storage
+  description: View a storage snapshot.
+- name: list_images
+  category: storage
+  description: View public VM images.
+- name: get_image
+  category: storage
+  description: View a public VM image.
+- name: list_custom_images
+  category: storage
+  description: View user-created custom images.
+- name: get_custom_image
+  category: storage
+  description: View a user-created custom image.
+- name: list_vpc_networks
+  category: networking
+  description: View VPCs.
+- name: get_vpc_network
+  category: networking
+  description: View a VPC.
+- name: list_vpc_subnets
+  category: networking
+  description: View subnets.
+- name: get_vpc_subnet
+  category: networking
+  description: View a subnet.
+- name: list_firewall_rules
+  category: networking
+  description: Inspect security rules.
+- name: get_firewall_rule
+  category: networking
+  description: Inspect a security rule.
+- name: list_load_balancers
+  category: networking
+  description: View traffic distribution configurations.
+- name: get_load_balancer
+  category: networking
+  description: View a load balancer.
+- name: list_kubernetes_clusters
+  category: orchestration
+  description: View CMK clusters.
+- name: get_kubernetes_cluster
+  category: orchestration
+  description: View a CMK cluster.
+- name: list_kubernetes_node_pools
+  category: orchestration
+  description: Inspect node pools.
+- name: get_kubernetes_node_pool
+  category: orchestration
+  description: Inspect a node pool.
+- name: list_kubernetes_node_pool_instances
+  category: orchestration
+  description: List specific nodes within a pool.
+- name: list_kubernetes_versions
+  category: orchestration
+  description: Check supported Kubernetes versions.
+- name: list_audit_logs
+  category: operations
+  description: Detailed logs of who did what and when.
+- name: list_org_quotas
+  category: operations
+  description: Check organization resource limits vs usage.
+- name: list_project_quotas
+  category: operations
+  description: Check project resource limits vs usage.
+- name: get_gpu_tracking
+  category: operations
+  description: Monitor GPU utilization and reservation capacity.
+- name: get_usage_by_project
+  category: operations
+  description: Retrieve usage data for billing analysis.
+tool_count: 41
+crosswalk: mcp/crusoe-tool-crosswalk.yml
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://docs.crusoecloud.com/reference/mcp-server
+  http_status: 200
+  npm_status: 200
