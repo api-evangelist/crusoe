@@ -31,52 +31,14 @@ tags:
 - energy
 - mcp
 apis:
-- name: Crusoe Cloud API Gateway
-  description: >-
-    REST API exposing all publicly available Crusoe Cloud endpoints — compute (VMs, instance groups,
-    instance templates, images, custom images), storage (disks, snapshots, S3 buckets and keys),
-    networking (VPC networks, subnets, firewall rules, load balancers, IB partitions, NVLink domains),
-    orchestration (Crusoe Managed Kubernetes clusters and node pools, Slurm clusters and nodesets,
-    AutoClusters), the Intelligence Foundry, container registry, identity and access (role bindings,
-    SSH keys, tokens, MFA, SSO, SCIM), and organization management (projects, quotas, usage, billing,
-    audit logs). Requests are authenticated with an HMAC-SHA256 signed Authorization header plus an
-    X-Crusoe-Timestamp header. Current version is v1; v1alpha5 remains published as the preview track.
-  humanURL: https://docs.crusoecloud.com/reference/api/
-  baseURL: https://api.cloud.crusoe.ai/v1
-  tags:
-  - ai-infrastructure
-  - cloud-computing
-  - gpu-compute
-  - kubernetes
-  - object-storage
-  - infrastructure-as-a-service
-  properties:
-  - type: OpenAPI
-    url: openapi/crusoe-cloud-api-gateway-v1-openapi.json
-  - type: OpenAPI
-    url: openapi/crusoe-cloud-api-gateway-v1alpha5-openapi.json
-  - type: Documentation
-    url: https://docs.crusoecloud.com/reference/api/
-  - type: APIReference
-    url: https://docs.crusoecloud.com/api/
-  - type: Authentication
-    url: authentication/crusoe-authentication.yml
-  - type: Conventions
-    url: conventions/crusoe-conventions.yml
-  - type: ErrorCatalog
-    url: errors/crusoe-problem-types.yml
-  - type: DataModel
-    url: data-model/crusoe-data-model.yml
-  - type: Overlay
-    url: overlays/crusoe-cloud-api-gateway-v1-overlay.yaml
 - name: Crusoe Managed Inference API
   description: >-
-    OpenAI-compatible inference API from the Crusoe Intelligence Foundry. Send chat/completions and
-    embeddings requests to Crusoe-hosted open models (DeepSeek, Llama, Gemma, GLM, Kimi, Nemotron and
-    others) without managing GPU infrastructure, or run reserved-capacity self-serve deployments and
-    LoRA-based serverless fine-tuning jobs. Authenticated with an Inference API key issued from the
-    Crusoe Cloud console. The endpoint requires credentials for every request, including discovery
-    paths, so no anonymous machine-readable contract is published for it.
+    OpenAI-compatible inference API from the Crusoe Intelligence Foundry. Send chat/completions and embeddings
+    requests to Crusoe-hosted open models (DeepSeek, Llama, Gemma, GLM, Kimi, Nemotron and others) without
+    managing GPU infrastructure, or run reserved-capacity self-serve deployments and LoRA-based serverless
+    fine-tuning jobs. Authenticated with an Inference API key issued from the Crusoe Cloud console. The
+    endpoint requires credentials for every request, including discovery paths, so no anonymous machine-readable
+    contract is published for it.
   humanURL: https://docs.crusoecloud.com/serverless-inference/overview
   baseURL: https://api.inference.crusoecloud.com/v1
   tags:
@@ -95,14 +57,13 @@ apis:
     url: authentication/crusoe-authentication.yml
 - name: Crusoe Cloud MCP Server
   description: >-
-    First-party, read-only Model Context Protocol server published by Crusoe as the npm package
-    @crusoeai/cloud-mcp and as a downloadable Claude Desktop extension bundle. Runs over stdio, inherits
-    credentials from the local ~/.crusoe/config CLI profile, and exposes read-only tools for identity,
-    projects, capacities, VMs, instance groups and templates, disks, snapshots, images, custom images,
-    VPC networks, subnets, firewall rules, load balancers, Kubernetes clusters and node pools, audit
-    logs, quotas, GPU tracking, usage, and a resource-relationship topology graph. All write operations
-    are disabled by design; a client-side limit of 60 requests per minute is enforced. Currently in
-    preview.
+    First-party, read-only Model Context Protocol server published by Crusoe as the npm package @crusoeai/cloud-mcp
+    and as a downloadable Claude Desktop extension bundle. Runs over stdio, inherits credentials from
+    the local ~/.crusoe/config CLI profile, and exposes read-only tools for identity, projects, capacities,
+    VMs, instance groups and templates, disks, snapshots, images, custom images, VPC networks, subnets,
+    firewall rules, load balancers, Kubernetes clusters and node pools, audit logs, quotas, GPU tracking,
+    usage, and a resource-relationship topology graph. All write operations are disabled by design; a
+    client-side limit of 60 requests per minute is enforced. Currently in preview.
   humanURL: https://docs.crusoecloud.com/reference/mcp-server
   baseURL: https://api.crusoecloud.com/v1
   tags:
@@ -119,6 +80,1359 @@ apis:
     url: https://docs.crusoecloud.com/reference/mcp-server
   - type: Packages
     url: https://www.npmjs.com/package/@crusoeai/cloud-mcp
+- aid: crusoe:crusoe-audit-logs-api
+  name: Crusoe Audit Logs API
+  description: The Audit Logs API from Crusoe — 1 operation(s) for audit logs.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-audit-logs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-autocluster-operations-api
+  name: Crusoe AutoCluster Operations API
+  description: The AutoCluster Operations API from Crusoe — 2 operation(s) for autocluster operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - AutoCluster Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-autocluster-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-autoclusters-api
+  name: Crusoe Auto Clusters API
+  description: The AutoClusters API from Crusoe — 2 operation(s) for autoclusters.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - AutoClusters
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-autoclusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-billing-api
+  name: Crusoe Billing API
+  description: The Billing API from Crusoe — 3 operation(s) for billing.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-billing-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-capacities-api
+  name: Crusoe Capacities API
+  description: The Capacities API from Crusoe — 1 operation(s) for capacities.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Capacities
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-capacities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-ccr-api
+  name: Crusoe Ccr API
+  description: The Ccr API from Crusoe — 8 operation(s) for ccr.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Ccr
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-ccr-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-container-registry-api
+  name: Crusoe Container Registry API
+  description: The Container Registry API from Crusoe — 8 operation(s) for container registry.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Container Registry
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-container-registry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-custom-image-operations-api
+  name: Crusoe Custom Image Operations API
+  description: >-
+    The Custom Image Operations API from Crusoe — 2 operation(s) for custom image operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Custom Image Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-custom-image-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-customimages-api
+  name: Crusoe Custom Images API
+  description: The CustomImages API from Crusoe — 3 operation(s) for customimages.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - CustomImages
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-customimages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-disk-operations-api
+  name: Crusoe Disk Operations API
+  description: The Disk Operations API from Crusoe — 2 operation(s) for disk operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Disk Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-disk-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-disks-api
+  name: Crusoe Disks API
+  description: The Disks API from Crusoe — 2 operation(s) for disks.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Disks
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-disks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-entities-api
+  name: Crusoe Entities API
+  description: The Entities API from Crusoe — 1 operation(s) for entities.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-entities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-feature-flags-api
+  name: Crusoe Feature Flags API
+  description: The Feature Flags API from Crusoe — 1 operation(s) for feature flags.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Feature Flags
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-feature-flags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-foundry-api
+  name: Crusoe Foundry API
+  description: The Foundry API from Crusoe — 16 operation(s) for foundry.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Foundry
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-foundry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-ib-networks-api
+  name: Crusoe IB Networks API
+  description: The IB Networks API from Crusoe — 2 operation(s) for ib networks.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - IB Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-ib-networks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-ib-partitions-api
+  name: Crusoe IB Partitions API
+  description: The IB Partitions API from Crusoe — 2 operation(s) for ib partitions.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - IB Partitions
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-ib-partitions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-identities-api
+  name: Crusoe Identities API
+  description: The Identities API from Crusoe — 1 operation(s) for identities.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-identities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-images-api
+  name: Crusoe Images API
+  description: The Images API from Crusoe — 2 operation(s) for images.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-images-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-instance-groups-api
+  name: Crusoe Instance Groups API
+  description: The Instance Groups API from Crusoe — 2 operation(s) for instance groups.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Instance Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-instance-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-instance-templates-api
+  name: Crusoe Instance Templates API
+  description: The Instance Templates API from Crusoe — 2 operation(s) for instance templates.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Instance Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-instance-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-internal-load-balancer-operations-api
+  name: Crusoe Internal Load Balancer Operations API
+  description: >-
+    The Internal Load Balancer Operations API from Crusoe — 2 operation(s) for internal load balancer
+    operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Internal Load Balancer Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-internal-load-balancer-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-internal-load-balancers-api
+  name: Crusoe Internal Load Balancers API
+  description: >-
+    The Internal Load Balancers API from Crusoe — 2 operation(s) for internal load balancers.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Internal Load Balancers
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-internal-load-balancers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-kubernetes-cluster-operations-api
+  name: Crusoe Kubernetes Cluster Operations API
+  description: >-
+    The Kubernetes Cluster Operations API from Crusoe — 2 operation(s) for kubernetes cluster operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Kubernetes Cluster Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-kubernetes-cluster-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-kubernetes-clusters-api
+  name: Crusoe Kubernetes Clusters API
+  description: The Kubernetes Clusters API from Crusoe — 3 operation(s) for kubernetes clusters.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Kubernetes Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-kubernetes-clusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-kubernetes-node-pool-operations-api
+  name: Crusoe Kubernetes Node Pool Operations API
+  description: >-
+    The Kubernetes Node Pool Operations API from Crusoe — 2 operation(s) for kubernetes node pool operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Kubernetes Node Pool Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-kubernetes-node-pool-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-kubernetes-node-pools-api
+  name: Crusoe Kubernetes Node Pools API
+  description: The Kubernetes Node Pools API from Crusoe — 5 operation(s) for kubernetes node pools.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Kubernetes Node Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-kubernetes-node-pools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-kubernetes-support-access-api
+  name: Crusoe Kubernetes Support Access API
+  description: >-
+    The Kubernetes Support Access API from Crusoe — 1 operation(s) for kubernetes support access.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Kubernetes Support Access
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-kubernetes-support-access-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-kubernetes-versions-api
+  name: Crusoe Kubernetes Versions API
+  description: The Kubernetes Versions API from Crusoe — 1 operation(s) for kubernetes versions.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Kubernetes Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-kubernetes-versions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-limitedusageapikey-api
+  name: Crusoe Limited Usage API Key API
+  description: The LimitedUsageAPIKey API from Crusoe — 1 operation(s) for limitedusageapikey.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - LimitedUsageAPIKey
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-limitedusageapikey-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-load-balancer-operations-api
+  name: Crusoe Load Balancer Operations API
+  description: >-
+    The Load Balancer Operations API from Crusoe — 2 operation(s) for load balancer operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Load Balancer Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-load-balancer-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-load-balancers-api
+  name: Crusoe Load Balancers API
+  description: The Load Balancers API from Crusoe — 2 operation(s) for load balancers.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Load Balancers
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-load-balancers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-locations-api
+  name: Crusoe Locations API
+  description: The Locations API from Crusoe — 1 operation(s) for locations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-locations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-mfa-api
+  name: Crusoe MFA API
+  description: The MFA API from Crusoe — 1 operation(s) for mfa.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - MFA
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-mfa-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-nvlink-domains-api
+  name: Crusoe NVLink Domains API
+  description: The NVLink Domains API from Crusoe — 1 operation(s) for nvlink domains.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - NVLink Domains
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-nvlink-domains-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-observability-api
+  name: Crusoe Observability API
+  description: The Observability API from Crusoe — 5 operation(s) for observability.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Observability
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-observability-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-projects-api
+  name: Crusoe Projects API
+  description: The Projects API from Crusoe — 2 operation(s) for projects.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-quotas-api
+  name: Crusoe Quotas API
+  description: The Quotas API from Crusoe — 2 operation(s) for quotas.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Quotas
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-quotas-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-reservations-api
+  name: Crusoe Reservations API
+  description: The Reservations API from Crusoe — 4 operation(s) for reservations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Reservations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-reservations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-rolebindings-api
+  name: Crusoe Role Bindings API
+  description: The RoleBindings API from Crusoe — 2 operation(s) for rolebindings.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - RoleBindings
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-rolebindings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-roles-api
+  name: Crusoe Roles API
+  description: The Roles API from Crusoe — 1 operation(s) for roles.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-s3buckets-api
+  name: Crusoe S3 Buckets API
+  description: The S3Buckets API from Crusoe — 7 operation(s) for s3buckets.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - S3Buckets
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-s3buckets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-s3keys-api
+  name: Crusoe S3 Keys API
+  description: The S3Keys API from Crusoe — 2 operation(s) for s3keys.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - S3Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-s3keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-scim-api
+  name: Crusoe SCIM API
+  description: The SCIM API from Crusoe — 4 operation(s) for scim.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - SCIM
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-scim-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-slurm-cluster-operations-api
+  name: Crusoe Slurm Cluster Operations API
+  description: >-
+    The Slurm Cluster Operations API from Crusoe — 2 operation(s) for slurm cluster operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Slurm Cluster Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-slurm-cluster-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-slurm-clusters-api
+  name: Crusoe Slurm Clusters API
+  description: The Slurm Clusters API from Crusoe — 2 operation(s) for slurm clusters.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Slurm Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-slurm-clusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-slurm-nodeset-operations-api
+  name: Crusoe Slurm Nodeset Operations API
+  description: >-
+    The Slurm Nodeset Operations API from Crusoe — 2 operation(s) for slurm nodeset operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Slurm Nodeset Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-slurm-nodeset-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-slurm-nodesets-api
+  name: Crusoe Slurm Nodesets API
+  description: The Slurm Nodesets API from Crusoe — 2 operation(s) for slurm nodesets.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Slurm Nodesets
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-slurm-nodesets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-snapshot-operations-api
+  name: Crusoe Snapshot Operations API
+  description: The Snapshot Operations API from Crusoe — 2 operation(s) for snapshot operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Snapshot Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-snapshot-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-snapshots-api
+  name: Crusoe Snapshots API
+  description: The Snapshots API from Crusoe — 2 operation(s) for snapshots.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-ssh-keys-api
+  name: Crusoe SSH Keys API
+  description: The SSH Keys API from Crusoe — 1 operation(s) for ssh keys.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - SSH Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-ssh-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-sso-api
+  name: Crusoe SSO API
+  description: The SSO API from Crusoe — 3 operation(s) for sso.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - SSO
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-sso-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-tokens-api
+  name: Crusoe Tokens API
+  description: The Tokens API from Crusoe — 1 operation(s) for tokens.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-usage-api
+  name: Crusoe Usage API
+  description: The Usage API from Crusoe — 3 operation(s) for usage.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-usage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vm-operations-api
+  name: Crusoe VM Operations API
+  description: The VM Operations API from Crusoe — 2 operation(s) for vm operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VM Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vm-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vms-api
+  name: Crusoe V Ms API
+  description: The VMs API from Crusoe — 6 operation(s) for vms.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VMs
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vpc-firewall-rule-operations-api
+  name: Crusoe VPC Firewall Rule Operations API
+  description: >-
+    The VPC Firewall Rule Operations API from Crusoe — 2 operation(s) for vpc firewall rule operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VPC Firewall Rule Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vpc-firewall-rule-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vpc-firewall-rules-api
+  name: Crusoe VPC Firewall Rules API
+  description: The VPC Firewall Rules API from Crusoe — 2 operation(s) for vpc firewall rules.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VPC Firewall Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vpc-firewall-rules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vpc-network-operations-api
+  name: Crusoe VPC Network Operations API
+  description: The VPC Network Operations API from Crusoe — 2 operation(s) for vpc network operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VPC Network Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vpc-network-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vpc-networks-api
+  name: Crusoe VPC Networks API
+  description: The VPC Networks API from Crusoe — 2 operation(s) for vpc networks.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VPC Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vpc-networks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vpc-subnet-operations-api
+  name: Crusoe VPC Subnet Operations API
+  description: The VPC Subnet Operations API from Crusoe — 2 operation(s) for vpc subnet operations.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VPC Subnet Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vpc-subnet-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-vpc-subnets-api
+  name: Crusoe VPC Subnets API
+  description: The VPC Subnets API from Crusoe — 2 operation(s) for vpc subnets.
+  humanURL: https://docs.crusoecloud.com/reference/api/
+  baseURL: https://api.cloud.crusoe.ai/v1
+  tags:
+  - VPC Subnets
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vpc-subnets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
