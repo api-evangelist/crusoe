@@ -1,0 +1,472 @@
+{
+  "item": [
+    {
+      "id": "6d087c78-d614-45b0-88a9-ec9e6b662ca7",
+      "name": "Entities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86fce594-5792-4261-a60e-b2f6f085ba2a",
+          "name": "Retrieve details about all active organizations the logged in user belongs to.",
+          "request": {
+            "name": "Retrieve details about all active organizations the logged in user belongs to.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4a12fd9-b143-47b7-ab2b-1736edc6c6bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"name\": \"Crusoe Energy\",\n      \"relation\": \"owner\",\n      \"billing\": {\n        \"balance\": \"$1000.00\",\n        \"has_valid_payment_method\": true,\n        \"delinquent\": false,\n        \"billing_method\": \"manual\"\n      },\n      \"features\": {\n        \"key_0\": {}\n      },\n      \"state\": \"string\",\n      \"state_reason\": \"string\",\n      \"billing_addr\": {\n        \"address_line1\": \"123 Main Street\",\n        \"city\": \"Denver\",\n        \"state_or_region\": \"Colorado\",\n        \"postal_code\": \"80202\",\n        \"country\": \"US\",\n        \"address_line2\": \"Suite 400\"\n      },\n      \"company_name\": \"mycompany\",\n      \"mfa_methods\": [\n        {\n          \"method\": \"webauthn\",\n          \"created_at\": \"2021-12-03T19:58:34Z\"\n        },\n        {\n          \"method\": \"webauthn\",\n          \"created_at\": \"2021-12-03T19:58:34Z\"\n        }\n      ],\n      \"organization_type\": \"standard\",\n      \"registration_type\": \"waitlist\",\n      \"tax_id\": \"51-2144346\",\n      \"tax_id_type\": \"EIN\"\n    },\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"name\": \"Crusoe Energy\",\n      \"relation\": \"owner\",\n      \"billing\": {\n        \"balance\": \"$1000.00\",\n        \"has_valid_payment_method\": true,\n        \"delinquent\": false,\n        \"billing_method\": \"manual\"\n      },\n      \"features\": {\n        \"key_0\": {}\n      },\n      \"state\": \"string\",\n      \"state_reason\": \"string\",\n      \"billing_addr\": {\n        \"address_line1\": \"123 Main Street\",\n        \"city\": \"Denver\",\n        \"state_or_region\": \"Colorado\",\n        \"postal_code\": \"80202\",\n        \"country\": \"US\",\n        \"address_line2\": \"Suite 400\"\n      },\n      \"company_name\": \"mycompany\",\n      \"mfa_methods\": [\n        {\n          \"method\": \"totp\",\n          \"created_at\": \"2021-12-03T19:58:34Z\"\n        },\n        {\n          \"method\": \"totp\",\n          \"created_at\": \"2021-12-03T19:58:34Z\"\n        }\n      ],\n      \"organization_type\": \"standard\",\n      \"registration_type\": \"waitlist\",\n      \"tax_id\": \"51-2144346\",\n      \"tax_id_type\": \"EIN\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10eb60cd-7e36-4756-a53e-399bcc953538",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "774f3a97-93d5-4c20-8298-a9b5b4ba3453",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "237c5ca8-10d3-44ca-ac9f-baf2639502c7",
+          "name": "Update details for an organization that the logged in user owns.",
+          "request": {
+            "name": "Update details for an organization that the logged in user owns.",
+            "description": {
+              "content": "A successful response from this resource will contain the updated organization details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "org_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billing_addr\": {\n    \"address_line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_or_region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address_line2\": \"<string>\"\n  },\n  \"company_name\": \"<string>\",\n  \"organization_name\": \"<string>\",\n  \"tax_id\": \"<string>\",\n  \"tax_id_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1609f5fc-ffb4-4207-bf47-04094464fa2a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing_addr\": {\n    \"address_line1\": \"123 Main Street\",\n    \"city\": \"Denver\",\n    \"state_or_region\": \"Colorado\",\n    \"postal_code\": \"80202\",\n    \"country\": \"US\",\n    \"address_line2\": \"Suite 400\"\n  },\n  \"company_name\": \"mycompany\",\n  \"organization_name\": \"Crusoe Energy\",\n  \"tax_id\": \"51-2144346\",\n  \"tax_id_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entity\": {\n    \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n    \"name\": \"Crusoe Energy\",\n    \"relation\": \"owner\",\n    \"billing\": {\n      \"balance\": \"$1000.00\",\n      \"has_valid_payment_method\": true,\n      \"delinquent\": false,\n      \"billing_method\": \"stripe\"\n    },\n    \"features\": {\n      \"key_0\": {}\n    },\n    \"state\": \"string\",\n    \"state_reason\": \"string\",\n    \"billing_addr\": {\n      \"address_line1\": \"123 Main Street\",\n      \"city\": \"Denver\",\n      \"state_or_region\": \"Colorado\",\n      \"postal_code\": \"80202\",\n      \"country\": \"US\",\n      \"address_line2\": \"Suite 400\"\n    },\n    \"company_name\": \"mycompany\",\n    \"mfa_methods\": [\n      {\n        \"method\": \"totp\",\n        \"created_at\": \"2021-12-03T19:58:34Z\"\n      },\n      {\n        \"method\": \"webauthn\",\n        \"created_at\": \"2021-12-03T19:58:34Z\"\n      }\n    ],\n    \"organization_type\": \"limited\",\n    \"registration_type\": \"waitlist\",\n    \"tax_id\": \"51-2144346\",\n    \"tax_id_type\": \"VAT\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d57066a5-8b84-40d6-9e95-dc2fb64e19e0",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing_addr\": {\n    \"address_line1\": \"123 Main Street\",\n    \"city\": \"Denver\",\n    \"state_or_region\": \"Colorado\",\n    \"postal_code\": \"80202\",\n    \"country\": \"US\",\n    \"address_line2\": \"Suite 400\"\n  },\n  \"company_name\": \"mycompany\",\n  \"organization_name\": \"Crusoe Energy\",\n  \"tax_id\": \"51-2144346\",\n  \"tax_id_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aaa1b2b-a41d-4e37-a683-905b426690ae",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing_addr\": {\n    \"address_line1\": \"123 Main Street\",\n    \"city\": \"Denver\",\n    \"state_or_region\": \"Colorado\",\n    \"postal_code\": \"80202\",\n    \"country\": \"US\",\n    \"address_line2\": \"Suite 400\"\n  },\n  \"company_name\": \"mycompany\",\n  \"organization_name\": \"Crusoe Energy\",\n  \"tax_id\": \"51-2144346\",\n  \"tax_id_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2618f6e1-0d43-43e9-914a-8833ad2cbdec",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing_addr\": {\n    \"address_line1\": \"123 Main Street\",\n    \"city\": \"Denver\",\n    \"state_or_region\": \"Colorado\",\n    \"postal_code\": \"80202\",\n    \"country\": \"US\",\n    \"address_line2\": \"Suite 400\"\n  },\n  \"company_name\": \"mycompany\",\n  \"organization_name\": \"Crusoe Energy\",\n  \"tax_id\": \"51-2144346\",\n  \"tax_id_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6832a33-9798-44a1-b479-7a006adcc481",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing_addr\": {\n    \"address_line1\": \"123 Main Street\",\n    \"city\": \"Denver\",\n    \"state_or_region\": \"Colorado\",\n    \"postal_code\": \"80202\",\n    \"country\": \"US\",\n    \"address_line2\": \"Suite 400\"\n  },\n  \"company_name\": \"mycompany\",\n  \"organization_name\": \"Crusoe Energy\",\n  \"tax_id\": \"51-2144346\",\n  \"tax_id_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5c6d7414-b389-49d3-8a2a-9468d98135f1",
+    "name": "Crusoe Entities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Entities across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

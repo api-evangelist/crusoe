@@ -1,0 +1,914 @@
+{
+  "item": [
+    {
+      "id": "2c3f7720-3102-43b6-90b0-18c5e864fdf8",
+      "name": "S3Keys",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf76d48e-6167-4c1b-8039-0c8658be9d82",
+          "name": "Lists all S3 access keys in the organization and returns their details.",
+          "request": {
+            "name": "Lists all S3 access keys in the organization and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":org_id",
+                "storage",
+                "s3",
+                "keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) ID of the organization that owns the S3 access keys."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce3620f6-2f78-4de4-9fe8-da67ea85a780",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access keys."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"key_uuid\": \"f5705300-79f8-4686-9b9f-02496a053bc0\",\n      \"user_id\": \"e7bed65d-e918-4fab-921c-03b8db94aa7b\",\n      \"access_key_id\": \"S3U_ab4a6b00aa5f408ea9fbac6de5eb45ab\",\n      \"status\": \"enabled\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"alias\": \"my-service-account\",\n      \"expire_at\": \"2022-12-03T19:58:34Z\"\n    },\n    {\n      \"key_uuid\": \"f5705300-79f8-4686-9b9f-02496a053bc0\",\n      \"user_id\": \"e7bed65d-e918-4fab-921c-03b8db94aa7b\",\n      \"access_key_id\": \"S3U_ab4a6b00aa5f408ea9fbac6de5eb45ab\",\n      \"status\": \"enabled\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"alias\": \"my-service-account\",\n      \"expire_at\": \"2022-12-03T19:58:34Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55f32d93-8e96-429f-b85c-d45702b02653",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access keys."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8e362c6-11da-43d0-8eee-68f0c3182b9f",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access keys."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fce6c550-9974-46b1-b6b6-2325abae3b73",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access keys."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb62ee03-4fe5-415e-8cfd-e94dde95676f",
+          "name": "Creates an S3 access key in the organization and returns the access key ID and one-time secret key.",
+          "request": {
+            "name": "Creates an S3 access key in the organization and returns the access key ID and one-time secret key.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":org_id",
+                "storage",
+                "s3",
+                "keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) ID of the organization that owns the S3 access key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alias\": \"<string>\",\n  \"expire_at\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4828897-86bb-4782-9b21-51ab24dcb306",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"my-service-account\",\n  \"expire_at\": \"2022-12-03T19:58:34Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_key_id\": \"S3U_ab4a6b00aa5f408ea9fbac6de5eb45ab\",\n  \"secret_key\": \"K7i+q0...\",\n  \"expire_at\": \"2022-12-03T19:58:34Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ab51381-7225-4517-8cf7-f5f914a8e0ab",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"my-service-account\",\n  \"expire_at\": \"2022-12-03T19:58:34Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bda27510-41ff-4e19-8dd6-3fd676e7044b",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"my-service-account\",\n  \"expire_at\": \"2022-12-03T19:58:34Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35776377-dc75-459b-98d0-7ed66fe37c9c",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"my-service-account\",\n  \"expire_at\": \"2022-12-03T19:58:34Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c40eba9-05df-43b4-b418-54625e828b0a",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"my-service-account\",\n  \"expire_at\": \"2022-12-03T19:58:34Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4c8de25-579f-45b8-b279-6d7254c1bf23",
+          "name": "Deletes an S3 access key from the organization.",
+          "request": {
+            "name": "Deletes an S3 access key from the organization.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":org_id",
+                "storage",
+                "s3",
+                "keys",
+                ":access_key_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) ID of the organization that owns the S3 access key."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_key_id",
+                  "description": "(Required) Access key ID of the S3 access key to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "019704dc-75a5-45df-b705-df4cfc9255a1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys",
+                    ":access_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_key_id",
+                      "description": "(Required) Access key ID of the S3 access key to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "621dbaee-d831-4f43-919d-addf782befbb",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys",
+                    ":access_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_key_id",
+                      "description": "(Required) Access key ID of the S3 access key to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "978a9f97-4704-4423-93e1-4ea25a7329b1",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys",
+                    ":access_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_key_id",
+                      "description": "(Required) Access key ID of the S3 access key to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f91dec43-2f7c-48c7-befe-51d24f0ea125",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys",
+                    ":access_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_key_id",
+                      "description": "(Required) Access key ID of the S3 access key to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb3021a-e287-455e-81a3-a85a5336f0af",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":org_id",
+                    "storage",
+                    "s3",
+                    "keys",
+                    ":access_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) ID of the organization that owns the S3 access key."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_key_id",
+                      "description": "(Required) Access key ID of the S3 access key to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "be7335e3-cf00-4801-a5f7-1bbbbd81c965",
+    "name": "Crusoe S3 Keys API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged S3Keys across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

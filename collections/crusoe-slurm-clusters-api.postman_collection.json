@@ -1,0 +1,1124 @@
+{
+  "item": [
+    {
+      "id": "a43a618e-475a-46b8-a742-27be465ddab9",
+      "name": "Slurm Clusters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94bae4db-3508-4f86-9cd5-fbf262dc5e05",
+          "name": "Retrieve information about slurm clusters belonging to the project.",
+          "request": {
+            "name": "Retrieve information about slurm clusters belonging to the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "slurm",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "slurm_cluster_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "slurm_cluster_ids",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dddd4b8-54f9-4d9e-9596-81520e29bffd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "us-east-1"
+                    },
+                    {
+                      "key": "state",
+                      "value": "running"
+                    },
+                    {
+                      "key": "slurm_cluster_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slurm_cluster_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"location\": \"us-northcentral1-a\",\n      \"name\": \"my-slurm-cluster\",\n      \"root_ssh_pub_keys\": [\n        \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n      ],\n      \"state\": \"UPDATING\",\n      \"home_volume_size\": \"\\\"10Ti\\\"\",\n      \"login_node_type\": \"c1a.8x\",\n      \"login_replicas\": 1,\n      \"subnet_id\": \"string\",\n      \"issues\": [\n        {\n          \"code\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"code\": \"string\",\n          \"message\": \"string\"\n        }\n      ],\n      \"login_node_endpoint\": \"string\",\n      \"nodesets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"location\": \"us-northcentral1-a\",\n      \"name\": \"my-slurm-cluster\",\n      \"root_ssh_pub_keys\": [\n        \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n      ],\n      \"state\": \"DELETING\",\n      \"home_volume_size\": \"\\\"10Ti\\\"\",\n      \"login_node_type\": \"c1a.8x\",\n      \"login_replicas\": 1,\n      \"subnet_id\": \"string\",\n      \"issues\": [\n        {\n          \"code\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"code\": \"string\",\n          \"message\": \"string\"\n        }\n      ],\n      \"login_node_endpoint\": \"string\",\n      \"nodesets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"version\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba3318a8-4f68-41bc-9972-5171be966cdd",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "us-east-1"
+                    },
+                    {
+                      "key": "state",
+                      "value": "running"
+                    },
+                    {
+                      "key": "slurm_cluster_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slurm_cluster_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d01860e-409e-471c-a2b1-afff449c9a52",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "us-east-1"
+                    },
+                    {
+                      "key": "state",
+                      "value": "running"
+                    },
+                    {
+                      "key": "slurm_cluster_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slurm_cluster_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb75f314-b159-4192-92ea-854b752ad639",
+          "name": "Create a new slurm cluster owned by the logged in user.",
+          "request": {
+            "name": "Create a new slurm cluster owned by the logged in user.",
+            "description": {
+              "content": "A successful response from this resource will contain the async operation ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "slurm",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"location\": \"<string>\",\n  \"root_ssh_pub_keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"internal_config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7199c25f-57f3-4e02-8d25-94a5e76f8e63",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-slurm-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"root_ssh_pub_keys\": [\n    \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n  ],\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"internal_config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb112acb-6837-4360-9871-f52c3386436f",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-slurm-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"root_ssh_pub_keys\": [\n    \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n  ],\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"internal_config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd84c5be-b33c-44fe-8e9c-c27ddc5016b3",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-slurm-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"root_ssh_pub_keys\": [\n    \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n  ],\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"internal_config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c102f76f-9ff7-4493-8805-eba417a22d8f",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-slurm-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"root_ssh_pub_keys\": [\n    \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n  ],\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"internal_config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f98e421-4565-4f21-bfb5-ebee331b4cba",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-slurm-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"root_ssh_pub_keys\": [\n    \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n  ],\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"internal_config\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d740b61d-3de0-4be1-9da7-68cbff737b37",
+          "name": "Delete a slurm cluster that the logged in user owns.",
+          "request": {
+            "name": "Delete a slurm cluster that the logged in user owns.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "slurm",
+                "clusters",
+                ":slurm_cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slurm_cluster_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e6786d3-0063-45e5-a877-99568e28236e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c63f206-3e07-4496-9695-8ff38380250b",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ebd4b23-0c4b-482a-b5ba-bb86082b5d92",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "725225bb-3c0a-4226-bfa9-3a755b8fc918",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "692a3a03-6780-40a1-a404-3db6fc921d45",
+          "name": "Retrieve information about a particular slurm cluster belonged to the project.",
+          "request": {
+            "name": "Retrieve information about a particular slurm cluster belonged to the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "slurm",
+                "clusters",
+                ":slurm_cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slurm_cluster_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d08f51d7-df96-4767-ad80-6fa2370f2615",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"location\": \"us-northcentral1-a\",\n  \"name\": \"my-slurm-cluster\",\n  \"root_ssh_pub_keys\": [\n    \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n  ],\n  \"state\": \"CREATE_FAILED\",\n  \"home_volume_size\": \"\\\"10Ti\\\"\",\n  \"login_node_type\": \"c1a.8x\",\n  \"login_replicas\": 1,\n  \"subnet_id\": \"<string>\",\n  \"issues\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"login_node_endpoint\": \"string\",\n  \"nodesets\": [\n    \"string\",\n    \"string\"\n  ],\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05041a51-c014-4851-9310-a9160980c7e4",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a62d8bb8-6e79-4802-b2a4-fbd2448bfbd1",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "slurm",
+                    "clusters",
+                    ":slurm_cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slurm_cluster_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eda23390-a1c1-4feb-8d14-ba4f6f692cc5",
+    "name": "Crusoe Slurm Clusters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Slurm Clusters across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

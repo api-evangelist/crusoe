@@ -1,0 +1,522 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Reservations API
+  version: '1.0'
+  description: 'Operations tagged Reservations across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Reservations
+paths:
+  /organizations/{organization_id}/reservations:
+    get:
+      operationId: getReservations
+      parameters:
+      - example: de8f27fe-8438-45e7-a2c2-a2767660625f
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrganizationID
+        schema:
+          type: string
+      - example: effective
+        in: query
+        name: status
+        x-go-name: Status
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/reservationsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get all reservations belonging to the specified organization. User must be part of the organization.
+      tags:
+      - Reservations
+  /organizations/{organization_id}/reservations/gpu-tracking:
+    get:
+      operationId: getReservationsGPUTracking
+      parameters:
+      - example: de8f27fe-8438-45e7-a2c2-a2767660625f
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrganizationID
+        schema:
+          type: string
+      - example:
+        - gpu-hours
+        in: query
+        name: product_line
+        x-go-name: ProductLine
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - us-east1
+        - us-northcentral1
+        in: query
+        name: region
+        x-go-name: Region
+        schema:
+          type: array
+          items:
+            type: string
+      - example: '"2024-01-01T00:00:00Z"'
+        in: query
+        name: start_time
+        x-go-name: StartTime
+        schema:
+          type: string
+      - example: '"2024-01-31T23:59:59Z"'
+        in: query
+        name: end_time
+        x-go-name: EndTime
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/reservationsGPUTrackingResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get GPU tracking data for the specified organization. User must be part of the organization and have reservations feature access.
+      tags:
+      - Reservations
+  /organizations/{organization_id}/reservations/gpu-tracking/latest:
+    get:
+      operationId: getLatestGPUTracking
+      parameters:
+      - example: de8f27fe-8438-45e7-a2c2-a2767660625f
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrganizationID
+        schema:
+          type: string
+      - example:
+        - gpu-hours
+        in: query
+        name: product_line
+        x-go-name: ProductLine
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - us-east1
+        - us-northcentral1
+        in: query
+        name: region
+        x-go-name: Region
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/latestGPUTrackingResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get latest GPU tracking data for the specified organization. User must be part of the organization and have reservations feature access.
+      tags:
+      - Reservations
+  /organizations/{organization_id}/reservations/{reservation_id}:
+    get:
+      operationId: getReservation
+      parameters:
+      - example: de8f27fe-8438-45e7-a2c2-a2767660625f
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrganizationID
+        schema:
+          type: string
+      - example: de8f27fe-8438-45e7-a2c2-a2767660625f
+        in: path
+        name: reservation_id
+        required: true
+        x-go-name: ReservationID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/reservationsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get reservation belonging to the specified organization and reservation ID. User must be part of the organization.
+      tags:
+      - Reservations
+components:
+  responses:
+    reservationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReservationsGetResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    reservationsGPUTrackingResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GPUTrackingResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    latestGPUTrackingResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LatestGPUTracking'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    GPUTrackingDatumMod:
+      properties:
+        event_time:
+          type: string
+          x-go-name: EventTime
+        global_reservation_capacity:
+          format: int64
+          type: integer
+          x-go-name: GlobalCapacity
+        organization_id:
+          type: string
+          x-go-name: OrganizationID
+        overage_count:
+          format: int64
+          type: integer
+          x-go-name: OnDemandCount
+        price:
+          format: double
+          type: number
+          x-go-name: Price
+        product_line:
+          type: string
+          x-go-name: ProductLine
+        region:
+          type: string
+          x-go-name: Region
+        regional_reservation_capacity:
+          format: int64
+          type: integer
+          x-go-name: RegionalCapacity
+        running_compute_unit_count:
+          format: int64
+          type: integer
+          x-go-name: GPUUsage
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Reservation:
+      properties:
+        contract_end_date:
+          example: '2025-08-14T09:00:35Z'
+          type: string
+          x-go-name: ContractEndDate
+        contract_start_date:
+          example: '2024-08-14T09:00:35Z'
+          type: string
+          x-go-name: ContractStartDate
+        date_delivered:
+          example: '2024-07-14T09:00:35Z'
+          type: string
+          x-go-name: DateDelivered
+        delivery_deadline:
+          example: '2024-08-14T09:00:35Z'
+          type: string
+          x-go-name: DeliveryDeadline
+        duration:
+          example: 12
+          format: float
+          type: number
+          x-go-name: Duration
+        id:
+          description: 'TODO: follow new format for giving descriptions to fields for apis'
+          example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb
+          type: string
+          x-go-name: ID
+        locations:
+          example: '"us-east1"'
+          items:
+            type: string
+          type: array
+          x-go-name: Locations
+        price:
+          example: '6.25'
+          type: string
+          x-go-name: Price
+        product_line:
+          example: h100
+          type: string
+          x-go-name: ProductLine
+        projects:
+          example: '"1a8ebda8-3c68-4ba6-adf6-961c3ec53748"'
+          items:
+            type: string
+          type: array
+          x-go-name: Projects
+        quantity:
+          example: 64
+          format: int64
+          type: integer
+          x-go-name: Quantity
+        reservation_type:
+          example: RIPA
+          type: string
+          x-go-name: ReservationType
+        used_quantity:
+          example: 32
+          format: int64
+          type: integer
+          x-go-name: UsedQuantity
+        vm_ids:
+          example: 1a8ebda8-3c68-4ba6-adf6-961c3ec53748,6f70a988-fac6-4a9c-ae26-cb016d7bec72
+          items:
+            type: string
+          type: array
+          x-go-name: VMIDs
+      required:
+      - id
+      - reservation_type
+      - product_line
+      - duration
+      - quantity
+      - used_quantity
+      - locations
+      - projects
+      - contract_start_date
+      - contract_end_date
+      - delivery_deadline
+      - date_delivered
+      - vm_ids
+      - price
+      title: Reservation contains information about a customer reservation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GPUTrackingDatum:
+      properties:
+        event_time:
+          type: string
+          x-go-name: EventTime
+        global_capacity:
+          format: int64
+          type: integer
+          x-go-name: GlobalCapacity
+        gpu_usage:
+          format: int64
+          type: integer
+          x-go-name: GPUUsage
+        on_demand_count:
+          format: int64
+          type: integer
+          x-go-name: OnDemandCount
+        organization_id:
+          type: string
+          x-go-name: OrganizationID
+        price:
+          format: double
+          type: number
+          x-go-name: Price
+        product_line:
+          type: string
+          x-go-name: ProductLine
+        region:
+          type: string
+          x-go-name: Region
+        regional_capacity:
+          format: int64
+          type: integer
+          x-go-name: RegionalCapacity
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ReservationsGetResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Reservation'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ReservationsGetResponse is the response type for GET requests to the reservations endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LatestGPUTracking:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GPUTrackingDatumMod'
+          type: array
+          x-go-name: Data
+        reservation_id:
+          items:
+            type: string
+          type: array
+          x-go-name: ReservationID
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GPUTrackingResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GPUTrackingDatum'
+          type: array
+          x-go-name: Data
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

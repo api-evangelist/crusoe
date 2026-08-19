@@ -1,0 +1,576 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Observability API
+  version: '1.0'
+  description: 'Operations tagged Observability across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Observability
+paths:
+  /projects/{project_id}/metrics/scrape:
+    get:
+      description: 'This endpoint proxies to VictoriaMetrics /federate endpoint and returns metrics
+
+        in Prometheus text exposition format for scraping by external monitoring systems.
+
+
+        Supports filtering by:
+
+        metric_name: Filter by metric name(s). Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time)
+
+        metric_category: Filter by ''system'' (Crusoe-collected) or ''custom'' (user-defined) metrics
+
+        labels: Filter by label key:value pairs. Supports comma-separated values (e.g., labels=job:api,region:us-east)
+
+
+        Internal metrics and provisioned throughput metrics are always excluded.
+
+
+        Rate limited to 10 requests per minute per project.
+
+        Response limited to 50MB payload and 100,000 time series.
+
+        Responses are cached for up to 1 minute.'
+      operationId: scrapeMetrics
+      parameters:
+      - description: The project ID to scrape metrics from. User must have read access to the project.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Filter by metric name. Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time).
+        example: crusoe_vm_cpu_seconds_total,crusoe_vm_disk_writes_completed_total
+        in: query
+        name: metric_name
+        x-go-name: MetricName
+        schema:
+          type: array
+          items:
+            type: string
+      - description: 'Filter by metric category. ''system'' returns Crusoe-collected metrics.
+
+          ''custom'' returns user-defined metrics with metrics_source=custom-metrics label.'
+        example: system
+        in: query
+        name: metric_category
+        x-go-name: MetricCategory
+        schema:
+          type: string
+          enum:
+          - system
+          - ' custom'
+      - description: 'Filter by label key:value pairs. Use colon to separate key and value.
+
+          Supports comma-separated values (e.g., labels=job:api,region:us-east). Supports UNION (labels=device:loop1|loop2)'
+        example: job:api,region:us-east
+        in: query
+        name: labels
+        x-go-name: Labels
+        schema:
+          type: array
+          items:
+            type: string
+      - description: 'Enable gzip compression for the response. Accepted values: ''true'' (enables gzip compression) or ''false'' (no compression). Invalid values will be logged and treated as ''false''.'
+        example: 'true'
+        in: query
+        name: compress
+        x-go-name: Compress
+        schema:
+          type: string
+      - description: 'Response format. Default Prometheus text. Set to "openmetrics" to receive application/openmetrics-text (1.0) with # EOF marker.'
+        example: openmetrics
+        in: query
+        name: format
+        x-go-name: Format
+        schema:
+          type: string
+          enum:
+          - prometheus
+          - openmetrics
+      responses:
+        '200':
+          $ref: '#/components/responses/scrapeMetricsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '429':
+          $ref: '#/components/responses/rateLimitError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Export metrics in Prometheus text format (default) or OpenMetrics format for scraping.
+      tags:
+      - Observability
+  /projects/{project_id}/metrics/timeseries:
+    get:
+      operationId: queryTimeseriesSimplified
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: shareddisk
+        in: query
+        name: resource_type
+        required: true
+        x-go-name: ResourceType
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: query
+        name: resource_id
+        x-go-name: ResourceID
+        schema:
+          type: string
+      - description: Start timestamp, inclusive.
+        example: <rfc3339 | unix_timestamp>
+        in: query
+        name: start
+        required: true
+        x-go-name: Start
+        schema:
+          type: string
+      - description: End timestamp, inclusive.
+        example: <rfc3339 | unix_timestamp>
+        in: query
+        name: end
+        required: true
+        x-go-name: End
+        schema:
+          type: string
+      - description: Query resolution step width in duration format or float number of seconds.
+        example: 5m | 30.0
+        in: query
+        name: step
+        required: true
+        x-go-name: Step
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/timeseriesResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Query timeseries for a resource (in development).
+      tags:
+      - Observability
+  /projects/{project_id}/metrics/timeseries/api/v1/query:
+    get:
+      operationId: queryTimeseries
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Prometheus expression query string.
+        example: metric[label=value]
+        in: query
+        name: query
+        required: true
+        x-go-name: Query
+        schema:
+          type: string
+      - description: Evaluation timestamp.
+        example: <rfc3339 | unix_timestamp>
+        in: query
+        name: time
+        x-go-name: Time
+        schema:
+          type: string
+      - description: Evaluation timeout. Defaults to and is capped by the value of the -query.timeout flag.
+        example: 30s
+        in: query
+        name: timeout
+        x-go-name: Timeout
+        schema:
+          type: string
+      - description: Maximum number of returned series. 0 means disabled.
+        example: '5'
+        in: query
+        name: limit
+        x-go-name: Limit
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/timeseriesResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Query timeseries at an instant via PromQL.
+      tags:
+      - Observability
+  /projects/{project_id}/metrics/timeseries/api/v1/query-range:
+    get:
+      operationId: queryTimeseriesRange
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Prometheus expression query string.
+        example: metric[label=value]
+        in: query
+        name: query
+        required: true
+        x-go-name: Query
+        schema:
+          type: string
+      - description: Start timestamp, inclusive.
+        example: <rfc3339 | unix_timestamp>
+        in: query
+        name: start
+        required: true
+        x-go-name: Start
+        schema:
+          type: string
+      - description: End timestamp, inclusive.
+        example: <rfc3339 | unix_timestamp>
+        in: query
+        name: end
+        required: true
+        x-go-name: End
+        schema:
+          type: string
+      - description: Query resolution step width in duration format or float number of seconds.
+        example: 5m | 30.0
+        in: query
+        name: step
+        required: true
+        x-go-name: Step
+        schema:
+          type: string
+      - description: Evaluation timeout. Defaults to and is capped by the value of the -query.timeout flag.
+        example: 30s
+        in: query
+        name: timeout
+        x-go-name: Timeout
+        schema:
+          type: string
+      - description: Maximum number of returned series. 0 means disabled.
+        example: '5'
+        in: query
+        name: limit
+        x-go-name: Limit
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/timeseriesResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Query timeseries over a time range via PromQL.
+      tags:
+      - Observability
+  /projects/{project_id}/metrics/timeseries/query-parameters:
+    get:
+      operationId: queryTimeseriesWithParameters
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Name of the metric to query.
+        example: cpu_usage_seconds_total
+        in: query
+        name: metric
+        required: true
+        x-go-name: Metric
+        schema:
+          type: string
+      - description: Labels to filter the metric by.  Multiple labels can be provided as comma-separated key=value pairs.
+        example: instance=server1,job=node
+        in: query
+        name: label
+        x-go-name: Label
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Function to use (e.g., rate, avg). Multiple functions are separated by comma and applied in that order
+        example: function=rate,avg
+        in: query
+        name: function
+        x-go-name: Function
+        schema:
+          type: string
+      - description: Range to use with some functions (e.g., rate).
+        example: range=3600
+        in: query
+        name: range
+        x-go-name: Range
+        schema:
+          type: string
+      - description: Start timestamp, inclusive.
+        example: '2024-01-22T10:00:00Z'
+        in: query
+        name: start
+        required: true
+        x-go-name: Start
+        schema:
+          type: string
+      - description: End timestamp, inclusive.
+        example: '2024-01-22T11:00:00Z'
+        in: query
+        name: end
+        required: true
+        x-go-name: End
+        schema:
+          type: string
+      - description: Query resolution step width in duration format or float number of seconds.
+        example: '60'
+        in: query
+        name: step
+        x-go-name: Step
+        schema:
+          type: string
+          default: '3600'
+      responses:
+        '200':
+          $ref: '#/components/responses/timeseriesResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Query timeseries by passing various metric parameters.
+      tags:
+      - Observability
+components:
+  schemas:
+    ObservabilityMetrics:
+      description: see also https://prometheus.io/docs/prometheus/latest/querying/api/
+      properties:
+        data:
+          example: '{}'
+          x-go-name: Data
+        error:
+          example: ???
+          type: string
+          x-go-name: Error
+        errorType:
+          example: ???
+          type: string
+          x-go-name: ErrorType
+        infos:
+          example: ???
+          items:
+            type: string
+          type: array
+          x-go-name: Infos
+        status:
+          example: success
+          type: string
+          x-go-name: Status
+        warnings:
+          example: ???
+          items:
+            type: string
+          type: array
+          x-go-name: Warnings
+      required:
+      - status
+      - data
+      title: This is the standard format for prometheus query responses;
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    scrapeMetricsResponse:
+      description: ''
+    rateLimitError:
+      description: Error Rate Limit Exceeded
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '429'
+                type: string
+                x-go-name: Code
+              message:
+                example: too_many_requests
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    timeseriesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ObservabilityMetrics'
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

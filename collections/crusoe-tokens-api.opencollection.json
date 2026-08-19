@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Tokens API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all active/expired API tokens for the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/users/tokens"
+          },
+          "docs": "Retrieve all active/expired API tokens for the logged in user."
+        },
+        {
+          "info": {
+            "name": "Create a new token owned by the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/users/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource will contain json-encoded details of API token.\nThis is the only time the customer will be able to view the secret key associated with the token."
+        },
+        {
+          "info": {
+            "name": "Delete an API token owned by the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/users/tokens",
+            "params": [
+              {
+                "name": "access_key",
+                "value": "WTUzcGibQ82y9_01h4MCdQ",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete an API token owned by the logged in user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

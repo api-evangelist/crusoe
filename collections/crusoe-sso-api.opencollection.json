@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe SSO API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSO",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the active sso providers for a given orgID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/sso/providers",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the active sso providers for a given orgID."
+        },
+        {
+          "info": {
+            "name": "Create a new SSO provider for a specific org.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/sso/providers",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "d62a74a8-e14e-41fd-81b6-9983f7ab9ba8",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new SSO provider for a specific org."
+        },
+        {
+          "info": {
+            "name": "Delete a specific SSO provider for a specific org.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/sso/providers/:provider_id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "d62a74a8-e14e-41fd-81b6-9983f7ab9ba8",
+                "type": "path"
+              },
+              {
+                "name": "provider_id",
+                "value": "d62a74a8-e14e-41fd-81b6-9983f7ab9ba8",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific SSO provider for a specific org."
+        },
+        {
+          "info": {
+            "name": "Update SSO for a user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/users/sso-enforcement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update SSO for a user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

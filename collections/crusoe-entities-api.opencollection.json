@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Entities API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve details about all active organizations the logged in user belongs to.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/entities"
+          },
+          "docs": "Retrieve details about all active organizations the logged in user belongs to."
+        },
+        {
+          "info": {
+            "name": "Update details for an organization that the logged in user owns.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/entities",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource will contain the updated organization details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

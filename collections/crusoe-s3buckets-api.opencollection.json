@@ -1,0 +1,260 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe S3 Buckets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "S3Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all S3 buckets in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the buckets."
+              },
+              {
+                "name": "next_page_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Token that returns the next page of results."
+              },
+              {
+                "name": "prev_page_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Token that returns the previous page of results."
+              },
+              {
+                "name": "page_size",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of buckets to return per page."
+              }
+            ]
+          },
+          "docs": "Lists all S3 buckets in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates an S3 bucket in the project and returns the created bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project to create the bucket in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an S3 bucket in the project and returns the created bucket."
+        },
+        {
+          "info": {
+            "name": "Returns the number of S3 buckets in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/count",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the buckets."
+              }
+            ]
+          },
+          "docs": "Returns the number of S3 buckets in the project."
+        },
+        {
+          "info": {
+            "name": "Returns the S3 bucket quota information for the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/quota",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the buckets."
+              }
+            ]
+          },
+          "docs": "Returns the S3 bucket quota information for the project."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single S3 bucket in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/:bucket_name",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the bucket."
+              },
+              {
+                "name": "bucket_name",
+                "value": "my-awesome-bucket",
+                "type": "path",
+                "description": "Name of the bucket."
+              }
+            ]
+          },
+          "docs": "Returns details for a single S3 bucket in the project."
+        },
+        {
+          "info": {
+            "name": "Replaces the tags on an S3 bucket and returns the updated bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/:bucket_name",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the bucket."
+              },
+              {
+                "name": "bucket_name",
+                "value": "my-awesome-bucket",
+                "type": "path",
+                "description": "Name of the bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the tags on an S3 bucket and returns the updated bucket."
+        },
+        {
+          "info": {
+            "name": "Deletes an S3 bucket from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/:bucket_name",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the bucket."
+              },
+              {
+                "name": "bucket_name",
+                "value": "my-awesome-bucket",
+                "type": "path",
+                "description": "Name of the bucket."
+              }
+            ]
+          },
+          "docs": "Deletes an S3 bucket from the project."
+        },
+        {
+          "info": {
+            "name": "Enables object lock on an S3 bucket and returns the updated bucket. Requires versioning to be enabled and cannot be disabled once enabled.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/:bucket_name/actions/enable-object-lock",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the bucket."
+              },
+              {
+                "name": "bucket_name",
+                "value": "my-awesome-bucket",
+                "type": "path",
+                "description": "Name of the bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables object lock on an S3 bucket and returns the updated bucket. Requires versioning to be enabled and cannot be disabled once enabled."
+        },
+        {
+          "info": {
+            "name": "Enables versioning on an S3 bucket and returns the updated bucket. Versioning cannot be disabled once enabled.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/s3/buckets/:bucket_name/actions/enable-versioning",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the bucket."
+              },
+              {
+                "name": "bucket_name",
+                "value": "my-awesome-bucket",
+                "type": "path",
+                "description": "Name of the bucket."
+              }
+            ]
+          },
+          "docs": "Enables versioning on an S3 bucket and returns the updated bucket. Versioning cannot be disabled once enabled."
+        },
+        {
+          "info": {
+            "name": "Lists all locations where object storage (S3) is available.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/storage/object-storage/supported-locations"
+          },
+          "docs": "Lists all locations where object storage (S3) is available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

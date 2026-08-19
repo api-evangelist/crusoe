@@ -1,0 +1,710 @@
+openapi: 3.2.0
+info:
+  title: Crusoe SCIM API
+  version: '1.0'
+  description: 'Operations tagged SCIM across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: SCIM
+paths:
+  /organizations/{org_id}/scim/integrations:
+    get:
+      operationId: listSCIMIntegrations
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listSCIMIntegrationsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: List SCIM integrations for an organization.
+      tags:
+      - SCIM
+    post:
+      operationId: createSCIMIntegration
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/createSCIMIntegrationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Create a new SCIM integration for an organization.
+      tags:
+      - SCIM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSCIMIntegrationRequestBody'
+        required: true
+  /organizations/{org_id}/scim/integrations/{integration_id}:
+    delete:
+      operationId: deleteSCIMIntegration
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: integration_id
+        required: true
+        x-go-name: IntegrationID
+        schema:
+          type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/emptyResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Delete a SCIM integration.
+      tags:
+      - SCIM
+    get:
+      operationId: getSCIMIntegration
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: integration_id
+        required: true
+        x-go-name: IntegrationID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getSCIMIntegrationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get a SCIM integration by ID.
+      tags:
+      - SCIM
+    patch:
+      operationId: updateSCIMIntegration
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: integration_id
+        required: true
+        x-go-name: IntegrationID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/updateSCIMIntegrationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Update a SCIM integration.
+      tags:
+      - SCIM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSCIMIntegrationRequestBody'
+        required: true
+  /organizations/{org_id}/scim/integrations/{integration_id}/tokens:
+    get:
+      operationId: listSCIMIntegrationTokens
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: integration_id
+        required: true
+        x-go-name: IntegrationID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listSCIMIntegrationTokensResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: List the tokens for a SCIM integration.
+      tags:
+      - SCIM
+    post:
+      operationId: createSCIMIntegrationToken
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: integration_id
+        required: true
+        x-go-name: IntegrationID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/createSCIMIntegrationTokenResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Create a token for a SCIM integration.
+      tags:
+      - SCIM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSCIMTokenRequestBody'
+        required: true
+  /organizations/{org_id}/scim/integrations/{integration_id}/tokens/{access_key_id}:
+    delete:
+      operationId: deleteSCIMIntegrationToken
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: integration_id
+        required: true
+        x-go-name: IntegrationID
+        schema:
+          type: string
+      - example: R7p5XctCQMuGlpVBmVdqzA
+        in: path
+        name: access_key_id
+        required: true
+        x-go-name: AccessKeyID
+        schema:
+          type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Delete a token from a SCIM integration.
+      tags:
+      - SCIM
+components:
+  schemas:
+    CreateSCIMIntegrationRequestBody:
+      properties:
+        identity_provider:
+          example: okta
+          type: string
+          x-go-name: IdentityProvider
+        name:
+          example: Okta SCIM Integration
+          type: string
+          x-go-name: Name
+        token:
+          $ref: '#/components/schemas/CreateSCIMTokenRequestBody'
+      required:
+      - name
+      - identity_provider
+      title: CreateSCIMIntegrationRequestBody is the JSON request body for creating a SCIM integration.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSCIMTokenRequestBody:
+      properties:
+        alias:
+          example: my-scim-token
+          type: string
+          x-go-name: Alias
+        expires_at:
+          example: '2025-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+      required:
+      - alias
+      - expires_at
+      title: CreateSCIMTokenRequestBody is the JSON request body for creating a SCIM integration token.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GeneratedLimitedUsageAPIKey:
+      properties:
+        alias:
+          example: newAPIKey
+          type: string
+          x-go-name: Alias
+        api_key:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: APIKey
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        key_id:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: KeyID
+        project_id:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+        usage:
+          enum:
+          - inference
+          - observability
+          example: inference
+          type: string
+          x-go-name: Usage
+      required:
+      - usage
+      - key_id
+      - api_key
+      - created_at
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SCIMIntegrationResponse:
+      properties:
+        created_at:
+          example: '2024-01-01T00:00:00Z'
+          type: string
+          x-go-name: CreatedAt
+        created_by:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: CreatedBy
+        id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: ID
+        identity_provider:
+          example: okta
+          type: string
+          x-go-name: IdentityProvider
+        last_activity_at:
+          description: The timestamp of the last SCIM activity on this integration.
+          example: '2024-01-01T00:00:00Z'
+          type: string
+          x-go-name: LastActivityAt
+        name:
+          example: Okta SCIM Integration
+          type: string
+          x-go-name: Name
+        organization_id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: OrganizationID
+        status:
+          example: active
+          type: string
+          x-go-name: Status
+        token_ids:
+          items:
+            type: string
+          type: array
+          x-go-name: TokenIDs
+        updated_at:
+          example: '2024-01-01T00:00:00Z'
+          type: string
+          x-go-name: UpdatedAt
+        user_count:
+          description: UserCount is the number of users provisioned via this SCIM integration.
+          format: int32
+          type: integer
+          x-go-name: UserCount
+      required:
+      - id
+      - organization_id
+      - name
+      - identity_provider
+      - token_ids
+      - status
+      - created_at
+      - updated_at
+      - created_by
+      title: SCIMIntegrationResponse is the JSON representation of a SCIM integration.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UpdateSCIMIntegrationRequestBody:
+      properties:
+        status:
+          description: The new status for the integration.
+          example: active
+          type: string
+          x-go-name: Status
+      title: UpdateSCIMIntegrationRequestBody is the JSON request body for updating a SCIM integration.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSCIMIntegrationResponse:
+      description: optionally including an inline token when requested.
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+        integration:
+          $ref: '#/components/schemas/SCIMIntegrationResponse'
+      required:
+      - integration
+      title: CreateSCIMIntegrationResponse is the JSON response for creating a SCIM integration,
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSCIMIntegrationsResponse:
+      properties:
+        integrations:
+          items:
+            $ref: '#/components/schemas/SCIMIntegrationResponse'
+          type: array
+          x-go-name: Integrations
+      required:
+      - integrations
+      title: ListSCIMIntegrationsResponse wraps a list of SCIM integration responses.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSCIMIntegrationTokensResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SCIMIntegrationTokenInfo'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListSCIMIntegrationTokensResponse wraps a list of SCIM integration token responses.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LimitedUsageAPIKeyPostResponse:
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+      required:
+      - api_key_info
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SCIMIntegrationTokenInfo:
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        key_id:
+          example: Hm11C1coQZm2+Aihn9ofYg
+          type: string
+          x-go-name: KeyID
+        last_used:
+          example: '2021-11-03T22:22:55Z'
+          type: string
+          x-go-name: LastUsed
+        project_id:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+        usage:
+          enum:
+          - inference
+          - observability
+          example: inference
+          type: string
+          x-go-name: Usage
+        user_id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: UserID
+      required:
+      - usage
+      - alias
+      - key_id
+      - created_at
+      - expires_at
+      - last_used
+      - user_id
+      title: SCIMIntegrationTokenInfo extends LimitedUsageAPIKeyInfo with a user ID.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    createSCIMIntegrationTokenResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyPostResponse'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listSCIMIntegrationTokensResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSCIMIntegrationTokensResponse'
+    createSCIMIntegrationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSCIMIntegrationResponse'
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getSCIMIntegrationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SCIMIntegrationResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listSCIMIntegrationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSCIMIntegrationsResponse'
+    updateSCIMIntegrationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SCIMIntegrationResponse'
+    emptyResponse:
+      description: Empty Response
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

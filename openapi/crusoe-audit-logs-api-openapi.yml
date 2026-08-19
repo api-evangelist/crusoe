@@ -1,0 +1,449 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Audit Logs API
+  version: '1.0'
+  description: 'Operations tagged Audit Logs across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Audit Logs
+paths:
+  /organizations/{organization_id}/audit-logs:
+    get:
+      operationId: getAuditLogs
+      parameters:
+      - example: de8f27fe-8438-45e7-a2c2-a2767660625f
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrganizationID
+        schema:
+          type: string
+      - example: f934fbdb-7e3a-4b92-b7d2-da0f91d768e8,8c29f3f3-830f-4a44-9b6b-a51fcf6a6b5d
+        in: query
+        name: project_ids
+        x-go-name: ProjectIDs
+        schema:
+          type: array
+          items:
+            type: string
+      - example: '2022-09-01T14:25:36-07:00'
+        in: query
+        name: start_time
+        x-go-name: StartTime
+        schema:
+          type: string
+      - example: '2022-09-06T14:25:36-07:00'
+        in: query
+        name: end_time
+        x-go-name: EndTime
+        schema:
+          type: string
+      - example: Create,Update
+        in: query
+        name: actions
+        x-go-name: Actions
+        schema:
+          type: array
+          items:
+            type: string
+      - example: f934fbdb-7e3a-4b92-b7d2-da0f91d768e8,8c29f3f3-830f-4a44-9b6b-a51fcf6a6b5d
+        in: query
+        name: actor_ids
+        x-go-name: ActorIDs
+        schema:
+          type: array
+          items:
+            type: string
+      - example: hh26@xxx.com,xyz@yyy.ai, only support filter by user email, not by crusoe admin email.
+        in: query
+        name: actor_emails
+        x-go-name: ActorEmails
+        schema:
+          type: array
+          items:
+            type: string
+      - example: User,Crusoe Admin, please ensure URL encoding for values with space.
+        in: query
+        name: actor_types
+        x-go-name: ActorTypes
+        schema:
+          type: array
+          items:
+            type: string
+      - example: f934fbdb-7e3a-4b92-b7d2-da0f91d768e8,8c29f3f3-830f-4a44-9b6b-a51fcf6a6b5d
+        in: query
+        name: target_ids
+        x-go-name: TargetIDs
+        schema:
+          type: array
+          items:
+            type: string
+      - example: VM,KubernetesCluster
+        in: query
+        name: target_types
+        x-go-name: TargetTypes
+        schema:
+          type: array
+          items:
+            type: string
+      - example: my_vm1,my_vm2
+        in: query
+        name: target_names
+        x-go-name: TargetNames
+        schema:
+          type: array
+          items:
+            type: string
+      - example: us-east1,us-northcentral1-a
+        in: query
+        name: locations
+        x-go-name: Locations
+        schema:
+          type: array
+          items:
+            type: string
+      - example: OK,Bad Request
+        in: query
+        name: results
+        x-go-name: Results
+        schema:
+          type: array
+          items:
+            type: string
+      - example: OK,Bad Request
+        in: query
+        name: results_not
+        x-go-name: ResultsNot
+        schema:
+          type: array
+          items:
+            type: string
+      - example: Browser,Crusoe Terraform/v0.5.21 please make sure the values are URL encoded.
+        in: query
+        name: surfaces
+        x-go-name: Surfaces
+        schema:
+          type: array
+          items:
+            type: string
+      - example: '20'
+        in: query
+        name: limit
+        x-go-name: Limit
+        schema:
+          type: string
+      - example: bXktZmlyc3Qtdm0
+        in: query
+        name: next_token
+        x-go-name: NextToken
+        schema:
+          type: string
+      - example: bXktZmlyc3Qtdm0
+        in: query
+        name: prev_token
+        x-go-name: PrevToken
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/auditLogsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get audit logs belonging to the specified organization. User must be part of the organization.
+      tags:
+      - Audit Logs
+components:
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    auditLogsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuditLogsGetResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    LogEntry:
+      properties:
+        action:
+          description: Name of the action
+          example: Create
+          type: string
+          x-go-name: Action
+        action_detail:
+          description: Name of the action
+          example: Attach Disk
+          type: string
+          x-go-name: ActionDetail
+        actor_email:
+          description: 'ActorEmail: the email address of the actor'
+          example: xxxx@gmail.coom
+          type: string
+          x-go-name: ActorEmail
+        actor_id:
+          description: 'Actor: who performed the action.'
+          example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb || "system"
+          type: string
+          x-go-name: Actor
+        actor_type:
+          description: 'ActorType: type of the actor'
+          example: user || admin || system
+          type: string
+          x-go-name: ActorType
+        client_ip:
+          description: IP address of the request
+          example: 10.2.5.355
+          type: string
+          x-go-name: ClientIP
+        end_time:
+          description: The end time of the request
+          example: '"2024-08-24T05:25:33.860Z"'
+          type: string
+          x-go-name: EndTime
+        error_message:
+          description: The error message of the request
+          example: '"The requested resource is out of stock. Please try again later."'
+          type: string
+          x-go-name: ErrorMsg
+        locations:
+          description: Region names of where the action is performed if applicable
+          example: us-east1
+          items:
+            type: string
+          type: array
+          x-go-name: Location
+        organization_id:
+          description: organization id
+          example: d10efcc0-7dba-4163-a3f0-f48aae20712a
+          type: string
+          x-go-name: OrganizationID
+        organization_name:
+          description: organization name
+          example: crusoe.ai
+          type: string
+          x-go-name: OrganizationName
+        project_id:
+          description: Project ID
+          example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb
+          type: string
+          x-go-name: ProjectID
+        project_name:
+          description: Project Name
+          example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb
+          type: string
+          x-go-name: ProjectName
+        result:
+          description: The result of the action
+          example: OK
+          type: string
+          x-go-name: Result
+        start_time:
+          description: The start time of the request
+          example: '"2024-08-24T05:25:30.954Z"'
+          type: string
+          x-go-name: StartTime
+        surface:
+          description: Surface type of the request
+          example: browser
+          type: string
+          x-go-name: Surface
+        target_ids:
+          description: 'The targets of the action
+
+            required'
+          example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb,6ac4d027-ee2a-4c0c-9b6f-e8638a7ae867
+          items:
+            type: string
+          type: array
+          x-go-name: Target
+        target_names:
+          description: The target names of the action
+          example: vm-test-1,vm-test-2
+          items:
+            type: string
+          type: array
+          x-go-name: TargetName
+        target_type:
+          description: 'The target type of the action
+
+            required'
+          example: VM
+          type: string
+          x-go-name: TargetType
+      required:
+      - action
+      - actor_id
+      - actor_email
+      - actor_type
+      - client_ip
+      - end_time
+      - result
+      - start_time
+      - surface
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AuditLogsGetResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LogEntry'
+          type: array
+          x-go-name: Items
+        next_page_token:
+          description: 'Base64 encoded token representing the starting of the next page of log entry.
+
+            Empty if currently on the last page.'
+          example: bXktbGFzdC12bQ
+          type: string
+          x-go-name: NextPageToken
+        prev_page_token:
+          description: 'Base64 encoded token representing the starting previous page of log entry.
+
+            Empty if currently on the first page.'
+          example: bXktZmlyc3Qtdm0
+          type: string
+          x-go-name: PrevPageToken
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

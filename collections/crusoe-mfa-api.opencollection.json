@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe MFA API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MFA",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get enabled MFA methods for the specified organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/mfa",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the ID of the organization"
+              }
+            ]
+          },
+          "docs": "Get enabled MFA methods for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Update required MFA methods for the specified organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/mfa",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the ID of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update required MFA methods for the specified organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

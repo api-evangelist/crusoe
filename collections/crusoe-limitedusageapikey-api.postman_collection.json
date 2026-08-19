@@ -1,0 +1,573 @@
+{
+  "item": [
+    {
+      "id": "29ea0a04-3a13-4b22-95ec-b9ce7120dce0",
+      "name": "LimitedUsageAPIKey",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e291b563-fcef-48d3-80bc-d8a37206740a",
+          "name": "Delete a Limited Usage API Key owned by the logged in user.",
+          "request": {
+            "name": "Delete a Limited Usage API Key owned by the logged in user.",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "limited-usage-api-key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c88827d4-3770-4a8b-aeae-a1199505af28",
+              "name": "Empty Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_id",
+                      "value": "WTUzcGibQ82y9_01h4MCdQ"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "612dfde4-4237-4f7d-b4d7-b8fc36ac7d5d",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_id",
+                      "value": "WTUzcGibQ82y9_01h4MCdQ"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0da9f5f-e254-412b-9803-0161793081cb",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_id",
+                      "value": "WTUzcGibQ82y9_01h4MCdQ"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d22c0082-7db2-4748-94dd-46295f4508a5",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_id",
+                      "value": "WTUzcGibQ82y9_01h4MCdQ"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19d07218-82a5-4f3f-b74b-e6dd390165a5",
+          "name": "Retrieve all active/expired Limited Usage API Keys for the logged in user and their usage types.",
+          "request": {
+            "name": "Retrieve all active/expired Limited Usage API Keys for the logged in user and their usage types.",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "limited-usage-api-key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5053a1c4-fb1b-42b8-8108-52948f523860",
+              "name": "A successful response from this resource will contain json-encoded array of token details, excluding the api key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"usage\": \"inference\",\n      \"alias\": \"token1\",\n      \"key_id\": \"Hm11C1coQZm2+Aihn9ofYg\",\n      \"created_at\": \"2021-11-03T22:16:27Z\",\n      \"expires_at\": \"2021-12-03T19:58:34Z\",\n      \"last_used\": \"2021-11-03T22:22:55Z\",\n      \"project_id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\"\n    },\n    {\n      \"usage\": \"inference\",\n      \"alias\": \"token1\",\n      \"key_id\": \"Hm11C1coQZm2+Aihn9ofYg\",\n      \"created_at\": \"2021-11-03T22:16:27Z\",\n      \"expires_at\": \"2021-12-03T19:58:34Z\",\n      \"last_used\": \"2021-11-03T22:22:55Z\",\n      \"project_id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0eab62c2-5c58-49f8-b256-9a0484005c0c",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60a2188e-9375-4c2d-8720-b17f4833c84a",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f45b5dca-a985-4083-952c-c3ca5a1a1f52",
+          "name": "Create a new limited usage api key owned by the logged in user, of type specified by usage parameter.",
+          "request": {
+            "name": "Create a new limited usage api key owned by the logged in user, of type specified by usage parameter.",
+            "description": {
+              "content": "A successful response from this resource will contain json-encoded details of the limited usage API key.\nThis is the only time the customer will be able to view the api key associated with the API key id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "limited-usage-api-key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "usage",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expires_at\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"project_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c96a1a24-a4b6-4e56-b09c-a8418dd07e2b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usage",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires_at\": \"2021-12-03T19:58:34Z\",\n  \"alias\": \"token1\",\n  \"project_id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_key_info\": {\n    \"usage\": \"inference\",\n    \"key_id\": \"R7p5XctCQMuGlpVBmVdqzA\",\n    \"api_key\": \"R7p5XctCQMuGlpVBmVdqzA\",\n    \"created_at\": \"2021-11-03T22:16:27Z\",\n    \"expires_at\": \"2021-12-03T19:58:34Z\",\n    \"alias\": \"newAPIKey\",\n    \"project_id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3c4fd4b-97b7-4ec9-b0d0-32e60712d62b",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usage",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires_at\": \"2021-12-03T19:58:34Z\",\n  \"alias\": \"token1\",\n  \"project_id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49045c9f-0277-4629-a7e6-a3bc8192c060",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "limited-usage-api-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usage",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires_at\": \"2021-12-03T19:58:34Z\",\n  \"alias\": \"token1\",\n  \"project_id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8883dee3-bc74-4592-b06a-550dfc0fd0c1",
+    "name": "Crusoe Limited Usage API Key API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged LimitedUsageAPIKey across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

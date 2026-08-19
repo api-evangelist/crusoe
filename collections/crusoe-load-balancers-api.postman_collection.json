@@ -1,0 +1,1401 @@
+{
+  "item": [
+    {
+      "id": "1b70f3d8-8d48-4980-ba7a-986666042a45",
+      "name": "Load Balancers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b65c46e0-5f23-42b5-a05b-38b06e1adf04",
+          "name": "Lists all external load balancers in the project and returns their details.",
+          "request": {
+            "name": "Lists all external load balancers in the project and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "load-balancers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Filters results to external load balancers in this location."
+                },
+                {
+                  "disabled": false,
+                  "key": "vpc_network_id",
+                  "value": "<string>",
+                  "description": "Filters results to external load balancers in this VPC network."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filters results to external load balancers with this name."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the external load balancers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2ddc4cd-85b9-405f-aff5-8ce1b57258a8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "vpc_network_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "name",
+                      "value": "my-loadbalancer-test"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the external load balancers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"project_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"name\": \"my-external-load-balancer\",\n      \"location\": \"us-northcentral1-a\",\n      \"protocol\": \"tcp\",\n      \"vip\": \"192.168.1.1\",\n      \"listen_ports_and_backends\": [\n        {\n          \"listen_port\": 80,\n          \"backends\": [\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"listen_port\": 80,\n          \"backends\": [\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"health_check_options\": {\n        \"failure_count\": 3,\n        \"interval\": 10,\n        \"success_count\": 2,\n        \"timeout\": 5\n      }\n    },\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"project_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"name\": \"my-external-load-balancer\",\n      \"location\": \"us-northcentral1-a\",\n      \"protocol\": \"tcp\",\n      \"vip\": \"192.168.1.1\",\n      \"listen_ports_and_backends\": [\n        {\n          \"listen_port\": 80,\n          \"backends\": [\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"listen_port\": 80,\n          \"backends\": [\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"ip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"health_check_options\": {\n        \"failure_count\": 3,\n        \"interval\": 10,\n        \"success_count\": 2,\n        \"timeout\": 5\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0220d4b-79a4-4f24-a53e-b4fc4611c0cb",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "vpc_network_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "name",
+                      "value": "my-loadbalancer-test"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the external load balancers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c53a977-8ee0-4c86-af10-cae934274f0d",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "vpc_network_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "name",
+                      "value": "my-loadbalancer-test"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the external load balancers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "013e2d87-9500-46d3-8bb0-d2fbb9bb7d9c",
+          "name": "Creates an external load balancer in the project and returns the async operation.",
+          "request": {
+            "name": "Creates an external load balancer in the project and returns the async operation.",
+            "description": {
+              "content": "This endpoint creates a new external load balancer in the specified project. The request must include the VPC ID, name, location, and at least one listen port with its associated backends.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "load-balancers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The project ID to which the external load balancer belongs."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protocol\": \"<string>\",\n  \"vpc_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\",\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": \"<long>\",\n      \"backends\": [\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": \"<long>\",\n      \"backends\": [\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": \"<long>\",\n    \"interval\": \"<long>\",\n    \"success_count\": \"<long>\",\n    \"timeout\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbfa5ece-3473-45db-8776-8270ccf3ca21",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protocol\": \"LOAD_BALANCER_PROTOCOL_TCP\",\n  \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"name\": \"my-external-load-balancer\",\n  \"location\": \"us-east1\",\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92ba5f7a-5733-4da7-a327-a0994ed869d0",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protocol\": \"LOAD_BALANCER_PROTOCOL_TCP\",\n  \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"name\": \"my-external-load-balancer\",\n  \"location\": \"us-east1\",\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41cb93fb-5b97-41b2-b7de-1d8c92eb256e",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protocol\": \"LOAD_BALANCER_PROTOCOL_TCP\",\n  \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"name\": \"my-external-load-balancer\",\n  \"location\": \"us-east1\",\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06bd1a55-115d-4a07-b2c4-cd0b2367459b",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protocol\": \"LOAD_BALANCER_PROTOCOL_TCP\",\n  \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"name\": \"my-external-load-balancer\",\n  \"location\": \"us-east1\",\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c18428bf-fdb6-45f6-b8cc-482a2c1af5d4",
+          "name": "Deletes an external load balancer from the project and returns the async operation.",
+          "request": {
+            "name": "Deletes an external load balancer from the project and returns the async operation.",
+            "description": {
+              "content": "This endpoint deletes an external load balancer identified by its ID within the specified project. No request body or query parameters are required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "load-balancers",
+                ":load_balancer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The project ID to which the external load balancer belongs."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "load_balancer_id",
+                  "description": "(Required) The ID of the external load balancer to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db37c764-cadb-46f3-b1a8-e1df29e185a2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b8f5beb-0808-442f-8aec-cc4947471849",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ee21e43-302c-4c4e-bbcc-2ea203669ab9",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c9ecb4d-5395-4032-b707-ca2c4f60b6a2",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d384f54-a29f-4fd0-954c-af7a8b5193d8",
+          "name": "Returns details for a single external load balancer in the project.",
+          "request": {
+            "name": "Returns details for a single external load balancer in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "load-balancers",
+                ":load_balancer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the external load balancer."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "load_balancer_id",
+                  "description": "(Required) ID of the external load balancer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ea4cc3b-ecff-4371-bdc9-84e684ea3a0a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the external load balancer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) ID of the external load balancer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"project_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"vpc_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"name\": \"my-external-load-balancer\",\n  \"location\": \"us-northcentral1-a\",\n  \"protocol\": \"tcp\",\n  \"vip\": \"192.168.1.1\",\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47fdbaea-bcd7-418b-a639-ffdfd2ca0f98",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the external load balancer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) ID of the external load balancer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49ecec34-edc5-430d-837a-e2908a1909f0",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the external load balancer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) ID of the external load balancer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65303731-3aec-4745-9c35-f2bf3148dbba",
+          "name": "Updates an external load balancer in the project and returns the async operation.",
+          "request": {
+            "name": "Updates an external load balancer in the project and returns the async operation.",
+            "description": {
+              "content": "This endpoint updates the configuration of an existing external load balancer. The request must include the load balancer ID and optionally the health check options and/or listen ports and associated backends.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "load-balancers",
+                ":load_balancer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The project ID to which the external load balancer belongs."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "load_balancer_id",
+                  "description": "(Required) The ID of the external load balancer to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": \"<long>\",\n      \"backends\": [\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": \"<long>\",\n      \"backends\": [\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"ip\": \"<string>\",\n          \"port\": \"<long>\",\n          \"status\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": \"<long>\",\n    \"interval\": \"<long>\",\n    \"success_count\": \"<long>\",\n    \"timeout\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c131423c-01ef-4745-9fb4-5e2a01cc49de",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c41f8e6-7e7a-4c29-aa65-72f3d88d9435",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0105f83a-5e06-4a9b-bc21-5d383a0e5439",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eac8a4f2-88ca-4bca-9b88-a727bcf7e920",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe78647-26aa-4144-992e-310876e35f51",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "load-balancers",
+                    ":load_balancer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to which the external load balancer belongs."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "load_balancer_id",
+                      "description": "(Required) The ID of the external load balancer to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"listen_ports_and_backends\": [\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    },\n    {\n      \"listen_port\": 80,\n      \"backends\": [\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        },\n        {\n          \"ip\": \"192.168.1.2\",\n          \"port\": 8080,\n          \"status\": \"ONLINE\"\n        }\n      ]\n    }\n  ],\n  \"health_check_options\": {\n    \"failure_count\": 3,\n    \"interval\": 10,\n    \"success_count\": 2,\n    \"timeout\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "537f3894-1248-471e-b1ae-12a4d4b0b3a5",
+    "name": "Crusoe Load Balancers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Load Balancers across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

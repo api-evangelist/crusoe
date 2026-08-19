@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Disks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all disks in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/disks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the disks."
+              },
+              {
+                "name": "disk_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to disks with these IDs."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to disks in this location."
+              },
+              {
+                "name": "disk_names",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to disks with these names."
+              },
+              {
+                "name": "exclude_os",
+                "value": "",
+                "type": "query",
+                "description": "Excludes OS disks from the results when true."
+              }
+            ]
+          },
+          "docs": "Size of disks will be in gibibytes (GiB)"
+        },
+        {
+          "info": {
+            "name": "Creates a disk in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/disks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requires either a disk snapshot ID, or size and location, where size of disk\nshould be in gibibytes (GiB) or tebibytes (TiB) in the format [Size][Unit].\nE.g. 10GiB. Disk type must be one of: DISK_TYPE_PERSISTENT_SSD.\nA successful response from this resource will contain the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single disk in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/disks/:disk_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the disk."
+              },
+              {
+                "name": "disk_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the disk."
+              }
+            ]
+          },
+          "docs": "Size of disk will be in gibibytes (GiB)"
+        },
+        {
+          "info": {
+            "name": "Resizes a disk in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/disks/:disk_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the disk."
+              },
+              {
+                "name": "disk_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the disk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Size should be in gibibytes (GiB) or tebibytes (TiB) in the format\n[Size][Unit]. E.g. 10GiB A successful response from this resource will\ncontain the async operation."
+        },
+        {
+          "info": {
+            "name": "Deletes a disk from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/storage/disks/:disk_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the disk."
+              },
+              {
+                "name": "disk_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the disk."
+              }
+            ]
+          },
+          "docs": "A successful response from this resource will contain the async operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,362 @@
+{
+  "item": [
+    {
+      "id": "16c288dd-93e5-4b2a-992c-a9a31299f899",
+      "name": "Kubernetes Versions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61d6ff03-4200-46c7-9403-6b54ca3164de",
+          "name": "Lists all available Kubernetes versions in the project and returns their details.",
+          "request": {
+            "name": "Lists all available Kubernetes versions in the project and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show_deprecated",
+                  "value": "<boolean>",
+                  "description": "Whether to include deprecated versions in the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "Filters results to versions available for this VM product."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project to list versions for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4774f0d-0e8f-4d8e-a19b-ed06a57dd578",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_deprecated",
+                      "value": "true"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "a100.2x"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to list versions for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kubernetes_cluster_versions\": [\n    {\n      \"cluster_version_name\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version_details\": {\n        \"BuildVersion\": \"string\",\n        \"MajorMinorVersion\": \"string\",\n        \"PatchVersion\": \"string\"\n      },\n      \"supported_features\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"cluster_version_name\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version_details\": {\n        \"BuildVersion\": \"string\",\n        \"MajorMinorVersion\": \"string\",\n        \"PatchVersion\": \"string\"\n      },\n      \"supported_features\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"kubernetes_node_pool_versions\": [\n    {\n      \"node_pool_version_name\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version_details\": {\n        \"BuildVersion\": \"string\",\n        \"MajorMinorVersion\": \"string\",\n        \"PatchVersion\": \"string\"\n      },\n      \"supported_features\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"node_pool_version_name\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version_details\": {\n        \"BuildVersion\": \"string\",\n        \"MajorMinorVersion\": \"string\",\n        \"PatchVersion\": \"string\"\n      },\n      \"supported_features\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d40d74a0-fdd3-4666-bbac-8c53246baba4",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_deprecated",
+                      "value": "true"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "a100.2x"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to list versions for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e3c6766-2152-4d32-934c-ad05b4f5225f",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_deprecated",
+                      "value": "true"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "a100.2x"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to list versions for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c65d68a8-7e18-4237-9009-298fa1d27f53",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_deprecated",
+                      "value": "true"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "a100.2x"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to list versions for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b62ca497-dc37-420d-88cf-8aa3089c349c",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_deprecated",
+                      "value": "true"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "a100.2x"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to list versions for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "906d0f6f-cfa4-455f-b81e-42d3a22dc496",
+    "name": "Crusoe Kubernetes Versions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Kubernetes Versions across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

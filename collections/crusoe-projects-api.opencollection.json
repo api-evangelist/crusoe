@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Projects API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all projects the logged-in user belongs to or owns and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/projects",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ee2a6bc3-aed5-4756-8995-9990a53d3a17",
+                "type": "query",
+                "description": "Filters results to projects in this organization."
+              },
+              {
+                "name": "project_name",
+                "value": "default",
+                "type": "query",
+                "description": "Filters results to projects with this name."
+              },
+              {
+                "name": "skip_loading_project_resources",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to skip loading the resource counts for each project."
+              }
+            ]
+          },
+          "docs": "If querying for projects within an organization, the logged-in user must be the owner of the organization."
+        },
+        {
+          "info": {
+            "name": "Creates a project and returns the created project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The logged-in user must have the permission to create projects within the organization.\nA successful response from this resource contains details of the created project."
+        },
+        {
+          "info": {
+            "name": "Updates a project and returns the updated project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/projects",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "f058d0db-2fa4-4cf2-8cf1-dfbcfe05a814",
+                "type": "query",
+                "description": "ID of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requests to this resource must contain the json-encoded representation of the changes they want to make to the project.\nCurrently only the project's name can be changed."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ee2a6bc3-aed5-4756-8995-9990a53d3a17",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Returns details for a single project."
+        },
+        {
+          "info": {
+            "name": "Deletes a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete operations cascade to VMs created under that project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

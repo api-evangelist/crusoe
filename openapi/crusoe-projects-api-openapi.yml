@@ -1,0 +1,426 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Projects API
+  version: '1.0'
+  description: 'Operations tagged Projects across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Projects
+paths:
+  /organizations/projects:
+    get:
+      description: If querying for projects within an organization, the logged-in user must be the owner of the organization.
+      operationId: listProjects
+      parameters:
+      - description: Filters results to projects in this organization.
+        example: ee2a6bc3-aed5-4756-8995-9990a53d3a17
+        in: query
+        name: org_id
+        x-go-name: OrgID
+        schema:
+          type: string
+      - description: Filters results to projects with this name.
+        example: default
+        in: query
+        name: project_name
+        x-go-name: ProjectName
+        schema:
+          type: string
+      - description: Whether to skip loading the resource counts for each project.
+        example: true
+        in: query
+        name: skip_loading_project_resources
+        x-go-name: SkipLoadingProjectResources
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/listProjectsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all projects the logged-in user belongs to or owns and returns their details.
+      tags:
+      - Projects
+    post:
+      description: 'The logged-in user must have the permission to create projects within the organization.
+
+        A successful response from this resource contains details of the created project.'
+      operationId: createProject
+      responses:
+        '200':
+          $ref: '#/components/responses/projectsPutPostResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a project and returns the created project.
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectsPostRequest'
+        required: true
+    put:
+      description: 'Requests to this resource must contain the json-encoded representation of the changes they want to make to the project.
+
+        Currently only the project''s name can be changed.'
+      operationId: updateProject
+      parameters:
+      - description: ID of the project.
+        example: f058d0db-2fa4-4cf2-8cf1-dfbcfe05a814
+        in: query
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/projectsPutPostResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates a project and returns the updated project.
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectsPutRequest'
+        required: true
+  /organizations/projects/{project_id}:
+    delete:
+      description: Delete operations cascade to VMs created under that project.
+      operationId: deleteProject
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a project.
+      tags:
+      - Projects
+    get:
+      operationId: getProject
+      parameters:
+      - description: ID of the project.
+        example: ee2a6bc3-aed5-4756-8995-9990a53d3a17
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getProjectResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single project.
+      tags:
+      - Projects
+components:
+  responses:
+    projectsPutPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectsPutPostResponseV1'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getProjectResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Project'
+    listProjectsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListProjectsResponseV1'
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    Project:
+      properties:
+        id:
+          description: ID of the project.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: ID
+        name:
+          description: Name of the project.
+          example: Admin
+          type: string
+          x-go-name: Name
+        organization_id:
+          description: ID of the organization that owns the project.
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: OrganizationID
+        relation:
+          description: Relation of the logged-in user to the project. Deprecated.
+          example: owner
+          type: string
+          x-go-name: Relation
+        resources:
+          $ref: '#/components/schemas/ProjectResources'
+      required:
+      - id
+      - organization_id
+      - name
+      - relation
+      - resources
+      title: Project contains identifying information for a project.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPostRequest:
+      properties:
+        name:
+          description: Name for the new project.
+          example: Admin
+          type: string
+          x-go-name: Name
+        organization_id:
+          description: ID of the organization that will own the new project.
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: OrganizationID
+      required:
+      - organization_id
+      - name
+      title: ProjectsPostRequest is the request type for POST requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectResources:
+      properties:
+        disks:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        images:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        instances:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        snapshots:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        vpc_networks:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+      required:
+      - instances
+      - disks
+      - snapshots
+      - images
+      - vpc_networks
+      title: ProjectResources contains information about resources within a project.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPutPostResponseV1:
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      required:
+      - project
+      title: ProjectsPutPostResponseV1 is the response type for PUT and POST requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectResourceDetails:
+      properties:
+        count:
+          description: Number of resources of this type in the project.
+          example: 5
+          format: int64
+          type: integer
+          x-go-name: Count
+      required:
+      - count
+      title: ProjectResourceDetails contains a count of resources of a single type within a project.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPutRequest:
+      properties:
+        name:
+          description: New name for the project.
+          example: Admin
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      title: ProjectsPutRequest is the request type for PUT requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListProjectsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListProjectsResponseV1 is the response type for GET requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

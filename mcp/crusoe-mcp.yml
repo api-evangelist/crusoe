@@ -11,14 +11,15 @@ server:
   package_url: https://www.npmjs.com/package/@crusoeai/cloud-mcp
   version_seen: 0.1.6
   command: npx
-  args: ['-y', '@crusoeai/cloud-mcp']
+  args:
+  - -y
+  - '@crusoeai/cloud-mcp'
   hosted: false
   remote_url: null
-  note: >-
-    Local stdio server only — there is no hosted/remote MCP endpoint, so tools/list cannot be probed
+  note: Local stdio server only — there is no hosted/remote MCP endpoint, so tools/list cannot be probed
     over HTTP. The tool list below is transcribed verbatim from Crusoe's own published documentation,
-    which gives names and descriptions but no inputSchema. Live input schemas require running the
-    server locally with credentials.
+    which gives names and descriptions but no inputSchema. Live input schemas require running the server
+    locally with credentials.
   talks_to: https://api.crusoecloud.com
 install:
 - client: claude-code
@@ -31,7 +32,7 @@ install:
   config: '{"mcpServers":{"crusoe-cloud":{"command":"npx","args":["-y","@crusoeai/cloud-mcp"]}}}'
 - client: any
   method: stdio
-  note: 'Type stdio, command npx, args -y @crusoeai/cloud-mcp'
+  note: Type stdio, command npx, args -y @crusoeai/cloud-mcp
 requirements:
   node: '>=18'
   credentials: API key pair in ~/.crusoe/config (the standard Crusoe CLI profile)
@@ -47,8 +48,7 @@ policy:
   write_operations: disabled by design
   rate_limit: 60 requests per minute (client-side)
   truncation: large lists truncated to 50 items by default
-  caveat: >-
-    Crusoe explicitly warns that the read-only guarantee covers only this server's tools — an agent
+  caveat: Crusoe explicitly warns that the read-only guarantee covers only this server's tools — an agent
     with shell access can still mutate infrastructure by invoking the installed `crusoe` CLI.
 tools:
 - name: get_user_identity
@@ -181,3 +181,10 @@ x-evidence:
   url: https://docs.crusoecloud.com/reference/mcp-server
   http_status: 200
   npm_status: 200
+deployment:
+  mode: remote
+  endpoint: https://api.crusoecloud.com
+  verified: probed
+  probe: not-mcp
+  checked: '2026-08-12'
+  source: catalog MCP census

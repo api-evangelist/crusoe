@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Audit Logs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get audit logs belonging to the specified organization. User must be part of the organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/audit-logs",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "de8f27fe-8438-45e7-a2c2-a2767660625f",
+                "type": "path"
+              },
+              {
+                "name": "project_ids",
+                "value": "f934fbdb-7e3a-4b92-b7d2-da0f91d768e8,8c29f3f3-830f-4a44-9b6b-a51fcf6a6b5d",
+                "type": "query"
+              },
+              {
+                "name": "start_time",
+                "value": "2022-09-01T14:25:36-07:00",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "2022-09-06T14:25:36-07:00",
+                "type": "query"
+              },
+              {
+                "name": "actions",
+                "value": "Create,Update",
+                "type": "query"
+              },
+              {
+                "name": "actor_ids",
+                "value": "f934fbdb-7e3a-4b92-b7d2-da0f91d768e8,8c29f3f3-830f-4a44-9b6b-a51fcf6a6b5d",
+                "type": "query"
+              },
+              {
+                "name": "actor_emails",
+                "value": "hh26@xxx.com,xyz@yyy.ai, only support filter by user email, not by crusoe admin email.",
+                "type": "query"
+              },
+              {
+                "name": "actor_types",
+                "value": "User,Crusoe Admin, please ensure URL encoding for values with space.",
+                "type": "query"
+              },
+              {
+                "name": "target_ids",
+                "value": "f934fbdb-7e3a-4b92-b7d2-da0f91d768e8,8c29f3f3-830f-4a44-9b6b-a51fcf6a6b5d",
+                "type": "query"
+              },
+              {
+                "name": "target_types",
+                "value": "VM,KubernetesCluster",
+                "type": "query"
+              },
+              {
+                "name": "target_names",
+                "value": "my_vm1,my_vm2",
+                "type": "query"
+              },
+              {
+                "name": "locations",
+                "value": "us-east1,us-northcentral1-a",
+                "type": "query"
+              },
+              {
+                "name": "results",
+                "value": "OK,Bad Request",
+                "type": "query"
+              },
+              {
+                "name": "results_not",
+                "value": "OK,Bad Request",
+                "type": "query"
+              },
+              {
+                "name": "surfaces",
+                "value": "Browser,Crusoe Terraform/v0.5.21 please make sure the values are URL encoded.",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query"
+              },
+              {
+                "name": "next_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query"
+              },
+              {
+                "name": "prev_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get audit logs belonging to the specified organization. User must be part of the organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

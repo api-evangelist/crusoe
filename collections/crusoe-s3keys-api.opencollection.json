@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe S3 Keys API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "S3Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all S3 access keys in the organization and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/storage/s3/keys",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the organization that owns the S3 access keys."
+              }
+            ]
+          },
+          "docs": "Lists all S3 access keys in the organization and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates an S3 access key in the organization and returns the access key ID and one-time secret key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/storage/s3/keys",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the organization that owns the S3 access key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an S3 access key in the organization and returns the access key ID and one-time secret key."
+        },
+        {
+          "info": {
+            "name": "Deletes an S3 access key from the organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/storage/s3/keys/:access_key_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization that owns the S3 access key."
+              },
+              {
+                "name": "access_key_id",
+                "value": "CKIA493K6LOVDNNAR4SZ",
+                "type": "path",
+                "description": "Access key ID of the S3 access key to delete."
+              }
+            ]
+          },
+          "docs": "Deletes an S3 access key from the organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

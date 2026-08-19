@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe SCIM API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SCIM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SCIM integrations for an organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List SCIM integrations for an organization."
+        },
+        {
+          "info": {
+            "name": "Create a new SCIM integration for an organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new SCIM integration for an organization."
+        },
+        {
+          "info": {
+            "name": "Get a SCIM integration by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations/:integration_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a SCIM integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update a SCIM integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations/:integration_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a SCIM integration."
+        },
+        {
+          "info": {
+            "name": "Delete a SCIM integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations/:integration_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a SCIM integration."
+        },
+        {
+          "info": {
+            "name": "List the tokens for a SCIM integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations/:integration_id/tokens",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the tokens for a SCIM integration."
+        },
+        {
+          "info": {
+            "name": "Create a token for a SCIM integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations/:integration_id/tokens",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a token for a SCIM integration."
+        },
+        {
+          "info": {
+            "name": "Delete a token from a SCIM integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/scim/integrations/:integration_id/tokens/:access_key_id",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "access_key_id",
+                "value": "R7p5XctCQMuGlpVBmVdqzA",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a token from a SCIM integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

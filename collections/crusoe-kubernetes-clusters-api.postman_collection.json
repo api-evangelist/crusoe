@@ -1,0 +1,1940 @@
+{
+  "item": [
+    {
+      "id": "f50982ec-9633-481b-aee1-9684d07c97b4",
+      "name": "Kubernetes Clusters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9004ada0-c9c8-4fe2-9b00-51cd717bbd7b",
+          "name": "Lists all Kubernetes clusters in the project and returns their details.",
+          "request": {
+            "name": "Lists all Kubernetes clusters in the project and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster_id",
+                  "value": "<string>",
+                  "description": "Filters results to the cluster with this ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "cluster_name",
+                  "value": "<string>",
+                  "description": "Filters results to the cluster with this name."
+                },
+                {
+                  "disabled": false,
+                  "key": "cluster_search_names",
+                  "value": "<string>",
+                  "description": "Filters results to clusters whose name matches one of these search names."
+                },
+                {
+                  "disabled": false,
+                  "key": "cluster_search_names",
+                  "value": "<string>",
+                  "description": "Filters results to clusters whose name matches one of these search names."
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<string>",
+                  "description": "Filters results to clusters in these locations."
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<string>",
+                  "description": "Filters results to clusters in these locations."
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "Filters results to clusters in these states."
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "Filters results to clusters in these states."
+                },
+                {
+                  "disabled": false,
+                  "key": "versions",
+                  "value": "<string>",
+                  "description": "Filters results to clusters running these versions."
+                },
+                {
+                  "disabled": false,
+                  "key": "versions",
+                  "value": "<string>",
+                  "description": "Filters results to clusters running these versions."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Field to sort results by; prefix with '-' for descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_inactive",
+                  "value": "<boolean>",
+                  "description": "Whether to include inactive clusters in the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>",
+                  "description": "Base64-encoded token for the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "prev_token",
+                  "value": "<string>",
+                  "description": "Base64-encoded token for the previous page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the clusters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4d5d2ee-75a0-4de1-9473-83ac4659b54c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "cluster_name",
+                      "value": "my-first-cluster"
+                    },
+                    {
+                      "key": "cluster_search_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster_search_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "versions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "versions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name, -name"
+                    },
+                    {
+                      "key": "show_inactive",
+                      "value": "true"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the clusters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"name\": \"my-kubernetes-cluster\",\n      \"location\": \"us-northcentral1-a\",\n      \"version\": \"1.29.5-crusoe.0\",\n      \"configuration\": \"ha\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"project_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n      \"node_pools\": [\n        \"1d2b3a4c-5e6f-7b9d-8c9a-0e1f2d3b4c5d\"\n      ],\n      \"add_ons\": [\n        \"crusoe_csi\"\n      ],\n      \"state\": \"STATE_RUNNING\",\n      \"dns_name\": \"my-kubernetes-cluster.crusoecloudcompute.com\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2021-12-03T19:58:34Z\",\n      \"kubelogin_args\": {\n        \"force-refresh\": \"\",\n        \"oidc-extra-scope\": \"email groups\"\n      },\n      \"apiserver_extra_args\": {\n        \"audit-log-maxage\": \"30\"\n      },\n      \"auth_config\": {\n        \"oidc\": {\n          \"ca_cert\": \"string\",\n          \"client_id\": \"kubernetes\",\n          \"groups_claim\": \"groups\",\n          \"issuer_url\": \"https://oauth2.example.com\",\n          \"username_claim\": \"email\",\n          \"username_prefix\": \"oidc:\"\n        }\n      },\n      \"cluster_cidr\": \"10.233.0.0/18\",\n      \"controller_manager_extra_args\": {\n        \"bind-address\": \"0.0.0.0\"\n      },\n      \"node_cidr_mask_size\": 24,\n      \"private\": true,\n      \"scheduler_extra_args\": {\n        \"bind-address\": \"0.0.0.0\"\n      },\n      \"service_cluster_ip_range\": \"10.233.0.0/18\"\n    },\n    {\n      \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"name\": \"my-kubernetes-cluster\",\n      \"location\": \"us-northcentral1-a\",\n      \"version\": \"1.29.5-crusoe.0\",\n      \"configuration\": \"ha\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"project_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n      \"node_pools\": [\n        \"1d2b3a4c-5e6f-7b9d-8c9a-0e1f2d3b4c5d\"\n      ],\n      \"add_ons\": [\n        \"crusoe_csi\"\n      ],\n      \"state\": \"STATE_RUNNING\",\n      \"dns_name\": \"my-kubernetes-cluster.crusoecloudcompute.com\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2021-12-03T19:58:34Z\",\n      \"kubelogin_args\": {\n        \"force-refresh\": \"\",\n        \"oidc-extra-scope\": \"email groups\"\n      },\n      \"apiserver_extra_args\": {\n        \"audit-log-maxage\": \"30\"\n      },\n      \"auth_config\": {\n        \"oidc\": {\n          \"ca_cert\": \"string\",\n          \"client_id\": \"kubernetes\",\n          \"groups_claim\": \"groups\",\n          \"issuer_url\": \"https://oauth2.example.com\",\n          \"username_claim\": \"email\",\n          \"username_prefix\": \"oidc:\"\n        }\n      },\n      \"cluster_cidr\": \"10.233.0.0/18\",\n      \"controller_manager_extra_args\": {\n        \"bind-address\": \"0.0.0.0\"\n      },\n      \"node_cidr_mask_size\": 24,\n      \"private\": true,\n      \"scheduler_extra_args\": {\n        \"bind-address\": \"0.0.0.0\"\n      },\n      \"service_cluster_ip_range\": \"10.233.0.0/18\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fbd40b6-0914-47a0-ba2f-2ff7db70728d",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "cluster_name",
+                      "value": "my-first-cluster"
+                    },
+                    {
+                      "key": "cluster_search_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster_search_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "versions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "versions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name, -name"
+                    },
+                    {
+                      "key": "show_inactive",
+                      "value": "true"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the clusters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9661b34c-4fbd-4b9c-9ff6-bc75484794de",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "cluster_name",
+                      "value": "my-first-cluster"
+                    },
+                    {
+                      "key": "cluster_search_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster_search_names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "versions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "versions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name, -name"
+                    },
+                    {
+                      "key": "show_inactive",
+                      "value": "true"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the clusters."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5be505f7-3b94-404c-8459-1fad8a6a9510",
+          "name": "Creates a Kubernetes cluster in the project and returns the async operation.",
+          "request": {
+            "name": "Creates a Kubernetes cluster in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project to create the cluster in."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"location\": \"<string>\",\n  \"version\": \"<string>\",\n  \"add_ons\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"apiserver_extra_args\": {\n    \"key_0\": \"<string>\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"groups_claim\": \"<string>\",\n      \"issuer_url\": \"<string>\",\n      \"username_claim\": \"<string>\",\n      \"username_prefix\": \"<string>\"\n    }\n  },\n  \"cluster_cidr\": \"<string>\",\n  \"configuration\": \"<string>\",\n  \"controller_manager_extra_args\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"kubelogin_args\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"node_cidr_mask_size\": \"<integer>\",\n  \"private\": \"<boolean>\",\n  \"scheduler_extra_args\": {\n    \"key_0\": \"<string>\"\n  },\n  \"service_cluster_ip_range\": \"<string>\",\n  \"subnet_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "546718b6-f34e-4d6c-bef0-496e3946980f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the cluster in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"version\": \"1.29.5-crusoe.0\",\n  \"add_ons\": [\n    \"crusoe_csi\",\n    \"nvidia_gpu_operator\",\n    \"nvidia_network_operator\"\n  ],\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"kubernetes\",\n      \"groups_claim\": \"groups\",\n      \"issuer_url\": \"https://oauth2.example.com\",\n      \"username_claim\": \"email\",\n      \"username_prefix\": \"oidc:\"\n    }\n  },\n  \"cluster_cidr\": \"10.233.0.0/18\",\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"node_cidr_mask_size\": 24,\n  \"private\": true,\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"service_cluster_ip_range\": \"10.233.0.0/18\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5e75140-649e-4334-a138-0b6a8b758f1e",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the cluster in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"version\": \"1.29.5-crusoe.0\",\n  \"add_ons\": [\n    \"crusoe_csi\",\n    \"nvidia_gpu_operator\",\n    \"nvidia_network_operator\"\n  ],\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"kubernetes\",\n      \"groups_claim\": \"groups\",\n      \"issuer_url\": \"https://oauth2.example.com\",\n      \"username_claim\": \"email\",\n      \"username_prefix\": \"oidc:\"\n    }\n  },\n  \"cluster_cidr\": \"10.233.0.0/18\",\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"node_cidr_mask_size\": 24,\n  \"private\": true,\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"service_cluster_ip_range\": \"10.233.0.0/18\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3d3b32d-8a78-4dc5-9b35-c626b051a089",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the cluster in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"version\": \"1.29.5-crusoe.0\",\n  \"add_ons\": [\n    \"crusoe_csi\",\n    \"nvidia_gpu_operator\",\n    \"nvidia_network_operator\"\n  ],\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"kubernetes\",\n      \"groups_claim\": \"groups\",\n      \"issuer_url\": \"https://oauth2.example.com\",\n      \"username_claim\": \"email\",\n      \"username_prefix\": \"oidc:\"\n    }\n  },\n  \"cluster_cidr\": \"10.233.0.0/18\",\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"node_cidr_mask_size\": 24,\n  \"private\": true,\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"service_cluster_ip_range\": \"10.233.0.0/18\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ee492f5-e872-426b-b504-2fe7716c6031",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the cluster in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"version\": \"1.29.5-crusoe.0\",\n  \"add_ons\": [\n    \"crusoe_csi\",\n    \"nvidia_gpu_operator\",\n    \"nvidia_network_operator\"\n  ],\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"kubernetes\",\n      \"groups_claim\": \"groups\",\n      \"issuer_url\": \"https://oauth2.example.com\",\n      \"username_claim\": \"email\",\n      \"username_prefix\": \"oidc:\"\n    }\n  },\n  \"cluster_cidr\": \"10.233.0.0/18\",\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"node_cidr_mask_size\": 24,\n  \"private\": true,\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"service_cluster_ip_range\": \"10.233.0.0/18\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03bcd362-d362-4426-981e-524b150dedaf",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the cluster in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"version\": \"1.29.5-crusoe.0\",\n  \"add_ons\": [\n    \"crusoe_csi\",\n    \"nvidia_gpu_operator\",\n    \"nvidia_network_operator\"\n  ],\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"kubernetes\",\n      \"groups_claim\": \"groups\",\n      \"issuer_url\": \"https://oauth2.example.com\",\n      \"username_claim\": \"email\",\n      \"username_prefix\": \"oidc:\"\n    }\n  },\n  \"cluster_cidr\": \"10.233.0.0/18\",\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"node_cidr_mask_size\": 24,\n  \"private\": true,\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"service_cluster_ip_range\": \"10.233.0.0/18\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59f11a5d-78d9-4299-abb4-3db0174a220f",
+          "name": "Deletes a Kubernetes cluster from the project and returns the async operation.",
+          "request": {
+            "name": "Deletes a Kubernetes cluster from the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the cluster."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cluster_id",
+                  "description": "(Required) ID of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aec5e72e-4bb1-42ca-aa15-dea708512607",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ffa2fcf-cd9c-4616-8253-f07dc4a12fc6",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1b987bd-68d7-4306-83ea-c1798b1558c8",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6acd0b4-fe5c-40e0-b1ea-7467923f9d16",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6bb7707-cad9-4d49-8ee1-70bbdfddc6de",
+          "name": "Returns details for a single Kubernetes cluster in the project.",
+          "request": {
+            "name": "Returns details for a single Kubernetes cluster in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the cluster."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cluster_id",
+                  "description": "(Required) ID of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df12fa99-2fd1-4437-804c-5dfb341ace62",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"name\": \"my-kubernetes-cluster\",\n  \"location\": \"us-northcentral1-a\",\n  \"version\": \"1.29.5-crusoe.0\",\n  \"configuration\": \"ha\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"project_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n  \"node_pools\": [\n    \"1d2b3a4c-5e6f-7b9d-8c9a-0e1f2d3b4c5d\"\n  ],\n  \"add_ons\": [\n    \"crusoe_csi\"\n  ],\n  \"state\": \"STATE_RUNNING\",\n  \"dns_name\": \"my-kubernetes-cluster.crusoecloudcompute.com\",\n  \"created_at\": \"2021-12-03T19:58:34Z\",\n  \"updated_at\": \"2021-12-03T19:58:34Z\",\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"auth_config\": {\n    \"oidc\": {\n      \"ca_cert\": \"<string>\",\n      \"client_id\": \"kubernetes\",\n      \"groups_claim\": \"groups\",\n      \"issuer_url\": \"https://oauth2.example.com\",\n      \"username_claim\": \"email\",\n      \"username_prefix\": \"oidc:\"\n    }\n  },\n  \"cluster_cidr\": \"10.233.0.0/18\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"node_cidr_mask_size\": 24,\n  \"private\": true,\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"service_cluster_ip_range\": \"10.233.0.0/18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71949eb3-55be-4025-80d4-e3442226f7f0",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "951b6bb4-841b-4825-84fe-5d0ad3d7566d",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef50eb3c-0245-467c-b6fc-449bfd81d5e2",
+          "name": "Updates a Kubernetes cluster in the project and returns the async operation.",
+          "request": {
+            "name": "Updates a Kubernetes cluster in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "clusters",
+                ":cluster_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the cluster."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cluster_id",
+                  "description": "(Required) ID of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kubelogin_args\": {\n    \"key_0\": \"<string>\"\n  },\n  \"apiserver_extra_args\": {\n    \"key_0\": \"<string>\"\n  },\n  \"configuration\": \"<string>\",\n  \"controller_manager_extra_args\": {\n    \"key_0\": \"<string>\"\n  },\n  \"scheduler_extra_args\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "184a5f6a-0029-43c9-a924-f38287104d62",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba1d0210-51a1-4cab-b999-99c6071f5778",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e098e481-a003-4587-9809-f5eb1dabcd72",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5ebbecb-6e1b-4bf5-8284-9f39dfa6f928",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kubelogin_args\": {\n    \"force-refresh\": \"\",\n    \"oidc-extra-scope\": \"email groups\"\n  },\n  \"apiserver_extra_args\": {\n    \"audit-log-maxage\": \"30\"\n  },\n  \"configuration\": \"ha\",\n  \"controller_manager_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  },\n  \"scheduler_extra_args\": {\n    \"bind-address\": \"0.0.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e786a1d-610b-48aa-bd78-ef35ffa1b27b",
+          "name": "Returns credentials for the user to authenticate to the cluster.",
+          "request": {
+            "name": "Returns credentials for the user to authenticate to the cluster.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "clusters",
+                ":cluster_id",
+                "get-credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "auth_type",
+                  "value": "<string>",
+                  "description": "Type of credentials to return: oidc or admin_cert."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the cluster."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cluster_id",
+                  "description": "(Required) ID of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87bcc6fb-04b1-4dd2-88fc-e417f857c9f0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id",
+                    "get-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster_name\": \"string\",\n  \"cluster_address\": \"string\",\n  \"cluster_ca_certificate\": \"string\",\n  \"user_name\": \"string\",\n  \"user_client_certificate\": \"string\",\n  \"user_client_key\": \"string\",\n  \"kube_config\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "279c6956-2ff6-45a8-b108-71912c00450e",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id",
+                    "get-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "701c41be-af5d-4225-89aa-5ebb8e4d931b",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id",
+                    "get-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "411a3816-56c2-4687-85d2-04da08100d2a",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id",
+                    "get-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b0574dc-7139-4b10-a949-15a529c96271",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "clusters",
+                    ":cluster_id",
+                    "get-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the cluster."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cluster_id",
+                      "description": "(Required) ID of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fc6dfb68-7e13-43f0-8c51-fd0e136b87e6",
+    "name": "Crusoe Kubernetes Clusters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Kubernetes Clusters across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

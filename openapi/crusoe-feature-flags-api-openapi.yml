@@ -1,0 +1,148 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Feature Flags API
+  version: '1.0'
+  description: 'Operations tagged Feature Flags across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Feature Flags
+paths:
+  /featureflags:
+    get:
+      description: 'A successful response from this resource will contain a map of
+
+        all feature flags and the value assigned to each of them for the user.'
+      operationId: getFeatureFlags
+      parameters:
+      - description: 'project_id optionally scopes flag evaluation to the given project. The
+
+          caller must be a member of the project. When set, flags are evaluated with
+
+          the project in the targeting context in addition to the user and org.'
+        in: query
+        name: project_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Feature flags retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerListFeatureFlagsResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      summary: Get feature flags for the currently logged in user.
+      tags:
+      - Feature Flags
+components:
+  schemas:
+    customerListFeatureFlagsResponse:
+      properties:
+        feature_flags:
+          additionalProperties: {}
+          example:
+            curated-images: true
+            infiniband: false
+          title: feature_flags is a map of feature flag names to their values
+          type: object
+      title: ListFeatureFlagsResponse is the list feature flags response
+      type: object
+    protobufAny:
+      additionalProperties: {}
+      properties:
+        '@type':
+          type: string
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+            type: object
+          type: array
+        message:
+          type: string
+      type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

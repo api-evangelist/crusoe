@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Capacities API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Capacities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists available Crusoe Cloud capacity with optional filters on location and product name.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/capacities",
+            "params": [
+              {
+                "name": "product_name",
+                "value": "[a100.1x, a100.2x]",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "[us-northcentral1-a, us-northcentral1-b]",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists available Crusoe Cloud capacity with optional filters on location and product name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

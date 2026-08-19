@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "04899d6e-7485-4d77-a2df-f72dd9bd16df",
+      "name": "Identities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "26efee8a-8b5f-4e23-a3f0-d8cb31dcddc5",
+          "name": "Retrieve user details for the logged in user.",
+          "request": {
+            "name": "Retrieve user details for the logged in user.",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64b57f4a-1927-4095-9f13-7d0b89d904a3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identity\": {\n    \"id\": \"string\",\n    \"email\": \"john.doe@crusoeenergy.com\",\n    \"name\": \"John Doe\",\n    \"role\": \"Admin\",\n    \"accepted_tos\": true,\n    \"company_name\": \"Crusoe\",\n    \"is_recovery\": true,\n    \"managed_by\": \"scim_okta\",\n    \"org_role\": \"org-member, org-admin\",\n    \"registration_type\": \"waitlist\",\n    \"role_bindings\": [\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"role_id\": \"string\",\n        \"scope_type\": \"string\",\n        \"scope_object_id\": \"string\",\n        \"role_name\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"role_id\": \"string\",\n        \"scope_type\": \"string\",\n        \"scope_object_id\": \"string\",\n        \"role_name\": \"string\"\n      }\n    ],\n    \"sso_enforcement\": \"none\",\n    \"user_state\": \"string\"\n  },\n  \"credentials\": [\n    \"string\",\n    \"string\"\n  ],\n  \"credentials_map\": {\n    \"key_0\": {\n      \"type\": \"string\",\n      \"created_at\": \"1961-02-02T17:58:32.186Z\",\n      \"updated_at\": \"1980-09-08T15:34:09.185Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6310072e-cbef-4c77-874c-590f059a020b",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "314ef8f2-149b-4ee6-9fba-f527eec68447",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c9a71dd-f4a0-42bc-879d-d7766c42b5f0",
+          "name": "Update user details for the logged in user.",
+          "request": {
+            "name": "Update user details for the logged in user.",
+            "description": {
+              "content": "A successful response from this resource wil contain the updated user details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da6da750-6f3a-4491-81c9-9e2677a5a496",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"role\": \"Admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identity\": {\n    \"id\": \"string\",\n    \"email\": \"john.doe@crusoeenergy.com\",\n    \"name\": \"John Doe\",\n    \"role\": \"Admin\",\n    \"accepted_tos\": true,\n    \"company_name\": \"Crusoe\",\n    \"is_recovery\": true,\n    \"managed_by\": \"scim_okta\",\n    \"org_role\": \"org-member, org-admin\",\n    \"registration_type\": \"waitlist\",\n    \"role_bindings\": [\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"role_id\": \"string\",\n        \"scope_type\": \"string\",\n        \"scope_object_id\": \"string\",\n        \"role_name\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"role_id\": \"string\",\n        \"scope_type\": \"string\",\n        \"scope_object_id\": \"string\",\n        \"role_name\": \"string\"\n      }\n    ],\n    \"sso_enforcement\": \"none\",\n    \"user_state\": \"string\"\n  },\n  \"credentials\": [\n    \"string\",\n    \"string\"\n  ],\n  \"credentials_map\": {\n    \"key_0\": {\n      \"type\": \"string\",\n      \"created_at\": \"2003-12-07T16:11:59.506Z\",\n      \"updated_at\": \"1983-05-24T10:41:17.072Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bebc36c-35f8-4d84-861c-8fc62c96079b",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"role\": \"Admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae19da0e-d0a2-46a4-a854-5ec9145f547e",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"role\": \"Admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9f21dd8f-d06f-44fa-8599-6550cd030b82",
+    "name": "Crusoe Identities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Identities across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

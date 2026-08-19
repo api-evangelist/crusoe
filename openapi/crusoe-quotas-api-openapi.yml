@@ -1,0 +1,311 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Quotas API
+  version: '1.0'
+  description: 'Operations tagged Quotas across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Quotas
+paths:
+  /organizations/{organization_id}/quotas:
+    get:
+      operationId: listOrgQuotas
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listOrgQuotasResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: List max and currently used organization quotas.
+      tags:
+      - Quotas
+  /projects/{project_id}/quotas:
+    get:
+      operationId: listProjectQuotas
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listProjectQuotasResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: List max and currently used project quotas.
+      tags:
+      - Quotas
+components:
+  responses:
+    listOrgQuotasResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListOrgQuotasResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listProjectQuotasResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListProjectQuotasResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    ListProjectQuotasResponse:
+      properties:
+        quotas:
+          description: Quotas are all returned project quotas
+          items:
+            $ref: '#/components/schemas/ProjectQuota'
+          type: array
+          x-go-name: Quotas
+      title: ListProjectQuotasResponse is the response for listing a project's quotas.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectQuota:
+      properties:
+        available:
+          description: Used is the remaining quota available
+          example: 6
+          format: int64
+          type: integer
+          x-go-name: Available
+        category:
+          description: Category is the quota category
+          example: GPU Instance, Storage
+          type: string
+          x-go-name: Category
+        description:
+          description: Description is the customer-facing description of the quota
+          example: A40 PCIe
+          type: string
+          x-go-name: Description
+        max:
+          description: Max is the maximum quota allowed for the resource in the project
+          example: 10
+          format: int64
+          type: integer
+          x-go-name: Max
+        programmatic_name:
+          description: ProgrammaticName is the external name of the resource the quota applies to
+          example: a40
+          type: string
+          x-go-name: ProgrammaticName
+        type:
+          description: Type is the enum quota type. This is meant to be used internally
+          example: PROJECT_QUOTA_TYPE_MAXIMUM_VM_SLICES_VCPU_6_MEM_60_A40_PCIE_48GB_1
+          type: string
+          x-go-name: Type
+        used:
+          description: Used is the current quota consumed by the project
+          example: 4
+          format: int64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListOrgQuotasResponse:
+      properties:
+        quotas:
+          description: Quotas are all returned org quotas
+          items:
+            $ref: '#/components/schemas/OrgQuota'
+          type: array
+          x-go-name: Quotas
+      title: ListOrgQuotasResponse is the response for listing a org's quotas.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    OrgQuota:
+      properties:
+        available:
+          description: Available is the remaining quota available to the org
+          example: 6
+          format: int64
+          type: integer
+          x-go-name: Available
+        description:
+          description: Description is the customer-facing description of the quota
+          example: Users
+          type: string
+          x-go-name: Description
+        max:
+          description: Max is the maximum quota allowed for the resource in the org
+          example: 10
+          format: int64
+          type: integer
+          x-go-name: Max
+        programmatic_name:
+          description: ProgrammaticName is the external, human-friendly identifier for the quota
+          example: users
+          type: string
+          x-go-name: ProgrammaticName
+        type:
+          description: Type is the enum quota type. This is meant to be used internally
+          example: ORG_QUOTAS_MAXIMUM_USERS
+          type: string
+          x-go-name: Type
+        used:
+          description: Used is the current quota consumed by the org
+          example: 4
+          format: int64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Kubernetes Node Pools API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Kubernetes Node Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all Kubernetes node pools in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pools."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query",
+                "description": "Filters results to node pools in this cluster."
+              },
+              {
+                "name": "sort",
+                "value": "created_at, -created_at",
+                "type": "query",
+                "description": "Field to sort results by; prefix with '-' for descending order."
+              }
+            ]
+          },
+          "docs": "Results can be narrowed to a single cluster with the cluster_id query parameter."
+        },
+        {
+          "info": {
+            "name": "Creates a Kubernetes node pool in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project to create the node pool in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Kubernetes node pool in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single Kubernetes node pool in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              }
+            ]
+          },
+          "docs": "Returns details for a single Kubernetes node pool in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a Kubernetes node pool in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a Kubernetes node pool in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Deletes a Kubernetes node pool from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              }
+            ]
+          },
+          "docs": "Deletes a Kubernetes node pool from the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Cancels an in-progress rotation of a Kubernetes node pool in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id/cancel-rotate",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              }
+            ]
+          },
+          "docs": "Cancels an in-progress rotation of a Kubernetes node pool in the project."
+        },
+        {
+          "info": {
+            "name": "Returns the rotation status of a Kubernetes node pool in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id/rotate",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              }
+            ]
+          },
+          "docs": "Returns the rotation status of a Kubernetes node pool in the project."
+        },
+        {
+          "info": {
+            "name": "Starts a rotation of a Kubernetes node pool in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id/rotate",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response returns an async operation you can poll."
+        },
+        {
+          "info": {
+            "name": "Lists all VMs in a Kubernetes node pool and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/nodepools/:node_pool_id/vms",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the node pool."
+              },
+              {
+                "name": "node_pool_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the node pool."
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of results to return per page."
+              },
+              {
+                "name": "sort",
+                "value": "name",
+                "type": "query",
+                "description": "Field to sort results by; prefix with '-' for descending order."
+              },
+              {
+                "name": "next_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Base64-encoded token for the next page of results."
+              },
+              {
+                "name": "prev_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Base64-encoded token for the previous page of results."
+              }
+            ]
+          },
+          "docs": "Lists all VMs in a Kubernetes node pool and returns their details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

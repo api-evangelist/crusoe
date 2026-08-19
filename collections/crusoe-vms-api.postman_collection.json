@@ -1,0 +1,2992 @@
+{
+  "item": [
+    {
+      "id": "e6ee9b30-d066-4ec8-8b65-8441f58d1211",
+      "name": "VMs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9295e3eb-fbf1-40b2-a95d-8787346432c6",
+          "name": "Creates multiple VMs in the project and returns the async operation.",
+          "request": {
+            "name": "Creates multiple VMs in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "bulk-instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name_prefix\": \"<string>\",\n  \"count\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"instance_group_id\": \"<string>\",\n  \"instance_template\": {\n    \"template_name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"ssh_public_key\": \"<string>\",\n    \"custom_image_name\": \"<string>\",\n    \"disks\": [\n      {\n        \"size\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"size\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"ib_partition_id\": \"<string>\",\n    \"image_name\": \"<string>\",\n    \"location\": \"<string>\",\n    \"maintenance_policy\": \"<string>\",\n    \"nvlink_domain_id\": \"<string>\",\n    \"placement_policy\": \"<string>\",\n    \"public_ip_address_type\": \"<string>\",\n    \"reservation_id\": \"<string>\",\n    \"shutdown_script\": \"<string>\",\n    \"startup_script\": \"<string>\",\n    \"subnet_id\": \"<string>\",\n    \"transport_partition_id\": \"<string>\",\n    \"virtualization_features\": {\n      \"nested_virtualization\": \"<boolean>\"\n    }\n  },\n  \"instance_template_id\": \"<string>\",\n  \"locations\": [\n    {\n      \"location\": \"<string>\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"location\": \"<string>\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"<string>\",\n    \"selection_strategy\": \"lowest_cost\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b87cf6b4-5619-4f91-b0a5-a5318a59fb7f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "bulk-instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name_prefix\": \"my-vm\",\n  \"count\": 6,\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"instance_group_id\": \"cda562c4-6162-4565-95f3-ce06a8220c07\",\n  \"instance_template\": {\n    \"template_name\": \"my-instance-template\",\n    \"type\": \"a100.2x\",\n    \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n    \"custom_image_name\": \"ubuntu:20.04\",\n    \"disks\": [\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      },\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      }\n    ],\n    \"ib_partition_id\": \"<string>\",\n    \"image_name\": \"ubuntu:20.04\",\n    \"location\": \"us-northcentral1-a\",\n    \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n    \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"placement_policy\": \"spread\",\n    \"public_ip_address_type\": \"static\",\n    \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"shutdown_script\": \"\\\"#!/bin/bash\\\\necho 'goodbye'\\\"\",\n    \"startup_script\": \"\\\"#!/bin/bash\\\\necho 'hello'\\\"\",\n    \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"virtualization_features\": {\n      \"nested_virtualization\": true\n    }\n  },\n  \"instance_template_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"locations\": [\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    },\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e817d704-bce4-425e-935b-24409149f5e1",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "bulk-instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name_prefix\": \"my-vm\",\n  \"count\": 6,\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"instance_group_id\": \"cda562c4-6162-4565-95f3-ce06a8220c07\",\n  \"instance_template\": {\n    \"template_name\": \"my-instance-template\",\n    \"type\": \"a100.2x\",\n    \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n    \"custom_image_name\": \"ubuntu:20.04\",\n    \"disks\": [\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      },\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      }\n    ],\n    \"ib_partition_id\": \"<string>\",\n    \"image_name\": \"ubuntu:20.04\",\n    \"location\": \"us-northcentral1-a\",\n    \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n    \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"placement_policy\": \"spread\",\n    \"public_ip_address_type\": \"static\",\n    \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"shutdown_script\": \"\\\"#!/bin/bash\\\\necho 'goodbye'\\\"\",\n    \"startup_script\": \"\\\"#!/bin/bash\\\\necho 'hello'\\\"\",\n    \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"virtualization_features\": {\n      \"nested_virtualization\": true\n    }\n  },\n  \"instance_template_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"locations\": [\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    },\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e07aa3b9-5ece-4ee9-af86-0aac7b27eac8",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "bulk-instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name_prefix\": \"my-vm\",\n  \"count\": 6,\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"instance_group_id\": \"cda562c4-6162-4565-95f3-ce06a8220c07\",\n  \"instance_template\": {\n    \"template_name\": \"my-instance-template\",\n    \"type\": \"a100.2x\",\n    \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n    \"custom_image_name\": \"ubuntu:20.04\",\n    \"disks\": [\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      },\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      }\n    ],\n    \"ib_partition_id\": \"<string>\",\n    \"image_name\": \"ubuntu:20.04\",\n    \"location\": \"us-northcentral1-a\",\n    \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n    \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"placement_policy\": \"spread\",\n    \"public_ip_address_type\": \"static\",\n    \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"shutdown_script\": \"\\\"#!/bin/bash\\\\necho 'goodbye'\\\"\",\n    \"startup_script\": \"\\\"#!/bin/bash\\\\necho 'hello'\\\"\",\n    \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"virtualization_features\": {\n      \"nested_virtualization\": true\n    }\n  },\n  \"instance_template_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"locations\": [\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    },\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53f29e53-2863-4e85-a440-c64d3ac809ae",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "bulk-instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name_prefix\": \"my-vm\",\n  \"count\": 6,\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"instance_group_id\": \"cda562c4-6162-4565-95f3-ce06a8220c07\",\n  \"instance_template\": {\n    \"template_name\": \"my-instance-template\",\n    \"type\": \"a100.2x\",\n    \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n    \"custom_image_name\": \"ubuntu:20.04\",\n    \"disks\": [\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      },\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      }\n    ],\n    \"ib_partition_id\": \"<string>\",\n    \"image_name\": \"ubuntu:20.04\",\n    \"location\": \"us-northcentral1-a\",\n    \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n    \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"placement_policy\": \"spread\",\n    \"public_ip_address_type\": \"static\",\n    \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"shutdown_script\": \"\\\"#!/bin/bash\\\\necho 'goodbye'\\\"\",\n    \"startup_script\": \"\\\"#!/bin/bash\\\\necho 'hello'\\\"\",\n    \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"virtualization_features\": {\n      \"nested_virtualization\": true\n    }\n  },\n  \"instance_template_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"locations\": [\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    },\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f3ae202-450f-423d-9d95-10c85a78d1c1",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "bulk-instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name_prefix\": \"my-vm\",\n  \"count\": 6,\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"instance_group_id\": \"cda562c4-6162-4565-95f3-ce06a8220c07\",\n  \"instance_template\": {\n    \"template_name\": \"my-instance-template\",\n    \"type\": \"a100.2x\",\n    \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n    \"custom_image_name\": \"ubuntu:20.04\",\n    \"disks\": [\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      },\n      {\n        \"size\": \"10GiB\",\n        \"type\": \"persistent-ssd\"\n      }\n    ],\n    \"ib_partition_id\": \"<string>\",\n    \"image_name\": \"ubuntu:20.04\",\n    \"location\": \"us-northcentral1-a\",\n    \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n    \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"placement_policy\": \"spread\",\n    \"public_ip_address_type\": \"static\",\n    \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"shutdown_script\": \"\\\"#!/bin/bash\\\\necho 'goodbye'\\\"\",\n    \"startup_script\": \"\\\"#!/bin/bash\\\\necho 'hello'\\\"\",\n    \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"virtualization_features\": {\n      \"nested_virtualization\": true\n    }\n  },\n  \"instance_template_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"locations\": [\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    },\n    {\n      \"location\": \"us-northcentral1-a\",\n      \"ib_partition_id\": \"<string>\",\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"transport_partition_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe1903e7-8d02-4e54-986d-166d4f43dfd9",
+          "name": "Lists all VMs in the project and returns their details.",
+          "request": {
+            "name": "Lists all VMs in the project and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Filters results to VMs with these IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>",
+                  "description": "Filters results to VMs with these names."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filters results to VMs of these types."
+                },
+                {
+                  "disabled": false,
+                  "key": "locations",
+                  "value": "<string>",
+                  "description": "Filters results to VMs in these locations."
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "Filters results to VMs in these states."
+                },
+                {
+                  "disabled": false,
+                  "key": "nvlink_domain_ids",
+                  "value": "<string>",
+                  "description": "Filters results to VMs in these NVLink domains."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Maximum number of VMs to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Field to sort the results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>",
+                  "description": "Token identifying the next page of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "prev_token",
+                  "value": "<string>",
+                  "description": "Token identifying the previous page of results to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44ecc48f-cebd-4487-aa23-8d644fcaeb4e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "names",
+                      "value": "my-first-vm"
+                    },
+                    {
+                      "key": "types",
+                      "value": "a40.2x,a100.8x"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "us-east1,us-northcentral1"
+                    },
+                    {
+                      "key": "states",
+                      "value": "STATE_RUNNING"
+                    },
+                    {
+                      "key": "nvlink_domain_ids",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"project_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"type\": \"a100.2x\",\n      \"state\": \"RUNNING\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2023-08-14T09:00:35Z\",\n      \"name\": \"my-first-vm\",\n      \"location\": \"us-centralnorth1-a\",\n      \"disks\": [\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        },\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        }\n      ],\n      \"network_interfaces\": [\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        },\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        }\n      ],\n      \"host_channel_adapters\": [\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        },\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        }\n      ],\n      \"maintenance_policy\": \"stop-vm\",\n      \"billing_type\": \"string\",\n      \"commitment_end\": \"string\",\n      \"commitment_period\": 4185,\n      \"instance_group_id\": \"707749bd-ecad-4de8-aa00-1ae2fdb99e19\",\n      \"instance_template_id\": \"75c6712a-8da8-463c-a72d-fc65cf922959\",\n      \"nvlink_domain_id\": \"string\",\n      \"pod_id\": \"29d20dc4-90ad-4365-ab05-83f5f5e52d94\",\n      \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n      \"virtualization_features\": {\n        \"nested_virtualization\": true\n      }\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"project_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"type\": \"a100.2x\",\n      \"state\": \"RUNNING\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2023-08-14T09:00:35Z\",\n      \"name\": \"my-first-vm\",\n      \"location\": \"us-centralnorth1-a\",\n      \"disks\": [\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        },\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        }\n      ],\n      \"network_interfaces\": [\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        },\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        }\n      ],\n      \"host_channel_adapters\": [\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        },\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        }\n      ],\n      \"maintenance_policy\": \"unspecified\",\n      \"billing_type\": \"string\",\n      \"commitment_end\": \"string\",\n      \"commitment_period\": 4268,\n      \"instance_group_id\": \"707749bd-ecad-4de8-aa00-1ae2fdb99e19\",\n      \"instance_template_id\": \"75c6712a-8da8-463c-a72d-fc65cf922959\",\n      \"nvlink_domain_id\": \"string\",\n      \"pod_id\": \"29d20dc4-90ad-4365-ab05-83f5f5e52d94\",\n      \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n      \"virtualization_features\": {\n        \"nested_virtualization\": true\n      }\n    }\n  ],\n  \"next_page_token\": \"bXktbGFzdC12bQ\",\n  \"prev_page_token\": \"bXktZmlyc3Qtdm0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "387958a8-fd0c-4a8d-a86d-f3a7af262be2",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "names",
+                      "value": "my-first-vm"
+                    },
+                    {
+                      "key": "types",
+                      "value": "a40.2x,a100.8x"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "us-east1,us-northcentral1"
+                    },
+                    {
+                      "key": "states",
+                      "value": "STATE_RUNNING"
+                    },
+                    {
+                      "key": "nvlink_domain_ids",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cc9e152-1d7a-4825-bcf0-d6ab42e31218",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "names",
+                      "value": "my-first-vm"
+                    },
+                    {
+                      "key": "types",
+                      "value": "a40.2x,a100.8x"
+                    },
+                    {
+                      "key": "locations",
+                      "value": "us-east1,us-northcentral1"
+                    },
+                    {
+                      "key": "states",
+                      "value": "STATE_RUNNING"
+                    },
+                    {
+                      "key": "nvlink_domain_ids",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8024964d-5a36-4d49-a7ea-734864df8bdf",
+          "name": "Creates a VM in the project and returns the async operation.",
+          "request": {
+            "name": "Creates a VM in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"ssh_public_key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\",\n  \"commitment_period\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"custom_image\": \"<string>\",\n  \"disks\": [\n    {\n      \"disk_id\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"attachment_type\": \"<string>\"\n    },\n    {\n      \"disk_id\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"attachment_type\": \"<string>\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"image\": \"<string>\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"maintenance_policy\": \"<string>\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"network\": \"<string>\",\n      \"subnet\": \"<string>\",\n      \"interface_type\": \"<string>\",\n      \"mac_address\": \"<string>\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"network\": \"<string>\",\n      \"subnet\": \"<string>\",\n      \"interface_type\": \"<string>\",\n      \"mac_address\": \"<string>\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"<string>\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"shutdown_script\": \"<string>\",\n  \"startup_script\": \"<string>\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "77552f67-80f0-4c41-8dae-4571258da60c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"a100.2x\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n  \"name\": \"my-first-vm\",\n  \"location\": \"us-northcentral1-a\",\n  \"commitment_period\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"custom_image\": \"<string>\",\n  \"disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"image\": \"ubuntu:20.04\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"shutdown_script\": \"#!/bin/bash\\\\necho 'goodbye'\",\n  \"startup_script\": \"#!/bin/bash\\\\necho 'hello'\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df71efa-2813-4d1d-a51b-95f196723af4",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"a100.2x\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n  \"name\": \"my-first-vm\",\n  \"location\": \"us-northcentral1-a\",\n  \"commitment_period\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"custom_image\": \"<string>\",\n  \"disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"image\": \"ubuntu:20.04\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"shutdown_script\": \"#!/bin/bash\\\\necho 'goodbye'\",\n  \"startup_script\": \"#!/bin/bash\\\\necho 'hello'\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a6e0c9f-a7e3-459e-bf4d-40ae60957011",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"a100.2x\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n  \"name\": \"my-first-vm\",\n  \"location\": \"us-northcentral1-a\",\n  \"commitment_period\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"custom_image\": \"<string>\",\n  \"disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"image\": \"ubuntu:20.04\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"shutdown_script\": \"#!/bin/bash\\\\necho 'goodbye'\",\n  \"startup_script\": \"#!/bin/bash\\\\necho 'hello'\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfc4c401-5cd9-48b2-8ea7-3cbabf8369c4",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"a100.2x\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n  \"name\": \"my-first-vm\",\n  \"location\": \"us-northcentral1-a\",\n  \"commitment_period\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"custom_image\": \"<string>\",\n  \"disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"image\": \"ubuntu:20.04\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"shutdown_script\": \"#!/bin/bash\\\\necho 'goodbye'\",\n  \"startup_script\": \"#!/bin/bash\\\\necho 'hello'\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f768332-54a3-482e-9cd1-1b7e7e011fbb",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"a100.2x\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\",\n  \"name\": \"my-first-vm\",\n  \"location\": \"us-northcentral1-a\",\n  \"commitment_period\": \"<long>\",\n  \"crusoe_watch_agent_install_mode\": \"<string>\",\n  \"custom_image\": \"<string>\",\n  \"disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"image\": \"ubuntu:20.04\",\n  \"install_crusoe_watch_agent\": \"<boolean,null>\",\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"shutdown_script\": \"#!/bin/bash\\\\necho 'goodbye'\",\n  \"startup_script\": \"#!/bin/bash\\\\necho 'hello'\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62c6aa2d-e3d7-4e68-9fc8-0f35b7731982",
+          "name": "Deletes a VM from the project and returns the async operation.",
+          "request": {
+            "name": "Deletes a VM from the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances",
+                ":vm_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VM."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vm_id",
+                  "description": "(Required) ID of the VM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9222e078-583b-4469-af30-d5c1625d8b6f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c287a34b-d784-4afc-8331-8f07f0b66986",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46a70c8d-6c64-4c96-b7c9-27722a2e4491",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef3601c0-62af-4e3c-80c7-fd60cd558816",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "210278eb-e925-4654-82f6-4ccfc74f12a6",
+          "name": "Returns details for a single VM in the project.",
+          "request": {
+            "name": "Returns details for a single VM in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances",
+                ":vm_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VM."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vm_id",
+                  "description": "(Required) ID of the VM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ace6355b-e611-4857-ac77-26c03e3fe528",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n  \"project_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"type\": \"a100.2x\",\n  \"state\": \"RUNNING\",\n  \"created_at\": \"2021-12-03T19:58:34Z\",\n  \"updated_at\": \"2023-08-14T09:00:35Z\",\n  \"name\": \"my-first-vm\",\n  \"location\": \"us-centralnorth1-a\",\n  \"disks\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"my-disk\",\n      \"type\": \"persistent-ssd\",\n      \"size\": \"10GiB\",\n      \"location\": \"us-northcentral1-a\",\n      \"block_size\": 4096,\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2021-12-03T19:58:34Z\",\n      \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n      \"attachment_type\": \"os | data\",\n      \"mode\": \"read-write | read-only\"\n    },\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"my-disk\",\n      \"type\": \"persistent-ssd\",\n      \"size\": \"10GiB\",\n      \"location\": \"us-northcentral1-a\",\n      \"block_size\": 4096,\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2021-12-03T19:58:34Z\",\n      \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n      \"attachment_type\": \"os | data\",\n      \"mode\": \"read-write | read-only\"\n    }\n  ],\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"host_channel_adapters\": [\n    {\n      \"type\": \"infiniband\",\n      \"guid\": \"946d:ae03:0021:69aa\",\n      \"ib_network_id\": \"string\",\n      \"ib_partition_id\": \"string\",\n      \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n    },\n    {\n      \"type\": \"infiniband\",\n      \"guid\": \"946d:ae03:0021:69aa\",\n      \"ib_network_id\": \"string\",\n      \"ib_partition_id\": \"string\",\n      \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n    }\n  ],\n  \"maintenance_policy\": \"manual\",\n  \"billing_type\": \"string\",\n  \"commitment_end\": \"string\",\n  \"commitment_period\": 6615,\n  \"instance_group_id\": \"707749bd-ecad-4de8-aa00-1ae2fdb99e19\",\n  \"instance_template_id\": \"75c6712a-8da8-463c-a72d-fc65cf922959\",\n  \"nvlink_domain_id\": \"string\",\n  \"pod_id\": \"29d20dc4-90ad-4365-ab05-83f5f5e52d94\",\n  \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n  \"virtualization_features\": {\n    \"nested_virtualization\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ac0fae9-f810-4546-b46c-b62208ec546c",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65177834-6651-4cca-922f-c84e76cc058e",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "496d9087-66bf-4463-afb4-f48f49bd5d00",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aea85788-ed19-4845-9250-afc403d41b99",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb8890c1-87f3-4c5b-ac7c-e5542d2db436",
+          "name": "Updates a VM in the project and returns the async operation.",
+          "request": {
+            "name": "Updates a VM in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances",
+                ":vm_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VM."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vm_id",
+                  "description": "(Required) ID of the VM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"commitment_period\": \"<long>\",\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"maintenance_policy\": \"<string>\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"network\": \"<string>\",\n      \"subnet\": \"<string>\",\n      \"interface_type\": \"<string>\",\n      \"mac_address\": \"<string>\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"network\": \"<string>\",\n      \"subnet\": \"<string>\",\n      \"interface_type\": \"<string>\",\n      \"mac_address\": \"<string>\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"<string>\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"<string>\",\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "566542bd-1ad0-4aa3-8f44-8540b5b9a9f5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"START\",\n  \"commitment_period\": \"<long>\",\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n  \"type\": \"a100.2x\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3286661d-ed11-491c-a383-9ff977a539ae",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"START\",\n  \"commitment_period\": \"<long>\",\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n  \"type\": \"a100.2x\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44c82a7f-c7e8-48b5-a378-19c0f7a05ade",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"START\",\n  \"commitment_period\": \"<long>\",\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n  \"type\": \"a100.2x\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d702151-7b7f-4eb2-91fd-0827156314d7",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"START\",\n  \"commitment_period\": \"<long>\",\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n  \"type\": \"a100.2x\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71c7052b-a9dc-4ecb-b67d-937b47b23e49",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"START\",\n  \"commitment_period\": \"<long>\",\n  \"host_channel_adapters\": [\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    },\n    {\n      \"ib_partition_id\": \"<string>\",\n      \"transport_partition_id\": \"<string>\"\n    }\n  ],\n  \"maintenance_policy\": \"manual,stop-vm,unspecified\",\n  \"network_interfaces\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"name\": \"network-interface-1\",\n      \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"interface_type\": \"ethernet\",\n      \"mac_address\": \"00:00:5e:00:53:af\",\n      \"ips\": [\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        },\n        {\n          \"private_ipv4\": {\n            \"address\": \"10.1.2.3\"\n          },\n          \"public_ipv4\": {\n            \"address\": \"121.0.0.0\",\n            \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n            \"type\": \"dynamic\"\n          }\n        }\n      ],\n      \"external_dns_name\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n  \"type\": \"a100.2x\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72e795a1-317a-4352-8adf-532b4a8157ea",
+          "name": "Attaches disks to a VM in the project and returns the async operation.",
+          "request": {
+            "name": "Attaches disks to a VM in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances",
+                ":vm_id",
+                "attach-disks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VM."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vm_id",
+                  "description": "(Required) ID of the VM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attach_disks\": [\n    {\n      \"disk_id\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"attachment_type\": \"<string>\"\n    },\n    {\n      \"disk_id\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"attachment_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44444b3d-30d4-4d0a-bee4-87e57b748209",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "attach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attach_disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af71d2b6-b1c8-4600-aa26-bdc2c48a96e8",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "attach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attach_disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01a246fe-edef-4904-9563-f96987b276ce",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "attach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attach_disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25d6c974-38de-4be5-8d43-d4ca6f222cac",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "attach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attach_disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01ff5734-c6b6-4f1c-bc8b-c93ffb4ab885",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "attach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attach_disks\": [\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    },\n    {\n      \"disk_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"mode\": \"read-write\",\n      \"attachment_type\": \"data\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a7f1f6c-33a0-4e74-baff-8f348bbb8542",
+          "name": "Detaches disks from a VM in the project and returns the async operation.",
+          "request": {
+            "name": "Detaches disks from a VM in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "instances",
+                ":vm_id",
+                "detach-disks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VM."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vm_id",
+                  "description": "(Required) ID of the VM."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detach_disks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "90bb189a-f58a-4b11-acf3-bc92a0261da3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "detach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detach_disks\": [\n    \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"123e4567-e89b-12d3-a456-426614174000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cd1a5cb-e1a3-4c15-9374-4c1957c2b552",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "detach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detach_disks\": [\n    \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"123e4567-e89b-12d3-a456-426614174000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "854b539b-e0ee-4447-9cbc-065ba2d43dfa",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "detach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detach_disks\": [\n    \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"123e4567-e89b-12d3-a456-426614174000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e56d5c8-c4d4-437d-981a-895a3956c212",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "detach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detach_disks\": [\n    \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"123e4567-e89b-12d3-a456-426614174000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3ce5fa7-e1cf-487e-8e65-751be7b5ad65",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "instances",
+                    ":vm_id",
+                    "detach-disks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VM."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vm_id",
+                      "description": "(Required) ID of the VM."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detach_disks\": [\n    \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n    \"123e4567-e89b-12d3-a456-426614174000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc9d3a49-dc42-4578-92c4-07466c367336",
+          "name": "Lists all available VM types and returns their details.",
+          "request": {
+            "name": "Lists all available VM types and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "compute",
+                "vms",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f976e87c-5165-4362-b77e-694c0996876c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"product_name\": \"a100.2x\",\n      \"description\": \"2x Nvidia A100\",\n      \"cpu_cores\": 4,\n      \"cpu_type\": \"intel\",\n      \"memory_gb\": 16,\n      \"memory_type\": \"RAM\",\n      \"disk_gb\": 8,\n      \"disk_type\": \"SSD\",\n      \"num_gpu\": 2,\n      \"gpu_type\": \"A100\"\n    },\n    {\n      \"product_name\": \"a100.2x\",\n      \"description\": \"2x Nvidia A100\",\n      \"cpu_cores\": 4,\n      \"cpu_type\": \"intel\",\n      \"memory_gb\": 16,\n      \"memory_type\": \"RAM\",\n      \"disk_gb\": 8,\n      \"disk_type\": \"SSD\",\n      \"num_gpu\": 2,\n      \"gpu_type\": \"A100\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9752a3d8-15d7-4a9a-a404-97af85bfad7a",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "508c0908-773f-47ea-95fa-0a8b06ce5002",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "compute",
+                    "vms",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bed7a13b-736f-408b-baef-b205182d54a2",
+    "name": "Crusoe V Ms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged VMs across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

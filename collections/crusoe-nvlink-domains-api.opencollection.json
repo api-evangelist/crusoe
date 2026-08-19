@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe NVLink Domains API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NVLink Domains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve details about all NVLink domains available for the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/nvlink-domains",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ]
+          },
+          "docs": "Retrieve details about all NVLink domains available for the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

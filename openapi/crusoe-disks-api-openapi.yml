@@ -1,0 +1,580 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Disks API
+  version: '1.0'
+  description: 'Operations tagged Disks across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Disks
+paths:
+  /projects/{project_id}/storage/disks:
+    get:
+      description: Size of disks will be in gibibytes (GiB)
+      operationId: listDisks
+      parameters:
+      - description: ID of the project that owns the disks.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Filters results to disks with these IDs.
+        in: query
+        name: disk_ids
+        x-go-name: DiskIds
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Filters results to disks in this location.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      - description: Filters results to disks with these names.
+        in: query
+        name: disk_names
+        x-go-name: DiskNames
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Excludes OS disks from the results when true.
+        in: query
+        name: exclude_os
+        x-go-name: ExcludeOs
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/listDisksResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all disks in the project and returns their details.
+      tags:
+      - Disks
+    post:
+      description: 'Requires either a disk snapshot ID, or size and location, where size of disk
+
+        should be in gibibytes (GiB) or tebibytes (TiB) in the format [Size][Unit].
+
+        E.g. 10GiB. Disk type must be one of: DISK_TYPE_PERSISTENT_SSD.
+
+        A successful response from this resource will contain the async operation.'
+      operationId: createDisk
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a disk in the project and returns the async operation.
+      tags:
+      - Disks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisksPostRequestV1'
+        required: true
+  /projects/{project_id}/storage/disks/{disk_id}:
+    delete:
+      description: A successful response from this resource will contain the async operation.
+      operationId: deleteDisk
+      parameters:
+      - description: ID of the project that owns the disk.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the disk.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: disk_id
+        required: true
+        x-go-name: DiskID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a disk from the project and returns the async operation.
+      tags:
+      - Disks
+    get:
+      description: Size of disk will be in gibibytes (GiB)
+      operationId: getDisk
+      parameters:
+      - description: ID of the project that owns the disk.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the disk.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: disk_id
+        required: true
+        x-go-name: DiskID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getDiskResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single disk in the project.
+      tags:
+      - Disks
+    patch:
+      description: 'Size should be in gibibytes (GiB) or tebibytes (TiB) in the format
+
+        [Size][Unit]. E.g. 10GiB A successful response from this resource will
+
+        contain the async operation.'
+      operationId: resizeDisk
+      parameters:
+      - description: ID of the project that owns the disk.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the disk.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: disk_id
+        required: true
+        x-go-name: DiskID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Resizes a disk in the project and returns the async operation.
+      tags:
+      - Disks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisksPatchRequest'
+        required: true
+components:
+  schemas:
+    VMAttachmentV1:
+      properties:
+        attachment_type:
+          $ref: '#/components/schemas/VMAttachmentType'
+        mode:
+          $ref: '#/components/schemas/DiskModeType'
+        vm_id:
+          description: ID of the VM the disk is attached to.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: VMID
+      required:
+      - vm_id
+      - attachment_type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DisksPostRequestV1:
+      properties:
+        block_size:
+          description: 'Block size for the new disk, in bytes: 512 or 4096.'
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        location:
+          description: Location to create the disk in.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name for the new disk.
+          example: my-disk
+          type: string
+          x-go-name: Name
+        size:
+          description: Storage capacity for the new disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        snapshot_id:
+          description: ID of a disk snapshot to create the disk from.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: DiskSnapshotID
+        type:
+          default: persistent-ssd
+          description: 'Type of disk to create: persistent-ssd or shared-volume. Defaults to persistent-ssd.'
+          enum:
+          - persistent-ssd
+          - shared-volume
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+      required:
+      - name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListDisksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DiskV1'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    DisksPatchRequest:
+      properties:
+        size:
+          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+      required:
+      - size
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VMAttachmentType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskModeType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskV1:
+      properties:
+        attached_to:
+          description: VMs the disk is currently attached to.
+          items:
+            $ref: '#/components/schemas/VMAttachmentV1'
+          type: array
+          x-go-name: AttachedTo
+        block_size:
+          description: 'Block size of the disk, in bytes: 512 or 4096.'
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        created_at:
+          description: Creation timestamp of the disk, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        dns_name:
+          description: DNS name used to mount the disk. Populated only for shared-volume disks.
+          example: nfs.crusoecloudcompute.com
+          type: string
+          x-go-name: DNSName
+        id:
+          description: ID of the disk.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: ID
+        location:
+          description: Location where the disk is provisioned.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name of the disk.
+          example: my-disk
+          type: string
+          x-go-name: Name
+        serial_number:
+          description: Serial number assigned to the disk.
+          example: 96FD14FDBCF7E21E8EC
+          type: string
+          x-go-name: SerialNumber
+        size:
+          description: Storage capacity of the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        type:
+          description: 'Type of the disk: persistent-ssd or shared-volume.'
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+        updated_at:
+          description: Last update timestamp of the disk, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: UpdatedAt
+        vips:
+          description: Virtual IP addresses used to mount the disk. Populated only for shared-volume disks.
+          example:
+          - 1.2.3.4
+          - 1.2.3.8
+          items:
+            type: string
+          type: array
+          x-go-name: VIPAddrs
+      required:
+      - id
+      - name
+      - type
+      - size
+      - location
+      - block_size
+      - created_at
+      - updated_at
+      - serial_number
+      - attached_to
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    listDisksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListDisksResponseV1'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getDiskResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskV1'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

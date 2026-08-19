@@ -1,0 +1,235 @@
+openapi: 3.2.0
+info:
+  title: Crusoe MFA API
+  version: '1.0'
+  description: 'Operations tagged MFA across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: MFA
+paths:
+  /organizations/{organization_id}/mfa:
+    get:
+      operationId: getMFA
+      parameters:
+      - description: organization_id is the ID of the organization
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          type: string
+          pattern: '[^/]+'
+      responses:
+        '200':
+          description: MFA methods retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerGetOrganizationMFAResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      summary: Get enabled MFA methods for the specified organization.
+      tags:
+      - MFA
+    patch:
+      operationId: updateMFA
+      parameters:
+      - description: organization_id is the ID of the organization
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          type: string
+          pattern: '[^/]+'
+      responses:
+        '200':
+          description: MFA methods updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerUpdateOrganizationMFAResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      summary: Update required MFA methods for the specified organization.
+      tags:
+      - MFA
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationsMFAServiceUpdateOrganizationMFABody'
+        required: true
+components:
+  schemas:
+    protobufAny:
+      additionalProperties: {}
+      properties:
+        '@type':
+          type: string
+      type: object
+    customerOrganizationMFA:
+      description: OrganizationMFA describes a single MFA method required by an organization.
+      properties:
+        created_at:
+          format: date-time
+          readOnly: true
+          title: created_at is when this MFA method was required by the organization
+          type: string
+        method:
+          example: totp
+          readOnly: true
+          title: 'method is the required MFA method (one of: totp, webauthn)'
+          type: string
+      type: object
+    OrganizationsMFAServiceUpdateOrganizationMFABody:
+      description: UpdateOrganizationMFARequest is the request for setting an organization's required MFA methods.
+      properties:
+        intended_methods:
+          example:
+          - totp
+          - webauthn
+          items:
+            type: string
+          title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
+          type: array
+      type: object
+    customerUpdateOrganizationMFAResponse:
+      description: 'UpdateOrganizationMFAResponse is the response for setting an organization''s required MFA methods.
+
+
+        Successful update calls return an empty body'
+      type: object
+    customerGetOrganizationMFAResponse:
+      description: GetOrganizationMFAResponse is the response containing an organization's required MFA methods.
+      properties:
+        mfa_methods:
+          items:
+            $ref: '#/components/schemas/customerOrganizationMFA'
+            type: object
+          title: mfa_methods is the set of MFA methods currently required by the organization
+          type: array
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+            type: object
+          type: array
+        message:
+          type: string
+      type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

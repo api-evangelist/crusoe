@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Quotas API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List max and currently used organization quotas.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/quotas",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List max and currently used organization quotas."
+        },
+        {
+          "info": {
+            "name": "List max and currently used project quotas.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/quotas",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List max and currently used project quotas."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

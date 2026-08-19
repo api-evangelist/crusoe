@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Kubernetes Support Access API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Kubernetes Support Access",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns support access settings for a Kubernetes cluster in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters/:cluster_id/support/settings",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the cluster."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the cluster."
+              }
+            ]
+          },
+          "docs": "Returns support access settings for a Kubernetes cluster in the project."
+        },
+        {
+          "info": {
+            "name": "Updates support access settings for a Kubernetes cluster in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters/:cluster_id/support/settings",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the cluster."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the cluster."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates support access settings for a Kubernetes cluster in the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

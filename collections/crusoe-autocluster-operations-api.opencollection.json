@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe AutoCluster Operations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AutoCluster Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve information about AutoCluster operations for a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/autocluster-operations",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "cluster_id",
+                "value": "e384a1de-81f8-4cb2-b312-a7d88a9bf9cb",
+                "type": "query"
+              },
+              {
+                "name": "operation_id",
+                "value": "5f9c5d6a-2d15-4a2c-8a2a-9b0f4e1d3b21",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "IN_PROGRESS",
+                "type": "query"
+              },
+              {
+                "name": "operation_type",
+                "value": "RESET_VM",
+                "type": "query"
+              },
+              {
+                "name": "remediation_state",
+                "value": "PREPARED",
+                "type": "query"
+              },
+              {
+                "name": "lower_bound",
+                "value": "2025-10-01T00:00:00Z",
+                "type": "query"
+              },
+              {
+                "name": "upper_bound",
+                "value": "2025-10-31T23:59:59Z",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve information about AutoCluster operations for a project."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about a specific AutoCluster operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/autocluster-operations/:operation_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "operation_id",
+                "value": "e384a1de-81f8-4cb2-b312-a7d88a9bf9cb",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve information about a specific AutoCluster operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

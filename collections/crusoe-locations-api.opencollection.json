@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Locations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all Crusoe Cloud locations usable for resource hosting.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/locations"
+          },
+          "docs": "Lists all Crusoe Cloud locations usable for resource hosting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

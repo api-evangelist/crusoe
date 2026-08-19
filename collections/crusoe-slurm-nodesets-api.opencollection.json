@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Slurm Nodesets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Slurm Nodesets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve information about slurm nodesets belonging to a project or cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "my-slurm-node-pool",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve information about slurm nodesets belonging to a project or cluster."
+        },
+        {
+          "info": {
+            "name": "Create a new slurm nodeset owned by the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource will contain the async operation."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about a particular slurm nodeset belonging to the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets/:nodeset_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "nodeset_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve information about a particular slurm nodeset belonging to the project."
+        },
+        {
+          "info": {
+            "name": "Update a nodeset that the logged in user owns.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets/:nodeset_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "nodeset_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a nodeset that the logged in user owns."
+        },
+        {
+          "info": {
+            "name": "Delete a nodeset that the logged in user owns.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets/:nodeset_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "nodeset_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a nodeset that the logged in user owns."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

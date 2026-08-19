@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Limited Usage API Key API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LimitedUsageAPIKey",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all active/expired Limited Usage API Keys for the logged in user and their usage types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/users/limited-usage-api-key"
+          },
+          "docs": "Retrieve all active/expired Limited Usage API Keys for the logged in user and their usage types."
+        },
+        {
+          "info": {
+            "name": "Create a new limited usage api key owned by the logged in user, of type specified by usage parameter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/users/limited-usage-api-key",
+            "params": [
+              {
+                "name": "usage",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource will contain json-encoded details of the limited usage API key.\nThis is the only time the customer will be able to view the api key associated with the API key id."
+        },
+        {
+          "info": {
+            "name": "Delete a Limited Usage API Key owned by the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/users/limited-usage-api-key",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "WTUzcGibQ82y9_01h4MCdQ",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete a Limited Usage API Key owned by the logged in user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Instance Groups API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instance Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all instance groups in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-groups",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all instance groups in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates an instance group in the project and returns the created instance group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-groups",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an instance group in the project and returns the created instance group."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single instance group in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-groups/:instance_group_id",
+            "params": [
+              {
+                "name": "instance_group_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the instance group."
+              },
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details for a single instance group in the project."
+        },
+        {
+          "info": {
+            "name": "Updates an instance group in the project and returns the updated instance group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-groups/:instance_group_id",
+            "params": [
+              {
+                "name": "instance_group_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the instance group."
+              },
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an instance group in the project and returns the updated instance group."
+        },
+        {
+          "info": {
+            "name": "Deletes an instance group from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-groups/:instance_group_id",
+            "params": [
+              {
+                "name": "instance_group_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the instance group."
+              },
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an instance group from the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

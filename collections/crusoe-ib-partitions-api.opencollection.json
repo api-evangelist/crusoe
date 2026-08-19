@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe IB Partitions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IB Partitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all InfiniBand partitions in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/ib-partitions",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all InfiniBand partitions in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates an InfiniBand partition in the project and returns the created InfiniBand partition.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/ib-partitions",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an InfiniBand partition in the project and returns the created InfiniBand partition."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single InfiniBand partition in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/ib-partitions/:ib_partition_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the InfiniBand partition."
+              },
+              {
+                "name": "ib_partition_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the InfiniBand partition."
+              }
+            ]
+          },
+          "docs": "Returns details for a single InfiniBand partition in the project."
+        },
+        {
+          "info": {
+            "name": "Deletes an InfiniBand partition from the project and returns an empty response.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/ib-partitions/:ib_partition_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the InfiniBand partition."
+              },
+              {
+                "name": "ib_partition_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the InfiniBand partition."
+              }
+            ]
+          },
+          "docs": "Deletes an InfiniBand partition from the project and returns an empty response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

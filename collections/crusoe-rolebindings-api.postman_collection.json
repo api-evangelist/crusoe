@@ -1,0 +1,673 @@
+{
+  "item": [
+    {
+      "id": "46f9cd8a-76f9-4207-8a6f-aab53a1af106",
+      "name": "RoleBindings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6cd1680b-77a4-42ad-b987-dccd82778b25",
+          "name": "Lists role bindings visible to the caller.",
+          "request": {
+            "name": "Lists role bindings visible to the caller.",
+            "description": {},
+            "url": {
+              "path": [
+                "iam",
+                "role-bindings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "role_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope_object_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32a0c8cb-7dd0-4f08-b847-40055d02e18d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_object_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"role_bindings\": [\n    {\n      \"id\": \"string\",\n      \"customer_id\": \"string\",\n      \"role_id\": \"string\",\n      \"scope_type\": \"string\",\n      \"scope_object_id\": \"string\",\n      \"role_name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"customer_id\": \"string\",\n      \"role_id\": \"string\",\n      \"scope_type\": \"string\",\n      \"scope_object_id\": \"string\",\n      \"role_name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0240c07-1b92-4f1e-adac-a7252db9dd14",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_object_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e192693b-c782-436d-8119-852389733ad0",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_object_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f6af310-3321-46db-a2e2-07d34a0efaea",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_object_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76b1ac82-1ef5-40f1-bc37-58aaa59a08eb",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope_object_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2e4c8b0-d6b4-48b4-8a35-8c15079617b6",
+          "name": "Creates and deletes role bindings for a user in a single atomic operation.",
+          "request": {
+            "name": "Creates and deletes role bindings for a user in a single atomic operation.",
+            "description": {
+              "content": "If any creation or deletion fails, no changes are applied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "iam",
+                "users",
+                ":user_id",
+                "role-bindings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bindings_to_create\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    }\n  ],\n  \"bindings_to_delete\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f85011b7-38a1-416c-b885-7407868b06ee",
+              "name": "Empty Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "users",
+                    ":user_id",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bindings_to_create\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    }\n  ],\n  \"bindings_to_delete\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10e0c121-9d92-4cd9-af74-49769fd466fd",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "users",
+                    ":user_id",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bindings_to_create\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    }\n  ],\n  \"bindings_to_delete\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d9f98bf-682b-4866-8c33-1318f237a787",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "users",
+                    ":user_id",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bindings_to_create\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    }\n  ],\n  \"bindings_to_delete\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abc8ce4d-8cf2-4dd8-8290-8318c19691ea",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "users",
+                    ":user_id",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bindings_to_create\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    }\n  ],\n  \"bindings_to_delete\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dab1523d-01f7-48fd-b210-349fe6724e6e",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iam",
+                    "users",
+                    ":user_id",
+                    "role-bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bindings_to_create\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"scope_type\": \"<string>\",\n      \"scope_object_id\": \"<string>\"\n    }\n  ],\n  \"bindings_to_delete\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2e4fb758-342f-41cf-ac88-2608b5a11898",
+    "name": "Crusoe Role Bindings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged RoleBindings across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

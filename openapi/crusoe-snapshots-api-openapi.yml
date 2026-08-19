@@ -1,0 +1,478 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Snapshots API
+  version: '1.0'
+  description: 'Operations tagged Snapshots across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Snapshots
+paths:
+  /projects/{project_id}/storage/snapshots:
+    get:
+      description: Size of snapshots will be in bytes.
+      operationId: listDiskSnapshots
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listDiskSnapshotsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all disk snapshots in the project and returns their details.
+      tags:
+      - Snapshots
+    post:
+      description: A successful response from this resource will contain the async operation.
+      operationId: createDiskSnapshot
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a disk snapshot in the project and returns the async operation.
+      tags:
+      - Snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiskSnapshotPostRequestV1'
+        required: true
+  /projects/{project_id}/storage/snapshots/{snapshot_id}:
+    delete:
+      description: A successful response from this resource will contain the async operation.
+      operationId: deleteDiskSnapshot
+      parameters:
+      - description: ID of the project that owns the disk snapshot.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the disk snapshot.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: snapshot_id
+        required: true
+        x-go-name: SnapshotID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a disk snapshot from the project and returns the async operation.
+      tags:
+      - Snapshots
+    get:
+      description: Size of snapshot will be in bytes.
+      operationId: getDiskSnapshot
+      parameters:
+      - description: ID of the project that owns the disk snapshot.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the disk snapshot.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: snapshot_id
+        required: true
+        x-go-name: SnapshotID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getSnapshotResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single disk snapshot in the project.
+      tags:
+      - Snapshots
+    patch:
+      description: A successful response from this resource will contain the updated snapshot.
+      operationId: renameDiskSnapshot
+      parameters:
+      - description: ID of the project that owns the disk snapshot.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the disk snapshot.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: snapshot_id
+        required: true
+        x-go-name: SnapshotID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/syncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Renames a disk snapshot in the project and returns the updated snapshot.
+      tags:
+      - Snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiskSnapshotPatchRequest'
+        required: true
+components:
+  responses:
+    syncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SyncOperationResponse'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listDiskSnapshotsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListDiskSnapshotsResponseV1'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getSnapshotResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskSnapshot'
+  schemas:
+    DiskSnapshotPatchRequest:
+      properties:
+        name:
+          description: New name for the disk snapshot.
+          example: my-snapshot
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: SyncOperationResponse is the response type for endpoints which return completed synchronous operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    DiskSnapshot:
+      properties:
+        block_size:
+          description: 'Block size of the disk snapshot, in bytes: 512 or 4096.'
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        created_at:
+          description: Creation timestamp of the disk snapshot, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        created_from:
+          description: ID of the disk the snapshot was created from.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: CreatedFrom
+        id:
+          description: ID of the disk snapshot.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: ID
+        name:
+          description: Name of the disk snapshot.
+          example: my-snapshot
+          type: string
+          x-go-name: Name
+        size:
+          description: Size of the disk snapshot, in bytes.
+          example: 10457 bytes
+          type: string
+          x-go-name: Size
+        updated_at:
+          description: Last update timestamp of the disk snapshot, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: UpdatedAt
+      required:
+      - id
+      - created_at
+      - updated_at
+      - created_from
+      - size
+      - block_size
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    DiskSnapshotPostRequestV1:
+      properties:
+        disk_id:
+          description: ID of the disk to snapshot.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: DiskID
+        name:
+          description: Name for the new disk snapshot.
+          example: my-snapshot-1
+          type: string
+          x-go-name: Name
+      required:
+      - disk_id
+      - name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListDiskSnapshotsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DiskSnapshot'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

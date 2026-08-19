@@ -1,0 +1,310 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Role Bindings API
+  version: '1.0'
+  description: 'Operations tagged RoleBindings across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: RoleBindings
+paths:
+  /iam/role-bindings:
+    get:
+      operationId: listRoleBindings
+      parameters:
+      - in: query
+        name: user_id
+        x-go-name: UserID
+        schema:
+          type: string
+      - in: query
+        name: role_id
+        x-go-name: RoleID
+        schema:
+          type: string
+      - in: query
+        name: scope_type
+        x-go-name: ScopeType
+        schema:
+          type: string
+          enum:
+          - org
+          - project
+      - in: query
+        name: scope_object_id
+        x-go-name: ScopeObjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listRoleBindingsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists role bindings visible to the caller.
+      tags:
+      - RoleBindings
+  /iam/users/{user_id}/role-bindings:
+    post:
+      description: If any creation or deletion fails, no changes are applied.
+      operationId: applyRoleBindings
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: user_id
+        required: true
+        x-go-name: UserID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates and deletes role bindings for a user in a single atomic operation.
+      tags:
+      - RoleBindings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyRoleBindingRequest'
+        required: true
+components:
+  responses:
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listRoleBindingsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListRoleBindingsResponse'
+  schemas:
+    RoleBindingInput:
+      properties:
+        customer_id:
+          type: string
+          x-go-name: CustomerID
+        role_id:
+          type: string
+          x-go-name: RoleID
+        scope_object_id:
+          type: string
+          x-go-name: ScopeObjectID
+        scope_type:
+          enum:
+          - org
+          - project
+          type: string
+          x-go-name: ScopeType
+      required:
+      - customer_id
+      - role_id
+      - scope_type
+      - scope_object_id
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RoleBinding:
+      properties:
+        customer_id:
+          type: string
+          x-go-name: CustomerID
+        id:
+          type: string
+          x-go-name: ID
+        role_id:
+          type: string
+          x-go-name: RoleID
+        role_name:
+          type: string
+          x-go-name: RoleName
+        scope_object_id:
+          type: string
+          x-go-name: ScopeObjectID
+        scope_type:
+          type: string
+          x-go-name: ScopeType
+      required:
+      - id
+      - customer_id
+      - role_id
+      - scope_type
+      - scope_object_id
+      - role_name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListRoleBindingsResponse:
+      properties:
+        role_bindings:
+          items:
+            $ref: '#/components/schemas/RoleBinding'
+          type: array
+          x-go-name: RoleBindings
+      required:
+      - role_bindings
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ApplyRoleBindingRequest:
+      properties:
+        bindings_to_create:
+          items:
+            $ref: '#/components/schemas/RoleBindingInput'
+          type: array
+          x-go-name: BindingsToCreate
+        bindings_to_delete:
+          items:
+            type: string
+          type: array
+          x-go-name: BindingsToDelete
+      required:
+      - bindings_to_create
+      - bindings_to_delete
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Slurm Nodeset Operations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Slurm Nodeset Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get status of asynchronous operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets/operations",
+            "params": [
+              {
+                "name": "resource_id",
+                "value": "452580d7-41d1-4b63-b4d7-4e4e21e95f96",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "IN_PROGRESS",
+                "type": "query"
+              },
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This resource retrieves information about the status of asynchronous operations for\nslurm nodesets. Query parameters can be used to filter results by slurm nodeset ID or operation state."
+        },
+        {
+          "info": {
+            "name": "Get status of a single asynchronous operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/:slurm_cluster_id/nodesets/operations/:operation_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "operation_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This resource retrieves information about the status of an asynchronous operation\nfor a slurm nodeset. Only information about the operation specified in the\npath will be returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

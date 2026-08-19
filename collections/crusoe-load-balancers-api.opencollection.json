@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Load Balancers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Load Balancers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all external load balancers in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/load-balancers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the external load balancers."
+              },
+              {
+                "name": "location",
+                "value": "us-east1",
+                "type": "query",
+                "description": "Filters results to external load balancers in this location."
+              },
+              {
+                "name": "vpc_network_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query",
+                "description": "Filters results to external load balancers in this VPC network."
+              },
+              {
+                "name": "name",
+                "value": "my-loadbalancer-test",
+                "type": "query",
+                "description": "Filters results to external load balancers with this name."
+              }
+            ]
+          },
+          "docs": "Lists all external load balancers in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates an external load balancer in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/load-balancers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "The project ID to which the external load balancer belongs."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates a new external load balancer in the specified project. The request must include the VPC ID, name, location, and at least one listen port with its associated backends."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single external load balancer in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/load-balancers/:load_balancer_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the external load balancer."
+              },
+              {
+                "name": "load_balancer_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the external load balancer."
+              }
+            ]
+          },
+          "docs": "Returns details for a single external load balancer in the project."
+        },
+        {
+          "info": {
+            "name": "Updates an external load balancer in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/load-balancers/:load_balancer_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "The project ID to which the external load balancer belongs."
+              },
+              {
+                "name": "load_balancer_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "The ID of the external load balancer to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint updates the configuration of an existing external load balancer. The request must include the load balancer ID and optionally the health check options and/or listen ports and associated backends."
+        },
+        {
+          "info": {
+            "name": "Deletes an external load balancer from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/load-balancers/:load_balancer_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "The project ID to which the external load balancer belongs."
+              },
+              {
+                "name": "load_balancer_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "The ID of the external load balancer to delete."
+              }
+            ]
+          },
+          "docs": "This endpoint deletes an external load balancer identified by its ID within the specified project. No request body or query parameters are required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

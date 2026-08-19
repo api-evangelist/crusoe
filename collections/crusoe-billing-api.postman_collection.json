@@ -1,0 +1,1071 @@
+{
+  "item": [
+    {
+      "id": "2f38493f-13a7-4c24-a69c-39229a97da35",
+      "name": "Billing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "49d5c88d-1dd0-4f36-89f9-5725d8e1b807",
+          "name": "Get the daily spend for a specified organization by project.",
+          "request": {
+            "name": "Get the daily spend for a specified organization by project.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "billing",
+                "costs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc408f85-628c-490d-a2cc-0285b363d215",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"resource_type\": \"\\\"a40.1x\\\"\",\n      \"project_id\": \"\\\"d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb\\\"\",\n      \"region\": \"\\\"us-northcentral1\\\"\",\n      \"date\": \"\\\"2022-07-01\\\"\",\n      \"quantity\": 2.123,\n      \"billable_metric\": \"\\\"gpu-hours\\\"\",\n      \"cost\": 12.34,\n      \"unit_price\": 1.23\n    },\n    {\n      \"resource_type\": \"\\\"a40.1x\\\"\",\n      \"project_id\": \"\\\"d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb\\\"\",\n      \"region\": \"\\\"us-northcentral1\\\"\",\n      \"date\": \"\\\"2022-07-01\\\"\",\n      \"quantity\": 2.123,\n      \"billable_metric\": \"\\\"gpu-hours\\\"\",\n      \"cost\": 12.34,\n      \"unit_price\": 1.23\n    }\n  ],\n  \"last_updated\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b33cfc1-7161-4c40-96f6-fdb71bc152ca",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0efc5937-0f9c-4f3d-a0a8-639e6f01a407",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7342e9a-6e52-40e3-af9f-a02157f76699",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd4a3fda-d965-43e0-9ac5-fa680d896a07",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbe15931-b497-495f-8e1f-e2c7fd38692e",
+          "name": "Return a CSV containing the costs for resources in a given period.",
+          "request": {
+            "name": "Return a CSV containing the costs for resources in a given period.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "billing",
+                "export-productline"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projects",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_lines",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_lines",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec483494-db52-4849-907b-5729c9e28789",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "export-productline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects",
+                      "value": "d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "persistent-ssd"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "a40"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "\"2022-07-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2023-08-08\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "cost",
+                  "value": "45.67"
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "metric",
+                  "value": "\"instance-hours\""
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "product_line",
+                  "value": "\"a40\", \"persistent-ssd\""
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "project_id",
+                  "value": "\"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\""
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "project_name",
+                  "value": "\"Apollo Project\""
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "quantity",
+                  "value": "1156.8708333905454"
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "region",
+                  "value": "\"us-east1\""
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "resource_name",
+                  "value": "\"My Cool Virtual Machine\""
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "unit_price",
+                  "value": "0.15"
+                },
+                {
+                  "disabled": false,
+                  "description": "required: true",
+                  "key": "usage_date",
+                  "value": "\"2025-02-14\""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45a245cf-af36-4535-b30f-0fdf9873f345",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "export-productline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects",
+                      "value": "d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "persistent-ssd"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "a40"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "\"2022-07-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2023-08-08\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26f50fd9-eb64-4d1b-b2ab-27d82f40b44e",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "export-productline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects",
+                      "value": "d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "persistent-ssd"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "a40"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "\"2022-07-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2023-08-08\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1ede62f-a1cb-40c2-84d3-62b3ae8533b2",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "export-productline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects",
+                      "value": "d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "persistent-ssd"
+                    },
+                    {
+                      "key": "product_lines",
+                      "value": "a40"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "\"2022-07-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2023-08-08\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8b83fdf-8a8d-4127-8187-581420bf265a",
+          "name": "Retrieve data about an organizations recent Non-Reservation costs.",
+          "request": {
+            "name": "Retrieve data about an organizations recent Non-Reservation costs.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "billing",
+                "options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "325bc94b-cddb-4a18-8a63-2d8762f549c2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "\"2025-05-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2025-05-20\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    \"d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb\"\n  ],\n  \"resource_types\": [\n    \"persistent-ssd\",\n    \"a40.1x\"\n  ],\n  \"product_lines\": [\n    \"a40\",\n    \"h200\"\n  ],\n  \"regions\": [\n    \"us-east1\",\n    \"us-northcentral1\"\n  ],\n  \"start_date\": \"\\\"2022-07-01\\\"\",\n  \"end_date\": \"\\\"2023-08-08\\\"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b04a7bdf-230f-44f0-9191-fc5808d225f8",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "\"2025-05-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2025-05-20\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21e93882-c210-4e2e-94a3-09eb65442edb",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "\"2025-05-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2025-05-20\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f896f5e-60bf-492b-b9cf-16f3ea3f7d1b",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "\"2025-05-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2025-05-20\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f1961ec-7f34-46f5-bd22-4f04c6ba0800",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "billing",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "\"2025-05-01\""
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "\"2025-05-20\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f499f99b-ceaf-423b-ab0d-6880b0ce7584",
+    "name": "Crusoe Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Billing across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

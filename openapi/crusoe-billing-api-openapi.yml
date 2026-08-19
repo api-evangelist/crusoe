@@ -1,0 +1,456 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Billing API
+  version: '1.0'
+  description: 'Operations tagged Billing across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Billing
+paths:
+  /organizations/{organization_id}/billing/costs:
+    get:
+      operationId: getBillingCosts
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/billingCostsGetResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get the daily spend for a specified organization by project.
+      tags:
+      - Billing
+  /organizations/{organization_id}/billing/export-productline:
+    get:
+      operationId: getBillingExportProductline
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example:
+        - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+        in: query
+        name: projects
+        x-go-name: Projects
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - persistent-ssd
+        - a40
+        in: query
+        name: product_lines
+        x-go-name: ProductLines
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - us-east1
+        - us-northcentral1
+        in: query
+        name: regions
+        x-go-name: Regions
+        schema:
+          type: array
+          items:
+            type: string
+      - example: '"2022-07-01"'
+        in: query
+        name: start_date
+        required: true
+        x-go-name: StartDate
+        schema:
+          type: string
+      - example: '"2023-08-08"'
+        in: query
+        name: end_date
+        required: true
+        x-go-name: EndDate
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getBillingExportProductlineResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Return a CSV containing the costs for resources in a given period.
+      tags:
+      - Billing
+  /organizations/{organization_id}/billing/options:
+    get:
+      operationId: getBillingOptions
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example: '"2025-05-01"'
+        in: query
+        name: start_date
+        x-go-name: StartDate
+        schema:
+          type: string
+      - example: '"2025-05-20"'
+        in: query
+        name: end_date
+        x-go-name: EndDate
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/billingOptionsGetResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve data about an organizations recent Non-Reservation costs.
+      tags:
+      - Billing
+components:
+  responses:
+    billingOptionsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UsageOptions'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getBillingExportProductlineResponse:
+      description: ''
+      headers:
+        cost:
+          description: 'required: true'
+          example: '45.67'
+          schema:
+            type: string
+        metric:
+          description: 'required: true'
+          example: '"instance-hours"'
+          schema:
+            type: string
+        product_line:
+          description: 'required: true'
+          example: '"a40", "persistent-ssd"'
+          schema:
+            type: string
+        project_id:
+          description: 'required: true'
+          example: '"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"'
+          schema:
+            type: string
+        project_name:
+          description: 'required: true'
+          example: '"Apollo Project"'
+          schema:
+            type: string
+        quantity:
+          description: 'required: true'
+          example: '261.271111'
+          schema:
+            type: number
+            format: double
+        region:
+          description: 'required: true'
+          example: '"us-east1"'
+          schema:
+            type: string
+        resource_name:
+          description: 'required: true'
+          example: '"My Cool Virtual Machine"'
+          schema:
+            type: string
+        unit_price:
+          description: 'required: true'
+          example: '0.15'
+          schema:
+            type: string
+        usage_date:
+          description: 'required: true'
+          example: '"2025-02-14"'
+          schema:
+            type: string
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    billingCostsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BillingCostData'
+  schemas:
+    UsageOptions:
+      description: 'UsageOptions contains the values which exist for the fields which we allow filtering
+
+        on for the usageByProjectGet endpoint.'
+      properties:
+        end_date:
+          example: '"2023-08-08"'
+          type: string
+          x-go-name: EndDate
+        product_lines:
+          example:
+          - a40
+          - h200
+          items:
+            type: string
+          type: array
+          x-go-name: ProductLines
+        projects:
+          example:
+          - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          items:
+            type: string
+          type: array
+          x-go-name: Projects
+        regions:
+          example:
+          - us-east1
+          - us-northcentral1
+          items:
+            type: string
+          type: array
+          x-go-name: Regions
+        resource_types:
+          example:
+          - persistent-ssd
+          - a40.1x
+          items:
+            type: string
+          type: array
+          x-go-name: ResourceTypes
+        start_date:
+          example: '"2022-07-01"'
+          type: string
+          x-go-name: StartDate
+      required:
+      - projects
+      - resource_types
+      - product_lines
+      - regions
+      - start_date
+      - end_date
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    BillingCostData:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BillingCostDatum'
+          type: array
+          x-go-name: Data
+        last_updated:
+          type: string
+          x-go-name: LastUpdated
+      required:
+      - data
+      title: UsageByProjectGetResponse is the response type for GET requests to the usage.usageByProject endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    BillingCostDatum:
+      properties:
+        billable_metric:
+          example: '"gpu-hours"'
+          type: string
+          x-go-name: BillableMetric
+        cost:
+          example: 12.34
+          format: double
+          type: number
+          x-go-name: Cost
+        date:
+          example: '"2022-07-01"'
+          type: string
+          x-go-name: Date
+        project_id:
+          example: '"d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"'
+          type: string
+          x-go-name: ProjectID
+        quantity:
+          example: 2.123
+          format: double
+          type: number
+          x-go-name: Quantity
+        region:
+          example: '"us-northcentral1"'
+          type: string
+          x-go-name: Region
+        resource_type:
+          example: '"a40.1x"'
+          type: string
+          x-go-name: ResourceType
+        unit_price:
+          example: 1.23
+          format: double
+          type: number
+          x-go-name: UnitPrice
+      required:
+      - resource_type
+      - project_id
+      - region
+      - date
+      - quantity
+      - billable_metric
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

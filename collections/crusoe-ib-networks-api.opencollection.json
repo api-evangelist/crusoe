@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe IB Networks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IB Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all InfiniBand networks and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/ib-networks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all InfiniBand networks and returns their details."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single InfiniBand network.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/ib-networks/:ib_network_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "ib_network_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the InfiniBand network."
+              }
+            ]
+          },
+          "docs": "Returns details for a single InfiniBand network."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

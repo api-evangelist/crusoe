@@ -1,0 +1,333 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Limited Usage API Key API
+  version: '1.0'
+  description: 'Operations tagged LimitedUsageAPIKey across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: LimitedUsageAPIKey
+paths:
+  /users/limited-usage-api-key:
+    delete:
+      operationId: deleteLimitedUsageAPIKey
+      parameters:
+      - example: WTUzcGibQ82y9_01h4MCdQ
+        in: query
+        name: key_id
+        required: true
+        x-go-name: KeyID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Delete a Limited Usage API Key owned by the logged in user.
+      tags:
+      - LimitedUsageAPIKey
+    get:
+      operationId: getLimitedUsageAPIKeys
+      responses:
+        '200':
+          $ref: '#/components/responses/limitedUsageAPIKeyGetResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve all active/expired Limited Usage API Keys for the logged in user and their usage types.
+      tags:
+      - LimitedUsageAPIKey
+    post:
+      description: 'A successful response from this resource will contain json-encoded details of the limited usage API key.
+
+        This is the only time the customer will be able to view the api key associated with the API key id.'
+      operationId: createLimitedUsageAPIKey
+      parameters:
+      - in: query
+        name: usage
+        required: true
+        x-go-name: Usage
+        schema:
+          type: string
+          enum:
+          - inference
+          - observability
+      responses:
+        '200':
+          $ref: '#/components/responses/limitedUsageAPIKeyPostResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Create a new limited usage api key owned by the logged in user, of type specified by usage parameter.
+      tags:
+      - LimitedUsageAPIKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLimitedUsageAPIKeyRequest'
+        required: true
+components:
+  responses:
+    limitedUsageAPIKeyGetResponse:
+      description: A successful response from this resource will contain json-encoded array of token details, excluding the api key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListLimitedUsageAPIKeysResponseV1'
+    limitedUsageAPIKeyPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyPostResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    CreateLimitedUsageAPIKeyRequest:
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        project_id:
+          description: Optional project ID the token is scoped to
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+      required:
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LimitedUsageAPIKeyPostResponse:
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+      required:
+      - api_key_info
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListLimitedUsageAPIKeysResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyInfo'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LimitedUsageAPIKeyInfo:
+      description: These are the fields returned from a GET request.
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        key_id:
+          example: Hm11C1coQZm2+Aihn9ofYg
+          type: string
+          x-go-name: KeyID
+        last_used:
+          example: '2021-11-03T22:22:55Z'
+          type: string
+          x-go-name: LastUsed
+        project_id:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+        usage:
+          enum:
+          - inference
+          - observability
+          example: inference
+          type: string
+          x-go-name: Usage
+      required:
+      - usage
+      - alias
+      - key_id
+      - created_at
+      - expires_at
+      - last_used
+      title: TokenInfo contains the Traits Island stores for a Token inside of Kratos.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GeneratedLimitedUsageAPIKey:
+      properties:
+        alias:
+          example: newAPIKey
+          type: string
+          x-go-name: Alias
+        api_key:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: APIKey
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        key_id:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: KeyID
+        project_id:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+        usage:
+          enum:
+          - inference
+          - observability
+          example: inference
+          type: string
+          x-go-name: Usage
+      required:
+      - usage
+      - key_id
+      - api_key
+      - created_at
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

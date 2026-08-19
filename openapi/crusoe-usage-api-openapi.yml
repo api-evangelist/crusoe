@@ -1,0 +1,447 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Usage API
+  version: '1.0'
+  description: 'Operations tagged Usage across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Usage
+paths:
+  /organizations/{org_id}/usage:
+    get:
+      operationId: getUsage
+      parameters:
+      - description: org_id is the ID of the org to fetch usage for
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+          pattern: '[^/]+'
+      - description: projects is an optional list of project IDs to filter usage by; absent means all projects
+        in: query
+        name: projects
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - description: resource_types is an optional list of product types to filter usage by; absent means all products
+        in: query
+        name: resource_types
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - description: regions is an optional list of regions to filter usage by; absent means all regions
+        in: query
+        name: regions
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - description: start_date is the optional start date (inclusive) of the usage period, formatted YYYY-MM-DD
+        in: query
+        name: start_date
+        required: false
+        schema:
+          type: string
+      - description: end_date is the optional end date of the usage period, formatted YYYY-MM-DD
+        in: query
+        name: end_date
+        required: false
+        schema:
+          type: string
+      - description: 'interval controls how usage is aggregated over the period: "daily" (the default) or "monthly"'
+        in: query
+        name: interval
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Usage retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerOrganizationUsage'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      summary: Get project-level usage for products in Crusoe Cloud.
+      tags:
+      - Usage
+  /organizations/{organization_id}/usage/export:
+    get:
+      operationId: getUsageExport
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      - example:
+        - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+        in: query
+        name: projects
+        required: true
+        x-go-name: Projects
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+        in: query
+        name: resources
+        required: true
+        x-go-name: Resources
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - persistent-ssd
+        - a40.1x
+        in: query
+        name: resource_types
+        required: true
+        x-go-name: ResourceTypes
+        schema:
+          type: array
+          items:
+            type: string
+      - example:
+        - us-east1
+        - us-northcentral1
+        in: query
+        name: regions
+        required: true
+        x-go-name: Regions
+        schema:
+          type: array
+          items:
+            type: string
+      - example: '"2022-07-01"'
+        in: query
+        name: start_date
+        required: true
+        x-go-name: StartDate
+        schema:
+          type: string
+      - example: '"2023-08-08"'
+        in: query
+        name: end_date
+        required: true
+        x-go-name: EndDate
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/usageExportGetResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get resource-level usage for products in Crusoe Cloud.
+      tags:
+      - Usage
+  /organizations/{organization_id}/usage/options:
+    get:
+      operationId: getUsageOptions
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: organization_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/usageOptionsGetResponse'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Get options which exist for filters for /usage and /usage/export routes.
+      tags:
+      - Usage
+components:
+  schemas:
+    customerOrganizationUsage:
+      description: OrganizationUsage is the project-level usage of products across an organization.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/customerProductProjectUsage'
+            type: object
+          readOnly: true
+          title: items is the list of per-project usage line items
+          type: array
+      type: object
+    protobufAny:
+      additionalProperties: {}
+      properties:
+        '@type':
+          type: string
+      type: object
+    UsageOptions:
+      description: 'UsageOptions contains the values which exist for the fields which we allow filtering
+
+        on for the usageByProjectGet endpoint.'
+      properties:
+        end_date:
+          example: '"2023-08-08"'
+          type: string
+          x-go-name: EndDate
+        product_lines:
+          example:
+          - a40
+          - h200
+          items:
+            type: string
+          type: array
+          x-go-name: ProductLines
+        projects:
+          example:
+          - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          items:
+            type: string
+          type: array
+          x-go-name: Projects
+        regions:
+          example:
+          - us-east1
+          - us-northcentral1
+          items:
+            type: string
+          type: array
+          x-go-name: Regions
+        resource_types:
+          example:
+          - persistent-ssd
+          - a40.1x
+          items:
+            type: string
+          type: array
+          x-go-name: ResourceTypes
+        start_date:
+          example: '"2022-07-01"'
+          type: string
+          x-go-name: StartDate
+      required:
+      - projects
+      - resource_types
+      - product_lines
+      - regions
+      - start_date
+      - end_date
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    customerProductProjectUsage:
+      description: ProductProjectUsage is the usage of a product within a project for a single date.
+      properties:
+        billable_metric:
+          example: gpu-hours
+          title: billable_metric is the unit the quantity is measured in
+          type: string
+        date:
+          example: '2022-07-01'
+          title: date is the date the usage was incurred, formatted YYYY-MM-DD
+          type: string
+        project_id:
+          example: d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          title: project_id is the ID of the project the usage was incurred in
+          type: string
+        quantity:
+          example: 2.123
+          format: double
+          title: quantity is the amount of the product used
+          type: number
+        region:
+          example: us-northcentral1
+          title: region is the region the usage was incurred in
+          type: string
+        reservation_id:
+          example: d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          title: reservation_id is the ID of the reservation the usage was incurred under
+          type: string
+        resource_type:
+          example: a40.1x
+          title: resource_type is the product type the usage was incurred for
+          type: string
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+            type: object
+          type: array
+        message:
+          type: string
+      type: object
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    usageOptionsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UsageOptions'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    usageExportGetResponse:
+      description: ''
+      headers:
+        metric:
+          example: instance-hours
+          schema:
+            type: string
+        project_id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          schema:
+            type: string
+        quantity:
+          example: '261.271111'
+          schema:
+            type: number
+            format: double
+        region:
+          example: us-east1
+          schema:
+            type: string
+        resource_id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          schema:
+            type: string
+        resource_type:
+          example: a40.1x
+          schema:
+            type: string
+        usage_date:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          schema:
+            type: string
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

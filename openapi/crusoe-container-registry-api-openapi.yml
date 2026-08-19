@@ -1,0 +1,974 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Container Registry API
+  version: '1.0'
+  description: 'Operations tagged Container Registry across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Container Registry
+paths:
+  /ccr/supported-locations:
+    get:
+      operationId: listSupportedLocations
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrListSupportedLocationsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists the locations where container registry repositories can be hosted.
+      tags:
+      - Container Registry
+  /ccr/supported-providers:
+    get:
+      operationId: listSupportedProviders
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrListSupportedProvidersResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists the upstream registry providers supported for pull-through-cache repositories.
+      tags:
+      - Container Registry
+  /ccr/tokens:
+    post:
+      operationId: createCcrToken
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrTokenResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a limited-scope token for authenticating to the container registry and returns it.
+      tags:
+      - Container Registry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CCRTokenRequest'
+  /projects/{project_id}/ccr/repositories:
+    get:
+      operationId: listCcrRepositories
+      parameters:
+      - description: ID of the project that owns the repositories.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Page number of results to return.
+        in: query
+        name: page
+        x-go-name: Page
+        schema:
+          type: integer
+          format: int32
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        x-go-name: PageSize
+        schema:
+          type: integer
+          format: int32
+      - description: Field to sort the results by.
+        in: query
+        name: sort_by
+        x-go-name: SortBy
+        schema:
+          type: string
+      - description: Order to sort the results in.
+        in: query
+        name: sort_order
+        x-go-name: SortOrder
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrListRepositoriesResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all container registry repositories in the project and returns their details.
+      tags:
+      - Container Registry
+    post:
+      operationId: createCcrRepository
+      parameters:
+      - description: ID of the project to create the repository in.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '201':
+          $ref: '#/components/responses/ccrRepositoryResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a container registry repository in the project and returns the created repository.
+      tags:
+      - Container Registry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryRequest'
+  /projects/{project_id}/ccr/repositories/{repository_id}:
+    delete:
+      operationId: deleteCcrRepository
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a container registry repository from the project.
+      tags:
+      - Container Registry
+    get:
+      operationId: getCcrRepository
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrRepositoryResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single container registry repository in the project.
+      tags:
+      - Container Registry
+    patch:
+      description: 'Updates the username and password credentials for the upstream registry
+
+        of a pull-through-cache repository.'
+      operationId: updateCcrRepositoryCredentials
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates the upstream registry credentials for a repository in the project.
+      tags:
+      - Container Registry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpstreamRegistryCredentials'
+  /projects/{project_id}/ccr/repositories/{repository_id}/images:
+    delete:
+      operationId: deleteCcrImage
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository that contains the image.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: ID of the image to delete.
+        in: query
+        name: image_id
+        required: true
+        x-go-name: ImageID
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes an image from a container registry repository in the project.
+      tags:
+      - Container Registry
+    get:
+      operationId: listCcrImages
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository that contains the images.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      - description: Page number of results to return.
+        in: query
+        name: page
+        x-go-name: Page
+        schema:
+          type: integer
+          format: int32
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        x-go-name: PageSize
+        schema:
+          type: integer
+          format: int32
+      - description: Field to sort the results by.
+        in: query
+        name: sort_by
+        x-go-name: SortBy
+        schema:
+          type: string
+      - description: Order to sort the results in.
+        in: query
+        name: sort_order
+        x-go-name: SortOrder
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrListImagesResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all images in a container registry repository in the project and returns their details.
+      tags:
+      - Container Registry
+  /projects/{project_id}/ccr/repositories/{repository_id}/manifests:
+    delete:
+      operationId: deleteCcrManifest
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository that contains the image.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: ID of the image that contains the manifest.
+        in: query
+        name: image_id
+        required: true
+        x-go-name: ImageID
+        schema:
+          type: string
+      - description: Tag that points to the manifest to delete. Either tag or digest must be provided, but not both.
+        in: query
+        name: tag
+        x-go-name: Tag
+        schema:
+          type: string
+      - description: Digest of the manifest to delete. Either tag or digest must be provided, but not both.
+        in: query
+        name: digest
+        x-go-name: Digest
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a manifest from an image in a container registry repository in the project.
+      tags:
+      - Container Registry
+    get:
+      operationId: listCcrManifests
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository that contains the image.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: ID of the image whose manifests are listed.
+        in: query
+        name: image_id
+        required: true
+        x-go-name: ImageID
+        schema:
+          type: string
+      - description: Filters results to manifests with a tag that contains this substring.
+        in: query
+        name: tag_contains
+        x-go-name: TagContains
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      - description: Page number of results to return.
+        in: query
+        name: page
+        x-go-name: Page
+        schema:
+          type: integer
+          format: int32
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        x-go-name: PageSize
+        schema:
+          type: integer
+          format: int32
+      - description: Field to sort the results by.
+        in: query
+        name: sort_by
+        x-go-name: SortBy
+        schema:
+          type: string
+      - description: Order to sort the results in.
+        in: query
+        name: sort_order
+        x-go-name: SortOrder
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrListManifestsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all manifests for an image in a container registry repository in the project and returns their details.
+      tags:
+      - Container Registry
+  /projects/{project_id}/ccr/repositories/{repository_id}/usage:
+    get:
+      operationId: getCcrRepositoryUsage
+      parameters:
+      - description: ID of the project that owns the repository.
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the repository.
+        in: path
+        name: repository_id
+        required: true
+        x-go-name: RepositoryID
+        schema:
+          type: string
+      - description: Location the repository is hosted in.
+        in: query
+        name: location
+        x-go-name: Location
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ccrRepositoryQuotaResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns usage data for a single container registry repository in the project.
+      tags:
+      - Container Registry
+components:
+  schemas:
+    UpstreamRegistry:
+      properties:
+        provider:
+          description: Provider of the upstream registry.
+          type: string
+          x-go-name: Provider
+        upstream_registry_credentials:
+          $ref: '#/components/schemas/UpstreamRegistryCredentials'
+        url:
+          description: Base URL of the upstream registry that the repository caches images from.
+          example: https://registry-1.docker.io
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSupportedLocationsResponse:
+      properties:
+        items:
+          description: List of locations where the container registry is available.
+          example:
+          - us-east1
+          - us-northcentral1
+          items:
+            type: string
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CCRTokenResponse:
+      properties:
+        token:
+          description: Token used to authenticate to the container registry.
+          type: string
+          x-go-name: Token
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListRepositoriesResponse:
+      properties:
+        items:
+          description: List of repositories.
+          items:
+            $ref: '#/components/schemas/Repository'
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Manifest:
+      properties:
+        digest:
+          description: Content-addressable digest that uniquely identifies the manifest.
+          example: sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+          type: string
+          x-go-name: Digest
+        pulled_at:
+          description: Last pull timestamp of the manifest, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          format: date-time
+          type: string
+          x-go-name: PullTimestampUTC
+        pushed_at:
+          description: Push timestamp of the manifest, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          format: date-time
+          type: string
+          x-go-name: PushTimestampUTC
+        size_bytes:
+          description: Total size of the manifest, in bytes.
+          example: '10485760'
+          type: string
+          x-go-name: SizeBytes
+        tags:
+          description: Tags that point to the manifest.
+          example:
+          - latest
+          - v1.0
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RepositoryRequest:
+      properties:
+        location:
+          description: Location to create the repository in.
+          example: us-east1
+          type: string
+          x-go-name: Location
+        max_size_bytes:
+          description: Maximum total size for the new repository, in bytes.
+          example: '10737418240'
+          type: string
+          x-go-name: MaxSizeBytes
+        mode:
+          description: Mode for the new repository, which determines how images are stored and served.
+          type: string
+          x-go-name: Mode
+        name:
+          description: Name for the new repository.
+          example: my-repository
+          type: string
+          x-go-name: Name
+        upstream_registry:
+          $ref: '#/components/schemas/UpstreamRegistry'
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CcrImage:
+      properties:
+        manifest_count:
+          description: Number of manifests in the image.
+          example: 3
+          format: int64
+          type: integer
+          x-go-name: ManifestCount
+        name:
+          description: Name of the image.
+          example: my-image
+          type: string
+          x-go-name: Name
+        pull_count:
+          description: Number of times the image has been pulled.
+          example: 100
+          format: int64
+          type: integer
+          x-go-name: PullCount
+        updated_at:
+          description: Last update timestamp of the image, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          format: date-time
+          type: string
+          x-go-name: LastUpdatedTimestampUTC
+        url:
+          description: URL at which the image can be accessed.
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CCRTokenRequest:
+      properties:
+        alias:
+          description: Alias for the new token, used to identify it.
+          example: my-token
+          type: string
+          x-go-name: Alias
+        expires_at:
+          description: Expiration timestamp of the token, in RFC3339 format.
+          example: '2026-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListCcrImagesResponse:
+      properties:
+        items:
+          description: List of images.
+          items:
+            $ref: '#/components/schemas/CcrImage'
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UpstreamRegistryCredentials:
+      properties:
+        password:
+          description: Password used to authenticate to the upstream registry.
+          type: string
+          x-go-name: Password
+        username:
+          description: Username used to authenticate to the upstream registry.
+          example: my-registry-user
+          type: string
+          x-go-name: Username
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RepositoryQuota:
+      properties:
+        last_requested_timestamp_utc:
+          description: Timestamp at which the usage data was last computed, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: LastRequestedTimestampUTC
+        max_size_bytes:
+          description: Maximum total size allowed for the repository, in bytes.
+          example: '10737418240'
+          type: string
+          x-go-name: MaxSizeBytes
+        used_size_bytes:
+          description: Total size currently used by the repository, in bytes.
+          example: '5368709120'
+          type: string
+          x-go-name: UsedSizeBytes
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListManifestsResponse:
+      properties:
+        items:
+          description: List of manifests.
+          items:
+            $ref: '#/components/schemas/Manifest'
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSupportedProvidersResponse:
+      properties:
+        items:
+          description: List of supported upstream registry providers.
+          items:
+            type: string
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Repository:
+      properties:
+        created_at:
+          description: Creation timestamp of the repository, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
+        id:
+          description: ID of the repository.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
+          type: string
+          x-go-name: ID
+        location:
+          description: Location the repository is hosted in.
+          example: us-east1
+          type: string
+          x-go-name: Location
+        max_size_bytes:
+          description: Maximum total size of the repository, in bytes.
+          example: '10737418240'
+          type: string
+          x-go-name: MaxSizeBytes
+        mode:
+          description: Mode of the repository, which determines how images are stored and served.
+          type: string
+          x-go-name: Mode
+        name:
+          description: Name of the repository.
+          example: my-repository
+          type: string
+          x-go-name: Name
+        state:
+          description: State of the repository.
+          type: string
+          x-go-name: State
+        upstream_registry:
+          $ref: '#/components/schemas/UpstreamRegistry'
+        url:
+          description: URL at which the repository can be accessed.
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ccrListManifestsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListManifestsResponse'
+    ccrListSupportedLocationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSupportedLocationsResponse'
+    ccrRepositoryQuotaResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RepositoryQuota'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ccrListRepositoriesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListRepositoriesResponse'
+    emptyResponse:
+      description: Empty Response
+    ccrRepositoryResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Repository'
+    ccrTokenResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CCRTokenResponse'
+    ccrListImagesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListCcrImagesResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ccrListSupportedProvidersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSupportedProvidersResponse'
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

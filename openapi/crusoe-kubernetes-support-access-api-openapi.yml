@@ -1,0 +1,348 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Kubernetes Support Access API
+  version: '1.0'
+  description: 'Operations tagged Kubernetes Support Access across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Kubernetes Support Access
+paths:
+  /projects/{project_id}/kubernetes/clusters/{cluster_id}/support/settings:
+    get:
+      operationId: getSupportSettings
+      parameters:
+      - description: ID of the project that owns the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getSupportSettingsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns support access settings for a Kubernetes cluster in the project.
+      tags:
+      - Kubernetes Support Access
+    patch:
+      operationId: updateSupportSettings
+      parameters:
+      - description: ID of the project that owns the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/updateSupportSettingsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates support access settings for a Kubernetes cluster in the project.
+      tags:
+      - Kubernetes Support Access
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KubernetesClusterSupportSettingsRequest'
+        required: true
+components:
+  schemas:
+    KubernetesClusterSupportSettingsResponse:
+      description: 'KubernetesClusterSupportSettingsResponse defines the response for getting
+
+        or setting support access settings for a Kubernetes cluster.'
+      properties:
+        access_enabled:
+          description: Master toggle for whether support access is enabled.
+          example: true
+          type: boolean
+          x-go-name: AccessEnabled
+        active_requests:
+          description: Currently active support access requests.
+          items:
+            $ref: '#/components/schemas/KubernetesSupportAccessRequest'
+          type: array
+          x-go-name: ActiveRequests
+        enabled_roles:
+          description: Enabled support access roles.
+          example:
+          - operator
+          - readonly
+          items:
+            type: string
+          type: array
+          x-go-name: EnabledRoles
+      required:
+      - access_enabled
+      - enabled_roles
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesClusterSupportSettingsRequest:
+      description: 'KubernetesClusterSupportSettingsRequest defines the request for updating
+
+        support access settings for a Kubernetes cluster.'
+      properties:
+        access_enabled:
+          description: Master toggle for whether support access is enabled.
+          example: true
+          type: boolean
+          x-go-name: AccessEnabled
+        enabled_roles:
+          description: Support access roles to enable.
+          example:
+          - operator
+          - readonly
+          items:
+            type: string
+          type: array
+          x-go-name: EnabledRoles
+      required:
+      - access_enabled
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesSupportAccessRequest:
+      properties:
+        access_role:
+          description: Requested support access role.
+          example: operator
+          type: string
+          x-go-name: AccessRole
+        cert_expires_at:
+          description: Time when the certificate expires.
+          example: '2024-01-15T18:30:00Z'
+          type: string
+          x-go-name: CertExpiresAt
+        cert_fingerprint:
+          description: Fingerprint of the certificate.
+          example: AA:BB:CC:DD:EE:FF
+          type: string
+          x-go-name: CertFingerprint
+        cert_issued_at:
+          description: Time when the most recent certificate was issued.
+          example: '2024-01-15T10:30:00Z'
+          type: string
+          x-go-name: CertIssuedAt
+        cert_serial:
+          description: Serial number of the certificate.
+          example: '1234567890'
+          type: string
+          x-go-name: CertSerial
+        expires_at:
+          description: Time when access expires.
+          example: '2024-01-15T18:30:00Z'
+          type: string
+          x-go-name: ExpiresAt
+        requested_at:
+          description: Time when access was requested.
+          example: '2024-01-15T10:30:00Z'
+          type: string
+          x-go-name: RequestedAt
+        requestor_id:
+          description: ID of the user who requested access.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: RequestorID
+        requestor_team:
+          description: Name of the team requesting support access.
+          example: SRE
+          type: string
+          x-go-name: RequestorTeam
+        support_reason:
+          description: Reason given for requesting support access.
+          example: Investigating cluster health issue
+          type: string
+          x-go-name: SupportReason
+        ticket_ref:
+          description: Ticket associated with the support access request.
+          example: TICKET-12345
+          type: string
+          x-go-name: TicketRef
+      required:
+      - access_role
+      title: KubernetesSupportAccessRequest defines the information about a support access request.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    updateSupportSettingsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesClusterSupportSettingsResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getSupportSettingsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesClusterSupportSettingsResponse'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

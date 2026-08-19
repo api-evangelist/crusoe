@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Internal Load Balancers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Internal Load Balancers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all load balancers in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/internal-load-balancers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all load balancers in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates a load balancer in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/internal-load-balancers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a load balancer in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single load balancer in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/internal-load-balancers/:load_balancer_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the load balancer."
+              },
+              {
+                "name": "load_balancer_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the load balancer."
+              }
+            ]
+          },
+          "docs": "Returns details for a single load balancer in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a load balancer in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/internal-load-balancers/:load_balancer_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the load balancer."
+              },
+              {
+                "name": "load_balancer_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the load balancer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "To disable health checking, pass \"health_check\": {\"port\": 0}."
+        },
+        {
+          "info": {
+            "name": "Deletes a load balancer from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/internal-load-balancers/:load_balancer_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the load balancer."
+              },
+              {
+                "name": "load_balancer_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the load balancer."
+              }
+            ]
+          },
+          "docs": "Deletes a load balancer from the project and returns the async operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

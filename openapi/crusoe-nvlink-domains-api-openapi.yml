@@ -1,0 +1,202 @@
+openapi: 3.2.0
+info:
+  title: Crusoe NVLink Domains API
+  version: '1.0'
+  description: 'Operations tagged NVLink Domains across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: NVLink Domains
+paths:
+  /projects/{project_id}/networking/nvlink-domains:
+    get:
+      operationId: listNvlinkDomains
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          $ref: '#/components/responses/listNvlinkDomainsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve details about all NVLink domains available for the project.
+      tags:
+      - NVLink Domains
+components:
+  responses:
+    listNvlinkDomainsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NvlinkDomainsSummaryListResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    NvlinkDomainsSummaryListResponse:
+      properties:
+        nvlink_domains:
+          description: List of NVLink domain summaries
+          items:
+            $ref: '#/components/schemas/NvlinkDomainSummaryResponse'
+          type: array
+          x-go-name: NvlinkDomains
+      title: NvlinkDomainsSummaryListResponse represents a list of NVLink domain summaries.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    NvlinkDomainSummaryResponse:
+      properties:
+        available_nodes:
+          description: Number of nodes currently available in the NVLink domain
+          example: 8
+          format: int32
+          type: integer
+          x-go-name: AvailableNodes
+        id:
+          description: ID of the NVLink domain
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+          x-go-name: ID
+        location:
+          description: Geographic location of the NVLink domain
+          example: us-east-1
+          type: string
+          x-go-name: Location
+        name:
+          description: Name of the NVLink domain
+          example: nvlink-domain-us-east-1
+          type: string
+          x-go-name: Name
+        total_nodes:
+          description: Total number of nodes in the NVLink domain
+          example: 16
+          format: int32
+          type: integer
+          x-go-name: TotalNodes
+      title: NvlinkDomainSummaryResponse represents summary information about an NVLink domain.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

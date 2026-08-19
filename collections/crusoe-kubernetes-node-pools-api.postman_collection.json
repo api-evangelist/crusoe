@@ -1,0 +1,3029 @@
+{
+  "item": [
+    {
+      "id": "60388840-1da7-46fc-8afb-ba5023ea5164",
+      "name": "Kubernetes Node Pools",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad96cfc3-7e40-4333-9bfc-f7194d775166",
+          "name": "Lists all Kubernetes node pools in the project and returns their details.",
+          "request": {
+            "name": "Lists all Kubernetes node pools in the project and returns their details.",
+            "description": {
+              "content": "Results can be narrowed to a single cluster with the cluster_id query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster_id",
+                  "value": "<string>",
+                  "description": "Filters results to node pools in this cluster."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Field to sort results by; prefix with '-' for descending order."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pools."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c151918-14e6-4067-93d6-6aaf18b906d2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "created_at, -created_at"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pools."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"0a1b3c2d-5e6f-8b9c-4d7e-1a2b3c4d5e6f\",\n      \"name\": \"crusoe-node-pool\",\n      \"count\": 4,\n      \"project_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n      \"cluster_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n      \"image_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"node_labels\": {\n        \"label\": \"my_node\"\n      },\n      \"node_taints\": [\n        {\n          \"effect\": \"NoSchedule\",\n          \"key\": \"gpu\",\n          \"value\": \"true\"\n        }\n      ],\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"instance_ids\": [\n        \"ca39e669-47ee-456b-968d-303234fbf99f\"\n      ],\n      \"state\": \"STATE_RUNNING\",\n      \"type\": \"a100.2x\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2021-12-03T19:58:34Z\",\n      \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"ephemeral_storage_for_containerd\": true,\n      \"instance_details\": [\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"using_latest_config\": true\n        },\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"using_latest_config\": true\n        }\n      ],\n      \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"public_ip_type\": \"dynamic\"\n    },\n    {\n      \"id\": \"0a1b3c2d-5e6f-8b9c-4d7e-1a2b3c4d5e6f\",\n      \"name\": \"crusoe-node-pool\",\n      \"count\": 4,\n      \"project_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n      \"cluster_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n      \"image_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n      \"node_labels\": {\n        \"label\": \"my_node\"\n      },\n      \"node_taints\": [\n        {\n          \"effect\": \"NoSchedule\",\n          \"key\": \"gpu\",\n          \"value\": \"true\"\n        }\n      ],\n      \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"instance_ids\": [\n        \"ca39e669-47ee-456b-968d-303234fbf99f\"\n      ],\n      \"state\": \"STATE_RUNNING\",\n      \"type\": \"a100.2x\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2021-12-03T19:58:34Z\",\n      \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"ephemeral_storage_for_containerd\": true,\n      \"instance_details\": [\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"using_latest_config\": true\n        },\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"using_latest_config\": true\n        }\n      ],\n      \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"public_ip_type\": \"dynamic\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a643a28b-c27b-413f-9f6d-8122ccc0104d",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "created_at, -created_at"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pools."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aa5cf1e-276f-42c4-af4e-3f30f67483f9",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "created_at, -created_at"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pools."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "659f269c-6e5c-4c18-9c6c-2c2f49ffdfb0",
+          "name": "Creates a Kubernetes node pool in the project and returns the async operation.",
+          "request": {
+            "name": "Creates a Kubernetes node pool in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project to create the node pool in."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"product_name\": \"<string>\",\n  \"count\": \"<long>\",\n  \"cluster_id\": \"<string>\",\n  \"ephemeral_storage_for_containerd\": \"<boolean>\",\n  \"ib_partition_id\": \"<string>\",\n  \"node_labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"node_pool_version\": \"<string>\",\n  \"node_taints\": [\n    {\n      \"key\": \"<string>\",\n      \"effect\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"effect\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nvlink_domain_id\": \"<string>\",\n  \"placement_policy\": \"unspecified\",\n  \"public_ip_type\": \"dynamic\",\n  \"reservation_specification\": {\n    \"id\": \"<string>\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"ssh_public_key\": \"<string>\",\n  \"subnet_id\": \"<string>\",\n  \"transport_partition_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "201185fc-638d-41f6-be68-503263bd200d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the node pool in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-node-pool\",\n  \"product_name\": \"a100.2x\",\n  \"count\": 4,\n  \"cluster_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"ib_partition_id\": \"<string>\",\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_pool_version\": \"1.30\",\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"placement_policy\": \"spread\",\n  \"public_ip_type\": \"dynamic\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"transport_partition_id\": \"b1f86d1b-42d2-490d-adb0-cc1029abf653\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f2a8ec5-c578-4fa1-bf91-0c056efe5118",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the node pool in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-node-pool\",\n  \"product_name\": \"a100.2x\",\n  \"count\": 4,\n  \"cluster_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"ib_partition_id\": \"<string>\",\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_pool_version\": \"1.30\",\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"placement_policy\": \"spread\",\n  \"public_ip_type\": \"dynamic\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"transport_partition_id\": \"b1f86d1b-42d2-490d-adb0-cc1029abf653\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e95a2f4-534a-4c88-a82a-36880f6acd39",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the node pool in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-node-pool\",\n  \"product_name\": \"a100.2x\",\n  \"count\": 4,\n  \"cluster_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"ib_partition_id\": \"<string>\",\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_pool_version\": \"1.30\",\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"placement_policy\": \"spread\",\n  \"public_ip_type\": \"dynamic\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"transport_partition_id\": \"b1f86d1b-42d2-490d-adb0-cc1029abf653\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6081e55e-519a-4fda-a818-ee7724f2237d",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the node pool in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-node-pool\",\n  \"product_name\": \"a100.2x\",\n  \"count\": 4,\n  \"cluster_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"ib_partition_id\": \"<string>\",\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_pool_version\": \"1.30\",\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"placement_policy\": \"spread\",\n  \"public_ip_type\": \"dynamic\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"transport_partition_id\": \"b1f86d1b-42d2-490d-adb0-cc1029abf653\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e44588f-e4e8-493f-8d08-e3f69d25d373",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project to create the node pool in."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-kubernetes-node-pool\",\n  \"product_name\": \"a100.2x\",\n  \"count\": 4,\n  \"cluster_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"ib_partition_id\": \"<string>\",\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_pool_version\": \"1.30\",\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"placement_policy\": \"spread\",\n  \"public_ip_type\": \"dynamic\",\n  \"reservation_specification\": {\n    \"id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n    \"selection_strategy\": \"lowest_cost\"\n  },\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8\",\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"transport_partition_id\": \"b1f86d1b-42d2-490d-adb0-cc1029abf653\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "785064ab-b3de-41ae-8f78-bf56b72d8e56",
+          "name": "Deletes a Kubernetes node pool from the project and returns the async operation.",
+          "request": {
+            "name": "Deletes a Kubernetes node pool from the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40259cf0-8a2e-4066-b859-9640bd177430",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e22b4a79-b7ac-400a-94f4-a83a0a30e460",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e559b933-90f9-4064-a050-33e4d7e0d112",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e411c0fd-5d78-4883-b04f-3c623f5e608f",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3805696-1603-4595-873a-0b8e5a22c47c",
+          "name": "Returns details for a single Kubernetes node pool in the project.",
+          "request": {
+            "name": "Returns details for a single Kubernetes node pool in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31c4d064-9e31-47df-b505-18cc9cff2d1f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0a1b3c2d-5e6f-8b9c-4d7e-1a2b3c4d5e6f\",\n  \"name\": \"crusoe-node-pool\",\n  \"count\": 4,\n  \"project_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n  \"cluster_id\": \"9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f\",\n  \"image_id\": \"ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab\",\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu\",\n      \"value\": \"true\"\n    }\n  ],\n  \"subnet_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"instance_ids\": [\n    \"ca39e669-47ee-456b-968d-303234fbf99f\"\n  ],\n  \"state\": \"STATE_RUNNING\",\n  \"type\": \"a100.2x\",\n  \"created_at\": \"2021-12-03T19:58:34Z\",\n  \"updated_at\": \"2021-12-03T19:58:34Z\",\n  \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"instance_details\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"using_latest_config\": true\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"using_latest_config\": true\n    }\n  ],\n  \"nvlink_domain_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"public_ip_type\": \"dynamic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edfca90d-925a-410a-90a0-2a8044d2b0d2",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3fb8e83-cdcb-48a8-a71c-43e986af7879",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6db4655b-ea61-4ac3-b8e7-a83960b954de",
+          "name": "Updates a Kubernetes node pool in the project and returns the async operation.",
+          "request": {
+            "name": "Updates a Kubernetes node pool in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"count\": \"<long>\",\n  \"node_labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"node_taints\": [\n    {\n      \"key\": \"<string>\",\n      \"effect\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"effect\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"reservation_id\": \"<string>\",\n  \"action\": \"UPDATE\",\n  \"ephemeral_storage_for_containerd\": \"<boolean>\",\n  \"node_pool_version\": \"<string>\",\n  \"ssh_public_key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e6db671-0feb-43de-842e-c99deb405b3b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": 4,\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n  \"action\": \"UPDATE\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"node_pool_version\": \"1.30\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06f3e15b-4a78-45eb-86d9-1d6fa9001c8c",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": 4,\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n  \"action\": \"UPDATE\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"node_pool_version\": \"1.30\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e099d2fe-117f-4bed-80d3-9b611b217339",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": 4,\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n  \"action\": \"UPDATE\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"node_pool_version\": \"1.30\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f615e238-d73f-4cea-9d15-c8c158dc6a9c",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": 4,\n  \"node_labels\": {\n    \"label\": \"my_node\"\n  },\n  \"node_taints\": [\n    {\n      \"effect\": \"NoSchedule\",\n      \"key\": \"gpu-type\",\n      \"value\": \"h100\"\n    }\n  ],\n  \"reservation_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n  \"action\": \"UPDATE\",\n  \"ephemeral_storage_for_containerd\": true,\n  \"node_pool_version\": \"1.30\",\n  \"ssh_public_key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2553bbc0-99f4-428f-8024-829340e252f1",
+          "name": "Cancels an in-progress rotation of a Kubernetes node pool in the project.",
+          "request": {
+            "name": "Cancels an in-progress rotation of a Kubernetes node pool in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id",
+                "cancel-rotate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e38f14e-8de3-4d9e-ac20-4a9a3d2e8a2f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "cancel-rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"no_rotate_in_progress\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d10b73-5167-43b0-8927-672798faf148",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "cancel-rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7c9e178-49d8-4090-9b4c-c51aaa6a1f56",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "cancel-rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33d47cf9-4ddb-47a5-99fe-251a34c092b9",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "cancel-rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6be6196-4553-47f4-b7b3-d22c6435fd33",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "cancel-rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26630449-7670-4a5e-bd65-1d40cffa25ca",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "cancel-rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1a9b1a2-879a-4c6e-a7b6-85c53a10ef52",
+          "name": "Returns the rotation status of a Kubernetes node pool in the project.",
+          "request": {
+            "name": "Returns the rotation status of a Kubernetes node pool in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id",
+                "rotate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1aef37f7-7b3a-4e91-98a3-745b91bdbdd7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"state\": \"string\",\n  \"out_of_sync_instances\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "598f7748-89da-4f04-a998-84e72e988d43",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54ac1100-a141-4cb0-b54c-433f444e8e31",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee7a8b9c-4dbd-49e5-a7dd-52c7d8d42828",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55debd9e-0e8d-4b52-a5bd-57e0fb7dddfd",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "389751a9-f04e-4411-b087-0776806276a5",
+          "name": "Starts a rotation of a Kubernetes node pool in the project and returns the async operation.",
+          "request": {
+            "name": "Starts a rotation of a Kubernetes node pool in the project and returns the async operation.",
+            "description": {
+              "content": "A successful response returns an async operation you can poll.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id",
+                "rotate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"strategy\": \"<string>\",\n  \"count\": \"<long>\",\n  \"percentage\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ca961c95-cd26-4b22-b1be-f492c80bcd0c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strategy\": \"count\",\n  \"count\": 2,\n  \"percentage\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87543f8b-312a-49ab-a05c-9052025c2b78",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strategy\": \"count\",\n  \"count\": 2,\n  \"percentage\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30eb5ba0-48ba-4bfb-b297-18df9567037a",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strategy\": \"count\",\n  \"count\": 2,\n  \"percentage\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "447ac196-8156-444a-8f28-8a9995b95420",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strategy\": \"count\",\n  \"count\": 2,\n  \"percentage\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9884065-7034-4955-b592-42e572d8e576",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strategy\": \"count\",\n  \"count\": 2,\n  \"percentage\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a52fbfcb-62a8-4d77-90f0-92e022b15afa",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "rotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"strategy\": \"count\",\n  \"count\": 2,\n  \"percentage\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87600035-221a-42a2-9585-2e4f53877261",
+          "name": "Lists all VMs in a Kubernetes node pool and returns their details.",
+          "request": {
+            "name": "Lists all VMs in a Kubernetes node pool and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "kubernetes",
+                "nodepools",
+                ":node_pool_id",
+                "vms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Maximum number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Field to sort results by; prefix with '-' for descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>",
+                  "description": "Base64-encoded token for the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "prev_token",
+                  "value": "<string>",
+                  "description": "Base64-encoded token for the previous page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the node pool."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node_pool_id",
+                  "description": "(Required) ID of the node pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47149805-92d7-4e5a-9adb-71dbadc1e07d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "vms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"project_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"type\": \"a100.2x\",\n      \"state\": \"RUNNING\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2023-08-14T09:00:35Z\",\n      \"name\": \"my-first-vm\",\n      \"location\": \"us-centralnorth1-a\",\n      \"disks\": [\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        },\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        }\n      ],\n      \"network_interfaces\": [\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        },\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        }\n      ],\n      \"host_channel_adapters\": [\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        },\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        }\n      ],\n      \"maintenance_policy\": \"unspecified\",\n      \"billing_type\": \"string\",\n      \"commitment_end\": \"string\",\n      \"commitment_period\": 4586,\n      \"instance_group_id\": \"707749bd-ecad-4de8-aa00-1ae2fdb99e19\",\n      \"instance_template_id\": \"75c6712a-8da8-463c-a72d-fc65cf922959\",\n      \"nvlink_domain_id\": \"string\",\n      \"pod_id\": \"29d20dc4-90ad-4365-ab05-83f5f5e52d94\",\n      \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n      \"virtualization_features\": {\n        \"nested_virtualization\": true\n      }\n    },\n    {\n      \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n      \"project_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n      \"type\": \"a100.2x\",\n      \"state\": \"RUNNING\",\n      \"created_at\": \"2021-12-03T19:58:34Z\",\n      \"updated_at\": \"2023-08-14T09:00:35Z\",\n      \"name\": \"my-first-vm\",\n      \"location\": \"us-centralnorth1-a\",\n      \"disks\": [\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        },\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"my-disk\",\n          \"type\": \"persistent-ssd\",\n          \"size\": \"10GiB\",\n          \"location\": \"us-northcentral1-a\",\n          \"block_size\": 4096,\n          \"created_at\": \"2021-12-03T19:58:34Z\",\n          \"updated_at\": \"2021-12-03T19:58:34Z\",\n          \"serial_number\": \"96FD14FDBCF7E21E8EC\",\n          \"attachment_type\": \"os | data\",\n          \"mode\": \"read-write | read-only\"\n        }\n      ],\n      \"network_interfaces\": [\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        },\n        {\n          \"id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"name\": \"network-interface-1\",\n          \"network\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"subnet\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n          \"interface_type\": \"ethernet\",\n          \"mac_address\": \"00:00:5e:00:53:af\",\n          \"ips\": [\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"private_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"public_ipv4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"external_dns_name\": \"string\"\n        }\n      ],\n      \"host_channel_adapters\": [\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        },\n        {\n          \"type\": \"infiniband\",\n          \"guid\": \"946d:ae03:0021:69aa\",\n          \"ib_network_id\": \"string\",\n          \"ib_partition_id\": \"string\",\n          \"transport_network_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\",\n          \"transport_partition_id\": \"ca39e669-47ee-456b-968d-303234fbf99f\"\n        }\n      ],\n      \"maintenance_policy\": \"manual\",\n      \"billing_type\": \"string\",\n      \"commitment_end\": \"string\",\n      \"commitment_period\": 1644,\n      \"instance_group_id\": \"707749bd-ecad-4de8-aa00-1ae2fdb99e19\",\n      \"instance_template_id\": \"75c6712a-8da8-463c-a72d-fc65cf922959\",\n      \"nvlink_domain_id\": \"string\",\n      \"pod_id\": \"29d20dc4-90ad-4365-ab05-83f5f5e52d94\",\n      \"reservation_id\": \"804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8\",\n      \"virtualization_features\": {\n        \"nested_virtualization\": true\n      }\n    }\n  ],\n  \"next_token\": \"bXktbGFzdC12bQ\",\n  \"prev_token\": \"bXktZmlyc3Qtdm0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6380ab4f-5f31-491a-9908-1af64ff878d7",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "vms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68beb190-9522-4883-b3ac-50e09af7d43e",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "vms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b98002d-5d93-47bc-9130-96123e9faff6",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "vms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "207ec946-6c0b-4f3f-b45f-4a903e4e09a8",
+              "name": "Error Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "vms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb1e30fa-965f-42db-93f9-a8abaaefd77d",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "kubernetes",
+                    "nodepools",
+                    ":node_pool_id",
+                    "vms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    },
+                    {
+                      "key": "prev_token",
+                      "value": "bXktZmlyc3Qtdm0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the node pool."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node_pool_id",
+                      "description": "(Required) ID of the node pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "10bc3afa-c4d2-4f37-93f6-d15e51c9d429",
+    "name": "Crusoe Kubernetes Node Pools API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Kubernetes Node Pools across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

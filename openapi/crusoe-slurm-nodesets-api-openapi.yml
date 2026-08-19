@@ -1,0 +1,541 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Slurm Nodesets API
+  version: '1.0'
+  description: 'Operations tagged Slurm Nodesets across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Slurm Nodesets
+paths:
+  /projects/{project_id}/slurm/{slurm_cluster_id}/nodesets:
+    get:
+      operationId: listSlurmNodesets
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: slurm_cluster_id
+        required: true
+        x-go-name: SlurmClusterID
+        schema:
+          type: string
+      - example: my-slurm-node-pool
+        in: query
+        name: name
+        x-go-name: Name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listSlurmNodesetsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve information about slurm nodesets belonging to a project or cluster.
+      tags:
+      - Slurm Nodesets
+    post:
+      description: A successful response from this resource will contain the async operation.
+      operationId: createSlurmNodeset
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: slurm_cluster_id
+        required: true
+        x-go-name: SlurmClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Create a new slurm nodeset owned by the logged in user.
+      tags:
+      - Slurm Nodesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlurmNodesetPostRequest'
+        required: true
+  /projects/{project_id}/slurm/{slurm_cluster_id}/nodesets/{nodeset_id}:
+    delete:
+      operationId: deleteSlurmNodeset
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: slurm_cluster_id
+        required: true
+        x-go-name: SlurmClusterID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: nodeset_id
+        required: true
+        x-go-name: NodesetID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Delete a nodeset that the logged in user owns.
+      tags:
+      - Slurm Nodesets
+    get:
+      operationId: getSlurmNodeset
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: slurm_cluster_id
+        required: true
+        x-go-name: SlurmClusterID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: nodeset_id
+        required: true
+        x-go-name: NodesetID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getSlurmNodesetResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve information about a particular slurm nodeset belonging to the project.
+      tags:
+      - Slurm Nodesets
+    patch:
+      operationId: updateSlurmNodeset
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: slurm_cluster_id
+        required: true
+        x-go-name: SlurmClusterID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: nodeset_id
+        required: true
+        x-go-name: NodesetID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Update a nodeset that the logged in user owns.
+      tags:
+      - Slurm Nodesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlurmNodesetPatchRequest'
+        required: true
+components:
+  responses:
+    listSlurmNodesetsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSlurmNodesetsResponse'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getSlurmNodesetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlurmNodeset'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    SlurmNodeset:
+      properties:
+        count:
+          description: Count of nodes that have all slurm replicas running.
+          format: int64
+          type: integer
+          x-go-name: Count
+        created_at:
+          description: Created at timestamp of the nodeset.
+          type: string
+          x-go-name: CreatedAt
+        id:
+          description: ID of the nodeset.
+          type: string
+          x-go-name: ID
+        issues:
+          description: Message describing why nodeset is not in running.
+          items:
+            $ref: '#/components/schemas/SlurmNodesetIssue'
+          type: array
+          x-go-name: Issues
+        name:
+          description: Name of the nodeset.
+          type: string
+          x-go-name: Name
+        state:
+          description: Current state.
+          enum:
+          - PROVISIONING
+          - RUNNING
+          - DELETING
+          - DELETED
+          - UPDATING
+          - UNHEALTHY
+          - CREATE_FAILED
+          - DELETE_FAILED
+          type: string
+          x-go-name: State
+        subnet_id:
+          description: Subnet ID of the nodeset.
+          type: string
+          x-go-name: SubnetID
+        transport_partition_id:
+          description: Transport Partition ID of the nodeset.
+          type: string
+          x-go-name: TransportPartitionID
+        type:
+          description: VM type in the nodeset
+          type: string
+          x-go-name: Type
+        updated_at:
+          description: Updated at timestamp of the nodeset.
+          type: string
+          x-go-name: UpdatedAt
+        vm_ssh_public_key:
+          description: VM SSH Public Key of the nodeset.
+          type: string
+          x-go-name: VMSSHPublicKey
+      required:
+      - id
+      - name
+      - type
+      - state
+      - count
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmNodesetPatchRequest:
+      properties:
+        count:
+          description: Count of nodes in the nodeset.
+          example: 8
+          format: int64
+          type: integer
+          x-go-name: Count
+      required:
+      - count
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSlurmNodesetsResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SlurmNodeset'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmNodesetPostRequest:
+      properties:
+        count:
+          description: Count of nodes in the nodeset.
+          example: 4
+          format: int64
+          type: integer
+          x-go-name: Count
+        name:
+          description: Name of the nodeset.
+          example: my-slurm-nodeset
+          type: string
+          x-go-name: Name
+        subnet_id:
+          description: ID of the subnet.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: SubnetID
+        transport_partition_id:
+          description: ID of the transport partition.
+          example: b1f86d1b-42d2-490d-adb0-cc1029abf653
+          type: string
+          x-go-name: TransportPartitionID
+        type:
+          description: VM type of the nodeset.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+        vm_ssh_public_key:
+          description: VM SSH public key.
+          example: ssh-rsa AAAA...
+          type: string
+          x-go-name: VMSSHPublicKey
+      required:
+      - name
+      - type
+      - count
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    SlurmNodesetIssue:
+      properties:
+        code:
+          description: Machine-readable issue code.
+          type: string
+          x-go-name: Code
+        message:
+          description: Human-readable description.
+          type: string
+          x-go-name: Message
+      title: SlurmNodesetIssue describes a problem preventing the nodeset from reaching RUNNING state.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

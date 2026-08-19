@@ -1,0 +1,451 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Ccr API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ccr",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists the locations where container registry repositories can be hosted.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/ccr/supported-locations"
+          },
+          "docs": "Lists the locations where container registry repositories can be hosted."
+        },
+        {
+          "info": {
+            "name": "Lists the upstream registry providers supported for pull-through-cache repositories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/ccr/supported-providers"
+          },
+          "docs": "Lists the upstream registry providers supported for pull-through-cache repositories."
+        },
+        {
+          "info": {
+            "name": "Creates a limited-scope token for authenticating to the container registry and returns it.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/ccr/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a limited-scope token for authenticating to the container registry and returns it."
+        },
+        {
+          "info": {
+            "name": "Lists all container registry repositories in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repositories."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort the results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Order to sort the results in."
+              }
+            ]
+          },
+          "docs": "Lists all container registry repositories in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates a container registry repository in the project and returns the created repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project to create the repository in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a container registry repository in the project and returns the created repository."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single container registry repository in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              }
+            ]
+          },
+          "docs": "Returns details for a single container registry repository in the project."
+        },
+        {
+          "info": {
+            "name": "Updates the upstream registry credentials for a repository in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the username and password credentials for the upstream registry\nof a pull-through-cache repository."
+        },
+        {
+          "info": {
+            "name": "Deletes a container registry repository from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              }
+            ]
+          },
+          "docs": "Deletes a container registry repository from the project."
+        },
+        {
+          "info": {
+            "name": "Lists all images in a container registry repository in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id/images",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository that contains the images."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort the results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Order to sort the results in."
+              }
+            ]
+          },
+          "docs": "Lists all images in a container registry repository in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Deletes an image from a container registry repository in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id/images",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository that contains the image."
+              },
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the image to delete."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              }
+            ]
+          },
+          "docs": "Deletes an image from a container registry repository in the project."
+        },
+        {
+          "info": {
+            "name": "Lists all manifests for an image in a container registry repository in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id/manifests",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository that contains the image."
+              },
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the image whose manifests are listed."
+              },
+              {
+                "name": "tag_contains",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to manifests with a tag that contains this substring."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of results to return."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort the results by."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Order to sort the results in."
+              }
+            ]
+          },
+          "docs": "Lists all manifests for an image in a container registry repository in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Deletes a manifest from an image in a container registry repository in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id/manifests",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository that contains the image."
+              },
+              {
+                "name": "image_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the image that contains the manifest."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Tag that points to the manifest to delete. Either tag or digest must be provided, but not both."
+              },
+              {
+                "name": "digest",
+                "value": "",
+                "type": "query",
+                "description": "Digest of the manifest to delete. Either tag or digest must be provided, but not both."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              }
+            ]
+          },
+          "docs": "Deletes a manifest from an image in a container registry repository in the project."
+        },
+        {
+          "info": {
+            "name": "Returns usage data for a single container registry repository in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/ccr/repositories/:repository_id/usage",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the repository."
+              },
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the repository."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location the repository is hosted in."
+              }
+            ]
+          },
+          "docs": "Returns usage data for a single container registry repository in the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

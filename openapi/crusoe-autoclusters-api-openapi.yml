@@ -1,0 +1,444 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Auto Clusters API
+  version: '1.0'
+  description: 'Operations tagged AutoClusters across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: AutoClusters
+paths:
+  /projects/{project_id}/kubernetes/clusters/{cluster_id}/autoclusters/config:
+    get:
+      description: Returns the cluster's Autoclusters configuration including alert handling defaults and any customer overrides.
+      operationId: getAutoClustersConfig
+      parameters:
+      - description: Project ID
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Cluster ID
+        example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getAutoClustersConfigResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve the AutoClusters configuration for a specific cluster.
+      tags:
+      - AutoClusters
+    patch:
+      description: Allows setting or removing remediation overrides and configuring project reservation fallback.
+      operationId: updateAutoClustersConfig
+      parameters:
+      - description: Project ID
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Cluster ID
+        example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/updateAutoClustersConfigResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Update the AutoClusters configuration for a specific cluster.
+      tags:
+      - AutoClusters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAutoClustersConfigRequest'
+        description: Request body
+        required: true
+  /projects/{project_id}/kubernetes/clusters/{cluster_id}/autoclusters/vms/{vm_id}/remediate:
+    post:
+      description: 'Trigger remediation for a VM within a Kubernetes cluster with AutoClusters add-on enabled. This creates an AutoClusters operation and returns an
+
+        asynchronous operation handle. Currently, this defaults to performing a replace node operation.'
+      operationId: remediateVM
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - example: e384a1de-81f8-4cb2-b312-a7d88a9bf9cb
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vm_id
+        required: true
+        x-go-name: VMID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Trigger VM remediation.
+      tags:
+      - AutoClusters
+components:
+  schemas:
+    RemediationConfig:
+      properties:
+        default_action:
+          $ref: '#/components/schemas/AutoRemediation'
+        effective_action:
+          $ref: '#/components/schemas/AutoRemediation'
+        issue_name:
+          description: The issue name / remediation type (e.g., "XID_74", "GPU_FELL_OFF_THE_BUS").
+          example: XID_74
+          type: string
+          x-go-name: IssueName
+        user_override:
+          $ref: '#/components/schemas/AutoRemediation'
+      title: RemediationConfig represents a single remediation configuration in the API response.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AutoClustersConfigResponse:
+      properties:
+        fallback_to_project_reservations:
+          description: Whether to use project's unused reservations as fallback when Crusoe spares are exhausted.
+          example: false
+          type: boolean
+          x-go-name: FallbackToProjectReservations
+        remediation_configs:
+          description: Per-issue configuration showing defaults and any user overrides.
+          items:
+            $ref: '#/components/schemas/RemediationConfig'
+          type: array
+          x-go-name: RemediationConfigs
+        updated_at:
+          description: When this config was last updated.
+          example: '2025-01-15T10:30:00Z'
+          format: date-time
+          type: string
+          x-go-name: UpdatedAt
+      title: AutoClustersConfigResponse represents the cluster configuration in the API response.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AutoRemediation:
+      description: 'example: REPLACE_NODE
+
+        enum: REPLACE_NODE,OFF'
+      title: AutoRemediation represents the auto remediation action type for an issue.
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    UpdateAutoClustersConfigRequest:
+      properties:
+        fallback_to_project_reservations:
+          description: Whether to use project's unused reservations as fallback. If not set, existing value is preserved.
+          example: true
+          type: boolean
+          x-go-name: FallbackToProjectReservations
+          x-redocly-optional: true
+        remove_remediation_overrides:
+          description: Remediation overrides to remove (revert to system defaults).
+          example:
+          - XID_74
+          - GPU_FELL_OFF_THE_BUS
+          items:
+            type: string
+          type: array
+          x-go-name: RemoveRemediationOverrides
+        set_remediation_overrides:
+          description: Remediation overrides to add or update. These will override the system defaults.
+          example:
+          - action: 'OFF'
+            issue_name: XID_74
+          items:
+            $ref: '#/components/schemas/RemediationOverrideRequest'
+          type: array
+          x-go-name: SetRemediationOverrides
+      required:
+      - fallback_to_project_reservations
+      title: UpdateAutoClustersConfigRequest represents the request body for updating cluster config.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RemediationOverrideRequest:
+      properties:
+        action:
+          $ref: '#/components/schemas/AutoRemediation'
+        issue_name:
+          description: The issue name to override (e.g., "XID_74", "GPU_FELL_OFF_THE_BUS").
+          example: XID_74
+          type: string
+          x-go-name: IssueName
+      required:
+      - issue_name
+      - action
+      title: RemediationOverrideRequest represents a remediation override in the API request.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+  responses:
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    getAutoClustersConfigResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AutoClustersConfigResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    updateAutoClustersConfigResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AutoClustersConfigResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

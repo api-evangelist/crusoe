@@ -1,0 +1,590 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Instance Templates API
+  version: '1.0'
+  description: 'Operations tagged Instance Templates across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Instance Templates
+paths:
+  /projects/{project_id}/compute/instance-templates:
+    get:
+      operationId: listInstanceTemplates
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listInstanceTemplatesResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all instance templates in the project and returns their details.
+      tags:
+      - Instance Templates
+    post:
+      operationId: createInstanceTemplate
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/createInstanceTemplateResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates an instance template in the project and returns the created instance template.
+      tags:
+      - Instance Templates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceTemplatePostRequestV1'
+        required: true
+  /projects/{project_id}/compute/instance-templates/{instance_template_id}:
+    delete:
+      operationId: deleteInstanceTemplate
+      parameters:
+      - description: ID of the instance template.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: instance_template_id
+        required: true
+        x-go-name: InstanceTemplateID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes an instance template from the project.
+      tags:
+      - Instance Templates
+    get:
+      operationId: getInstanceTemplate
+      parameters:
+      - description: ID of the instance template.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: instance_template_id
+        required: true
+        x-go-name: InstanceTemplateID
+        schema:
+          type: string
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getInstanceTemplateResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single instance template in the project.
+      tags:
+      - Instance Templates
+components:
+  schemas:
+    VirtualizationFeatures:
+      properties:
+        nested_virtualization:
+          description: Whether nested virtualization is enabled, allowing a VM to run inside this VM.
+          example: true
+          type: boolean
+          x-go-name: NestedVirtualization
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstanceTemplatePostRequestV1:
+      properties:
+        custom_image_name:
+          description: 'Custom image to use for all VMs created from this instance template.
+
+            Only one of Image or CustomImage should be supplied at once.'
+          example: ubuntu:20.04
+          type: string
+          x-go-name: CustomImage
+        disks:
+          description: Disks to attach to all VMs created from this instance template.
+          items:
+            $ref: '#/components/schemas/DiskTemplate'
+          type: array
+          x-go-name: Disks
+        ib_partition_id:
+          description: 'Deprecated: Use transport_partition_id instead.'
+          type: string
+          x-go-name: IBPartition
+        image_name:
+          description: OS Image to use for all VMs created from this instance template.
+          example: ubuntu:20.04
+          type: string
+          x-go-name: Image
+        location:
+          description: 'Location to use for all VMs created from this instance template.
+
+            If provided, all location-specific resources must also be provided.'
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        maintenance_policy:
+          description: Host maintenance policy controlling how VMs created from this instance template behave during host maintenance.
+          example: manual,stop-vm,unspecified
+          type: string
+          x-go-name: MaintenancePolicy
+        nvlink_domain_id:
+          description: NVLink domain to assign to all VMs created from this instance template.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+          x-go-name: NvlinkDomainID
+        placement_policy:
+          description: 'Placement policy controlling how VMs created from this instance template are
+
+            distributed across hosts: spread or unspecified.'
+          example: spread
+          type: string
+          x-go-name: PlacementPolicy
+        public_ip_address_type:
+          description: Public IP address type to use for all VMs created from this instance template. Must either be "static" or "dynamic".
+          example: static
+          type: string
+          x-go-name: PublicIPAddressType
+        reservation_id:
+          description: Reservation to use for all VMs created from this instance template.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+          type: string
+          x-go-name: ReservationID
+        shutdown_script:
+          description: Shutdown script to use for all VMs created from this instance template.
+          example: '"#!/bin/bash\necho ''goodbye''"'
+          type: string
+          x-go-name: ShutdownScript
+        ssh_public_key:
+          description: SSH public key to use for all VMs created from this instance template.
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D
+          type: string
+          x-go-name: SSHPublicKey
+        startup_script:
+          description: Startup script to use for all VMs created from this instance template.
+          example: '"#!/bin/bash\necho ''hello''"'
+          type: string
+          x-go-name: StartupScript
+        subnet_id:
+          description: 'Subnet to use for all VMs created from this instance template.
+
+            This is location-specific and must be provided if location is provided.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: Subnet
+        template_name:
+          description: Name of the instance template. (This is not the name of the VMs created from this instance template.)
+          example: my-instance-template
+          type: string
+          x-go-name: TemplateName
+        transport_partition_id:
+          description: 'IB or RoCE partition to use for all VMs created from this instance template.
+
+            Should only be provided for transport-enabled VM types.
+
+            This is location-specific and must be provided if location is provided.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: TransportPartitionID
+        type:
+          description: Product name of the VM type we want to create from this instance template.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+        virtualization_features:
+          $ref: '#/components/schemas/VirtualizationFeatures'
+      required:
+      - template_name
+      - type
+      - ssh_public_key
+      title: InstanceTemplatePostRequestV1 defines the specifications of VMs to be created during bulk VM creation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskTemplate:
+      properties:
+        size:
+          description: Size of the disk, including a unit suffix.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        type:
+          description: 'Type of disk to create: persistent-ssd or shared-volume.'
+          enum:
+          - persistent-ssd
+          - shared-volume
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+      required:
+      - size
+      - type
+      title: DiskTemplate defines a disk to create for each VM during bulk VM creation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListInstanceTemplatesResponseV1:
+      description: 'ListInstanceTemplatesResponseV1 is the resource response type for GET
+
+        requests to the InstanceTemplates endpoint.'
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/InstanceTemplate'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstanceTemplate:
+      properties:
+        created_at:
+          description: Creation timestamp of the instance template, in RFC3339 format.
+          example: '2024-01-01T00:00:00Z'
+          type: string
+          x-go-name: CreatedAt
+        custom_image_name:
+          description: Custom image to use for all VMs created from this instance template.
+          example: ubuntu:20.04
+          type: string
+          x-go-name: CustomImage
+        disks:
+          description: Disks attached to all VMs created from this instance template.
+          items:
+            $ref: '#/components/schemas/DiskTemplate'
+          type: array
+          x-go-name: Disks
+        ib_partition_id:
+          type: string
+          x-go-name: IBPartition
+        id:
+          description: ID of the instance template.
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: ID
+        image_name:
+          description: OS Image to use for all VMs created from this instance template.
+          example: ubuntu:20.04
+          type: string
+          x-go-name: Image
+        location:
+          description: 'Location to use for all VMs created from this instance template.
+
+            May be empty if we do not want to bind this template to a location.'
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        maintenance_policy:
+          description: 'Host maintenance policy controlling how VMs created from this instance template behave during
+
+            host maintenance: manual, stop-vm, or unspecified.'
+          enum:
+          - manual
+          - stop-vm
+          - unspecified
+          type: string
+          x-go-name: MaintenancePolicy
+        name:
+          description: Name of the instance template. (This is not the name of the VMs created from this instance template.)
+          example: my-instance-template
+          type: string
+          x-go-name: Name
+        nvlink_domain_id:
+          description: NVLink domain assigned to all VMs created from this instance template.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+          x-go-name: NvlinkDomainID
+        placement_policy:
+          description: 'Placement policy controlling how VMs created from this instance template are
+
+            distributed across hosts: spread or unspecified.'
+          enum:
+          - spread
+          - unspecified
+          type: string
+          x-go-name: PlacementPolicy
+        project_id:
+          description: ID of the project this instance template belongs to.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: ProjectID
+        public_ip_address_type:
+          description: Public IP address type to use for all VMs created from this instance template. Must either be "static" or "dynamic".
+          example: static
+          type: string
+          x-go-name: PublicIPAddressType
+        reservation_id:
+          description: Reservation used for all VMs created from this instance template.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+          type: string
+          x-go-name: ReservationID
+        shutdown_script:
+          description: Shutdown script to use for all VMs created from this instance template.
+          example: '#!/bin/bash\necho ''goodbye'''
+          type: string
+          x-go-name: ShutdownScript
+        ssh_public_key:
+          description: SSH public key to use for all VMs created from this instance template.
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D
+          type: string
+          x-go-name: SSHPubKey
+        startup_script:
+          description: Startup script to use for all VMs created from this instance template.
+          example: '#!/bin/bash\necho ''hello'''
+          type: string
+          x-go-name: StartupScript
+        subnet_id:
+          description: 'SubnetID to use for all VMs created from this instance template.
+
+            Only used if template has a location.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: SubnetID
+        transport_partition_id:
+          description: 'IB or RoCE partition to use for all VMs created from this instance template.
+
+            Only used for transport-enabled VM types. Empty if template has no location.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: TransportPartitionID
+        type:
+          description: Product name of the VM type we want to create from this instance template.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+        virtualization_features:
+          $ref: '#/components/schemas/VirtualizationFeatures'
+      required:
+      - name
+      - id
+      - type
+      - ssh_public_key
+      - startup_script
+      - shutdown_script
+      - image_name
+      - ib_partition_id
+      - transport_partition_id
+      - subnet_id
+      - location
+      - project_id
+      - created_at
+      - public_ip_address_type
+      - placement_policy
+      - maintenance_policy
+      title: InstanceTemplate defines the specifications of VMs to be created during bulk VM creation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getInstanceTemplateResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceTemplate'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listInstanceTemplatesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListInstanceTemplatesResponseV1'
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    createInstanceTemplateResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceTemplate'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

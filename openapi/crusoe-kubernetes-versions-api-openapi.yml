@@ -1,0 +1,288 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Kubernetes Versions API
+  version: '1.0'
+  description: 'Operations tagged Kubernetes Versions across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Kubernetes Versions
+paths:
+  /projects/{project_id}/kubernetes/versions:
+    get:
+      operationId: listKubernetesVersions
+      parameters:
+      - description: ID of the project to list versions for.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Whether to include deprecated versions in the results.
+        example: true
+        in: query
+        name: show_deprecated
+        x-go-name: ShowDeprecated
+        schema:
+          type: boolean
+      - description: Filters results to versions available for this VM product.
+        example: a100.2x
+        in: query
+        name: product_name
+        x-go-name: ProductName
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listKubernetesVersionsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all available Kubernetes versions in the project and returns their details.
+      tags:
+      - Kubernetes Versions
+components:
+  schemas:
+    ListKubernetesVersionsResponse:
+      properties:
+        kubernetes_cluster_versions:
+          description: Available Kubernetes cluster versions.
+          items:
+            $ref: '#/components/schemas/KubernetesClustersVersionInfo'
+          type: array
+          x-go-name: KubernetesClusterVersions
+        kubernetes_node_pool_versions:
+          description: Available Kubernetes node pool versions.
+          items:
+            $ref: '#/components/schemas/KubernetesNodePoolsVersionInfo'
+          type: array
+          x-go-name: KubernetesNodePoolVersions
+      required:
+      - kubernetes_cluster_versions
+      - kubernetes_node_pool_versions
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesClustersVersionInfo:
+      properties:
+        cluster_version_name:
+          description: Version name of the Crusoe Kubernetes cluster image.
+          type: string
+          x-go-name: ClusterVersionName
+        supported_features:
+          description: 'Features supported by this cluster version. Possible values today: "oidc",
+
+            "autoclusters", "active_health_checks". New feature names may be added over time.
+
+            API consumers should ignore unrecognized feature names.'
+          items:
+            type: string
+          type: array
+          x-go-name: SupportedFeatures
+        tags:
+          description: Tags associated with the version.
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+        version_details:
+          $ref: '#/components/schemas/VersionDetails'
+      required:
+      - cluster_version_name
+      - tags
+      - version_details
+      - supported_features
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesNodePoolsVersionInfo:
+      properties:
+        node_pool_version_name:
+          description: Version name of the Crusoe Kubernetes node pool image.
+          type: string
+          x-go-name: NodePoolVersionName
+        supported_features:
+          description: 'Features supported by this node pool version. Possible values today: "node_taints",
+
+            "ephemeral_storage_for_containerd". New feature names may be added over time.
+
+            API consumers should ignore unrecognized feature names.'
+          items:
+            type: string
+          type: array
+          x-go-name: SupportedFeatures
+        tags:
+          description: Tags associated with the version.
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+        version_details:
+          $ref: '#/components/schemas/VersionDetails'
+      required:
+      - node_pool_version_name
+      - tags
+      - version_details
+      - supported_features
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VersionDetails:
+      properties:
+        BuildVersion:
+          description: Build version component.
+          type: string
+        MajorMinorVersion:
+          description: Major and minor version components, for example "1.30".
+          type: string
+        PatchVersion:
+          description: Patch version component.
+          type: string
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listKubernetesVersionsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

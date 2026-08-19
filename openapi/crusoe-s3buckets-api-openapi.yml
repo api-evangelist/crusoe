@@ -1,0 +1,740 @@
+openapi: 3.2.0
+info:
+  title: Crusoe S3 Buckets API
+  version: '1.0'
+  description: 'Operations tagged S3Buckets across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: S3Buckets
+paths:
+  /projects/{project_id}/storage/s3/buckets:
+    get:
+      operationId: listS3Buckets
+      parameters:
+      - description: ID of the project that owns the buckets.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Token that returns the next page of results.
+        example: bXktZmlyc3Qtdm0
+        in: query
+        name: next_page_token
+        x-go-name: NextPageToken
+        schema:
+          type: string
+      - description: Token that returns the previous page of results.
+        example: bXktZmlyc3Qtdm0
+        in: query
+        name: prev_page_token
+        x-go-name: PrevPageToken
+        schema:
+          type: string
+      - description: Maximum number of buckets to return per page.
+        example: 10
+        in: query
+        name: page_size
+        x-go-name: PageSize
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          $ref: '#/components/responses/listS3BucketsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all S3 buckets in the project and returns their details.
+      tags:
+      - S3Buckets
+    post:
+      operationId: createS3Bucket
+      parameters:
+      - description: ID of the project to create the bucket in.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketResponse'
+          description: // Returns the created bucket
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates an S3 bucket in the project and returns the created bucket.
+      tags:
+      - S3Buckets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateS3BucketRequest'
+        required: true
+  /projects/{project_id}/storage/s3/buckets/count:
+    get:
+      operationId: getS3BucketsCount
+      parameters:
+      - description: ID of the project that owns the buckets.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketsCountResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns the number of S3 buckets in the project.
+      tags:
+      - S3Buckets
+  /projects/{project_id}/storage/s3/buckets/quota:
+    get:
+      operationId: getS3BucketsQuotaRequest
+      parameters:
+      - description: ID of the project that owns the buckets.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketsQuotaResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns the S3 bucket quota information for the project.
+      tags:
+      - S3Buckets
+  /projects/{project_id}/storage/s3/buckets/{bucket_name}:
+    delete:
+      operationId: deleteS3Bucket
+      parameters:
+      - description: ID of the project that owns the bucket.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Name of the bucket.
+        example: my-awesome-bucket
+        in: path
+        name: bucket_name
+        required: true
+        x-go-name: BucketName
+        schema:
+          type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/okEmpty'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes an S3 bucket from the project.
+      tags:
+      - S3Buckets
+    get:
+      operationId: getS3Bucket
+      parameters:
+      - description: ID of the project that owns the bucket.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Name of the bucket.
+        example: my-awesome-bucket
+        in: path
+        name: bucket_name
+        required: true
+        x-go-name: BucketName
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single S3 bucket in the project.
+      tags:
+      - S3Buckets
+    patch:
+      operationId: updateS3BucketTags
+      parameters:
+      - description: ID of the project that owns the bucket.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Name of the bucket.
+        example: my-awesome-bucket
+        in: path
+        name: bucket_name
+        required: true
+        x-go-name: BucketName
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketResponse'
+          description: // Returns the updated bucket
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Replaces the tags on an S3 bucket and returns the updated bucket.
+      tags:
+      - S3Buckets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateS3BucketTagsRequest'
+        required: true
+  /projects/{project_id}/storage/s3/buckets/{bucket_name}/actions/enable-object-lock:
+    post:
+      operationId: enableS3BucketObjectLock
+      parameters:
+      - description: ID of the project that owns the bucket.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Name of the bucket.
+        example: my-awesome-bucket
+        in: path
+        name: bucket_name
+        required: true
+        x-go-name: BucketName
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketResponse'
+          description: // Returns the updated bucket
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Enables object lock on an S3 bucket and returns the updated bucket. Requires versioning to be enabled and cannot be disabled once enabled.
+      tags:
+      - S3Buckets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableS3BucketObjectLockRequest'
+  /projects/{project_id}/storage/s3/buckets/{bucket_name}/actions/enable-versioning:
+    post:
+      operationId: enableS3BucketVersioning
+      parameters:
+      - description: ID of the project that owns the bucket.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Name of the bucket.
+        example: my-awesome-bucket
+        in: path
+        name: bucket_name
+        required: true
+        x-go-name: BucketName
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getS3BucketResponse'
+          description: // Returns the updated bucket
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Enables versioning on an S3 bucket and returns the updated bucket. Versioning cannot be disabled once enabled.
+      tags:
+      - S3Buckets
+  /storage/object-storage/supported-locations:
+    get:
+      operationId: listS3SupportedLocations
+      responses:
+        '200':
+          $ref: '#/components/responses/listS3SupportedLocationsResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all locations where object storage (S3) is available.
+      tags:
+      - S3Buckets
+components:
+  schemas:
+    S3RetentionMode:
+      description: 'enum: governance,compliance'
+      title: 'Object lock retention mode for an S3 bucket: governance or compliance.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateS3BucketRequest:
+      properties:
+        location:
+          description: Location to create the bucket in.
+          example: us-eaststaging1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: 'Name for the new bucket. Must be DNS-compliant: 3-63 characters, using lowercase letters, numbers, and hyphens.'
+          example: my-new-bucket
+          type: string
+          x-go-name: Name
+        object_lock_enabled:
+          description: 'Whether to enable object lock on the new bucket. Requires versioning to be
+
+            enabled and cannot be disabled once enabled.'
+          example: false
+          type: boolean
+          x-go-name: ObjectLockEnabled
+        retention_period:
+          description: Length of the object lock retention period, in the unit given by retention_period_unit.
+          example: 30
+          format: int32
+          type: integer
+          x-go-name: RetentionPeriod
+        retention_period_unit:
+          $ref: '#/components/schemas/S3RetentionPeriodUnit'
+        tags:
+          additionalProperties:
+            type: string
+          description: Tags to apply to the new bucket as key-value pairs.
+          type: object
+          x-go-name: Tags
+        versioning_state:
+          $ref: '#/components/schemas/S3VersioningState'
+      required:
+      - name
+      - location
+      title: CreateS3BucketRequest is the request body for creating a new S3 bucket.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    QuotaValidationResult:
+      properties:
+        ActualUsed:
+          description: Amount of quota consumed by current usage.
+          format: int64
+          type: integer
+        LimitReached:
+          description: Whether usage is at or above the quota limit.
+          type: boolean
+        QuotaLimit:
+          description: Amount of quota allocated for the resource.
+          format: int64
+          type: integer
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3Bucket:
+      description: This is the REST-friendly model for the `BucketInfo` proto.
+      properties:
+        archived_at:
+          description: Archive timestamp of the bucket, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ArchivedAt
+        bucket_size:
+          description: Size of the bucket, in GiB.
+          example: 2.42
+          format: float
+          type: number
+          x-go-name: BucketSize
+        created_at:
+          description: Creation timestamp of the bucket, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        location:
+          description: Location where the bucket is hosted.
+          example: us-eaststaging1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name of the bucket.
+          example: my-awesome-bucket
+          type: string
+          x-go-name: Name
+        object_lock_enabled:
+          description: Whether object lock is enabled.
+          example: false
+          type: boolean
+          x-go-name: ObjectLockEnabled
+        project_id:
+          description: ID of the project that owns the bucket.
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: ProjectID
+        retention_mode:
+          $ref: '#/components/schemas/S3RetentionMode'
+        retention_period:
+          description: Length of the object lock retention period, in the unit given by retention_period_unit.
+          example: 30
+          format: int32
+          type: integer
+          x-go-name: RetentionPeriod
+        retention_period_unit:
+          $ref: '#/components/schemas/S3RetentionPeriodUnit'
+        s3_url:
+          description: Endpoint URL for accessing the bucket.
+          example: https://object.us-eaststaging7-b.crusoecloudcompute.com/my-first-bucket
+          type: string
+          x-go-name: S3URL
+        tags:
+          additionalProperties:
+            type: string
+          description: Tags applied to the bucket as key-value pairs.
+          type: object
+          x-go-name: Tags
+        updated_at:
+          description: Last update timestamp of the bucket, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: UpdatedAt
+        user_id:
+          description: ID of the S3 user that owns the bucket.
+          example: S3U_...
+          type: string
+          x-go-name: UserID
+        versioning_state:
+          $ref: '#/components/schemas/S3VersioningState'
+      required:
+      - name
+      - user_id
+      - project_id
+      - location
+      - versioning_state
+      - object_lock_enabled
+      - created_at
+      - updated_at
+      title: S3Bucket represents information about a single S3 bucket.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3VersioningState:
+      description: 'enum: disabled,enabled,suspended'
+      title: 'Versioning state of an S3 bucket: disabled, enabled, or suspended.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3RetentionPeriodUnit:
+      description: 'enum: days,years'
+      title: 'Unit of measurement for an object lock retention period: days or years.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UpdateS3BucketTagsRequest:
+      properties:
+        tags:
+          additionalProperties:
+            type: string
+          description: New set of tags for the bucket, as key-value pairs. Replaces all existing tags.
+          type: object
+          x-go-name: Tags
+      required:
+      - tags
+      title: UpdateS3BucketTagsRequest is the request body for updating S3 bucket tags.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    EnableS3BucketObjectLockRequest:
+      properties:
+        retention_period:
+          description: Length of the object lock retention period, in the unit given by retention_period_unit.
+          example: 30
+          format: int32
+          type: integer
+          x-go-name: RetentionPeriod
+        retention_period_unit:
+          $ref: '#/components/schemas/S3RetentionPeriodUnit'
+      title: EnableS3BucketObjectLockRequest defines the body for enabling object lock.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListS3SupportedLocationsResponse:
+      properties:
+        items:
+          description: Locations where object storage (S3) is available.
+          example:
+          - us-east1-a
+          - us-northcentral1-a
+          items:
+            type: string
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListS3SupportedLocationsResponse is the response type for GET requests to the S3 supported-locations endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListS3BucketsResponse:
+      properties:
+        items:
+          description: List of buckets.
+          items:
+            $ref: '#/components/schemas/S3Bucket'
+          type: array
+          x-go-name: Items
+        next_page_token:
+          description: Next page token.
+          type: string
+          x-go-name: NextPageToken
+        prev_page_token:
+          description: Previous page token.
+          type: string
+          x-go-name: PrevPageToken
+      required:
+      - items
+      title: ListS3BucketsResponse is the response type for GET requests to the S3 buckets endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listS3SupportedLocationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListS3SupportedLocationsResponse'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listS3BucketsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListS3BucketsResponse'
+    getS3BucketResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/S3Bucket'
+    okEmpty:
+      description: ''
+    getS3BucketsCountResponse:
+      description: ''
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getS3BucketsQuotaResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QuotaValidationResult'
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

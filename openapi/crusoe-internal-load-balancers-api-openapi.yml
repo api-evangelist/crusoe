@@ -1,0 +1,620 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Internal Load Balancers API
+  version: '1.0'
+  description: 'Operations tagged Internal Load Balancers across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Internal Load Balancers
+paths:
+  /projects/{project_id}/networking/internal-load-balancers:
+    get:
+      operationId: listLoadBalancers
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listLoadBalancersResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all load balancers in the project and returns their details.
+      tags:
+      - Internal Load Balancers
+    post:
+      operationId: createLoadBalancer
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a load balancer in the project and returns the async operation.
+      tags:
+      - Internal Load Balancers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadBalancersPostRequest'
+        required: true
+  /projects/{project_id}/networking/internal-load-balancers/{load_balancer_id}:
+    delete:
+      operationId: deleteLoadBalancer
+      parameters:
+      - description: ID of the project that owns the load balancer.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the load balancer.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: load_balancer_id
+        required: true
+        x-go-name: LoadBalancerID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a load balancer from the project and returns the async operation.
+      tags:
+      - Internal Load Balancers
+    get:
+      operationId: getLoadBalancer
+      parameters:
+      - description: ID of the project that owns the load balancer.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the load balancer.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: load_balancer_id
+        required: true
+        x-go-name: LoadBalancerID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getLoadBalancerResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single load balancer in the project.
+      tags:
+      - Internal Load Balancers
+    patch:
+      description: 'To disable health checking, pass "health_check": {"port": 0}.'
+      operationId: patchLoadBalancer
+      parameters:
+      - description: ID of the project that owns the load balancer.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the load balancer.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: load_balancer_id
+        required: true
+        x-go-name: LoadBalancerID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates a load balancer in the project and returns the async operation.
+      tags:
+      - Internal Load Balancers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadBalancersPatchRequestV1'
+        required: true
+components:
+  schemas:
+    IPAddresses:
+      properties:
+        private_ipv4:
+          $ref: '#/components/schemas/PrivateIPv4Address'
+        public_ipv4:
+          $ref: '#/components/schemas/PublicIPv4Address'
+      required:
+      - private_ipv4
+      - public_ipv4
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListLoadBalancersResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    NetworkTarget:
+      properties:
+        cidr:
+          description: CIDR block, or an IP address that is converted to a CIDR. Mutually exclusive with resource_id.
+          example: 10.1.2.3/24
+          type: string
+          x-go-name: CIDR
+        resource_id:
+          description: ID of a backend resource. Mutually exclusive with cidr.
+          example: 306aa10d-5570-4e47-88c9-46bf11bd8737
+          type: string
+          x-go-name: ResourceID
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    LoadBalancerNetworkInterface:
+      properties:
+        network:
+          description: ID of the VPC network for the interface.
+          example: dbaafd53-96ea-4754-9cce-78e7f08ac151
+          type: string
+          x-go-name: Network
+        subnet:
+          description: ID of the subnet for the interface.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: Subnet
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LoadBalancersPostRequest:
+      properties:
+        algorithm:
+          description: Load balancing algorithm used to distribute traffic across destinations (for example, random).
+          example: random
+          type: string
+          x-go-name: Algorithm
+        destinations:
+          description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
+          items:
+            $ref: '#/components/schemas/NetworkTarget'
+          type: array
+          x-go-name: Destinations
+        health_check:
+          $ref: '#/components/schemas/HealthCheckOptions'
+        location:
+          description: Location to create the load balancer in.
+          example: us-northcentraleast1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name for the new load balancer.
+          example: my-load-balancer
+          type: string
+          x-go-name: Name
+        network_interfaces:
+          description: Network interfaces to attach the load balancer to.
+          items:
+            $ref: '#/components/schemas/LoadBalancerNetworkInterface'
+          type: array
+          x-go-name: NetworkInterfaces
+        protocols:
+          description: 'Network protocols the load balancer handles. Currently only one of: tcp, udp.'
+          example: '[tcp]'
+          items:
+            type: string
+          type: array
+          x-go-name: Protocols
+        type:
+          description: Type of the load balancer (for example, internal_ipv4).
+          example: internal_ipv4
+          type: string
+          x-go-name: Type
+      required:
+      - name
+      - destinations
+      - location
+      - protocols
+      - network_interfaces
+      - algorithm
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LoadBalancer:
+      properties:
+        algorithm:
+          description: Load balancing algorithm used to distribute traffic across destinations (for example, random).
+          example: random
+          type: string
+          x-go-name: Algorithm
+        destinations:
+          description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
+          items:
+            $ref: '#/components/schemas/NetworkTarget'
+          type: array
+          x-go-name: Destinations
+        health_check:
+          $ref: '#/components/schemas/HealthCheckOptions'
+        id:
+          description: ID of the load balancer.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: ID
+        ips:
+          description: IP addresses assigned to the load balancer.
+          items:
+            $ref: '#/components/schemas/IPAddresses'
+          type: array
+          x-go-name: IPs
+        location:
+          description: Location of the load balancer.
+          example: us-northcentraleast1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name of the load balancer.
+          example: my-load-balancer
+          type: string
+          x-go-name: Name
+        network_interfaces:
+          description: Network interfaces the load balancer is attached to.
+          items:
+            $ref: '#/components/schemas/LoadBalancerNetworkInterface'
+          type: array
+          x-go-name: NetworkInterfaces
+        protocols:
+          description: 'Network protocols the load balancer handles. One of: tcp, udp.'
+          example: '[tcp]'
+          items:
+            type: string
+          type: array
+          x-go-name: Protocols
+        type:
+          description: Type of the load balancer (for example, internal_ipv4).
+          example: internal_ipv4
+          type: string
+          x-go-name: Type
+      required:
+      - id
+      - name
+      - network_interfaces
+      - destinations
+      - location
+      - protocols
+      - algorithm
+      - ips
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LoadBalancersPatchRequestV1:
+      properties:
+        destinations:
+          description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
+          items:
+            $ref: '#/components/schemas/NetworkTarget'
+          type: array
+          x-go-name: Destinations
+        health_check:
+          $ref: '#/components/schemas/HealthCheckOptions'
+        name:
+          description: New name for the load balancer.
+          example: my-load-balancer
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    HealthCheckOptions:
+      properties:
+        failure_count:
+          description: Number of allowed failures before considering a backend unhealthy.
+          example: '3'
+          type: string
+          x-go-name: FailureCount
+        interval:
+          description: Interval between health checks, in seconds.
+          example: '60'
+          type: string
+          x-go-name: Interval
+        port:
+          description: Port on which to perform health checks.
+          example: '8080'
+          type: string
+          x-go-name: Port
+        success_count:
+          description: Number of successful checks required to consider a backend healthy.
+          example: '2'
+          type: string
+          x-go-name: SuccessCount
+        timeout:
+          description: Timeout for a health check response, in seconds.
+          example: '20'
+          type: string
+          x-go-name: Timeout
+      required:
+      - port
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    PrivateIPv4Address:
+      properties:
+        address:
+          description: Private IPv4 address.
+          example: 10.1.2.3
+          type: string
+          x-go-name: Address
+      required:
+      - address
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    PublicIPv4Address:
+      properties:
+        address:
+          description: Public IPv4 address.
+          example: 121.0.0.0
+          type: string
+          x-go-name: Address
+        id:
+          description: ID of the public IPv4 address.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: ID
+        type:
+          description: Allocation type of the public IPv4 address (for example, dynamic).
+          example: dynamic
+          type: string
+          x-go-name: Type
+      required:
+      - address
+      - id
+      - type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getLoadBalancerResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoadBalancer'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listLoadBalancersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListLoadBalancersResponseV1'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

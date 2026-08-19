@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Kubernetes Clusters API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Kubernetes Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all Kubernetes clusters in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the clusters."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query",
+                "description": "Filters results to the cluster with this ID."
+              },
+              {
+                "name": "cluster_name",
+                "value": "my-first-cluster",
+                "type": "query",
+                "description": "Filters results to the cluster with this name."
+              },
+              {
+                "name": "cluster_search_names",
+                "value": "a40.2x,a100.8x",
+                "type": "query",
+                "description": "Filters results to clusters whose name matches one of these search names."
+              },
+              {
+                "name": "locations",
+                "value": "us-east1,us-northcentral1",
+                "type": "query",
+                "description": "Filters results to clusters in these locations."
+              },
+              {
+                "name": "states",
+                "value": "STATE_RUNNING",
+                "type": "query",
+                "description": "Filters results to clusters in these states."
+              },
+              {
+                "name": "versions",
+                "value": "1.30",
+                "type": "query",
+                "description": "Filters results to clusters running these versions."
+              },
+              {
+                "name": "sort",
+                "value": "name, -name",
+                "type": "query",
+                "description": "Field to sort results by; prefix with '-' for descending order."
+              },
+              {
+                "name": "show_inactive",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include inactive clusters in the results."
+              },
+              {
+                "name": "next_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Base64-encoded token for the next page of results."
+              },
+              {
+                "name": "prev_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Base64-encoded token for the previous page of results."
+              }
+            ]
+          },
+          "docs": "Lists all Kubernetes clusters in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates a Kubernetes cluster in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project to create the cluster in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Kubernetes cluster in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single Kubernetes cluster in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the cluster."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the cluster."
+              }
+            ]
+          },
+          "docs": "Returns details for a single Kubernetes cluster in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a Kubernetes cluster in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the cluster."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the cluster."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a Kubernetes cluster in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Deletes a Kubernetes cluster from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters/:cluster_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the cluster."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the cluster."
+              }
+            ]
+          },
+          "docs": "Deletes a Kubernetes cluster from the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns credentials for the user to authenticate to the cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/clusters/:cluster_id/get-credentials",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the cluster."
+              },
+              {
+                "name": "cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the cluster."
+              },
+              {
+                "name": "auth_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of credentials to return: oidc or admin_cert."
+              }
+            ]
+          },
+          "docs": "Returns credentials for the user to authenticate to the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

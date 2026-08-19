@@ -1,0 +1,269 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Observability API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Observability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export metrics in Prometheus text format (default) or OpenMetrics format for scraping.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/metrics/scrape",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "The project ID to scrape metrics from. User must have read access to the project."
+              },
+              {
+                "name": "metric_name",
+                "value": "crusoe_vm_cpu_seconds_total,crusoe_vm_disk_writes_completed_total",
+                "type": "query",
+                "description": "Filter by metric name. Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time)."
+              },
+              {
+                "name": "metric_category",
+                "value": "system",
+                "type": "query",
+                "description": "Filter by metric category. 'system' returns Crusoe-collected metrics.\n'custom' returns user-defined metrics with metrics_source=custom-metrics label."
+              },
+              {
+                "name": "labels",
+                "value": "job:api,region:us-east",
+                "type": "query",
+                "description": "Filter by label key:value pairs. Use colon to separate key and value.\nSupports comma-separated values (e.g., labels=job:api,region:us-east). Supports UNION (labels=device:loop1|loop2)"
+              },
+              {
+                "name": "compress",
+                "value": "true",
+                "type": "query",
+                "description": "Enable gzip compression for the response. Accepted values: 'true' (enables gzip compression) or 'false' (no compression). Invalid values will be logged and treated as 'false'."
+              },
+              {
+                "name": "format",
+                "value": "openmetrics",
+                "type": "query",
+                "description": "Response format. Default Prometheus text. Set to \"openmetrics\" to receive application/openmetrics-text (1.0) with # EOF marker."
+              }
+            ]
+          },
+          "docs": "This endpoint proxies to VictoriaMetrics /federate endpoint and returns metrics\nin Prometheus text exposition format for scraping by external monitoring systems.\n\nSupports filtering by:\nmetric_name: Filter by metric name(s). Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time)\nmetric_category: Filter by 'system' (Crusoe-collected) or 'custom' (user-defined) metrics\nlabels: Filter by label key:value pairs. Supports comma-separated values (e.g., labels=job:api"
+        },
+        {
+          "info": {
+            "name": "Query timeseries for a resource (in development).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/metrics/timeseries",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "resource_type",
+                "value": "shareddisk",
+                "type": "query"
+              },
+              {
+                "name": "resource_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "<rfc3339 | unix_timestamp>",
+                "type": "query",
+                "description": "Start timestamp, inclusive."
+              },
+              {
+                "name": "end",
+                "value": "<rfc3339 | unix_timestamp>",
+                "type": "query",
+                "description": "End timestamp, inclusive."
+              },
+              {
+                "name": "step",
+                "value": "5m | 30.0",
+                "type": "query",
+                "description": "Query resolution step width in duration format or float number of seconds."
+              }
+            ]
+          },
+          "docs": "Query timeseries for a resource (in development)."
+        },
+        {
+          "info": {
+            "name": "Query timeseries at an instant via PromQL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/metrics/timeseries/api/v1/query",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "query",
+                "value": "metric[label=value]",
+                "type": "query",
+                "description": "Prometheus expression query string."
+              },
+              {
+                "name": "time",
+                "value": "<rfc3339 | unix_timestamp>",
+                "type": "query",
+                "description": "Evaluation timestamp."
+              },
+              {
+                "name": "timeout",
+                "value": "30s",
+                "type": "query",
+                "description": "Evaluation timeout. Defaults to and is capped by the value of the -query.timeout flag."
+              },
+              {
+                "name": "limit",
+                "value": "5",
+                "type": "query",
+                "description": "Maximum number of returned series. 0 means disabled."
+              }
+            ]
+          },
+          "docs": "Query timeseries at an instant via PromQL."
+        },
+        {
+          "info": {
+            "name": "Query timeseries over a time range via PromQL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/metrics/timeseries/api/v1/query-range",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "query",
+                "value": "metric[label=value]",
+                "type": "query",
+                "description": "Prometheus expression query string."
+              },
+              {
+                "name": "start",
+                "value": "<rfc3339 | unix_timestamp>",
+                "type": "query",
+                "description": "Start timestamp, inclusive."
+              },
+              {
+                "name": "end",
+                "value": "<rfc3339 | unix_timestamp>",
+                "type": "query",
+                "description": "End timestamp, inclusive."
+              },
+              {
+                "name": "step",
+                "value": "5m | 30.0",
+                "type": "query",
+                "description": "Query resolution step width in duration format or float number of seconds."
+              },
+              {
+                "name": "timeout",
+                "value": "30s",
+                "type": "query",
+                "description": "Evaluation timeout. Defaults to and is capped by the value of the -query.timeout flag."
+              },
+              {
+                "name": "limit",
+                "value": "5",
+                "type": "query",
+                "description": "Maximum number of returned series. 0 means disabled."
+              }
+            ]
+          },
+          "docs": "Query timeseries over a time range via PromQL."
+        },
+        {
+          "info": {
+            "name": "Query timeseries by passing various metric parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/metrics/timeseries/query-parameters",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "metric",
+                "value": "cpu_usage_seconds_total",
+                "type": "query",
+                "description": "Name of the metric to query."
+              },
+              {
+                "name": "label",
+                "value": "instance=server1,job=node",
+                "type": "query",
+                "description": "Labels to filter the metric by.  Multiple labels can be provided as comma-separated key=value pairs."
+              },
+              {
+                "name": "function",
+                "value": "function=rate,avg",
+                "type": "query",
+                "description": "Function to use (e.g., rate, avg). Multiple functions are separated by comma and applied in that order"
+              },
+              {
+                "name": "range",
+                "value": "range=3600",
+                "type": "query",
+                "description": "Range to use with some functions (e.g., rate)."
+              },
+              {
+                "name": "start",
+                "value": "2024-01-22T10:00:00Z",
+                "type": "query",
+                "description": "Start timestamp, inclusive."
+              },
+              {
+                "name": "end",
+                "value": "2024-01-22T11:00:00Z",
+                "type": "query",
+                "description": "End timestamp, inclusive."
+              },
+              {
+                "name": "step",
+                "value": "60",
+                "type": "query",
+                "description": "Query resolution step width in duration format or float number of seconds."
+              }
+            ]
+          },
+          "docs": "Query timeseries by passing various metric parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

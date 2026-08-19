@@ -1,0 +1,2315 @@
+{
+  "item": [
+    {
+      "id": "04e1efc4-6481-4dc5-9351-7c6691b2f96b",
+      "name": "Observability",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7c912d2-87f7-4c6f-9c0e-c2446f2eefe5",
+          "name": "Export metrics in Prometheus text format (default) or OpenMetrics format for scraping.",
+          "request": {
+            "name": "Export metrics in Prometheus text format (default) or OpenMetrics format for scraping.",
+            "description": {
+              "content": "This endpoint proxies to VictoriaMetrics /federate endpoint and returns metrics\nin Prometheus text exposition format for scraping by external monitoring systems.\n\nSupports filtering by:\nmetric_name: Filter by metric name(s). Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time)\nmetric_category: Filter by 'system' (Crusoe-collected) or 'custom' (user-defined) metrics\nlabels: Filter by label key:value pairs. Supports comma-separated values (e.g., labels=job:api,region:us-east)\n\nInternal metrics and provisioned throughput metrics are always excluded.\n\nRate limited to 10 requests per minute per project.\nResponse limited to 50MB payload and 100,000 time series.\nResponses are cached for up to 1 minute.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "metrics",
+                "scrape"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metric_name",
+                  "value": "<string>",
+                  "description": "Filter by metric name. Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time)."
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_name",
+                  "value": "<string>",
+                  "description": "Filter by metric name. Supports comma-separated values (e.g., metric_name=http_requests_total,http_response_time)."
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_category",
+                  "value": "<string>",
+                  "description": "Filter by metric category. 'system' returns Crusoe-collected metrics.\n'custom' returns user-defined metrics with metrics_source=custom-metrics label."
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "Filter by label key:value pairs. Use colon to separate key and value.\nSupports comma-separated values (e.g., labels=job:api,region:us-east). Supports UNION (labels=device:loop1|loop2)"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "Filter by label key:value pairs. Use colon to separate key and value.\nSupports comma-separated values (e.g., labels=job:api,region:us-east). Supports UNION (labels=device:loop1|loop2)"
+                },
+                {
+                  "disabled": false,
+                  "key": "compress",
+                  "value": "<string>",
+                  "description": "Enable gzip compression for the response. Accepted values: 'true' (enables gzip compression) or 'false' (no compression). Invalid values will be logged and treated as 'false'."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format. Default Prometheus text. Set to \"openmetrics\" to receive application/openmetrics-text (1.0) with # EOF marker."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c41c6c9c-63cd-45ba-865c-0b11223711b3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_category",
+                      "value": "system"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "openmetrics"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "584aa96f-930f-44d3-927c-06e93c91654a",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_category",
+                      "value": "system"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "openmetrics"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4e5af80-9ce6-4934-9904-0f1bafd438ae",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_category",
+                      "value": "system"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "openmetrics"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef6c3a82-ee49-496c-ab8c-dc0b21c85ef0",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_category",
+                      "value": "system"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "openmetrics"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cffd86f1-cd09-45c1-b1d4-a8fc2acf3d68",
+              "name": "Error Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_category",
+                      "value": "system"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "openmetrics"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"429\",\n  \"message\": \"too_many_requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e4c34b5-f24b-4bdf-9176-3f013024ce20",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_category",
+                      "value": "system"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compress",
+                      "value": "true"
+                    },
+                    {
+                      "key": "format",
+                      "value": "openmetrics"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The project ID to scrape metrics from. User must have read access to the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "580f9919-6199-4229-9d2a-3d62e0da392b",
+          "name": "Query timeseries for a resource (in development).",
+          "request": {
+            "name": "Query timeseries for a resource (in development).",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "metrics",
+                "timeseries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "resource_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "resource_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start timestamp, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) End timestamp, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<string>",
+                  "description": "(Required) Query resolution step width in duration format or float number of seconds."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81315116-f356-4dce-a0d3-940a8ce9459c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_type",
+                      "value": "shareddisk"
+                    },
+                    {
+                      "key": "resource_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {},\n  \"error\": \"???\",\n  \"errorType\": \"???\",\n  \"infos\": [\n    \"string\",\n    \"string\"\n  ],\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbf1e584-4267-48c5-a5b8-b19695fa7db5",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_type",
+                      "value": "shareddisk"
+                    },
+                    {
+                      "key": "resource_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cd5e76b-c757-4f38-a7ff-d709af38706e",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_type",
+                      "value": "shareddisk"
+                    },
+                    {
+                      "key": "resource_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c74e5474-3eb4-401b-b6bd-ed5618eaf1a4",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_type",
+                      "value": "shareddisk"
+                    },
+                    {
+                      "key": "resource_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f2e9eea-9137-4a21-9f73-1a4ea90e8183",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_type",
+                      "value": "shareddisk"
+                    },
+                    {
+                      "key": "resource_id",
+                      "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b243b77-8936-4cf9-9ce4-e0ce03ebcd24",
+          "name": "Query timeseries at an instant via PromQL.",
+          "request": {
+            "name": "Query timeseries at an instant via PromQL.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "metrics",
+                "timeseries",
+                "api",
+                "v1",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Prometheus expression query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "Evaluation timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Evaluation timeout. Defaults to and is capped by the value of the -query.timeout flag."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Maximum number of returned series. 0 means disabled."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67e0180a-e8d7-47ca-a6ca-257aaa123a19",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {},\n  \"error\": \"???\",\n  \"errorType\": \"???\",\n  \"infos\": [\n    \"string\",\n    \"string\"\n  ],\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a70b942-2cfd-40a8-adb6-4c0b9bb9505e",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69978994-5aee-4de0-86bc-a9a6fc39490c",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0cd222d-f8e2-4746-a5de-371a10eb2da7",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f4bb623-c36e-4c80-9b0d-67c122c326a7",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65c6dbcd-224b-4f9a-bd1d-34069581fce6",
+          "name": "Query timeseries over a time range via PromQL.",
+          "request": {
+            "name": "Query timeseries over a time range via PromQL.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "metrics",
+                "timeseries",
+                "api",
+                "v1",
+                "query-range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Prometheus expression query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start timestamp, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) End timestamp, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<string>",
+                  "description": "(Required) Query resolution step width in duration format or float number of seconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Evaluation timeout. Defaults to and is capped by the value of the -query.timeout flag."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "Maximum number of returned series. 0 means disabled."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a579ebf-6989-4f3e-9151-2c258f14b575",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query-range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {},\n  \"error\": \"???\",\n  \"errorType\": \"???\",\n  \"infos\": [\n    \"string\",\n    \"string\"\n  ],\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cd61dd8-bb00-49fb-aac4-8669bbee7036",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query-range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4431312-810e-403c-88aa-05050977271f",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query-range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1ceab57-949d-4b17-9a60-db6b511f6cf5",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query-range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b2d277c-6f69-4b42-a332-f26ce14b350d",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "api",
+                    "v1",
+                    "query-range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "metric[label=value]"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<rfc3339 | unix_timestamp>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "5m | 30.0"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "30s"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88861c9d-2f52-4fd5-8f9e-61d7bac0ddbe",
+          "name": "Query timeseries by passing various metric parameters.",
+          "request": {
+            "name": "Query timeseries by passing various metric parameters.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "metrics",
+                "timeseries",
+                "query-parameters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metric",
+                  "value": "<string>",
+                  "description": "(Required) Name of the metric to query."
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Labels to filter the metric by.  Multiple labels can be provided as comma-separated key=value pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Labels to filter the metric by.  Multiple labels can be provided as comma-separated key=value pairs."
+                },
+                {
+                  "disabled": false,
+                  "key": "function",
+                  "value": "<string>",
+                  "description": "Function to use (e.g., rate, avg). Multiple functions are separated by comma and applied in that order"
+                },
+                {
+                  "disabled": false,
+                  "key": "range",
+                  "value": "<string>",
+                  "description": "Range to use with some functions (e.g., rate)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Start timestamp, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) End timestamp, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "3600",
+                  "description": "Query resolution step width in duration format or float number of seconds."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1afa86b6-fff8-4d38-bfa9-c54024dc68b6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "query-parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "cpu_usage_seconds_total"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "function",
+                      "value": "function=rate,avg"
+                    },
+                    {
+                      "key": "range",
+                      "value": "range=3600"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2024-01-22T10:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2024-01-22T11:00:00Z"
+                    },
+                    {
+                      "key": "step",
+                      "value": "60"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {},\n  \"error\": \"???\",\n  \"errorType\": \"???\",\n  \"infos\": [\n    \"string\",\n    \"string\"\n  ],\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4a78705-0e53-464c-a388-fa30eb001bc9",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "query-parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "cpu_usage_seconds_total"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "function",
+                      "value": "function=rate,avg"
+                    },
+                    {
+                      "key": "range",
+                      "value": "range=3600"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2024-01-22T10:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2024-01-22T11:00:00Z"
+                    },
+                    {
+                      "key": "step",
+                      "value": "60"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f336b0c-8c71-4366-ad68-0e150963dc77",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "query-parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "cpu_usage_seconds_total"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "function",
+                      "value": "function=rate,avg"
+                    },
+                    {
+                      "key": "range",
+                      "value": "range=3600"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2024-01-22T10:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2024-01-22T11:00:00Z"
+                    },
+                    {
+                      "key": "step",
+                      "value": "60"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d6be44e-f1e0-47d6-9879-34597894fef6",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "query-parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "cpu_usage_seconds_total"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "function",
+                      "value": "function=rate,avg"
+                    },
+                    {
+                      "key": "range",
+                      "value": "range=3600"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2024-01-22T10:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2024-01-22T11:00:00Z"
+                    },
+                    {
+                      "key": "step",
+                      "value": "60"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e5dc6f5-dfcf-4d74-9c3b-e67acd0cfd4e",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "metrics",
+                    "timeseries",
+                    "query-parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "cpu_usage_seconds_total"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "function",
+                      "value": "function=rate,avg"
+                    },
+                    {
+                      "key": "range",
+                      "value": "range=3600"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2024-01-22T10:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2024-01-22T11:00:00Z"
+                    },
+                    {
+                      "key": "step",
+                      "value": "60"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e3846dc3-e3dc-42ac-9abf-0662cdd44919",
+    "name": "Crusoe Observability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Observability across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

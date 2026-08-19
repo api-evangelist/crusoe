@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe SSH Keys API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSH Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the list of SSH public keys registered to the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/users/ssh-keys"
+          },
+          "docs": "Retrieve the list of SSH public keys registered to the logged in user."
+        },
+        {
+          "info": {
+            "name": "Register a new SSH public key to the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/users/ssh-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource wil contain the created SSH key details."
+        },
+        {
+          "info": {
+            "name": "Delete an SSH public key registered to the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/users/ssh-keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "6e28cad3-98e6-47a9-a9fc-1cd83a7f25c1",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete an SSH public key registered to the logged in user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

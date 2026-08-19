@@ -1,0 +1,1496 @@
+openapi: 3.2.0
+info:
+  title: Crusoe V Ms API
+  version: '1.0'
+  description: 'Operations tagged VMs across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: VMs
+paths:
+  /projects/{project_id}/compute/vms/bulk-instances:
+    post:
+      operationId: bulkCreateInstance
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates multiple VMs in the project and returns the async operation.
+      tags:
+      - VMs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkInstancePostRequestV1'
+        required: true
+  /projects/{project_id}/compute/vms/instances:
+    get:
+      operationId: listInstances
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Filters results to VMs with these IDs.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: query
+        name: ids
+        x-go-name: IDs
+        schema:
+          type: string
+      - description: Filters results to VMs with these names.
+        example: my-first-vm
+        in: query
+        name: names
+        x-go-name: Names
+        schema:
+          type: string
+      - description: Filters results to VMs of these types.
+        example: a40.2x,a100.8x
+        in: query
+        name: types
+        x-go-name: Types
+        schema:
+          type: string
+      - description: Filters results to VMs in these locations.
+        example: us-east1,us-northcentral1
+        in: query
+        name: locations
+        x-go-name: Locations
+        schema:
+          type: string
+      - description: Filters results to VMs in these states.
+        example: STATE_RUNNING
+        in: query
+        name: states
+        x-go-name: States
+        schema:
+          type: string
+      - description: Filters results to VMs in these NVLink domains.
+        example: 550e8400-e29b-41d4-a716-446655440000
+        in: query
+        name: nvlink_domain_ids
+        x-go-name: NvlinkDomainIds
+        schema:
+          type: string
+      - description: Maximum number of VMs to return per page.
+        example: '20'
+        in: query
+        name: limit
+        x-go-name: Limit
+        schema:
+          type: string
+      - description: Field to sort the results by.
+        example: name
+        in: query
+        name: sort
+        x-go-name: Sort
+        schema:
+          type: string
+      - description: Token identifying the next page of results to return.
+        example: bXktZmlyc3Qtdm0
+        in: query
+        name: next_token
+        x-go-name: NextToken
+        schema:
+          type: string
+      - description: Token identifying the previous page of results to return.
+        example: bXktZmlyc3Qtdm0
+        in: query
+        name: prev_token
+        x-go-name: PrevToken
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listInstancesResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all VMs in the project and returns their details.
+      tags:
+      - VMs
+    post:
+      operationId: createInstance
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a VM in the project and returns the async operation.
+      tags:
+      - VMs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstancesPostRequestV1'
+        required: true
+  /projects/{project_id}/compute/vms/instances/{vm_id}:
+    delete:
+      operationId: deleteInstance
+      parameters:
+      - description: ID of the project that owns the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vm_id
+        required: true
+        x-go-name: VMID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a VM from the project and returns the async operation.
+      tags:
+      - VMs
+    get:
+      operationId: getInstance
+      parameters:
+      - description: ID of the project that owns the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vm_id
+        required: true
+        x-go-name: VMID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getInstanceResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single VM in the project.
+      tags:
+      - VMs
+    patch:
+      operationId: updateInstance
+      parameters:
+      - description: ID of the project that owns the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vm_id
+        required: true
+        x-go-name: VMID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates a VM in the project and returns the async operation.
+      tags:
+      - VMs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstancesPatchRequestV1'
+        required: true
+  /projects/{project_id}/compute/vms/instances/{vm_id}/attach-disks:
+    post:
+      operationId: updateInstanceAttachDisks
+      parameters:
+      - description: ID of the project that owns the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vm_id
+        required: true
+        x-go-name: VMID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Attaches disks to a VM in the project and returns the async operation.
+      tags:
+      - VMs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstancesAttachDiskPostRequestV1'
+        required: true
+  /projects/{project_id}/compute/vms/instances/{vm_id}/detach-disks:
+    post:
+      operationId: updateInstanceDetachDisks
+      parameters:
+      - description: ID of the project that owns the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VM.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vm_id
+        required: true
+        x-go-name: VMID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Detaches disks from a VM in the project and returns the async operation.
+      tags:
+      - VMs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstancesDetachDiskPostRequest'
+        required: true
+  /projects/{project_id}/compute/vms/types:
+    get:
+      operationId: getVMTypes
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/typesGetResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all available VM types and returns their details.
+      tags:
+      - VMs
+components:
+  schemas:
+    IPAddresses:
+      properties:
+        private_ipv4:
+          $ref: '#/components/schemas/PrivateIPv4Address'
+        public_ipv4:
+          $ref: '#/components/schemas/PublicIPv4Address'
+      required:
+      - private_ipv4
+      - public_ipv4
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VirtualizationFeatures:
+      properties:
+        nested_virtualization:
+          description: Whether nested virtualization is enabled, allowing a VM to run inside this VM.
+          example: true
+          type: boolean
+          x-go-name: NestedVirtualization
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Type:
+      properties:
+        cpu_cores:
+          description: Number of CPU cores provided by the VM type.
+          example: 4
+          format: int64
+          type: integer
+          x-go-name: CPUCores
+        cpu_type:
+          description: CPU manufacturer of the VM type.
+          example: intel
+          type: string
+          x-go-name: CPUType
+        description:
+          description: Human-readable description of the VM type.
+          example: 2x Nvidia A100
+          type: string
+          x-go-name: Description
+        disk_gb:
+          description: Amount of disk storage provided by the VM type, in GB.
+          example: 8
+          format: int64
+          type: integer
+          x-go-name: DiskGB
+        disk_type:
+          description: Type of disk storage provided by the VM type.
+          example: SSD
+          type: string
+          x-go-name: DiskType
+        gpu_type:
+          description: GPU model provided by the VM type.
+          example: A100
+          type: string
+          x-go-name: GPUType
+        memory_gb:
+          description: Amount of memory provided by the VM type, in GB.
+          example: 16
+          format: int64
+          type: integer
+          x-go-name: MemoryGB
+        memory_type:
+          description: Type of memory provided by the VM type.
+          example: RAM
+          type: string
+          x-go-name: MemoryType
+        num_gpu:
+          description: Number of GPUs provided by the VM type.
+          example: 2
+          format: int64
+          type: integer
+          x-go-name: NumGPU
+        product_name:
+          description: Product name of the VM type.
+          example: a100.2x
+          type: string
+          x-go-name: ProductName
+      required:
+      - product_name
+      - description
+      - cpu_cores
+      - cpu_type
+      - memory_gb
+      - memory_type
+      - disk_gb
+      - disk_type
+      - num_gpu
+      - gpu_type
+      title: Type describes an instance type of a Crusoe cloud offering, used in the GET vms.types endpoint response.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AttachedDiskV1:
+      properties:
+        attachment_type:
+          description: 'How the disk is attached to the VM: os (boot disk) or data.'
+          example: os | data
+          type: string
+          x-go-name: AttachmentType
+        block_size:
+          description: Block size of the disk, in bytes.
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        created_at:
+          description: Creation timestamp of the disk, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        id:
+          description: ID of the disk.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: ID
+        location:
+          description: Location of the disk.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        mode:
+          description: 'Access mode the disk is attached with: read-write or read-only.'
+          example: read-write | read-only
+          type: string
+          x-go-name: Mode
+        name:
+          description: Name of the disk.
+          example: my-disk
+          type: string
+          x-go-name: Name
+        serial_number:
+          description: Serial number of the disk.
+          example: 96FD14FDBCF7E21E8EC
+          type: string
+          x-go-name: SerialNumber
+        size:
+          description: Size of the disk.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        type:
+          description: Storage type of the disk.
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+        updated_at:
+          description: Last update timestamp of the disk, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: UpdatedAt
+      required:
+      - id
+      - name
+      - type
+      - size
+      - location
+      - block_size
+      - created_at
+      - updated_at
+      - serial_number
+      - attachment_type
+      - mode
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstanceTemplatePostRequestV1:
+      properties:
+        custom_image_name:
+          description: 'Custom image to use for all VMs created from this instance template.
+
+            Only one of Image or CustomImage should be supplied at once.'
+          example: ubuntu:20.04
+          type: string
+          x-go-name: CustomImage
+        disks:
+          description: Disks to attach to all VMs created from this instance template.
+          items:
+            $ref: '#/components/schemas/DiskTemplate'
+          type: array
+          x-go-name: Disks
+        ib_partition_id:
+          description: 'Deprecated: Use transport_partition_id instead.'
+          type: string
+          x-go-name: IBPartition
+        image_name:
+          description: OS Image to use for all VMs created from this instance template.
+          example: ubuntu:20.04
+          type: string
+          x-go-name: Image
+        location:
+          description: 'Location to use for all VMs created from this instance template.
+
+            If provided, all location-specific resources must also be provided.'
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        maintenance_policy:
+          description: Host maintenance policy controlling how VMs created from this instance template behave during host maintenance.
+          example: manual,stop-vm,unspecified
+          type: string
+          x-go-name: MaintenancePolicy
+        nvlink_domain_id:
+          description: NVLink domain to assign to all VMs created from this instance template.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+          x-go-name: NvlinkDomainID
+        placement_policy:
+          description: 'Placement policy controlling how VMs created from this instance template are
+
+            distributed across hosts: spread or unspecified.'
+          example: spread
+          type: string
+          x-go-name: PlacementPolicy
+        public_ip_address_type:
+          description: Public IP address type to use for all VMs created from this instance template. Must either be "static" or "dynamic".
+          example: static
+          type: string
+          x-go-name: PublicIPAddressType
+        reservation_id:
+          description: Reservation to use for all VMs created from this instance template.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+          type: string
+          x-go-name: ReservationID
+        shutdown_script:
+          description: Shutdown script to use for all VMs created from this instance template.
+          example: '"#!/bin/bash\necho ''goodbye''"'
+          type: string
+          x-go-name: ShutdownScript
+        ssh_public_key:
+          description: SSH public key to use for all VMs created from this instance template.
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D
+          type: string
+          x-go-name: SSHPublicKey
+        startup_script:
+          description: Startup script to use for all VMs created from this instance template.
+          example: '"#!/bin/bash\necho ''hello''"'
+          type: string
+          x-go-name: StartupScript
+        subnet_id:
+          description: 'Subnet to use for all VMs created from this instance template.
+
+            This is location-specific and must be provided if location is provided.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: Subnet
+        template_name:
+          description: Name of the instance template. (This is not the name of the VMs created from this instance template.)
+          example: my-instance-template
+          type: string
+          x-go-name: TemplateName
+        transport_partition_id:
+          description: 'IB or RoCE partition to use for all VMs created from this instance template.
+
+            Should only be provided for transport-enabled VM types.
+
+            This is location-specific and must be provided if location is provided.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: TransportPartitionID
+        type:
+          description: Product name of the VM type we want to create from this instance template.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+        virtualization_features:
+          $ref: '#/components/schemas/VirtualizationFeatures'
+      required:
+      - template_name
+      - type
+      - ssh_public_key
+      title: InstanceTemplatePostRequestV1 defines the specifications of VMs to be created during bulk VM creation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListTypesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Type'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstancesDetachDiskPostRequest:
+      description: 'InstancesDetachDiskPostRequest is the request type for POST requests to the
+
+        vms.instances.detach-disk endpoint.'
+      properties:
+        detach_disks:
+          description: Identifiers of the disks to detach from the VM.
+          example:
+          - 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          - 123e4567-e89b-12d3-a456-426614174000
+          items:
+            type: string
+          type: array
+          x-go-name: DetachDisks
+      required:
+      - detach_disks
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskAttachment:
+      properties:
+        attachment_type:
+          description: 'Role the disk plays for the VM: os or data.'
+          enum:
+          - os
+          - data
+          example: data
+          type: string
+          x-go-name: AttachmentType
+        disk_id:
+          description: ID of the disk to attach.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: DiskID
+        mode:
+          description: 'Access mode to attach the disk with: read-only or read-write.'
+          enum:
+          - read-only
+          - read-write
+          example: read-write
+          type: string
+          x-go-name: Mode
+      required:
+      - disk_id
+      - mode
+      - attachment_type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    BulkCreateLocationInfo:
+      properties:
+        ib_partition_id:
+          description: 'Deprecated: Use transport_partition_id instead.'
+          type: string
+          x-go-name: IBPartitionID
+        location:
+          description: Location to create the VMs in.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        subnet_id:
+          description: 'ID of the subnet to create the VMs in. Must be in the same location
+
+            as the VMs. If not provided, the default subnet for the location will be
+
+            used, if there is one.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: SubnetID
+        transport_partition_id:
+          description: 'ID of the Infiniband or RoCE partition to create the VMs in, if a transport type was
+
+            specified. Must be in the same location as the VMs.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: TransportPartitionID
+      required:
+      - location
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    InstancesPatchRequestV1:
+      properties:
+        action:
+          description: 'Action to perform on the VM: START, STOP, RESET, RESERVE, UNRESERVE, or UPDATE. RESERVE and
+
+            UNRESERVE operations are done synchronously, and so will have succeeded with a 200 response.'
+          enum:
+          - START
+          - STOP
+          - RESET
+          - RESERVE
+          - UNRESERVE
+          - UPDATE
+          example: START
+          type: string
+          x-go-name: Action
+        commitment_period:
+          description: CommitmentPeriod is deprecated, please use reservationID instead
+          format: int64
+          type: integer
+          x-go-name: CommitmentPeriod
+        host_channel_adapters:
+          description: New set of host channel adapters for the VM.
+          items:
+            $ref: '#/components/schemas/PartialHostChannelAdapter'
+          type: array
+          x-go-name: HostChannelAdapters
+        maintenance_policy:
+          description: 'New host maintenance policy for the VM: manual, stop-vm, or unspecified.'
+          example: manual,stop-vm,unspecified
+          type: string
+          x-go-name: MaintenancePolicy
+        network_interfaces:
+          description: New set of network interfaces for the VM.
+          items:
+            $ref: '#/components/schemas/NetworkInterface'
+          type: array
+          x-go-name: NetworkInterfaces
+        reservation_id:
+          description: ID of the reservation to use for the VM.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+          type: string
+          x-go-name: ReservationID
+        type:
+          description: New VM type to change the VM to.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+      required:
+      - action
+      title: InstancesPatchRequestV1 is the request type for PATCH requests to the vms.instances endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    BulkInstancePostRequestV1:
+      properties:
+        count:
+          description: 'Number of VMs to create. If multiple locations are specified, this is the number of VMs
+
+            created in each location.'
+          example: 6
+          format: int64
+          type: integer
+          x-go-name: Count
+        crusoe_watch_agent_install_mode:
+          description: 'Installation mode for the Crusoe Watch Agent: docker or native. Defaults to docker.'
+          enum:
+          - docker
+          - native
+          type: string
+          x-go-name: CrusoeWatchAgentInstallMode
+        install_crusoe_watch_agent:
+          description: Whether to install the Crusoe Watch Agent on the VMs. Defaults to true.
+          type:
+          - boolean
+          - 'null'
+          x-go-name: InstallCrusoeWatchAgent
+        instance_group_id:
+          description: ID of the instance group the VMs will be created in.
+          example: cda562c4-6162-4565-95f3-ce06a8220c07
+          type: string
+          x-go-name: InstanceGroupID
+        instance_template:
+          $ref: '#/components/schemas/InstanceTemplatePostRequestV1'
+        instance_template_id:
+          description: ID of the instance template to use for creating the VMs.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: InstanceTemplateID
+        locations:
+          description: Locations to create the VMs in. This overrides any location specified in the instance template.
+          items:
+            $ref: '#/components/schemas/BulkCreateLocationInfo'
+          type: array
+          x-go-name: Locations
+        name_prefix:
+          description: 'Name prefix for the VMs to be created, used to derive each VM''s name (e.g. "my-vm" produces
+
+            "my-vm-1", "my-vm-2", and so on).'
+          example: my-vm
+          type: string
+          x-go-name: NamePrefix
+        nvlink_domain_id:
+          description: ID of the NVLink domain to create the VMs in.
+          type: string
+          x-go-name: NvlinkDomainID
+        reservation_specification:
+          $ref: '#/components/schemas/ReservationSpecification'
+      required:
+      - name_prefix
+      - count
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstancesPostRequestV1:
+      description: 'InstancesPostRequestV1 is the request type for POST requests to the
+
+        vms.instances endpoint.'
+      properties:
+        commitment_period:
+          description: commitment is no longer supported
+          format: int64
+          type: integer
+          x-go-name: CommitmentPeriod
+        crusoe_watch_agent_install_mode:
+          description: 'Installation mode for the Crusoe Watch Agent: docker or native. Defaults to docker.'
+          enum:
+          - docker
+          - native
+          type: string
+          x-go-name: CrusoeWatchAgentInstallMode
+        custom_image:
+          description: ID of a custom image to use for the new VM. Either image or custom_image should be supplied, not both.
+          type: string
+          x-go-name: CustomImage
+        disks:
+          description: Disks to attach to the new VM.
+          example: '[{disk_id: "09ae8411-0fbb-411c-898c-2b8f19622ae1", mode: "read-write", attachment_type: "data"},'
+          items:
+            $ref: '#/components/schemas/DiskAttachment'
+          type: array
+          x-go-name: Disks
+        host_channel_adapters:
+          description: Host channel adapters to attach to the new VM.
+          items:
+            $ref: '#/components/schemas/PartialHostChannelAdapter'
+          type: array
+          x-go-name: HostChannelAdapters
+        image:
+          description: Name of the OS image to use for the new VM. Either image or custom_image should be supplied, not both.
+          example: ubuntu:20.04
+          type: string
+          x-go-name: Image
+        install_crusoe_watch_agent:
+          description: Whether to install the Crusoe Watch Agent on the VM. Defaults to true.
+          type:
+          - boolean
+          - 'null'
+          x-go-name: InstallCrusoeWatchAgent
+        location:
+          description: Location to create the VM in.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        maintenance_policy:
+          description: 'Host maintenance policy to apply to the new VM: manual, stop-vm, or unspecified.'
+          example: manual,stop-vm,unspecified
+          type: string
+          x-go-name: MaintenancePolicy
+        name:
+          description: Name for the new VM.
+          example: my-first-vm
+          type: string
+          x-go-name: Name
+        network_interfaces:
+          description: Network interfaces to attach to the new VM.
+          items:
+            $ref: '#/components/schemas/NetworkInterface'
+          type: array
+          x-go-name: NetworkInterfaces
+        nvlink_domain_id:
+          description: ID of the NVLink domain to create the VM in.
+          type: string
+          x-go-name: NvlinkDomainID
+        reservation_specification:
+          $ref: '#/components/schemas/ReservationSpecification'
+        shutdown_script:
+          description: Script to run when the VM shuts down.
+          example: '#!/bin/bash\necho ''goodbye'''
+          type: string
+          x-go-name: ShutdownScript
+        ssh_public_key:
+          description: SSH public key to grant access to the new VM.
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCspdG97nTS/h4PEPq2QD2RYVK1jxFXLFZuSDMI8Rtxpucl6LDZLOghEYoj13lxKQnGtcsM3Iu68lh+4YgZe7CbI6cc/TxPbeAX2HJTqDh0J7+GAlLBHK9tsepC0QlhIDiazJptOPDZ3cesCBXdxSnzEbhDaqgYOfl393cp1fCeOKRIDWEP3H9CM25dCbWF66sTDziLsojJ9dMnxhgKm9/JkZc5gYncLT/2Ey+VWfV9Fs65mGUrBbQOn3c8S/nEk6WRcYn4PFOnIp0Mz+Chb50iCJrW677pllLnkTGSU+4c0H9J5z4HDG0I+91RoiQ0QsayFTYO1JtSn+THLuq98V+D
+          type: string
+          x-go-name: SSHPublicKey
+        startup_script:
+          description: Script to run when the VM starts.
+          example: '#!/bin/bash\necho ''hello'''
+          type: string
+          x-go-name: StartupScript
+        type:
+          description: Product name of the VM type to create.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+        virtualization_features:
+          $ref: '#/components/schemas/VirtualizationFeatures'
+      required:
+      - type
+      - ssh_public_key
+      - name
+      - location
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    NetworkInterface:
+      properties:
+        external_dns_name:
+          description: External DNS name of the network interface.
+          type: string
+          x-go-name: ExternalDNSName
+        id:
+          description: ID of the network interface.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
+          type: string
+          x-go-name: ID
+        interface_type:
+          description: Type of the network interface.
+          example: ethernet
+          type: string
+          x-go-name: InterfaceType
+        ips:
+          description: IP addresses assigned to the network interface.
+          items:
+            $ref: '#/components/schemas/IPAddresses'
+          type: array
+          x-go-name: IPs
+        mac_address:
+          description: MAC address of the network interface.
+          example: 00:00:5e:00:53:af
+          type: string
+          x-go-name: MACAddress
+        name:
+          description: Name of the network interface.
+          example: network-interface-1
+          type: string
+          x-go-name: Name
+        network:
+          description: ID of the VPC network the interface is attached to.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: Network
+        subnet:
+          description: ID of the VPC subnet the interface is attached to.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: Subnet
+      required:
+      - id
+      - name
+      - network
+      - subnet
+      - interface_type
+      - mac_address
+      - ips
+      - external_dns_name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    HostChannelAdapter:
+      properties:
+        guid:
+          description: Globally unique identifier (GUID) of the host channel adapter.
+          example: 946d:ae03:0021:69aa
+          type: string
+          x-go-name: GUID
+        ib_network_id:
+          type: string
+          x-go-name: IBNetworkID
+        ib_partition_id:
+          type: string
+          x-go-name: IBPartitionID
+        transport_network_id:
+          description: ID of the transport network the host channel adapter is attached to.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
+          type: string
+          x-go-name: TransportNetworkID
+        transport_partition_id:
+          description: ID of the transport partition the host channel adapter is attached to.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
+          type: string
+          x-go-name: TransportPartitionID
+        type:
+          description: Transport type of the host channel adapter.
+          example: infiniband
+          type: string
+          x-go-name: Type
+      required:
+      - type
+      - guid
+      - ib_network_id
+      - ib_partition_id
+      - transport_network_id
+      - transport_partition_id
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListInstancesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/InstanceV1'
+          type: array
+          x-go-name: Items
+        next_page_token:
+          description: 'Base64 encoded token representing the next page of instances.
+
+            Empty if currently on the last page.'
+          example: bXktbGFzdC12bQ
+          type: string
+          x-go-name: NextPageToken
+        prev_page_token:
+          description: 'Base64 encoded token representing the previous page of instances.
+
+            Empty if currently on the first page.'
+          example: bXktZmlyc3Qtdm0
+          type: string
+          x-go-name: PrevPageToken
+      required:
+      - items
+      title: ListInstancesResponseV1 is the response type for GET requests to /compute/vms/instances.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstancesAttachDiskPostRequestV1:
+      description: 'InstancesAttachDiskPostRequestV1 is the request type for POST requests to the
+
+        vms.instances.attach-disk endpoint.'
+      properties:
+        attach_disks:
+          description: Disks to attach to the VM.
+          example: '[{disk_id: "09ae8411-0fbb-411c-898c-2b8f19622ae1", mode: "read-write", attachment_type: "data"}, {disk_id: "b1f86d1b-42d2-490d-adb0-cc1029abf653", mode: "read-only", attachment_type: "data"}]'
+          items:
+            $ref: '#/components/schemas/DiskAttachment'
+          type: array
+          x-go-name: AttachDisks
+      required:
+      - attach_disks
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    PartialHostChannelAdapter:
+      properties:
+        ib_partition_id:
+          description: 'Deprecated: Use transport_partition_id instead.'
+          type: string
+          x-go-name: IBPartitionID
+        transport_partition_id:
+          description: ID of the transport partition to assign the host channel adapter to.
+          type: string
+          x-go-name: TransportPartitionID
+      title: PartialHostChannelAdapter is used when POSTing and PATCHing VMs to assign IB Partitions.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskTemplate:
+      properties:
+        size:
+          description: Size of the disk, including a unit suffix.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        type:
+          description: 'Type of disk to create: persistent-ssd or shared-volume.'
+          enum:
+          - persistent-ssd
+          - shared-volume
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+      required:
+      - size
+      - type
+      title: DiskTemplate defines a disk to create for each VM during bulk VM creation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    InstanceV1:
+      description: 'InstanceV1 contains identifying information about a vm instance for
+
+        vms.instances endpoints.'
+      properties:
+        billing_type:
+          description: 'Billing type of the VM: On-demand, Spot, or PoC.
+
+            values: On-demand, Spot, PoC'
+          type: string
+          x-go-name: BillingType
+        commitment_end:
+          type: string
+          x-go-name: CommitmentEnd
+        commitment_period:
+          description: commitment is no longer supported
+          format: int64
+          type: integer
+          x-go-name: CommitmentPeriod
+        created_at:
+          description: Creation timestamp of the VM, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        disks:
+          description: Disks attached to the VM.
+          items:
+            $ref: '#/components/schemas/AttachedDiskV1'
+          type: array
+          x-go-name: Disks
+        host_channel_adapters:
+          description: Host channel adapters attached to the VM.
+          items:
+            $ref: '#/components/schemas/HostChannelAdapter'
+          type: array
+          x-go-name: HostChannelAdapters
+        id:
+          description: ID of the VM.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
+          type: string
+          x-go-name: ID
+        instance_group_id:
+          description: ID of the instance group the VM belongs to, if any.
+          example: 707749bd-ecad-4de8-aa00-1ae2fdb99e19
+          type: string
+          x-go-name: InstanceGroupID
+        instance_template_id:
+          description: ID of the instance template the VM was created from, if any.
+          example: 75c6712a-8da8-463c-a72d-fc65cf922959
+          type: string
+          x-go-name: InstanceTemplateID
+        location:
+          description: Location the VM runs in.
+          example: us-centralnorth1-a
+          type: string
+          x-go-name: Location
+        maintenance_policy:
+          description: 'Host maintenance policy applied to the VM: manual, stop-vm, or unspecified.'
+          enum:
+          - manual
+          - stop-vm
+          - unspecified
+          type: string
+          x-go-name: MaintenancePolicy
+        name:
+          description: Name of the VM.
+          example: my-first-vm
+          type: string
+          x-go-name: Name
+        network_interfaces:
+          description: Network interfaces attached to the VM.
+          items:
+            $ref: '#/components/schemas/NetworkInterface'
+          type: array
+          x-go-name: NetworkInterfaces
+        nvlink_domain_id:
+          description: ID of the NVLink domain the VM belongs to, if any.
+          type: string
+          x-go-name: NvlinkDomainID
+        pod_id:
+          description: ID of the pod the VM belongs to, if any.
+          example: 29d20dc4-90ad-4365-ab05-83f5f5e52d94
+          type: string
+          x-go-name: PodID
+        project_id:
+          description: ID of the project that owns the VM.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: ProjectID
+        reservation_id:
+          description: ID of the reservation the VM belongs to, if any.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+          type: string
+          x-go-name: ReservationID
+        state:
+          description: Current lifecycle state of the VM.
+          example: RUNNING
+          type: string
+          x-go-name: State
+        type:
+          description: Product name of the VM type.
+          example: a100.2x
+          type: string
+          x-go-name: Type
+        updated_at:
+          description: Last update timestamp of the VM, in RFC3339 format.
+          example: '2023-08-14T09:00:35Z'
+          type: string
+          x-go-name: UpdatedAt
+        virtualization_features:
+          $ref: '#/components/schemas/VirtualizationFeatures'
+      required:
+      - id
+      - project_id
+      - type
+      - state
+      - created_at
+      - updated_at
+      - name
+      - location
+      - disks
+      - network_interfaces
+      - host_channel_adapters
+      - maintenance_policy
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    PrivateIPv4Address:
+      properties:
+        address:
+          description: Private IPv4 address.
+          example: 10.1.2.3
+          type: string
+          x-go-name: Address
+      required:
+      - address
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ReservationSpecification:
+      properties:
+        id:
+          description: ID of the reservation to use for the VM. Incompatible with selection_strategy.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+          type: string
+          x-go-name: ID
+        selection_strategy:
+          default: lowest_cost
+          description: 'Strategy for automatically selecting a reservation: lowest_cost or on_demand. Use on_demand
+
+            to opt out of reservation usage. Incompatible with id.'
+          enum:
+          - lowest_cost
+          - on_demand
+          example: lowest_cost
+          type: string
+          x-go-name: SelectionStrategy
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    PublicIPv4Address:
+      properties:
+        address:
+          description: Public IPv4 address.
+          example: 121.0.0.0
+          type: string
+          x-go-name: Address
+        id:
+          description: ID of the public IPv4 address.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: ID
+        type:
+          description: Allocation type of the public IPv4 address (for example, dynamic).
+          example: dynamic
+          type: string
+          x-go-name: Type
+      required:
+      - address
+      - id
+      - type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listInstancesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListInstancesResponseV1'
+    getInstanceResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceV1'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    typesGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListTypesResponseV1'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

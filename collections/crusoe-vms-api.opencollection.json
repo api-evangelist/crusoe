@@ -1,0 +1,295 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe V Ms API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates multiple VMs in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/bulk-instances",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates multiple VMs in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Lists all VMs in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "ids",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query",
+                "description": "Filters results to VMs with these IDs."
+              },
+              {
+                "name": "names",
+                "value": "my-first-vm",
+                "type": "query",
+                "description": "Filters results to VMs with these names."
+              },
+              {
+                "name": "types",
+                "value": "a40.2x,a100.8x",
+                "type": "query",
+                "description": "Filters results to VMs of these types."
+              },
+              {
+                "name": "locations",
+                "value": "us-east1,us-northcentral1",
+                "type": "query",
+                "description": "Filters results to VMs in these locations."
+              },
+              {
+                "name": "states",
+                "value": "STATE_RUNNING",
+                "type": "query",
+                "description": "Filters results to VMs in these states."
+              },
+              {
+                "name": "nvlink_domain_ids",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filters results to VMs in these NVLink domains."
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of VMs to return per page."
+              },
+              {
+                "name": "sort",
+                "value": "name",
+                "type": "query",
+                "description": "Field to sort the results by."
+              },
+              {
+                "name": "next_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Token identifying the next page of results to return."
+              },
+              {
+                "name": "prev_token",
+                "value": "bXktZmlyc3Qtdm0",
+                "type": "query",
+                "description": "Token identifying the previous page of results to return."
+              }
+            ]
+          },
+          "docs": "Lists all VMs in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates a VM in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a VM in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single VM in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances/:vm_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VM."
+              },
+              {
+                "name": "vm_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VM."
+              }
+            ]
+          },
+          "docs": "Returns details for a single VM in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a VM in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances/:vm_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VM."
+              },
+              {
+                "name": "vm_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VM."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a VM in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Deletes a VM from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances/:vm_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VM."
+              },
+              {
+                "name": "vm_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VM."
+              }
+            ]
+          },
+          "docs": "Deletes a VM from the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Attaches disks to a VM in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances/:vm_id/attach-disks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VM."
+              },
+              {
+                "name": "vm_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VM."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attaches disks to a VM in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Detaches disks from a VM in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/instances/:vm_id/detach-disks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VM."
+              },
+              {
+                "name": "vm_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VM."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Detaches disks from a VM in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Lists all available VM types and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/vms/types",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all available VM types and returns their details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

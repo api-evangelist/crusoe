@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Role Bindings API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RoleBindings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists role bindings visible to the caller.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/iam/role-bindings",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "role_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "scope_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "scope_object_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists role bindings visible to the caller."
+        },
+        {
+          "info": {
+            "name": "Creates and deletes role bindings for a user in a single atomic operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/iam/users/:user_id/role-bindings",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If any creation or deletion fails, no changes are applied."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,399 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Entities API
+  version: '1.0'
+  description: 'Operations tagged Entities across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Entities
+paths:
+  /organizations/entities:
+    get:
+      operationId: getOrganizations
+      responses:
+        '200':
+          $ref: '#/components/responses/organizationsGetResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve details about all active organizations the logged in user belongs to.
+      tags:
+      - Entities
+    put:
+      description: A successful response from this resource will contain the updated organization details.
+      operationId: updateOrganization
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: query
+        name: org_id
+        required: true
+        x-go-name: OrgID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/organizationsPutPostResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Update details for an organization that the logged in user owns.
+      tags:
+      - Entities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntitiesPutPostRequest'
+        required: true
+components:
+  schemas:
+    Entity:
+      properties:
+        billing:
+          $ref: '#/components/schemas/Billing'
+        billing_addr:
+          $ref: '#/components/schemas/BillingAddress'
+        company_name:
+          example: mycompany
+          type: string
+          x-go-name: CompanyName
+        features:
+          additionalProperties: {}
+          type: object
+          x-go-name: Features
+        id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: ID
+        mfa_methods:
+          items:
+            $ref: '#/components/schemas/OrganizationMFA'
+          type: array
+          x-go-name: MFAMethods
+        name:
+          example: Crusoe Energy
+          type: string
+          x-go-name: Name
+        organization_type:
+          enum:
+          - standard
+          - enterprise
+          - limited
+          type: string
+          x-go-name: OrganizationType
+        registration_type:
+          example: waitlist
+          type: string
+          x-go-name: RegistrationType
+        relation:
+          example: owner
+          type: string
+          x-go-name: Relation
+        state:
+          type: string
+          x-go-name: State
+        state_reason:
+          type: string
+          x-go-name: StateReason
+        tax_id:
+          example: 51-2144346
+          type: string
+          x-go-name: TaxID
+        tax_id_type:
+          enum:
+          - EIN
+          - VAT
+          type: string
+          x-go-name: TaxIDType
+      required:
+      - id
+      - name
+      - relation
+      - billing
+      - features
+      - state
+      - state_reason
+      title: Entity contains identifying information for an organization.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    EntitiesPutPostRequest:
+      properties:
+        billing_addr:
+          $ref: '#/components/schemas/BillingAddress'
+        company_name:
+          example: mycompany
+          type: string
+          x-go-name: CompanyName
+        organization_name:
+          example: Crusoe Energy
+          type: string
+          x-go-name: OrganizationName
+        tax_id:
+          example: 51-2144346
+          type: string
+          x-go-name: TaxID
+        tax_id_type:
+          enum:
+          - EIN
+          - VAT
+          type: string
+          x-go-name: TaxIDType
+      title: EntitiesPutPostRequest is the request type for PUT and POST requests to the entities endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    OrganizationMFA:
+      properties:
+        created_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        method:
+          enum:
+          - totp
+          - webauthn
+          type: string
+          x-go-name: Method
+      required:
+      - method
+      - created_at
+      title: OrganizationMFA contains details about a single required MFA method.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListEntitiesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Entity'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListEntitiesResponseV1 is the response type for GET requests to the entities endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    EntitiesPutPostResponse:
+      properties:
+        entity:
+          $ref: '#/components/schemas/Entity'
+      required:
+      - entity
+      title: EntitiesPutPostResponse is the response type for PUT and POST requests to the entities endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    BillingAddress:
+      properties:
+        address_line1:
+          example: 123 Main Street
+          type: string
+          x-go-name: AddressLine1
+        address_line2:
+          example: Suite 400
+          type: string
+          x-go-name: AddressLine2
+        city:
+          example: Denver
+          type: string
+          x-go-name: City
+        country:
+          example: US
+          type: string
+          x-go-name: Country
+        postal_code:
+          example: '80202'
+          type: string
+          x-go-name: PostalCode
+        state_or_region:
+          example: Colorado
+          type: string
+          x-go-name: StateOrRegion
+      required:
+      - address_line1
+      - city
+      - state_or_region
+      - postal_code
+      - country
+      title: BillingAddress contains sensitive information related to the billing address for an entity.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Billing:
+      properties:
+        balance:
+          example: $1000.00
+          type: string
+          x-go-name: Balance
+        billing_method:
+          enum:
+          - stripe
+          - manual
+          type: string
+          x-go-name: BillingMethod
+        delinquent:
+          example: false
+          type: boolean
+          x-go-name: Delinquent
+        has_valid_payment_method:
+          example: true
+          type: boolean
+          x-go-name: HasValidPaymentMethod
+      required:
+      - balance
+      - has_valid_payment_method
+      - delinquent
+      title: Billing contains information about the billing status of an organization.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    organizationsPutPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EntitiesPutPostResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    organizationsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListEntitiesResponseV1'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

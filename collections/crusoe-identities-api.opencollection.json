@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Identities API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve user details for the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/users/identities"
+          },
+          "docs": "Retrieve user details for the logged in user."
+        },
+        {
+          "info": {
+            "name": "Update user details for the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cloud.crusoe.ai/v1/users/identities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource wil contain the updated user details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

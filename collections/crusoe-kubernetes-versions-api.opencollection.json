@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Kubernetes Versions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Kubernetes Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all available Kubernetes versions in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/kubernetes/versions",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project to list versions for."
+              },
+              {
+                "name": "show_deprecated",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to include deprecated versions in the results."
+              },
+              {
+                "name": "product_name",
+                "value": "a100.2x",
+                "type": "query",
+                "description": "Filters results to versions available for this VM product."
+              }
+            ]
+          },
+          "docs": "Lists all available Kubernetes versions in the project and returns their details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,574 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Foundry API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Foundry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists the credentials in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/credentials",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Lists the credentials in the project."
+        },
+        {
+          "info": {
+            "name": "Creates a credential in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/credentials",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a credential in the project."
+        },
+        {
+          "info": {
+            "name": "Returns a single credential in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/credentials/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the credential."
+              },
+              {
+                "name": "reveal",
+                "value": "",
+                "type": "query",
+                "description": "When true, include the secret material in the response."
+              }
+            ]
+          },
+          "docs": "Returns a single credential in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a credential's description in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/credentials/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the credential."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a credential's description in the project."
+        },
+        {
+          "info": {
+            "name": "Deletes a credential from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/credentials/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the credential."
+              }
+            ]
+          },
+          "docs": "Deletes a credential from the project."
+        },
+        {
+          "info": {
+            "name": "Lists the models deployed and available for inference in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/deployed-models",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Lists the models deployed and available for inference in the project."
+        },
+        {
+          "info": {
+            "name": "Returns the activity feed for the project's deployed models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/deployed-models/activity",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Returns the activity feed for the project's deployed models."
+        },
+        {
+          "info": {
+            "name": "Returns deployment progress for the project's deployed models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/deployed-models/progress",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Returns deployment progress for the project's deployed models."
+        },
+        {
+          "info": {
+            "name": "Streams deployment progress for the project's deployed models as server-sent events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/deployed-models/progress/stream",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "The response is a text/event-stream of progress updates."
+        },
+        {
+          "info": {
+            "name": "Renames a deployed model's alias.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/deployed-models/rename",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a deployed model's alias."
+        },
+        {
+          "info": {
+            "name": "Updates the HuggingFace source behind a deployed model's alias.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/deployed-models/update",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the HuggingFace source behind a deployed model's alias."
+        },
+        {
+          "info": {
+            "name": "Lists the LoRA adapter deployments in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/loras",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the deployments."
+              }
+            ]
+          },
+          "docs": "Lists the LoRA adapter deployments in the project."
+        },
+        {
+          "info": {
+            "name": "Deploys a LoRA adapter (a fine-tuned model) onto its parent base model in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/loras",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project to deploy the adapter in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The deployment is asynchronous: the response returns the deployment record in a\npending state, which is reconciled to ready once the adapter is loaded."
+        },
+        {
+          "info": {
+            "name": "Returns a single LoRA adapter deployment in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/loras/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the deployment."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the LoRA adapter deployment."
+              }
+            ]
+          },
+          "docs": "Returns a single LoRA adapter deployment in the project."
+        },
+        {
+          "info": {
+            "name": "Removes a LoRA adapter deployment from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/loras/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project that owns the deployment."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the LoRA adapter deployment."
+              }
+            ]
+          },
+          "docs": "The teardown is asynchronous: the adapter is unloaded from the serving cluster in the background."
+        },
+        {
+          "info": {
+            "name": "Lists the self-serve deployments in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Lists the self-serve deployments in the project."
+        },
+        {
+          "info": {
+            "name": "Creates a self-serve deployment in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Asynchronous: returns the accepted deployment ID and status."
+        },
+        {
+          "info": {
+            "name": "Returns a single self-serve deployment in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the deployment."
+              }
+            ]
+          },
+          "docs": "Returns a single self-serve deployment in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a self-serve deployment (name and/or replica count) in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the deployment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a self-serve deployment (name and/or replica count) in the project."
+        },
+        {
+          "info": {
+            "name": "Deletes a self-serve deployment from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments/:id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the deployment."
+              }
+            ]
+          },
+          "docs": "Deletes a self-serve deployment from the project."
+        },
+        {
+          "info": {
+            "name": "Returns the activity feed for a self-serve deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments/:id/activity",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the deployment."
+              }
+            ]
+          },
+          "docs": "Returns the activity feed for a self-serve deployment."
+        },
+        {
+          "info": {
+            "name": "Returns deployment progress for a self-serve deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments/:id/progress",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the deployment."
+              }
+            ]
+          },
+          "docs": "Returns deployment progress for a self-serve deployment."
+        },
+        {
+          "info": {
+            "name": "Streams progress for a self-serve deployment as server-sent events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/deployments/:id/progress/stream",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the deployment."
+              }
+            ]
+          },
+          "docs": "The response is a text/event-stream of progress updates."
+        },
+        {
+          "info": {
+            "name": "Lists the self-serve deployment flavors available to the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/foundry/selfserve/flavors",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the project."
+              }
+            ]
+          },
+          "docs": "Lists the self-serve deployment flavors available to the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

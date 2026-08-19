@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Usage API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get project-level usage for products in Crusoe Cloud.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:org_id/usage",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "org_id is the ID of the org to fetch usage for"
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "projects is an optional list of project IDs to filter usage by; absent means all projects"
+              },
+              {
+                "name": "resource_types",
+                "value": "",
+                "type": "query",
+                "description": "resource_types is an optional list of product types to filter usage by; absent means all products"
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "regions is an optional list of regions to filter usage by; absent means all regions"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "start_date is the optional start date (inclusive) of the usage period, formatted YYYY-MM-DD"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "end_date is the optional end date of the usage period, formatted YYYY-MM-DD"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "interval controls how usage is aggregated over the period: \"daily\" (the default) or \"monthly\""
+              }
+            ]
+          },
+          "docs": "Get project-level usage for products in Crusoe Cloud."
+        },
+        {
+          "info": {
+            "name": "Get resource-level usage for products in Crusoe Cloud.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/usage/export",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "projects",
+                "value": "d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb",
+                "type": "query"
+              },
+              {
+                "name": "resources",
+                "value": "d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb",
+                "type": "query"
+              },
+              {
+                "name": "resource_types",
+                "value": "persistent-ssd,a40.1x",
+                "type": "query"
+              },
+              {
+                "name": "regions",
+                "value": "us-east1,us-northcentral1",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "\"2022-07-01\"",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "\"2023-08-08\"",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get resource-level usage for products in Crusoe Cloud."
+        },
+        {
+          "info": {
+            "name": "Get options which exist for filters for /usage and /usage/export routes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/organizations/:organization_id/usage/options",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get options which exist for filters for /usage and /usage/export routes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

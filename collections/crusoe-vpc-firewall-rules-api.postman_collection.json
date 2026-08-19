@@ -1,0 +1,1488 @@
+{
+  "item": [
+    {
+      "id": "2a2226d1-479b-4b09-b1f0-13dfe08d44cd",
+      "name": "VPC Firewall Rules",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83d270cb-d0c5-479c-9feb-7681af095e86",
+          "name": "Lists all VPC firewall rules in the project and returns their details.",
+          "request": {
+            "name": "Lists all VPC firewall rules in the project and returns their details.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "vpc-firewall-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96bc54bb-39af-4ca8-8387-b1108d7a774c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"name\": \"my-firewall-rule\",\n      \"direction\": \"ingress\",\n      \"action\": \"allow\",\n      \"vpc_network_id\": \"74927f69-f6f6-43f4-bc0d-7bb2e864250e\",\n      \"state\": \"active\",\n      \"sources\": [\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        },\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        }\n      ],\n      \"source_ports\": [\n        \"string\",\n        \"string\"\n      ],\n      \"destinations\": [\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        },\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        }\n      ],\n      \"destination_ports\": [\n        \"string\",\n        \"string\"\n      ],\n      \"protocols\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n      \"name\": \"my-firewall-rule\",\n      \"direction\": \"ingress\",\n      \"action\": \"allow\",\n      \"vpc_network_id\": \"74927f69-f6f6-43f4-bc0d-7bb2e864250e\",\n      \"state\": \"active\",\n      \"sources\": [\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        },\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        }\n      ],\n      \"source_ports\": [\n        \"string\",\n        \"string\"\n      ],\n      \"destinations\": [\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        },\n        {\n          \"cidr\": \"10.1.2.3/24\",\n          \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n        }\n      ],\n      \"destination_ports\": [\n        \"string\",\n        \"string\"\n      ],\n      \"protocols\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fd0e46d-96b4-4c08-adc1-9f723030ea8c",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c24580fc-e78c-4e82-a80a-29dd72387144",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aff7f3c-7c42-4be8-985b-b7f5613cba2a",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a40f415e-ec37-45c4-90b9-78af8d3f1374",
+          "name": "Creates a VPC firewall rule in the project and returns the async operation.",
+          "request": {
+            "name": "Creates a VPC firewall rule in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "vpc-firewall-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"action\": \"<string>\",\n  \"sources\": [\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vpc_network_id\": \"<string>\",\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddbc2d3a-fde0-4bdd-8af0-5d3ebb8b60ab",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-firewall-rule\",\n  \"direction\": \"ingress\",\n  \"action\": \"allow\",\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vpc_network_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "363a2532-5005-4843-8145-01437c004673",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-firewall-rule\",\n  \"direction\": \"ingress\",\n  \"action\": \"allow\",\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vpc_network_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f035931-1ab8-44c5-b4d6-6e69731194c0",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-firewall-rule\",\n  \"direction\": \"ingress\",\n  \"action\": \"allow\",\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vpc_network_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a1dbcf5-50a3-4c32-99e7-9d052e94f816",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-firewall-rule\",\n  \"direction\": \"ingress\",\n  \"action\": \"allow\",\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vpc_network_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aceed553-c672-4e61-88c4-4096767c19f2",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-firewall-rule\",\n  \"direction\": \"ingress\",\n  \"action\": \"allow\",\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vpc_network_id\": \"09ae8411-0fbb-411c-898c-2b8f19622ae1\",\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1f874ad-59f4-4162-b774-b2cb577619ab",
+          "name": "Deletes a VPC firewall rule from the project and returns the async operation.",
+          "request": {
+            "name": "Deletes a VPC firewall rule from the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "vpc-firewall-rules",
+                ":vpc_firewall_rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VPC firewall rule."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vpc_firewall_rule_id",
+                  "description": "(Required) ID of the VPC firewall rule."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d30d25b-369e-4407-bff1-4ffe8d4ad508",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5c48ce0-34b3-44f4-86cd-9d15c6f8f5fe",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5f7f1fb-cace-42d4-ae5c-b8f938c06e83",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c00a1a33-84a2-4aed-bd85-2c6bcb0ebcce",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40e8107f-edeb-4767-b2d6-446700e56aa4",
+          "name": "Returns details for a single VPC firewall rule in the project.",
+          "request": {
+            "name": "Returns details for a single VPC firewall rule in the project.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "vpc-firewall-rules",
+                ":vpc_firewall_rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VPC firewall rule."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vpc_firewall_rule_id",
+                  "description": "(Required) ID of the VPC firewall rule."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b94934fb-e305-4e8d-8485-e9d3e082c4b1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc\",\n  \"name\": \"my-firewall-rule\",\n  \"direction\": \"ingress\",\n  \"action\": \"allow\",\n  \"vpc_network_id\": \"74927f69-f6f6-43f4-bc0d-7bb2e864250e\",\n  \"state\": \"active\",\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"source_ports\": [\n    \"string\",\n    \"string\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"destination_ports\": [\n    \"string\",\n    \"string\"\n  ],\n  \"protocols\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f50654f4-c708-4493-ba1a-e60618e2a4df",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c5fc5ef-d594-4774-a9ea-b2a72a5d49aa",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5109bc53-068e-407f-bb52-155630d13b3f",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4e93ae5-9d65-4902-8553-82b42d3b0e39",
+          "name": "Updates a VPC firewall rule in the project and returns the async operation.",
+          "request": {
+            "name": "Updates a VPC firewall rule in the project and returns the async operation.",
+            "description": {},
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "networking",
+                "vpc-firewall-rules",
+                ":vpc_firewall_rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) ID of the project that owns the VPC firewall rule."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vpc_firewall_rule_id",
+                  "description": "(Required) ID of the VPC firewall rule."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sources\": [\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    },\n    {\n      \"cidr\": \"<string>\",\n      \"resource_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8c0549f-82ce-46f0-9b25-82bdd422637f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"name\": \"my-firewall-rule\",\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"operation\": {\n    \"operation_id\": \"F6EF489C-086E-458D-B812-7962964A28C9\",\n    \"state\": \"IN_PROGRESS\",\n    \"metadata\": {},\n    \"started_at\": \"2021-12-03T19:58:34Z\",\n    \"completed_at\": \"2021-12-03T19:59:34Z\",\n    \"result\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b42e370-68ec-4950-98d0-214a657d1eba",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"name\": \"my-firewall-rule\",\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e108f39-100e-4399-9749-3e225d6885f3",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"name\": \"my-firewall-rule\",\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bc0bc86-0c89-4c13-ad00-a5dfdff59f4e",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"name\": \"my-firewall-rule\",\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d17080e-4b7f-4efb-b94d-6f7f08b3f513",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "networking",
+                    "vpc-firewall-rules",
+                    ":vpc_firewall_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) ID of the project that owns the VPC firewall rule."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vpc_firewall_rule_id",
+                      "description": "(Required) ID of the VPC firewall rule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"destinations\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ],\n  \"name\": \"my-firewall-rule\",\n  \"protocols\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source_ports\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sources\": [\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    },\n    {\n      \"cidr\": \"10.1.2.3/24\",\n      \"resource_id\": \"306aa10d-5570-4e47-88c9-46bf11bd8737\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "35de291f-ae82-409b-86be-6ebe5e7248df",
+    "name": "Crusoe VPC Firewall Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged VPC Firewall Rules across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

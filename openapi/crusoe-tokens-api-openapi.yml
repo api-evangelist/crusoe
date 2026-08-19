@@ -1,0 +1,296 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Tokens API
+  version: '1.0'
+  description: 'Operations tagged Tokens across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Tokens
+paths:
+  /users/tokens:
+    delete:
+      operationId: deleteToken
+      parameters:
+      - example: WTUzcGibQ82y9_01h4MCdQ
+        in: query
+        name: access_key
+        required: true
+        x-go-name: AccessKey
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Delete an API token owned by the logged in user.
+      tags:
+      - Tokens
+    get:
+      operationId: getTokens
+      responses:
+        '200':
+          $ref: '#/components/responses/tokensGetResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve all active/expired API tokens for the logged in user.
+      tags:
+      - Tokens
+    post:
+      description: 'A successful response from this resource will contain json-encoded details of API token.
+
+        This is the only time the customer will be able to view the secret key associated with the token.'
+      operationId: createToken
+      responses:
+        '200':
+          $ref: '#/components/responses/tokensPostResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Create a new token owned by the logged in user.
+      tags:
+      - Tokens
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenRequest'
+        required: true
+components:
+  schemas:
+    TokensPostResponse:
+      properties:
+        token:
+          $ref: '#/components/schemas/GeneratedToken'
+      required:
+      - token
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    TokenInfo:
+      description: These are the fields returned from a GET request.
+      properties:
+        access_key:
+          example: Hm11C1coQZm2+Aihn9ofYg
+          type: string
+          x-go-name: AccessKey
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        last_used:
+          example: '2021-11-03T22:22:55Z'
+          type: string
+          x-go-name: LastUsed
+      required:
+      - alias
+      - access_key
+      - created_at
+      - expires_at
+      - last_used
+      title: TokenInfo contains the Traits Island stores for a Token inside of Kratos.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListTokensResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/TokenInfo'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateTokenRequest:
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+      required:
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GeneratedToken:
+      description: These are the fields returned from a PUT request.
+      properties:
+        access_key:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: AccessKey
+        alias:
+          example: newtoken
+          type: string
+          x-go-name: Alias
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        secret_key:
+          example: HrbZ3VTUb2YNAq53Md1EsA
+          type: string
+          x-go-name: SecretKey
+      required:
+      - access_key
+      - secret_key
+      - created_at
+      - expires_at
+      title: GeneratedToken contains the Traits Island stores for a Token inside of Kratos.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    tokensGetResponse:
+      description: A successful response from this resource will contain json-encoded array of token details, excluding the secret key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListTokensResponseV1'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    tokensPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokensPostResponse'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe VPC Networks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VPC Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all VPC networks in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-networks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all VPC networks in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates a VPC network in the project and returns the created network.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-networks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a VPC network in the project and returns the created network."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single VPC network in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-networks/:vpc_network_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VPC network."
+              },
+              {
+                "name": "vpc_network_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VPC network."
+              }
+            ]
+          },
+          "docs": "Returns details for a single VPC network in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a VPC network in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-networks/:vpc_network_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VPC network."
+              },
+              {
+                "name": "vpc_network_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VPC network."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a VPC network in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Deletes a VPC network from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-networks/:vpc_network_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VPC network."
+              },
+              {
+                "name": "vpc_network_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VPC network."
+              }
+            ]
+          },
+          "docs": "Deletes a VPC network from the project and returns the async operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

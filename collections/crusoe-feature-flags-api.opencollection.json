@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Feature Flags API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feature Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get feature flags for the currently logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/featureflags",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "project_id optionally scopes flag evaluation to the given project. The\ncaller must be a member of the project. When set, flags are evaluated with\nthe project in the targeting context in addition to the user and org."
+              }
+            ]
+          },
+          "docs": "A successful response from this resource will contain a map of\nall feature flags and the value assigned to each of them for the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

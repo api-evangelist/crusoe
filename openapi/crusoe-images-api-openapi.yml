@@ -1,0 +1,264 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Images API
+  version: '1.0'
+  description: 'Operations tagged Images across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Images
+paths:
+  /compute/images:
+    get:
+      operationId: listImages
+      parameters:
+      - description: Optional filter to return only images compatible with the specified product group (e.g. "a100", "h100").
+        example: a100
+        in: query
+        name: product_group
+        x-go-name: ProductGroup
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listImagesResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all images and returns their details.
+      tags:
+      - Images
+  /compute/images/{image_id}:
+    get:
+      operationId: getImage
+      parameters:
+      - description: ID of the image.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: image_id
+        required: true
+        x-go-name: ImageID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getImageResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single image.
+      tags:
+      - Images
+components:
+  schemas:
+    Image:
+      properties:
+        created_at:
+          description: Creation timestamp of the image, in RFC3339 format.
+          example: '2023-06-29T20:03:26Z'
+          type: string
+          x-go-name: CreatedAt
+        description:
+          description: Description of the image.
+          example: base Ubuntu 20.04 image
+          type: string
+          x-go-name: Description
+        id:
+          description: ID of the image.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: ID
+        locations:
+          description: Locations where the image is available.
+          example: '[us-east1, us-northcentral1]'
+          items:
+            type: string
+          type: array
+          x-go-name: Locations
+        name:
+          description: Name of the image.
+          example: ubuntu
+          type: string
+          x-go-name: Name
+        tags:
+          description: Tags associated with the image.
+          example: '[20.4, latest]'
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+      required:
+      - id
+      - name
+      - description
+      - tags
+      - created_at
+      - locations
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListImagesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListImagesResponseV1 is the resource response type for GET requests to the Images endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getImageResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Image'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listImagesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListImagesResponseV1'
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

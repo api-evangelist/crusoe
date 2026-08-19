@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Slurm Clusters API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Slurm Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve information about slurm clusters belonging to the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/clusters",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "names",
+                "value": "my-slurm-cluster",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "us-east-1",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "running",
+                "type": "query"
+              },
+              {
+                "name": "slurm_cluster_ids",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve information about slurm clusters belonging to the project."
+        },
+        {
+          "info": {
+            "name": "Create a new slurm cluster owned by the logged in user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/clusters",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A successful response from this resource will contain the async operation ID."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about a particular slurm cluster belonged to the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/clusters/:slurm_cluster_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve information about a particular slurm cluster belonged to the project."
+        },
+        {
+          "info": {
+            "name": "Delete a slurm cluster that the logged in user owns.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/slurm/clusters/:slurm_cluster_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              },
+              {
+                "name": "slurm_cluster_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a slurm cluster that the logged in user owns."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

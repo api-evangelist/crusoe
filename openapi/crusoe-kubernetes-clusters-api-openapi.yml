@@ -1,0 +1,899 @@
+openapi: 3.2.0
+info:
+  title: Crusoe Kubernetes Clusters API
+  version: '1.0'
+  description: 'Operations tagged Kubernetes Clusters across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: Kubernetes Clusters
+paths:
+  /projects/{project_id}/kubernetes/clusters:
+    get:
+      operationId: listClusters
+      parameters:
+      - description: ID of the project that owns the clusters.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: Filters results to the cluster with this ID.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: query
+        name: cluster_id
+        x-go-name: ClusterID
+        schema:
+          type: string
+      - description: Filters results to the cluster with this name.
+        example: my-first-cluster
+        in: query
+        name: cluster_name
+        x-go-name: ClusterName
+        schema:
+          type: string
+      - description: Filters results to clusters whose name matches one of these search names.
+        example: a40.2x,a100.8x
+        in: query
+        name: cluster_search_names
+        x-go-name: ClusterSearchNames
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Filters results to clusters in these locations.
+        example: us-east1,us-northcentral1
+        in: query
+        name: locations
+        x-go-name: Locations
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Filters results to clusters in these states.
+        example: STATE_RUNNING
+        in: query
+        name: states
+        x-go-name: States
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Filters results to clusters running these versions.
+        example: '1.30'
+        in: query
+        name: versions
+        x-go-name: Versions
+        schema:
+          type: array
+          items:
+            type: string
+      - description: Field to sort results by; prefix with '-' for descending order.
+        example: name, -name
+        in: query
+        name: sort
+        x-go-name: SortBy
+        schema:
+          type: string
+      - description: Whether to include inactive clusters in the results.
+        example: true
+        in: query
+        name: show_inactive
+        x-go-name: ShowInactive
+        schema:
+          type: boolean
+      - description: Base64-encoded token for the next page of results.
+        example: bXktZmlyc3Qtdm0
+        in: query
+        name: next_token
+        x-go-name: NextToken
+        schema:
+          type: string
+      - description: Base64-encoded token for the previous page of results.
+        example: bXktZmlyc3Qtdm0
+        in: query
+        name: prev_token
+        x-go-name: PrevToken
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listKubernetesClustersResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all Kubernetes clusters in the project and returns their details.
+      tags:
+      - Kubernetes Clusters
+    post:
+      operationId: createCluster
+      parameters:
+      - description: ID of the project to create the cluster in.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a Kubernetes cluster in the project and returns the async operation.
+      tags:
+      - Kubernetes Clusters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KubernetesClusterPostRequest'
+        required: true
+  /projects/{project_id}/kubernetes/clusters/{cluster_id}:
+    delete:
+      operationId: deleteCluster
+      parameters:
+      - description: ID of the project that owns the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a Kubernetes cluster from the project and returns the async operation.
+      tags:
+      - Kubernetes Clusters
+    get:
+      operationId: getCluster
+      parameters:
+      - description: ID of the project that owns the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getKubernetesClusterResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single Kubernetes cluster in the project.
+      tags:
+      - Kubernetes Clusters
+    patch:
+      operationId: updateCluster
+      parameters:
+      - description: ID of the project that owns the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates a Kubernetes cluster in the project and returns the async operation.
+      tags:
+      - Kubernetes Clusters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KubernetesClusterPatchRequest'
+        required: true
+  /projects/{project_id}/kubernetes/clusters/{cluster_id}/get-credentials:
+    post:
+      operationId: getClusterCredentials
+      parameters:
+      - description: ID of the project that owns the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the cluster.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: cluster_id
+        required: true
+        x-go-name: ClusterID
+        schema:
+          type: string
+      - description: 'Type of credentials to return: oidc or admin_cert.'
+        in: query
+        name: auth_type
+        x-go-name: AuthType
+        schema:
+          type: string
+          enum:
+          - oidc
+          - admin_cert
+      responses:
+        '200':
+          $ref: '#/components/responses/getKubernetesClusterCredentialsResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns credentials for the user to authenticate to the cluster.
+      tags:
+      - Kubernetes Clusters
+components:
+  responses:
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listKubernetesClustersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListKubernetesClustersResponse'
+    getKubernetesClusterResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesCluster'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getKubernetesClusterCredentialsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesAuthenticationDetails'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    OIDCAuthConfig:
+      description: This allows the Kubernetes API server to authenticate users via an external OIDC provider.
+      properties:
+        ca_cert:
+          description: PEM-encoded certificate authority certificate used to validate the OIDC server's certificate.
+          type: string
+          x-go-name: CACert
+        client_id:
+          description: Client ID for the OpenID Connect client.
+          example: kubernetes
+          type: string
+          x-go-name: ClientID
+        groups_claim:
+          description: Claim used to identify the user's groups.
+          example: groups
+          type: string
+          x-go-name: GroupsClaim
+        issuer_url:
+          description: URL of the OpenID Connect issuer.
+          example: https://oauth2.example.com
+          type: string
+          x-go-name: IssuerURL
+        username_claim:
+          description: Claim used to identify the user. Defaults to 'sub'.
+          example: email
+          type: string
+          x-go-name: UsernameClaim
+        username_prefix:
+          description: Prefix added before the username to avoid name conflicts.
+          example: 'oidc:'
+          type: string
+          x-go-name: UsernamePrefix
+      title: OIDCAuthConfig defines OpenID Connect authentication configuration.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesAuthenticationDetails:
+      description: It supports both the new kubeconfig-based and legacy certificate-based authentication.
+      properties:
+        cluster_address:
+          description: Address of the Kubernetes cluster to authenticate to.
+          type: string
+          x-go-name: ClusterAddress
+        cluster_ca_certificate:
+          description: CA certificate of the Kubernetes cluster to authenticate to.
+          type: string
+          x-go-name: ClusterCACert
+        cluster_name:
+          description: Name of the Kubernetes cluster to authenticate to.
+          type: string
+          x-go-name: ClusterName
+        kube_config:
+          description: Kubeconfig for the Kubernetes cluster to authenticate to.
+          type: string
+          x-go-name: KubeConfig
+        user_client_certificate:
+          description: Client certificate the user presents to authenticate to the cluster.
+          type: string
+          x-go-name: UserClientCert
+        user_client_key:
+          description: Private key associated with the user's client certificate.
+          type: string
+          x-go-name: UserClientKey
+        user_name:
+          description: Name of the authenticating user.
+          type: string
+          x-go-name: UserName
+      required:
+      - cluster_name
+      - cluster_address
+      - cluster_ca_certificate
+      - user_name
+      - user_client_certificate
+      - user_client_key
+      title: KubernetesAuthenticationDetails contains credentials to authenticate to a Kubernetes cluster.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesClusterPatchRequest:
+      properties:
+        apiserver_extra_args:
+          additionalProperties:
+            type: string
+          description: 'New extra arguments to pass to the kube-apiserver control plane component.
+
+            If absent, existing args are preserved. If present but empty, args are cleared.'
+          example:
+            audit-log-maxage: '30'
+          type: object
+          x-go-name: ApiserverExtraArgs
+        configuration:
+          description: Configuration setting is deprecated, defaults to HA configuration.
+          enum:
+          - ha
+          example: ha
+          type: string
+          x-go-name: Configuration
+        controller_manager_extra_args:
+          additionalProperties:
+            type: string
+          description: 'New extra arguments to pass to the kube-controller-manager control plane component.
+
+            If absent, existing args are preserved. If present but empty, args are cleared.'
+          example:
+            bind-address: 0.0.0.0
+          type: object
+          x-go-name: ControllerManagerExtraArgs
+        kubelogin_args:
+          additionalProperties:
+            type: string
+          description: New arguments for the kubectl oidc-login plugin.
+          example:
+            force-refresh: ''
+            oidc-extra-scope: email groups
+          type: object
+          x-go-name: KubeloginArgs
+          x-redocly-optional: true
+        scheduler_extra_args:
+          additionalProperties:
+            type: string
+          description: 'New extra arguments to pass to the kube-scheduler control plane component.
+
+            If absent, existing args are preserved. If present but empty, args are cleared.'
+          example:
+            bind-address: 0.0.0.0
+          type: object
+          x-go-name: SchedulerExtraArgs
+      required:
+      - kubelogin_args
+      title: KubernetesClusterPatchRequest defines the specifications of the cluster to be updated.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesCluster:
+      properties:
+        add_ons:
+          description: Add-ons associated with the cluster.
+          example:
+          - crusoe_csi
+          items:
+            type: string
+          type: array
+          x-go-name: AddOns
+        apiserver_extra_args:
+          additionalProperties:
+            type: string
+          description: Extra arguments passed to the kube-apiserver control plane component.
+          example:
+            audit-log-maxage: '30'
+          type: object
+          x-go-name: ApiserverExtraArgs
+        auth_config:
+          $ref: '#/components/schemas/KubernetesClusterAuthConfig'
+        cluster_cidr:
+          description: Range of IP addresses allocated to pods scheduled on worker nodes, in CIDR notation.
+          example: 10.233.0.0/18
+          type: string
+          x-go-name: ClusterCIDR
+        configuration:
+          description: Configuration setting of the Kubernetes cluster.
+          enum:
+          - ha
+          example: ha
+          type: string
+          x-go-name: Configuration
+        controller_manager_extra_args:
+          additionalProperties:
+            type: string
+          description: Extra arguments passed to the kube-controller-manager control plane component.
+          example:
+            bind-address: 0.0.0.0
+          type: object
+          x-go-name: ControllerManagerExtraArgs
+        created_at:
+          description: Creation timestamp of the cluster, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        dns_name:
+          description: DNS name of the cluster.
+          example: my-kubernetes-cluster.crusoecloudcompute.com
+          type: string
+          x-go-name: DNSName
+        id:
+          description: ID of the Kubernetes cluster.
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: ID
+        kubelogin_args:
+          additionalProperties:
+            type: string
+          description: Arguments for the kubectl oidc-login plugin.
+          example:
+            force-refresh: ''
+            oidc-extra-scope: email groups
+          type: object
+          x-go-name: KubeloginArgs
+        location:
+          description: Location of the Kubernetes cluster.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name of the Kubernetes cluster.
+          example: my-kubernetes-cluster
+          type: string
+          x-go-name: Name
+        node_cidr_mask_size:
+          description: Mask size for the cluster CIDR.
+          example: 24
+          format: int32
+          type: integer
+          x-go-name: NodeCIDRMask
+        node_pools:
+          description: IDs of the node pools within the Kubernetes cluster.
+          example:
+          - 1d2b3a4c-5e6f-7b9d-8c9a-0e1f2d3b4c5d
+          items:
+            type: string
+          type: array
+          x-go-name: NodePools
+        private:
+          description: Whether the cluster is private (without a public IP).
+          example: true
+          type: boolean
+          x-go-name: Private
+        project_id:
+          description: ID of the project that owns the Kubernetes cluster.
+          example: 9c8b7d6e-5f4a-3b2c-1e0f-2a3b4c5d6e7f
+          type: string
+          x-go-name: ProjectID
+        scheduler_extra_args:
+          additionalProperties:
+            type: string
+          description: Extra arguments passed to the kube-scheduler control plane component.
+          example:
+            bind-address: 0.0.0.0
+          type: object
+          x-go-name: SchedulerExtraArgs
+        service_cluster_ip_range:
+          description: Range of IP addresses allocated to Kubernetes services, in CIDR notation.
+          example: 10.233.0.0/18
+          type: string
+          x-go-name: ServiceClusterCIDR
+        state:
+          description: Current state of the cluster.
+          example: STATE_RUNNING
+          type: string
+          x-go-name: State
+        subnet_id:
+          description: ID of the subnet the Kubernetes cluster belongs to.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: SubnetID
+        updated_at:
+          description: Last update timestamp of the cluster, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: UpdatedAt
+        version:
+          description: Version of the Crusoe Kubernetes image the cluster runs.
+          example: 1.29.5-crusoe.0
+          type: string
+          x-go-name: Version
+      required:
+      - id
+      - name
+      - location
+      - version
+      - configuration
+      - subnet_id
+      - project_id
+      - node_pools
+      - add_ons
+      - state
+      - dns_name
+      - created_at
+      - updated_at
+      - kubelogin_args
+      title: KubernetesCluster defines the specifications of the Kubernetes cluster.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesClusterPostRequest:
+      properties:
+        add_ons:
+          description: List of add-ons to include in the new cluster.
+          example:
+          - crusoe_csi
+          - nvidia_gpu_operator
+          - nvidia_network_operator
+          items:
+            type: string
+          type: array
+          x-go-name: AddOns
+        apiserver_extra_args:
+          additionalProperties:
+            type: string
+          description: Extra arguments to pass to the kube-apiserver control plane component.
+          example:
+            audit-log-maxage: '30'
+          type: object
+          x-go-name: ApiserverExtraArgs
+        auth_config:
+          $ref: '#/components/schemas/KubernetesClusterAuthConfig'
+        cluster_cidr:
+          description: Range of IP addresses allocated to pods scheduled on worker nodes, in CIDR notation.
+          example: 10.233.0.0/18
+          type: string
+          x-go-name: ClusterCIDR
+        configuration:
+          description: Configuration setting is deprecated, defaults to HA configuration.
+          enum:
+          - ha
+          example: ha
+          type: string
+          x-go-name: Configuration
+        controller_manager_extra_args:
+          additionalProperties:
+            type: string
+          description: Extra arguments to pass to the kube-controller-manager control plane component.
+          example:
+            bind-address: 0.0.0.0
+          type: object
+          x-go-name: ControllerManagerExtraArgs
+        kubelogin_args:
+          additionalProperties:
+            type: string
+          description: Arguments for the kubectl oidc-login plugin.
+          example:
+            force-refresh: ''
+            oidc-extra-scope: email groups
+          type: object
+          x-go-name: KubeloginArgs
+        location:
+          description: Location to create the Kubernetes cluster in.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name of the Kubernetes cluster.
+          example: my-kubernetes-cluster
+          type: string
+          x-go-name: Name
+        node_cidr_mask_size:
+          description: Mask size for the cluster CIDR.
+          example: 24
+          format: int32
+          type: integer
+          x-go-name: NodeCIDRMask
+        private:
+          description: Whether the cluster is private (without a public IP). Defaults to false.
+          example: true
+          type: boolean
+          x-go-name: Private
+        scheduler_extra_args:
+          additionalProperties:
+            type: string
+          description: Extra arguments to pass to the kube-scheduler control plane component.
+          example:
+            bind-address: 0.0.0.0
+          type: object
+          x-go-name: SchedulerExtraArgs
+        service_cluster_ip_range:
+          description: Range of IP addresses allocated to Kubernetes services, in CIDR notation.
+          example: 10.233.0.0/18
+          type: string
+          x-go-name: ServiceClusterCIDR
+        subnet_id:
+          description: 'ID of the subnet to create the cluster in. Must be in the location
+
+            specified. If not provided, the default subnet for the location is
+
+            used, if there is one.'
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: SubnetID
+        version:
+          description: Version of the Crusoe Kubernetes image to create the cluster with.
+          example: 1.29.5-crusoe.0
+          type: string
+          x-go-name: Version
+      required:
+      - name
+      - location
+      - version
+      title: KubernetesClusterPostRequest defines the specifications of the cluster to be created.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesClusterAuthConfig:
+      description: 'This configures how users authenticate to the Kubernetes API server.
+
+        example: {"oidc": {"issuer_url": "https://oauth2.example.com", "client_id": "kubernetes"}}'
+      properties:
+        oidc:
+          $ref: '#/components/schemas/OIDCAuthConfig'
+      title: KubernetesClusterAuthConfig defines authentication configuration for the cluster.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    ListKubernetesClustersResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/KubernetesCluster'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

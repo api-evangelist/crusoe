@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe VPC Firewall Rules API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VPC Firewall Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all VPC firewall rules in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-firewall-rules",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all VPC firewall rules in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates a VPC firewall rule in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-firewall-rules",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a VPC firewall rule in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single VPC firewall rule in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-firewall-rules/:vpc_firewall_rule_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VPC firewall rule."
+              },
+              {
+                "name": "vpc_firewall_rule_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VPC firewall rule."
+              }
+            ]
+          },
+          "docs": "Returns details for a single VPC firewall rule in the project."
+        },
+        {
+          "info": {
+            "name": "Updates a VPC firewall rule in the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-firewall-rules/:vpc_firewall_rule_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VPC firewall rule."
+              },
+              {
+                "name": "vpc_firewall_rule_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VPC firewall rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a VPC firewall rule in the project and returns the async operation."
+        },
+        {
+          "info": {
+            "name": "Deletes a VPC firewall rule from the project and returns the async operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/networking/vpc-firewall-rules/:vpc_firewall_rule_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the project that owns the VPC firewall rule."
+              },
+              {
+                "name": "vpc_firewall_rule_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the VPC firewall rule."
+              }
+            ]
+          },
+          "docs": "Deletes a VPC firewall rule from the project and returns the async operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

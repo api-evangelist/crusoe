@@ -1,0 +1,1415 @@
+{
+  "item": [
+    {
+      "id": "160d93ba-688e-4d91-baa2-17bda0f30070",
+      "name": "Reservations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "08f14d01-eee1-458c-986a-3ba95d1da7f6",
+          "name": "Get all reservations belonging to the specified organization. User must be part of the organization.",
+          "request": {
+            "name": "Get all reservations belonging to the specified organization. User must be part of the organization.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4088d09d-5ac2-4f08-937d-16a3c31135c4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "effective"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"e384a1de-81f8-4cb2-b312-a7d88a9bf9cb\",\n      \"reservation_type\": \"RIPA\",\n      \"product_line\": \"h100\",\n      \"duration\": 12,\n      \"quantity\": 64,\n      \"used_quantity\": 32,\n      \"locations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"projects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"contract_start_date\": \"2024-08-14T09:00:35Z\",\n      \"contract_end_date\": \"2025-08-14T09:00:35Z\",\n      \"delivery_deadline\": \"2024-08-14T09:00:35Z\",\n      \"date_delivered\": \"2024-07-14T09:00:35Z\",\n      \"vm_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": \"6.25\"\n    },\n    {\n      \"id\": \"e384a1de-81f8-4cb2-b312-a7d88a9bf9cb\",\n      \"reservation_type\": \"RIPA\",\n      \"product_line\": \"h100\",\n      \"duration\": 12,\n      \"quantity\": 64,\n      \"used_quantity\": 32,\n      \"locations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"projects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"contract_start_date\": \"2024-08-14T09:00:35Z\",\n      \"contract_end_date\": \"2025-08-14T09:00:35Z\",\n      \"delivery_deadline\": \"2024-08-14T09:00:35Z\",\n      \"date_delivered\": \"2024-07-14T09:00:35Z\",\n      \"vm_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": \"6.25\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c1ba417-ce4b-47b9-aef5-300bb7cbbf51",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "effective"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fab71ef2-5e39-4c6a-9bbb-8c868b6a0dbf",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "effective"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80026f61-19b5-4acd-9bde-9ac1796d9f20",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "effective"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74d03fd9-9da3-4afb-b3f7-80966010cbcc",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "effective"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5882fb7a-24fa-406d-a7f1-746094299a5b",
+          "name": "Get GPU tracking data for the specified organization. User must be part of the organization and have reservations feature access.",
+          "request": {
+            "name": "Get GPU tracking data for the specified organization. User must be part of the organization and have reservations feature access.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "reservations",
+                "gpu-tracking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_line",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_line",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7c88962-13cf-4eb9-bf99-1a4214c31875",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "\"2024-01-01T00:00:00Z\""
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "\"2024-01-31T23:59:59Z\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"event_time\": \"string\",\n      \"global_capacity\": 1587,\n      \"gpu_usage\": 6813,\n      \"on_demand_count\": 6391,\n      \"organization_id\": \"string\",\n      \"price\": 2353.0599391562955,\n      \"product_line\": \"string\",\n      \"region\": \"string\",\n      \"regional_capacity\": 8225\n    },\n    {\n      \"event_time\": \"string\",\n      \"global_capacity\": 8883,\n      \"gpu_usage\": 6433,\n      \"on_demand_count\": 1145,\n      \"organization_id\": \"string\",\n      \"price\": 197.6334918168454,\n      \"product_line\": \"string\",\n      \"region\": \"string\",\n      \"regional_capacity\": 9685\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a7447a8-f39c-4a5a-92af-dd9fdf932c78",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "\"2024-01-01T00:00:00Z\""
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "\"2024-01-31T23:59:59Z\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7377f9a7-9e53-4f93-8c4a-15bd2ae0c041",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "\"2024-01-01T00:00:00Z\""
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "\"2024-01-31T23:59:59Z\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01f677c9-dac0-4372-9767-ee9d0ee473ce",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "\"2024-01-01T00:00:00Z\""
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "\"2024-01-31T23:59:59Z\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6b0d3d7-fe81-4a8e-a285-a0d2ecd86708",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "\"2024-01-01T00:00:00Z\""
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "\"2024-01-31T23:59:59Z\""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a59f8db2-9182-49d2-8035-53af275fafdf",
+          "name": "Get latest GPU tracking data for the specified organization. User must be part of the organization and have reservations feature access.",
+          "request": {
+            "name": "Get latest GPU tracking data for the specified organization. User must be part of the organization and have reservations feature access.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "reservations",
+                "gpu-tracking",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_line",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_line",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ec0034f-a4df-4ad7-84eb-880b3cf89954",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"event_time\": \"string\",\n      \"global_reservation_capacity\": 4159,\n      \"organization_id\": \"string\",\n      \"overage_count\": 3024,\n      \"price\": 9825.441695961023,\n      \"product_line\": \"string\",\n      \"region\": \"string\",\n      \"regional_reservation_capacity\": 2609,\n      \"running_compute_unit_count\": 9540\n    },\n    {\n      \"event_time\": \"string\",\n      \"global_reservation_capacity\": 9393,\n      \"organization_id\": \"string\",\n      \"overage_count\": 8210,\n      \"price\": 6879.5705719279695,\n      \"product_line\": \"string\",\n      \"region\": \"string\",\n      \"regional_reservation_capacity\": 7246,\n      \"running_compute_unit_count\": 5849\n    }\n  ],\n  \"reservation_id\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c36e4e84-e972-4815-acdf-2599c1da77f3",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d724cad-0fce-48ce-9c55-d4f8d003fab5",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fd417c8-72a7-4e56-82e6-91027ab9ed64",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9061ab00-563f-4602-ac0f-c5c28037dcd3",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    "gpu-tracking",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_line",
+                      "value": "gpu-hours"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-east1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "us-northcentral1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46cf981a-32e7-4b9b-9935-39ac4e6d9789",
+          "name": "Get reservation belonging to the specified organization and reservation ID. User must be part of the organization.",
+          "request": {
+            "name": "Get reservation belonging to the specified organization and reservation ID. User must be part of the organization.",
+            "description": {},
+            "url": {
+              "path": [
+                "organizations",
+                ":organization_id",
+                "reservations",
+                ":reservation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organization_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reservation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2734954e-8345-40a5-8ffc-81e2d42c6b7b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    ":reservation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"e384a1de-81f8-4cb2-b312-a7d88a9bf9cb\",\n      \"reservation_type\": \"RIPA\",\n      \"product_line\": \"h100\",\n      \"duration\": 12,\n      \"quantity\": 64,\n      \"used_quantity\": 32,\n      \"locations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"projects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"contract_start_date\": \"2024-08-14T09:00:35Z\",\n      \"contract_end_date\": \"2025-08-14T09:00:35Z\",\n      \"delivery_deadline\": \"2024-08-14T09:00:35Z\",\n      \"date_delivered\": \"2024-07-14T09:00:35Z\",\n      \"vm_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": \"6.25\"\n    },\n    {\n      \"id\": \"e384a1de-81f8-4cb2-b312-a7d88a9bf9cb\",\n      \"reservation_type\": \"RIPA\",\n      \"product_line\": \"h100\",\n      \"duration\": 12,\n      \"quantity\": 64,\n      \"used_quantity\": 32,\n      \"locations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"projects\": [\n        \"string\",\n        \"string\"\n      ],\n      \"contract_start_date\": \"2024-08-14T09:00:35Z\",\n      \"contract_end_date\": \"2025-08-14T09:00:35Z\",\n      \"delivery_deadline\": \"2024-08-14T09:00:35Z\",\n      \"date_delivered\": \"2024-07-14T09:00:35Z\",\n      \"vm_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": \"6.25\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf7ed1e1-7f83-4f2c-a917-7ed4c997114a",
+              "name": "Error Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    ":reservation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"bad_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd7c2e1d-9745-4b12-9521-a8a0298addd5",
+              "name": "Error Authentication Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    ":reservation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"bad_credential\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0a9807d-948a-41f2-9fa3-42319de655f2",
+              "name": "Error Permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    ":reservation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0282846b-5564-4d07-a57f-b1c93a78a1b3",
+              "name": "Error Internal Server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organization_id",
+                    "reservations",
+                    ":reservation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organization_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cloud.crusoe.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "60d488a1-ac0c-464c-97f9-e0f82403a813",
+    "name": "Crusoe Reservations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Reservations across 2 of this provider's published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

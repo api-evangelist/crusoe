@@ -1,0 +1,488 @@
+openapi: 3.2.0
+info:
+  title: Crusoe VPC Networks API
+  version: '1.0'
+  description: 'Operations tagged VPC Networks across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: VPC Networks
+paths:
+  /projects/{project_id}/networking/vpc-networks:
+    get:
+      operationId: listVPCNetworks
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/listVPCNetworksResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Lists all VPC networks in the project and returns their details.
+      tags:
+      - VPC Networks
+    post:
+      operationId: createVPCNetwork
+      parameters:
+      - example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/vpcNetworkPostResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Creates a VPC network in the project and returns the created network.
+      tags:
+      - VPC Networks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VPCNetworkPostRequest'
+        required: true
+  /projects/{project_id}/networking/vpc-networks/{vpc_network_id}:
+    delete:
+      operationId: deleteVPCNetwork
+      parameters:
+      - description: ID of the project that owns the VPC network.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VPC network.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vpc_network_id
+        required: true
+        x-go-name: VPCNetworkID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Deletes a VPC network from the project and returns the async operation.
+      tags:
+      - VPC Networks
+    get:
+      operationId: getVPCNetwork
+      parameters:
+      - description: ID of the project that owns the VPC network.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VPC network.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vpc_network_id
+        required: true
+        x-go-name: VPCNetworkID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/getVPCNetworkResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Returns details for a single VPC network in the project.
+      tags:
+      - VPC Networks
+    patch:
+      operationId: patchVPCNetwork
+      parameters:
+      - description: ID of the project that owns the VPC network.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: project_id
+        required: true
+        x-go-name: ProjectID
+        schema:
+          type: string
+      - description: ID of the VPC network.
+        example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+        in: path
+        name: vpc_network_id
+        required: true
+        x-go-name: VPCNetworkID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/asyncOperationResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '403':
+          $ref: '#/components/responses/permissionsError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Updates a VPC network in the project and returns the async operation.
+      tags:
+      - VPC Networks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VPCNetworkPatchRequest'
+        required: true
+components:
+  schemas:
+    VPCNetworkPostRequest:
+      properties:
+        cidr:
+          description: Address range for the VPC network, in CIDR notation (for example, 172.27.0.0/16).
+          example: 172.27.0.0/16
+          type: string
+          x-go-name: Cidr
+        name:
+          description: Name for the new VPC network.
+          example: my-cool-vpc-network
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      - cidr
+      title: VPCNetworkPostRequest is the request type for POST requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VPCNetwork:
+      properties:
+        cidr:
+          description: Address range of the VPC network, in CIDR notation.
+          example: 121.0.0.0/20
+          type: string
+          x-go-name: CIDR
+        gateway:
+          description: ID of the VPC network's gateway.
+          example: 11bf5b4c-e0e5-4017-bdb8-3861f3acedc1
+          type: string
+          x-go-name: Gateway
+        id:
+          description: ID of the VPC network.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: ID
+        name:
+          description: Name of the VPC network.
+          example: default-ethernet
+          type: string
+          x-go-name: Name
+        subnets:
+          description: IDs of the subnets that belong to the VPC network. Empty if the network has none.
+          example: '[1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc]'
+          items:
+            type: string
+          type: array
+          x-go-name: Subnets
+      required:
+      - id
+      - name
+      - subnets
+      - gateway
+      - cidr
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VPCNetworkPatchRequest:
+      properties:
+        name:
+          description: New name for the VPC network.
+          example: my-cool-vpc-network
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      title: VPCNetworkPatchRequest is the request type for PATCH requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    VPCNetworkPostResponse:
+      properties:
+        network:
+          $ref: '#/components/schemas/VPCNetwork'
+      required:
+      - network
+      title: VPCNetworkPostResponse is the response type for POST requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    ListVPCNetworksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/VPCNetwork'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListVPCNetworksResponseV1 is the response type for GET requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    vpcNetworkPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VPCNetworkPostResponse'
+    listVPCNetworksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListVPCNetworksResponseV1'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getVPCNetworkResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VPCNetwork'
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

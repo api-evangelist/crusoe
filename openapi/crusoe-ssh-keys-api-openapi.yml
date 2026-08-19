@@ -1,0 +1,297 @@
+openapi: 3.2.0
+info:
+  title: Crusoe SSH Keys API
+  version: '1.0'
+  description: 'Operations tagged SSH Keys across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cloud.crusoe.ai/v1
+tags:
+- name: SSH Keys
+paths:
+  /users/ssh-keys:
+    delete:
+      operationId: deleteSSHKey
+      parameters:
+      - example: 6e28cad3-98e6-47a9-a9fc-1cd83a7f25c1
+        in: query
+        name: id
+        required: true
+        x-go-name: ID
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/emptyResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Delete an SSH public key registered to the logged in user.
+      tags:
+      - SSH Keys
+    get:
+      operationId: getSSHKeys
+      responses:
+        '200':
+          $ref: '#/components/responses/getSSHKeysResponse'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Retrieve the list of SSH public keys registered to the logged in user.
+      tags:
+      - SSH Keys
+    post:
+      description: A successful response from this resource wil contain the created SSH key details.
+      operationId: createSSHKey
+      responses:
+        '200':
+          $ref: '#/components/responses/createSSHKeysResponse'
+        '400':
+          $ref: '#/components/responses/badReqError'
+        '401':
+          $ref: '#/components/responses/authError'
+        '500':
+          $ref: '#/components/responses/serverError'
+      summary: Register a new SSH public key to the logged in user.
+      tags:
+      - SSH Keys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSSHKeyRequest'
+        required: true
+components:
+  responses:
+    createSSHKeysResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSSHKeyResponse'
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getSSHKeysResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSSHKeysResponseV1'
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
+    SSHKey:
+      properties:
+        created_at:
+          example: '2022-01-24T20:13:35.328Z'
+          type: string
+          x-go-name: CreatedAt
+        fingerprints:
+          $ref: '#/components/schemas/Fingerprints'
+        id:
+          example: 0b880f48-6a97-408f-8351-3cc30871e010
+          type: string
+          x-go-name: ID
+        name:
+          example: public key 1
+          type: string
+          x-go-name: Name
+        public_key:
+          example: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICpuH/fqCFLbAConChyVH6rZzSaxlnHSwQk6qvtPsf5E
+          type: string
+          x-go-name: PublicKey
+      required:
+      - id
+      - name
+      - public_key
+      - created_at
+      - fingerprints
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Fingerprints:
+      properties:
+        md5:
+          example: bf:60:fa:cc:9f:42:1f:5e:23:9e:ed:d2:69:d8:76:93
+          type: string
+          x-go-name: MD5
+        sha256:
+          example: tARFxQkVHeqm6TzqpI897QsHVdgZlxgL2/YhVltmEUk
+          type: string
+          x-go-name: SHA256
+      required:
+      - md5
+      - sha256
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSSHKeyResponse:
+      properties:
+        ssh_key:
+          $ref: '#/components/schemas/SSHKey'
+      required:
+      - ssh_key
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSSHKeyRequest:
+      properties:
+        name:
+          example: John Doe
+          type: string
+          x-go-name: Name
+        public_key:
+          example: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICpuH/fqCFLbAConChyVH6rZzSaxlnHSwQk6qvtPsf5E
+          type: string
+          x-go-name: PublicKey
+      required:
+      - name
+      - public_key
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSSHKeysResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+x-refined-from:
+- crusoe-cloud-api-gateway-v1-openapi.json
+- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+x-tagGroups:
+- name: Compute
+  tags:
+  - VMs
+  - VM Operations
+  - Images
+  - Instance Templates
+- name: Organizations
+  tags:
+  - Projects
+  - Billing
+  - Entities
+  - Prospects
+  - Usage
+  - Quotas
+  - Audit Logs
+  - SCIM
+- name: Users
+  tags:
+  - Identities
+  - SSH Keys
+  - Tokens
+- name: Storage
+  tags:
+  - Disks
+  - Disk Operations
+  - Snapshots
+  - Snapshot Operations
+  - S3Buckets
+  - S3Users
+- name: Networking
+  tags:
+  - VPC Firewall Rules
+  - VPC Firewall Rule Operations
+  - VPC Networks
+  - VPC Subnets
+  - IB Partitions
+  - Load Balancers
+  - NVLink Domains
+- name: Orchestration
+  tags:
+  - Kubernetes Clusters
+  - Kubernetes Cluster Operations
+  - Kubernetes Node Pools
+  - Kubernetes Node Pool Operations
+  - Kubernetes Versions
+  - AutoClusters
+  - AutoCluster Operations
+- name: Locations
+  tags:
+  - Locations
+- name: Capacities
+  tags:
+  - Capacities
+- name: Container Registry
+  tags:
+  - Container Registry
+- name: Foundry
+  tags:
+  - Foundry

@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Images API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all images and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/compute/images",
+            "params": [
+              {
+                "name": "product_group",
+                "value": "a100",
+                "type": "query",
+                "description": "Optional filter to return only images compatible with the specified product group (e.g. \"a100\", \"h100\")."
+              }
+            ]
+          },
+          "docs": "Lists all images and returns their details."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single image.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/compute/images/:image_id",
+            "params": [
+              {
+                "name": "image_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the image."
+              }
+            ]
+          },
+          "docs": "Returns details for a single image."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

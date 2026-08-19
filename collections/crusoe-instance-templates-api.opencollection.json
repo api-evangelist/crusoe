@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Crusoe Instance Templates API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instance Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists all instance templates in the project and returns their details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-templates",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all instance templates in the project and returns their details."
+        },
+        {
+          "info": {
+            "name": "Creates an instance template in the project and returns the created instance template.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-templates",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an instance template in the project and returns the created instance template."
+        },
+        {
+          "info": {
+            "name": "Returns details for a single instance template in the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-templates/:instance_template_id",
+            "params": [
+              {
+                "name": "instance_template_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the instance template."
+              },
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details for a single instance template in the project."
+        },
+        {
+          "info": {
+            "name": "Deletes an instance template from the project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cloud.crusoe.ai/v1/projects/:project_id/compute/instance-templates/:instance_template_id",
+            "params": [
+              {
+                "name": "instance_template_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path",
+                "description": "ID of the instance template."
+              },
+              {
+                "name": "project_id",
+                "value": "ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an instance template from the project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
