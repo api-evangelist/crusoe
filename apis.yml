@@ -20,6 +20,17 @@ specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
+- AI Infrastructure
+- Cloud Computing
+- GPU Compute
+- Machine-Learning
+- Inference
+- Kubernetes
+- Object Storage
+- Infrastructure-as-a-Service
+- Energy
+- MCP
+tags_raw:
 - ai-infrastructure
 - cloud-computing
 - gpu-compute
@@ -42,6 +53,11 @@ apis:
   humanURL: https://docs.crusoecloud.com/serverless-inference/overview
   baseURL: https://api.inference.crusoecloud.com/v1
   tags:
+  - Inference
+  - Machine-Learning
+  - OpenAI-Compatible
+  - Fine-Tuning
+  tags_raw:
   - inference
   - machine-learning
   - openai-compatible
@@ -67,6 +83,11 @@ apis:
   humanURL: https://docs.crusoecloud.com/reference/mcp-server
   baseURL: https://api.crusoecloud.com/v1
   tags:
+  - MCP
+  - agent-native
+  - AI Infrastructure
+  - Cloud Computing
+  tags_raw:
   - mcp
   - agent-native
   - ai-infrastructure
@@ -461,6 +482,8 @@ apis:
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -754,6 +777,8 @@ apis:
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
+  - Load Balancer
+  tags_raw:
   - Load Balancers
   properties:
   - type: OpenAPI
@@ -864,6 +889,8 @@ apis:
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -996,6 +1023,8 @@ apis:
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
+  - S3 Keys
+  tags_raw:
   - S3Keys
   properties:
   - type: OpenAPI
