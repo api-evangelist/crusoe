@@ -12,6 +12,18 @@ description: >-
   inference, serverless fine-tuning, and self-serve deployments of open models. Crusoe also ships a
   first-party CLI, a Terraform provider, a Go API client, and a read-only Crusoe Cloud MCP server for
   AI assistants. Founded 2018, headquartered in Denver, Colorado.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.crusoe.ai/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/crusoe/refs/heads/main/apis.yml
 x-type: company
