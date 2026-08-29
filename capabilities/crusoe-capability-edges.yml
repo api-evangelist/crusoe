@@ -1,0 +1,309 @@
+slug: crusoe
+provider: Crusoe
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 30
+edges:
+- tag: RoleBindings
+  spec_file: crusoe-rolebindings-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.89
+  evidence: POST /iam/users/{user_id}/role-bindings — "Creates and deletes role bindings for a user in
+    a single atomic operation."
+  reason: IAM-path operations granting and revoking roles to users — authorisation/access administration,
+    i.e. Identity & Access Management.
+- tag: Disks
+  spec_file: crusoe-disks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/storage/disks createDisk 'Creates a disk in the project'; PATCH
+    ... resizeDisk; schema DiskV1
+  reason: Provisioning and resizing of block-storage volumes in a cloud project is cloud/storage infrastructure
+    provisioning, i.e. IT Infrastructure Management. No business-domain reading fits.
+- tag: Foundry
+  spec_file: crusoe-foundry-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.85
+  evidence: listFoundryDeployedModels 'Lists the models deployed and available for inference in the project';
+    'Updates the HuggingFace source behind a deployed model's alias'; schemas LoRAAdapterDeployment, CreateDeploymentRequest
+  reason: Operations deploy, version, rename and monitor ML models (including LoRA adapters) for inference
+    — model lifecycle / MLOps, i.e. Artificial Intelligence Management.
+- tag: IB Networks
+  spec_file: crusoe-ib-networks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: GET /projects/{project_id}/networking/ib-networks listIBNetworks 'Lists all InfiniBand networks
+    and returns their details'; schema IBNetworkCapacity
+  reason: Read surface over InfiniBand network fabric resources is network infrastructure management within
+    a cloud platform.
+- tag: IB Partitions
+  spec_file: crusoe-ib-partitions-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/networking/ib-partitions createIBPartition 'Creates an InfiniBand
+    partition in the project'
+  reason: Create/delete of InfiniBand network partitions is provisioning of network infrastructure; no
+    business-domain capability applies.
+- tag: Instance Groups
+  spec_file: crusoe-instance-groups-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/compute/instance-groups createInstanceGroup; schemas InstanceGroup,
+    DesiredCount
+  reason: Lifecycle management of groups of compute instances (with desired count) is cloud compute infrastructure
+    provisioning and scaling.
+- tag: Instance Templates
+  spec_file: crusoe-instance-templates-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/compute/instance-templates createInstanceTemplate; schemas InstanceTemplate,
+    DiskTemplate, VirtualizationFeatures
+  reason: Templates defining VM/disk configuration for compute provisioning are infrastructure configuration
+    artefacts, squarely IT Infrastructure Management.
+- tag: Internal Load Balancers
+  spec_file: crusoe-internal-load-balancers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/networking/internal-load-balancers createLoadBalancer; schemas
+    LoadBalancerNetworkInterface, HealthCheckOptions
+  reason: Create/update/delete of network load balancers with health checks and IP addressing is provisioning
+    of network infrastructure.
+- tag: Kubernetes Clusters
+  spec_file: crusoe-kubernetes-clusters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: '"Creates a Kubernetes cluster in the project and returns the async operation." / schema KubernetesCluster'
+  reason: CRUD lifecycle over managed Kubernetes clusters on a GPU cloud — provisioning and stewardship
+    of compute infrastructure, i.e. IT Infrastructure Management (cloud/compute).
+- tag: Kubernetes Node Pools
+  spec_file: crusoe-kubernetes-node-pools-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: '"Creates a Kubernetes node pool in the project", "Starts a rotation of a Kubernetes node
+    pool", "Lists all VMs in a Kubernetes node pool"'
+  reason: Provisioning, updating and rotating pools of VMs backing Kubernetes clusters — direct management
+    of cloud compute infrastructure.
+- tag: Load Balancers
+  spec_file: crusoe-load-balancers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: '"Creates an external load balancer in the project and returns the async operation." / path
+    /networking/load-balancers'
+  reason: Lifecycle management of network load balancers with backends and health checks — cloud network
+    infrastructure management.
+- tag: VMs
+  spec_file: crusoe-vms-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: createInstance  Creates a VM in the project and returns the async operation.
+  reason: Virtual machine provisioning, disk attach/detach and VM type catalogue — cloud compute infrastructure
+    management.
+- tag: VPC Networks
+  spec_file: crusoe-vpc-networks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/networking/vpc-networks  createVPCNetwork  Creates a VPC network
+    in the project
+  reason: Operations create, list, patch and delete virtual private cloud networks — provisioning of cloud
+    network infrastructure, which is IT Infrastructure Management (compute, storage, network, cloud infrastructure).
+    No industry-specific reading fits a GPU cloud's networking primitives.
+- tag: VPC Subnets
+  spec_file: crusoe-vpc-subnets-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /projects/{project_id}/networking/vpc-subnets  createVPCSubnet  Creates a VPC subnet
+    in the project
+  reason: CRUD over VPC subnets and NAT gateways is cloud network infrastructure provisioning, mapping
+    to IT Infrastructure Management.
+- tag: Roles
+  spec_file: crusoe-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: GET /iam/roles — "Lists role associated with the caller's organization."; schemas ListRolesResponse,
+    Role
+  reason: IAM role catalogue underpinning access control decisions; thin (single read op) but unambiguously
+    an access-management surface.
+- tag: AutoClusters
+  spec_file: crusoe-autoclusters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: PATCH /projects/{project_id}/kubernetes/clusters/{cluster_id}/autoclusters/config "Update
+    the AutoClusters configuration"; POST .../vms/{vm_id}/remediate "Trigger VM remediation."
+  reason: Configuration and auto-remediation of Kubernetes cluster/VM fleets is cloud compute infrastructure
+    management, mapping to IT Infrastructure Management.
+- tag: Images
+  spec_file: crusoe-images-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: GET /compute/images listImages 'Lists all images and returns their details'; schema Image
+  reason: Compute machine images are infrastructure catalogue artefacts used to launch VMs; this is IT
+    infrastructure management, not marketing/media imagery.
+- tag: MFA
+  spec_file: crusoe-mfa-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: '"Get enabled MFA methods for the specified organization." / "Update required MFA methods
+    for the specified organization."'
+  reason: Configuration of multi-factor authentication requirements for an organisation's users — authentication/access
+    control, i.e. Identity & Access Management.
+- tag: S3Buckets
+  spec_file: crusoe-s3buckets-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /projects/{project_id}/storage/s3/buckets — "Creates an S3 bucket in the project"; "Enables
+    versioning on an S3 bucket"
+  reason: Provisioning and configuration of object-storage buckets (versioning, object lock, locations)
+    — cloud storage infrastructure management.
+- tag: Slurm Clusters
+  spec_file: crusoe-slurm-clusters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: createSlurmCluster  Create a new slurm cluster owned by the logged in user.
+  reason: Provisioning and lifecycle of HPC/GPU compute clusters in a cloud project — compute infrastructure
+    management, not a business-domain capability.
+- tag: SSO
+  spec_file: crusoe-sso-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.79
+  evidence: POST /organizations/{organization_id}/sso/providers — "Create a new SSO provider for a specific
+    org."; PATCH /users/sso-enforcement
+  reason: Registration and enforcement of per-organization SSO identity providers — federation of tenant
+    identity providers into the multi-tenant service.
+- tag: Identities
+  spec_file: crusoe-identities-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: GET /users/identities getUserIdentity 'Retrieve user details for the logged in user'; schemas
+    Identity, IdentityCredential, RoleBinding
+  reason: User identity records with credentials and role bindings are identity and access management
+    artefacts, not HR employee records; the RoleBinding schema grounds the access-management reading.
+- tag: SCIM
+  spec_file: crusoe-scim-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.78
+  evidence: POST /organizations/{org_id}/scim/integrations — "Create a new SCIM integration for an organization.";
+    "Create a token for a SCIM integration."
+  reason: Per-organization SCIM integrations for automated user provisioning from the customer's IdP —
+    directly matches Tenant Identity Federation ('lifecycle of tenant user accounts via single sign-on
+    and SCIM').
+- tag: Slurm Nodesets
+  spec_file: crusoe-slurm-nodesets-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: createSlurmNodeset  Create a new slurm nodeset owned by the logged in user.
+  reason: CRUD over sets of compute nodes within a cluster — cloud compute infrastructure provisioning.
+- tag: CustomImages
+  spec_file: crusoe-customimages-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /projects/{project_id}/compute/custom-images "Creates a custom image in the project";
+    schema "Image"
+  reason: Lifecycle management of custom machine images used to provision compute instances is cloud/compute
+    infrastructure management.
+- tag: Observability
+  spec_file: crusoe-observability-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.72
+  evidence: GET /projects/{project_id}/metrics/scrape — "Export metrics in Prometheus text format (default)
+    or OpenMetrics format for scraping."; "Query timeseries at an instant via PromQL"; schema ObservabilityMetrics
+  reason: Operations expose Prometheus/PromQL metrics and timeseries for running cloud resources — metrics-based
+    observability of a live service. Mapped to Observability Management; the alternative reading (BC-600.40
+    IT Operations monitoring) keeps confidence moderate.
+- tag: S3Keys
+  spec_file: crusoe-s3keys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /organizations/{org_id}/storage/s3/keys — "Creates an S3 access key in the organization
+    and returns the access key ID and one-time secret key."
+  reason: Issuance and revocation of access credentials for storage access — credential/access management.
+    Could alternatively be read as secrets management, hence moderate confidence.
+- tag: SSH Keys
+  spec_file: crusoe-ssh-keys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /users/ssh-keys — "Register a new SSH public key to the logged in user."
+  reason: Registration and removal of per-user SSH public keys used for authenticated access to instances
+    — user credential/access administration.
+- tag: Snapshots
+  spec_file: crusoe-snapshots-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: createDiskSnapshot  Creates a disk snapshot in the project and returns the async operation.
+  reason: Block-storage disk snapshot lifecycle — storage infrastructure management. Could arguably touch
+    backup/DR, but the operations are plain storage-resource CRUD.
+- tag: Usage
+  spec_file: crusoe-usage-api-openapi.yml
+  capability_id: BC-4250.10
+  capability_id_l1: BC-4250
+  capability_name: Usage Metering
+  confidence: 0.7
+  evidence: getUsage  Get project-level usage for products in Crusoe Cloud.
+  reason: Aggregated resource-level consumption reporting per organisation/project — usage metering feeding
+    cloud billing/analytics.

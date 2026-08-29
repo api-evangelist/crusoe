@@ -1480,6 +1480,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/crusoe-capability-edges.yml
+  name: Crusoe Business Capability Map
 - type: Website
   url: https://www.crusoe.ai/
 - type: DeveloperPortal
