@@ -1,17 +1,15 @@
 aid: crusoe
 name: Crusoe
-description: >-
-  Crusoe is a vertically integrated "AI factory" company that designs, builds, and operates
-  energy-first AI infrastructure, and sells it as Crusoe Cloud — a GPU cloud for training, fine-tuning,
-  and inference. The public developer surface is the Crusoe Cloud API Gateway, a REST API at
-  api.cloud.crusoe.ai covering virtual machines, instance groups and templates, block storage disks and
-  snapshots, S3-compatible object storage, custom images, a container registry, VPC networking and load
-  balancers, InfiniBand partitions and NVLink domains, Crusoe Managed Kubernetes and Slurm clusters,
-  capacity reservations, IAM role bindings, SCIM/SSO, quotas, audit logs, usage and billing. Alongside
-  it, the Intelligence Foundry exposes an OpenAI-compatible Managed Inference API for serverless
-  inference, serverless fine-tuning, and self-serve deployments of open models. Crusoe also ships a
-  first-party CLI, a Terraform provider, a Go API client, and a read-only Crusoe Cloud MCP server for
-  AI assistants. Founded 2018, headquartered in Denver, Colorado.
+description: Crusoe is a vertically integrated "AI factory" company that designs, builds, and operates energy-first
+  AI infrastructure, and sells it as Crusoe Cloud — a GPU cloud for training, fine-tuning, and inference. The public
+  developer surface is the Crusoe Cloud API Gateway, a REST API at api.cloud.crusoe.ai covering virtual machines,
+  instance groups and templates, block storage disks and snapshots, S3-compatible object storage, custom images,
+  a container registry, VPC networking and load balancers, InfiniBand partitions and NVLink domains, Crusoe Managed
+  Kubernetes and Slurm clusters, capacity reservations, IAM role bindings, SCIM/SSO, quotas, audit logs, usage and
+  billing. Alongside it, the Intelligence Foundry exposes an OpenAI-compatible Managed Inference API for serverless
+  inference, serverless fine-tuning, and self-serve deployments of open models. Crusoe also ships a first-party
+  CLI, a Terraform provider, a Go API client, and a read-only Crusoe Cloud MCP server for AI assistants. Founded
+  2018, headquartered in Denver, Colorado.
 deliveryModel:
   model: saas
   open_source: false
@@ -23,6 +21,19 @@ deliveryModel:
   - openapi
   - pricing
   generated: '2026-08-28'
+  method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://www.crusoe.ai/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/crusoe/refs/heads/main/apis.yml
@@ -55,13 +66,11 @@ tags_raw:
 - mcp
 apis:
 - name: Crusoe Managed Inference API
-  description: >-
-    OpenAI-compatible inference API from the Crusoe Intelligence Foundry. Send chat/completions and embeddings
-    requests to Crusoe-hosted open models (DeepSeek, Llama, Gemma, GLM, Kimi, Nemotron and others) without
-    managing GPU infrastructure, or run reserved-capacity self-serve deployments and LoRA-based serverless
-    fine-tuning jobs. Authenticated with an Inference API key issued from the Crusoe Cloud console. The
-    endpoint requires credentials for every request, including discovery paths, so no anonymous machine-readable
-    contract is published for it.
+  description: OpenAI-compatible inference API from the Crusoe Intelligence Foundry. Send chat/completions and embeddings
+    requests to Crusoe-hosted open models (DeepSeek, Llama, Gemma, GLM, Kimi, Nemotron and others) without managing
+    GPU infrastructure, or run reserved-capacity self-serve deployments and LoRA-based serverless fine-tuning jobs.
+    Authenticated with an Inference API key issued from the Crusoe Cloud console. The endpoint requires credentials
+    for every request, including discovery paths, so no anonymous machine-readable contract is published for it.
   humanURL: https://docs.crusoecloud.com/serverless-inference/overview
   baseURL: https://api.inference.crusoecloud.com/v1
   tags:
@@ -84,14 +93,13 @@ apis:
   - type: Authentication
     url: authentication/crusoe-authentication.yml
 - name: Crusoe Cloud MCP Server
-  description: >-
-    First-party, read-only Model Context Protocol server published by Crusoe as the npm package @crusoeai/cloud-mcp
-    and as a downloadable Claude Desktop extension bundle. Runs over stdio, inherits credentials from
-    the local ~/.crusoe/config CLI profile, and exposes read-only tools for identity, projects, capacities,
-    VMs, instance groups and templates, disks, snapshots, images, custom images, VPC networks, subnets,
-    firewall rules, load balancers, Kubernetes clusters and node pools, audit logs, quotas, GPU tracking,
-    usage, and a resource-relationship topology graph. All write operations are disabled by design; a
-    client-side limit of 60 requests per minute is enforced. Currently in preview.
+  description: First-party, read-only Model Context Protocol server published by Crusoe as the npm package @crusoeai/cloud-mcp
+    and as a downloadable Claude Desktop extension bundle. Runs over stdio, inherits credentials from the local
+    ~/.crusoe/config CLI profile, and exposes read-only tools for identity, projects, capacities, VMs, instance
+    groups and templates, disks, snapshots, images, custom images, VPC networks, subnets, firewall rules, load balancers,
+    Kubernetes clusters and node pools, audit logs, quotas, GPU tracking, usage, and a resource-relationship topology
+    graph. All write operations are disabled by design; a client-side limit of 60 requests per minute is enforced.
+    Currently in preview.
   humanURL: https://docs.crusoecloud.com/reference/mcp-server
   baseURL: https://api.crusoecloud.com/v1
   tags:
@@ -269,8 +277,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-custom-image-operations-api
   name: Crusoe Custom Image Operations API
-  description: >-
-    The Custom Image Operations API from Crusoe — 2 operation(s) for custom image operations.
+  description: The Custom Image Operations API from Crusoe — 2 operation(s) for custom image operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -558,8 +565,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-internal-load-balancer-operations-api
   name: Crusoe Internal Load Balancer Operations API
-  description: >-
-    The Internal Load Balancer Operations API from Crusoe — 2 operation(s) for internal load balancer
+  description: The Internal Load Balancer Operations API from Crusoe — 2 operation(s) for internal load balancer
     operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
@@ -582,8 +588,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-internal-load-balancers-api
   name: Crusoe Internal Load Balancers API
-  description: >-
-    The Internal Load Balancers API from Crusoe — 2 operation(s) for internal load balancers.
+  description: The Internal Load Balancers API from Crusoe — 2 operation(s) for internal load balancers.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -605,8 +610,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-kubernetes-cluster-operations-api
   name: Crusoe Kubernetes Cluster Operations API
-  description: >-
-    The Kubernetes Cluster Operations API from Crusoe — 2 operation(s) for kubernetes cluster operations.
+  description: The Kubernetes Cluster Operations API from Crusoe — 2 operation(s) for kubernetes cluster operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -650,8 +654,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-kubernetes-node-pool-operations-api
   name: Crusoe Kubernetes Node Pool Operations API
-  description: >-
-    The Kubernetes Node Pool Operations API from Crusoe — 2 operation(s) for kubernetes node pool operations.
+  description: The Kubernetes Node Pool Operations API from Crusoe — 2 operation(s) for kubernetes node pool operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -695,8 +698,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-kubernetes-support-access-api
   name: Crusoe Kubernetes Support Access API
-  description: >-
-    The Kubernetes Support Access API from Crusoe — 1 operation(s) for kubernetes support access.
+  description: The Kubernetes Support Access API from Crusoe — 1 operation(s) for kubernetes support access.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -762,8 +764,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-load-balancer-operations-api
   name: Crusoe Load Balancer Operations API
-  description: >-
-    The Load Balancer Operations API from Crusoe — 2 operation(s) for load balancer operations.
+  description: The Load Balancer Operations API from Crusoe — 2 operation(s) for load balancer operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -1077,8 +1078,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-slurm-cluster-operations-api
   name: Crusoe Slurm Cluster Operations API
-  description: >-
-    The Slurm Cluster Operations API from Crusoe — 2 operation(s) for slurm cluster operations.
+  description: The Slurm Cluster Operations API from Crusoe — 2 operation(s) for slurm cluster operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -1122,8 +1122,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-slurm-nodeset-operations-api
   name: Crusoe Slurm Nodeset Operations API
-  description: >-
-    The Slurm Nodeset Operations API from Crusoe — 2 operation(s) for slurm nodeset operations.
+  description: The Slurm Nodeset Operations API from Crusoe — 2 operation(s) for slurm nodeset operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -1343,8 +1342,7 @@ apis:
     url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-vpc-firewall-rule-operations-api
   name: Crusoe VPC Firewall Rule Operations API
-  description: >-
-    The VPC Firewall Rule Operations API from Crusoe — 2 operation(s) for vpc firewall rule operations.
+  description: The VPC Firewall Rule Operations API from Crusoe — 2 operation(s) for vpc firewall rule operations.
   humanURL: https://docs.crusoecloud.com/reference/api/
   baseURL: https://api.cloud.crusoe.ai/v1
   tags:
@@ -1474,6 +1472,565 @@ apis:
     url: errors/crusoe-problem-types.yml
   - type: DataModel
     url: data-model/crusoe-data-model.yml
+- aid: crusoe:cloud-api
+  name: Crusoe Cloud API
+  description: 'The Crusoe Cloud API is the primary control plane for provisioning and
+
+    managing GPU compute, storage, networking, Kubernetes clusters, identity,
+
+    and billing on Crusoe''s vertically integrated AI cloud. It is delivered
+
+    as a versioned REST API with API token authentication, supported by a
+
+    first-party CLI, SDKs, and a Terraform provider.
+
+    '
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Cloud API
+  - GPU Compute
+  - Storage
+  - Networking
+  - Kubernetes
+  - IAM
+  - Billing
+  properties:
+  - type: Documentation
+    url: https://docs.crusoecloud.com/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Console
+    url: https://console.crusoecloud.com/
+  - type: Support
+    url: https://support.crusoecloud.com/
+  - type: GitHubOrganization
+    url: https://github.com/crusoecloud
+  - type: Cookbook
+    url: https://cookbook.crusoe.ai/
+  - type: StatusOrAnnouncements
+    url: https://crusoe.ai/blog
+  features:
+  - name: Virtual Machines
+    description: Create, list, update, and delete GPU and CPU virtual machines with async operation tracking.
+  - name: Custom Images and Templates
+    description: Manage images, custom images, and instance templates for reproducible deployments.
+  - name: Managed Kubernetes
+    description: Provision Kubernetes clusters and node pools tuned for AI workloads.
+  - name: Disks and Snapshots
+    description: Manage persistent disks, resize them, and create snapshots through the API.
+  - name: VPC Networking
+    description: Configure VPC networks, subnets, firewall rules, Infiniband partitions, and load balancers.
+  - name: Identity and Access
+    description: Manage users, SSH keys, API tokens, and role-based access control.
+  - name: Usage, Quotas, and Billing
+    description: Pull daily spend, project- and resource-level usage, quotas, audit logs, and GPU reservations.
+  - name: Managed Inference
+    description: Use Crusoe Intelligence Foundry to serve open-source and custom-tuned models with API keys.
+  useCases:
+  - name: AI Model Training
+    description: Spin up GPU clusters for large-scale model training and fine-tuning.
+  - name: Production Inference
+    description: Deploy managed inference endpoints for open-source and custom models.
+  - name: Container Orchestration
+    description: Run AI workloads on managed Kubernetes with GPU scheduling.
+  - name: Infrastructure as Code
+    description: Provision Crusoe resources from Terraform and CI pipelines.
+  - name: Cost and Usage Reporting
+    description: Pull usage and spend data into internal FinOps dashboards.
+  integrations:
+  - name: Terraform
+  - name: Kubernetes
+  - name: NVIDIA GPUs
+  - name: AMD GPUs
+  - name: DeepSeek
+  - name: Llama
+  - name: Nemotron
+  - name: NVIDIA NIM
+  - name: Container Registry
+  - name: SSH
+  authentication:
+  - type: APIKey
+    description: API tokens issued via /users/tokens and managed in the Crusoe Cloud console.
+- aid: crusoe:crusoe-energy-audit-logs-api
+  name: Crusoe Audit Logs API
+  description: The Audit Logs API from Crusoe — 1 operation(s) for audit logs.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-audit-logs-api-openapi.yml
+- aid: crusoe:crusoe-energy-autocluster-operations-api
+  name: Crusoe AutoCluster Operations API
+  description: The AutoCluster Operations API from Crusoe — 1 operation(s) for autocluster operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - AutoCluster Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-autocluster-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-autoclusters-api
+  name: Crusoe AutoClusters API
+  description: The AutoClusters API from Crusoe — 2 operation(s) for autoclusters.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - AutoClusters
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-autoclusters-api-openapi.yml
+- aid: crusoe:crusoe-energy-billing-api
+  name: Crusoe Billing API
+  description: The Billing API from Crusoe — 3 operation(s) for billing.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-billing-api-openapi.yml
+- aid: crusoe:crusoe-energy-capacities-api
+  name: Crusoe Capacities API
+  description: The Capacities API from Crusoe — 1 operation(s) for capacities.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Capacities
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-capacities-api-openapi.yml
+- aid: crusoe:crusoe-energy-custom-image-operations-api
+  name: Crusoe Custom Image Operations API
+  description: The Custom Image Operations API from Crusoe — 2 operation(s) for custom image operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Custom Image Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-custom-image-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-custom-images-api
+  name: Crusoe Custom Images API
+  description: The Custom Images API from Crusoe — 3 operation(s) for custom images.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - CustomImages
+  tags_raw:
+  - Custom Images
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-custom-images-api-openapi.yml
+- aid: crusoe:crusoe-energy-disk-operations-api
+  name: Crusoe Disk Operations API
+  description: The Disk Operations API from Crusoe — 2 operation(s) for disk operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Disk Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-disk-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-disks-api
+  name: Crusoe Disks API
+  description: The Disks API from Crusoe — 2 operation(s) for disks.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Disks
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-disks-api-openapi.yml
+- aid: crusoe:crusoe-energy-entities-api
+  name: Crusoe Entities API
+  description: The Entities API from Crusoe — 1 operation(s) for entities.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-entities-api-openapi.yml
+- aid: crusoe:crusoe-energy-feature-flags-api
+  name: Crusoe Feature Flags API
+  description: The Feature Flags API from Crusoe — 1 operation(s) for feature flags.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Feature Flags
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-feature-flags-api-openapi.yml
+- aid: crusoe:crusoe-energy-ib-networks-api
+  name: Crusoe IB Networks API
+  description: The IB Networks API from Crusoe — 2 operation(s) for ib networks.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - IB Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-ib-networks-api-openapi.yml
+- aid: crusoe:crusoe-energy-ib-partitions-api
+  name: Crusoe IB Partitions API
+  description: The IB Partitions API from Crusoe — 2 operation(s) for ib partitions.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - IB Partitions
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-ib-partitions-api-openapi.yml
+- aid: crusoe:crusoe-energy-identities-api
+  name: Crusoe Identities API
+  description: The Identities API from Crusoe — 1 operation(s) for identities.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-identities-api-openapi.yml
+- aid: crusoe:crusoe-energy-images-api
+  name: Crusoe Images API
+  description: The Images API from Crusoe — 2 operation(s) for images.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Image
+  tags_raw:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-images-api-openapi.yml
+- aid: crusoe:crusoe-energy-inferenceapikey-api
+  name: Crusoe InferenceAPIKey API
+  description: The InferenceAPIKey API from Crusoe — 1 operation(s) for inferenceapikey.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - InferenceAPIKey
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-inferenceapikey-api-openapi.yml
+- aid: crusoe:crusoe-energy-instance-groups-api
+  name: Crusoe Instance Groups API
+  description: The Instance Groups API from Crusoe — 2 operation(s) for instance groups.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Instance Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-instance-groups-api-openapi.yml
+- aid: crusoe:crusoe-energy-instance-templates-api
+  name: Crusoe Instance Templates API
+  description: The Instance Templates API from Crusoe — 2 operation(s) for instance templates.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Instance Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-instance-templates-api-openapi.yml
+- aid: crusoe:crusoe-energy-internal-load-balancer-operations-api
+  name: Crusoe Internal Load Balancer Operations API
+  description: The Internal Load Balancer Operations API from Crusoe — 2 operation(s) for internal load balancer
+    operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Internal Load Balancer Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-internal-load-balancer-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-internal-load-balancers-api
+  name: Crusoe Internal Load Balancers API
+  description: The Internal Load Balancers API from Crusoe — 2 operation(s) for internal load balancers.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Internal Load Balancers
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-internal-load-balancers-api-openapi.yml
+- aid: crusoe:crusoe-energy-kubernetes-cluster-operations-api
+  name: Crusoe Kubernetes Cluster Operations API
+  description: The Kubernetes Cluster Operations API from Crusoe — 2 operation(s) for kubernetes cluster operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Kubernetes Cluster Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-kubernetes-cluster-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-kubernetes-clusters-api
+  name: Crusoe Kubernetes Clusters API
+  description: The Kubernetes Clusters API from Crusoe — 3 operation(s) for kubernetes clusters.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Kubernetes Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-kubernetes-clusters-api-openapi.yml
+- aid: crusoe:crusoe-energy-kubernetes-node-pool-operations-api
+  name: Crusoe Kubernetes Node Pool Operations API
+  description: The Kubernetes Node Pool Operations API from Crusoe — 2 operation(s) for kubernetes node pool operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Kubernetes Node Pool Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-kubernetes-node-pool-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-kubernetes-node-pools-api
+  name: Crusoe Kubernetes Node Pools API
+  description: The Kubernetes Node Pools API from Crusoe — 4 operation(s) for kubernetes node pools.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Kubernetes Node Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-kubernetes-node-pools-api-openapi.yml
+- aid: crusoe:crusoe-energy-kubernetes-versions-api
+  name: Crusoe Kubernetes Versions API
+  description: The Kubernetes Versions API from Crusoe — 1 operation(s) for kubernetes versions.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Kubernetes Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-kubernetes-versions-api-openapi.yml
+- aid: crusoe:crusoe-energy-load-balancer-operations-api
+  name: Crusoe Load Balancer Operations API
+  description: The Load Balancer Operations API from Crusoe — 2 operation(s) for load balancer operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Load Balancer Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-load-balancer-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-load-balancers-api
+  name: Crusoe Load Balancers API
+  description: The Load Balancers API from Crusoe — 2 operation(s) for load balancers.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Load Balancer
+  tags_raw:
+  - Load Balancers
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-load-balancers-api-openapi.yml
+- aid: crusoe:crusoe-energy-locations-api
+  name: Crusoe Locations API
+  description: The Locations API from Crusoe — 1 operation(s) for locations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-locations-api-openapi.yml
+- aid: crusoe:crusoe-energy-projects-api
+  name: Crusoe Projects API
+  description: The Projects API from Crusoe — 2 operation(s) for projects.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Project
+  tags_raw:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-projects-api-openapi.yml
+- aid: crusoe:crusoe-energy-quotas-api
+  name: Crusoe Quotas API
+  description: The Quotas API from Crusoe — 2 operation(s) for quotas.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Quotas
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-quotas-api-openapi.yml
+- aid: crusoe:crusoe-energy-reservations-api
+  name: Crusoe Reservations API
+  description: The Reservations API from Crusoe — 3 operation(s) for reservations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Reservations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-reservations-api-openapi.yml
+- aid: crusoe:crusoe-energy-roles-api
+  name: Crusoe Roles API
+  description: The Roles API from Crusoe — 3 operation(s) for roles.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-roles-api-openapi.yml
+- aid: crusoe:crusoe-energy-slurm-clusters-api
+  name: Crusoe Slurm Clusters API
+  description: The Slurm Clusters API from Crusoe — 2 operation(s) for slurm clusters.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Slurm Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-slurm-clusters-api-openapi.yml
+- aid: crusoe:crusoe-energy-slurm-node-pools-api
+  name: Crusoe Slurm Node Pools API
+  description: The Slurm Node Pools API from Crusoe — 2 operation(s) for slurm node pools.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Slurm Node Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-slurm-node-pools-api-openapi.yml
+- aid: crusoe:crusoe-energy-snapshot-operations-api
+  name: Crusoe Snapshot Operations API
+  description: The Snapshot Operations API from Crusoe — 2 operation(s) for snapshot operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Snapshot Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-snapshot-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-snapshots-api
+  name: Crusoe Snapshots API
+  description: The Snapshots API from Crusoe — 2 operation(s) for snapshots.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-snapshots-api-openapi.yml
+- aid: crusoe:crusoe-energy-ssh-keys-api
+  name: Crusoe SSH Keys API
+  description: The SSH Keys API from Crusoe — 1 operation(s) for ssh keys.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - SSH Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-ssh-keys-api-openapi.yml
+- aid: crusoe:crusoe-energy-tokens-api
+  name: Crusoe Tokens API
+  description: The Tokens API from Crusoe — 1 operation(s) for tokens.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-tokens-api-openapi.yml
+- aid: crusoe:crusoe-energy-usage-api
+  name: Crusoe Usage API
+  description: The Usage API from Crusoe — 3 operation(s) for usage.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-usage-api-openapi.yml
+- aid: crusoe:crusoe-energy-vm-operations-api
+  name: Crusoe VM Operations API
+  description: The VM Operations API from Crusoe — 2 operation(s) for vm operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VM Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vm-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-vms-api
+  name: Crusoe VMs API
+  description: The VMs API from Crusoe — 6 operation(s) for vms.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VMs
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vms-api-openapi.yml
+- aid: crusoe:crusoe-energy-vpc-firewall-rule-operations-api
+  name: Crusoe VPC Firewall Rule Operations API
+  description: The VPC Firewall Rule Operations API from Crusoe — 2 operation(s) for vpc firewall rule operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VPC Firewall Rule Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vpc-firewall-rule-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-vpc-firewall-rules-api
+  name: Crusoe VPC Firewall Rules API
+  description: The VPC Firewall Rules API from Crusoe — 2 operation(s) for vpc firewall rules.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VPC Firewall Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vpc-firewall-rules-api-openapi.yml
+- aid: crusoe:crusoe-energy-vpc-network-operations-api
+  name: Crusoe VPC Network Operations API
+  description: The VPC Network Operations API from Crusoe — 2 operation(s) for vpc network operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VPC Network Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vpc-network-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-vpc-networks-api
+  name: Crusoe VPC Networks API
+  description: The VPC Networks API from Crusoe — 2 operation(s) for vpc networks.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VPC Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vpc-networks-api-openapi.yml
+- aid: crusoe:crusoe-energy-vpc-subnet-operations-api
+  name: Crusoe VPC Subnet Operations API
+  description: The VPC Subnet Operations API from Crusoe — 2 operation(s) for vpc subnet operations.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VPC Subnet Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vpc-subnet-operations-api-openapi.yml
+- aid: crusoe:crusoe-energy-vpc-subnets-api
+  name: Crusoe VPC Subnets API
+  description: The VPC Subnets API from Crusoe — 2 operation(s) for vpc subnets.
+  humanURL: https://docs.crusoecloud.com/
+  baseURL: https://api.crusoecloud.com/v1alpha5
+  tags:
+  - VPC Subnets
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-energy-vpc-subnets-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -1561,6 +2118,10 @@ common:
   url: overlays/crusoe-cloud-api-gateway-v1-overlay.yaml
 - type: SLA
   url: https://legal.crusoe.ai/#service-level-agreements
+- type: Website
+  url: https://crusoe.ai/
+- type: Blog
+  url: https://crusoe.ai/blog
 x-enrichment:
   date: '2026-08-04'
   status: enriched
