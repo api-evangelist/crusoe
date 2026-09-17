@@ -1018,52 +1018,6 @@ apis:
     url: errors/crusoe-problem-types.yml
   - type: DataModel
     url: data-model/crusoe-data-model.yml
-- aid: crusoe:crusoe-s3buckets-api
-  name: Crusoe S3 Buckets API
-  description: The S3Buckets API from Crusoe — 7 operation(s) for s3buckets.
-  humanURL: https://docs.crusoecloud.com/reference/api/
-  baseURL: https://api.cloud.crusoe.ai/v1
-  tags:
-  - S3Buckets
-  properties:
-  - type: OpenAPI
-    url: openapi/crusoe-s3buckets-api-openapi.yml
-  - type: Documentation
-    url: https://docs.crusoecloud.com/reference/api/
-  - type: APIReference
-    url: https://docs.crusoecloud.com/api/
-  - type: Authentication
-    url: authentication/crusoe-authentication.yml
-  - type: Conventions
-    url: conventions/crusoe-conventions.yml
-  - type: ErrorCatalog
-    url: errors/crusoe-problem-types.yml
-  - type: DataModel
-    url: data-model/crusoe-data-model.yml
-- aid: crusoe:crusoe-s3keys-api
-  name: Crusoe S3 Keys API
-  description: The S3Keys API from Crusoe — 2 operation(s) for s3keys.
-  humanURL: https://docs.crusoecloud.com/reference/api/
-  baseURL: https://api.cloud.crusoe.ai/v1
-  tags:
-  - S3 Keys
-  tags_raw:
-  - S3Keys
-  properties:
-  - type: OpenAPI
-    url: openapi/crusoe-s3keys-api-openapi.yml
-  - type: Documentation
-    url: https://docs.crusoecloud.com/reference/api/
-  - type: APIReference
-    url: https://docs.crusoecloud.com/api/
-  - type: Authentication
-    url: authentication/crusoe-authentication.yml
-  - type: Conventions
-    url: conventions/crusoe-conventions.yml
-  - type: ErrorCatalog
-    url: errors/crusoe-problem-types.yml
-  - type: DataModel
-    url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-scim-api
   name: Crusoe SCIM API
   description: The SCIM API from Crusoe — 4 operation(s) for scim.
@@ -1330,28 +1284,6 @@ apis:
     url: errors/crusoe-problem-types.yml
   - type: DataModel
     url: data-model/crusoe-data-model.yml
-- aid: crusoe:crusoe-vms-api
-  name: Crusoe V Ms API
-  description: The VMs API from Crusoe — 6 operation(s) for vms.
-  humanURL: https://docs.crusoecloud.com/reference/api/
-  baseURL: https://api.cloud.crusoe.ai/v1
-  tags:
-  - VMs
-  properties:
-  - type: OpenAPI
-    url: openapi/crusoe-vms-api-openapi.yml
-  - type: Documentation
-    url: https://docs.crusoecloud.com/reference/api/
-  - type: APIReference
-    url: https://docs.crusoecloud.com/api/
-  - type: Authentication
-    url: authentication/crusoe-authentication.yml
-  - type: Conventions
-    url: conventions/crusoe-conventions.yml
-  - type: ErrorCatalog
-    url: errors/crusoe-problem-types.yml
-  - type: DataModel
-    url: data-model/crusoe-data-model.yml
 - aid: crusoe:crusoe-vpc-firewall-rule-operations-api
   name: Crusoe VPC Firewall Rule Operations API
   description: >-
@@ -1568,6 +1500,72 @@ apis:
   authentication:
   - type: APIKey
     description: API tokens issued via /users/tokens and managed in the Crusoe Cloud console.
+- aid: crusoe:crusoe-vms-api
+  name: Crusoe V Ms API
+  description: The VMs API from Crusoe — 6 operation(s) for vms.
+  humanURL: https://docs.crusoecloud.com/serverless-inference/overview
+  baseURL: https://api.inference.crusoecloud.com/v1
+  tags:
+  - VMs
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-vms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-s3-buckets-api
+  name: Crusoe S3 Buckets API
+  description: The S3 Buckets API from Crusoe — 7 operation(s) for s3 buckets.
+  humanURL: https://docs.crusoecloud.com/serverless-inference/overview
+  baseURL: https://api.inference.crusoecloud.com/v1
+  tags:
+  - S3 Buckets
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-s3-buckets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
+- aid: crusoe:crusoe-s3-keys-api
+  name: Crusoe S3 Keys API
+  description: The S3 Keys API from Crusoe — 2 operation(s) for s3 keys.
+  humanURL: https://docs.crusoecloud.com/serverless-inference/overview
+  baseURL: https://api.inference.crusoecloud.com/v1
+  tags:
+  - S3 Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/crusoe-s3-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.crusoecloud.com/reference/api/
+  - type: APIReference
+    url: https://docs.crusoecloud.com/api/
+  - type: Authentication
+    url: authentication/crusoe-authentication.yml
+  - type: Conventions
+    url: conventions/crusoe-conventions.yml
+  - type: ErrorCatalog
+    url: errors/crusoe-problem-types.yml
+  - type: DataModel
+    url: data-model/crusoe-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
