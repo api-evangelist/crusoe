@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 24
+edge_count: 28
 edges:
 - tag: SSO
   spec_file: crusoe-sso-api-openapi.yml
@@ -152,6 +152,17 @@ edges:
     of a Kubernetes node pool'
   reason: Provisioning, scaling and rotation of Kubernetes worker node pools and their VMs — cloud compute
     infrastructure management.
+- tag: MFA
+  spec_file: crusoe-mfa-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: '"Get enabled MFA methods for the specified organization." / "Update required MFA methods
+    for the specified organization."'
+  reason: Configuration of multi-factor authentication requirements for an organisation's users — authentication/access
+    control, i.e. Identity & Access Management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: S3Buckets
   spec_file: crusoe-s3-buckets-api-openapi.yml
   reanchored_from: crusoe-s3buckets-api-openapi.yml
@@ -185,6 +196,17 @@ edges:
     'Lists the LoRA adapter deployments'
   reason: Deployment, renaming, progress tracking and LoRA adaptation of ML models served for inference
     — ML model lifecycle / MLOps operations, i.e. Artificial Intelligence Management.
+- tag: Identities
+  spec_file: crusoe-identities-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: GET /users/identities getUserIdentity 'Retrieve user details for the logged in user'; schemas
+    Identity, IdentityCredential, RoleBinding
+  reason: User identity records with credentials and role bindings are identity and access management
+    artefacts, not HR employee records; the RoleBinding schema grounds the access-management reading.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Roles
   spec_file: crusoe-roles-api-openapi.yml
   capability_id: BC-620.20
@@ -204,6 +226,17 @@ edges:
     owned by the logged in user.'
   reason: Lifecycle of HPC/GPU compute clusters — provisioning of compute infrastructure, i.e. IT Infrastructure
     Management.
+- tag: CustomImages
+  spec_file: crusoe-customimages-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /projects/{project_id}/compute/custom-images "Creates a custom image in the project";
+    schema "Image"
+  reason: Lifecycle management of custom machine images used to provision compute instances is cloud/compute
+    infrastructure management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Images
   spec_file: crusoe-images-api-openapi.yml
   capability_id: BC-600.50
@@ -233,6 +266,18 @@ edges:
     remediation'
   reason: Operations configure Kubernetes cluster auto-scaling/auto-remediation and remediate VMs — management
     of compute infrastructure, i.e. cross-industry IT infrastructure management, not any Oil & Gas capability.
+- tag: S3Keys
+  spec_file: crusoe-s3-keys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /organizations/{org_id}/storage/s3/keys — "Creates an S3 access key in the organization
+    and returns the access key ID and one-time secret key."
+  reason: Issuance and revocation of access credentials for storage access — credential/access management.
+    Could alternatively be read as secrets management, hence moderate confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
+  reanchored_from: crusoe-s3keys-api-openapi.yml
 - tag: Slurm Nodesets
   spec_file: crusoe-slurm-nodesets-api-openapi.yml
   capability_id: BC-600.50
