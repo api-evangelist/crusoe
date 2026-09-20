@@ -10,6 +10,10 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: developer-api
 pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
 published: true
 note: 'Mixed usage pricing: GPU/CPU hourly, storage per GiB/month, token-based inference and fine-tuning.
   Spot prices and several GPU models listed as Contact sales; only a representative subset of the many
