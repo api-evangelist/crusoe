@@ -153,7 +153,8 @@ edges:
   reason: Provisioning, scaling and rotation of Kubernetes worker node pools and their VMs — cloud compute
     infrastructure management.
 - tag: S3Buckets
-  spec_file: crusoe-s3buckets-api-openapi.yml
+  spec_file: crusoe-s3-buckets-api-openapi.yml
+  reanchored_from: crusoe-s3buckets-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
