@@ -1,0 +1,147 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.crusoe.ai/cloud/pricing
+sources:
+- https://www.crusoe.ai/cloud/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120317
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+published: true
+note: 'Mixed usage pricing: GPU/CPU hourly, storage per GiB/month, token-based inference and fine-tuning.
+  Spot prices and several GPU models listed as Contact sales; only a representative subset of the many
+  model token prices is captured.'
+plan_count: 22
+currency: USD
+plans:
+- name: NVIDIA GB200 186GB NVL72 (on-demand)
+  price_text: Contact sales
+  period: none
+  unit: GPU-hr
+- name: NVIDIA B200 180GB HGX (on-demand)
+  price_text: Contact sales
+  period: none
+  unit: GPU-hr
+- name: NVIDIA H200 141GB HGX (on-demand)
+  price_text: $4.29/GPU-hr
+  price: 4.29
+  currency: USD
+  period: per-use
+  unit: GPU-hour
+- name: NVIDIA H100 80GB HGX (on-demand)
+  price_text: $3.90/GPU-hr
+  price: 3.9
+  currency: USD
+  period: per-use
+  unit: GPU-hour
+- name: NVIDIA A100 80GB SXM (on-demand)
+  price_text: $2.30/GPU-hr
+  price: 2.3
+  currency: USD
+  period: per-use
+  unit: GPU-hour
+- name: NVIDIA A100 80GB PCIe (on-demand)
+  price_text: $2.00/GPU-hr
+  price: 2.0
+  currency: USD
+  period: per-use
+  unit: GPU-hour
+- name: NVIDIA L40S 48GB (on-demand)
+  price_text: $1.50/GPU-hr
+  price: 1.5
+  currency: USD
+  period: per-use
+  unit: GPU-hour
+- name: AMD MI300X 192GB (on-demand)
+  price_text: $3.45/GPU-hr
+  price: 3.45
+  currency: USD
+  period: per-use
+  unit: GPU-hour
+- name: CPU general-purpose
+  price_text: $0.04/vCPU-hr
+  price: 0.04
+  currency: USD
+  period: per-use
+  unit: vCPU-hour
+- name: CPU storage-optimized
+  price_text: $0.09/vCPU-hr
+  price: 0.09
+  currency: USD
+  period: per-use
+  unit: vCPU-hour
+- name: Persistent disks
+  price_text: $0.08 per GiB/month
+  price: 0.08
+  currency: USD
+  period: month
+  unit: GiB
+- name: Shared disks
+  price_text: $0.07 per GiB/month
+  price: 0.07
+  currency: USD
+  period: month
+  unit: GiB
+- name: Container registry usage
+  price_text: $0.10 per GiB/month
+  price: 0.1
+  currency: USD
+  period: month
+  unit: GiB
+- name: Object Storage
+  price_text: $0.06 per GiB/month
+  price: 0.06
+  currency: USD
+  period: month
+  unit: GiB
+- name: Managed Kubernetes cluster
+  price_text: $0.10 per cluster hour
+  price: 0.1
+  currency: USD
+  period: per-use
+  unit: cluster hour
+- name: Serverless Fine-Tuning GPT-OSS 120B
+  price_text: $6.00
+  price: 6.0
+  currency: USD
+  period: per-use
+  unit: per 1M tokens
+- name: Serverless Fine-Tuning Llama 3.1 8B Instruct
+  price_text: $0.40
+  price: 0.4
+  currency: USD
+  period: per-use
+  unit: per 1M tokens
+- name: Serverless Inference DeepSeek V4 Pro input
+  price_text: $1.74
+  price: 1.74
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: output $3.48, cached $0.15
+- name: Serverless Inference GPT-OSS 120B input
+  price_text: $0.05
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: per 1M input tokens
+  overage: output $0.20, cached $0.05
+- name: Self-Serve Deployment NVIDIA H100 80GB HGX
+  price_text: $5.50
+  price: 5.5
+  currency: USD
+  period: per-use
+  unit: per hour
+- name: Self-Serve Deployment NVIDIA H200 141GB HGX
+  price_text: $6.00
+  price: 6.0
+  currency: USD
+  period: per-use
+  unit: per hour
+- name: Provisioned Throughput
+  price_text: Contact sales to learn more.
+  period: none
+  unit: AI Model Units (AMUs)
