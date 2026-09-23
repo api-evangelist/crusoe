@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Observability API
-  version: '1.0'
-  description: 'Operations tagged Observability across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Observability API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -104,7 +104,7 @@ paths:
           $ref: '#/components/responses/rateLimitError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Export metrics in Prometheus text format (default) or OpenMetrics format for scraping.
+      summary: Export metrics in Prometheus text format (default) or OpenMetrics format for…
       tags:
       - Observability
   /projects/{project_id}/metrics/timeseries:
@@ -166,7 +166,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Query timeseries for a resource (in development).
+      summary: Query timeseries for a resource (in development)
       tags:
       - Observability
   /projects/{project_id}/metrics/timeseries/api/v1/query:
@@ -220,7 +220,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Query timeseries at an instant via PromQL.
+      summary: Query timeseries at an instant via PromQL
       tags:
       - Observability
   /projects/{project_id}/metrics/timeseries/api/v1/query-range:
@@ -291,7 +291,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Query timeseries over a time range via PromQL.
+      summary: Query timeseries over a time range via PromQL
       tags:
       - Observability
   /projects/{project_id}/metrics/timeseries/query-parameters:
@@ -371,10 +371,109 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Query timeseries by passing various metric parameters.
+      summary: Query timeseries by passing various metric parameters
       tags:
       - Observability
 components:
+  responses:
+    timeseriesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ObservabilityMetrics'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    scrapeMetricsResponse:
+      description: ''
+    rateLimitError:
+      description: Error Rate Limit Exceeded
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '429'
+                type: string
+                x-go-name: Code
+              message:
+                example: too_many_requests
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
     ObservabilityMetrics:
       description: see also https://prometheus.io/docs/prometheus/latest/querying/api/
@@ -412,108 +511,6 @@ components:
       title: This is the standard format for prometheus query responses;
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    scrapeMetricsResponse:
-      description: ''
-    rateLimitError:
-      description: Error Rate Limit Exceeded
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '429'
-                type: string
-                x-go-name: Code
-              message:
-                example: too_many_requests
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    timeseriesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ObservabilityMetrics'
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
 x-tagGroups:
 - name: Compute
   tags:

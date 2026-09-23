@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Quotas API
-  version: '1.0'
-  description: 'Operations tagged Quotas across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Quotas API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: List max and currently used organization quotas.
+      summary: List max and currently used organization quotas
       tags:
       - Quotas
   /projects/{project_id}/quotas:
@@ -55,96 +55,22 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: List max and currently used project quotas.
+      summary: List max and currently used project quotas
       tags:
       - Quotas
 components:
-  responses:
-    listOrgQuotasResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListOrgQuotasResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listProjectQuotasResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListProjectQuotasResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
+    ListOrgQuotasResponse:
+      properties:
+        quotas:
+          description: Quotas are all returned org quotas
+          items:
+            $ref: '#/components/schemas/OrgQuota'
+          type: array
+          x-go-name: Quotas
+      title: ListOrgQuotasResponse is the response for listing a org's quotas.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListProjectQuotasResponse:
       properties:
         quotas:
@@ -198,17 +124,6 @@ components:
           x-go-name: Used
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListOrgQuotasResponse:
-      properties:
-        quotas:
-          description: Quotas are all returned org quotas
-          items:
-            $ref: '#/components/schemas/OrgQuota'
-          type: array
-          x-go-name: Quotas
-      title: ListOrgQuotasResponse is the response for listing a org's quotas.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     OrgQuota:
       properties:
         available:
@@ -246,9 +161,91 @@ components:
           x-go-name: Used
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+  responses:
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listProjectQuotasResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListProjectQuotasResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listOrgQuotasResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListOrgQuotasResponse'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

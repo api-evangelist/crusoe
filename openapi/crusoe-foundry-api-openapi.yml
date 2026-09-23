@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Foundry API
-  version: '1.0'
-  description: 'Operations tagged Foundry across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Foundry API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -28,7 +28,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists the credentials in the project.
+      summary: Lists the credentials in the project
       tags:
       - Foundry
     post:
@@ -52,7 +52,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Creates a credential in the project.
+      summary: Creates a credential in the project
       tags:
       - Foundry
       requestBody:
@@ -89,7 +89,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Deletes a credential from the project.
+      summary: Deletes a credential from the project
       tags:
       - Foundry
     get:
@@ -126,7 +126,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns a single credential in the project.
+      summary: Returns a single credential in the project
       tags:
       - Foundry
     patch:
@@ -159,7 +159,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Updates a credential's description in the project.
+      summary: Updates a credential's description in the project
       tags:
       - Foundry
       requestBody:
@@ -187,7 +187,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists the models deployed and available for inference in the project.
+      summary: Lists the models deployed and available for inference in the project
       tags:
       - Foundry
   /projects/{project_id}/foundry/deployed-models/activity:
@@ -210,7 +210,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns the activity feed for the project's deployed models.
+      summary: Returns the activity feed for the project's deployed models
       tags:
       - Foundry
   /projects/{project_id}/foundry/deployed-models/progress:
@@ -233,7 +233,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns deployment progress for the project's deployed models.
+      summary: Returns deployment progress for the project's deployed models
       tags:
       - Foundry
   /projects/{project_id}/foundry/deployed-models/progress/stream:
@@ -257,7 +257,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Streams deployment progress for the project's deployed models as server-sent events.
+      summary: Streams deployment progress for the project's deployed models as server-sent…
       tags:
       - Foundry
   /projects/{project_id}/foundry/deployed-models/rename:
@@ -284,7 +284,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Renames a deployed model's alias.
+      summary: Renames a deployed model's alias
       tags:
       - Foundry
       requestBody:
@@ -316,7 +316,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Updates the HuggingFace source behind a deployed model's alias.
+      summary: Updates the HuggingFace source behind a deployed model's alias
       tags:
       - Foundry
       requestBody:
@@ -344,7 +344,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists the LoRA adapter deployments in the project.
+      summary: Lists the LoRA adapter deployments in the project
       tags:
       - Foundry
     post:
@@ -373,7 +373,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Deploys a LoRA adapter (a fine-tuned model) onto its parent base model in the project.
+      summary: Deploys a LoRA adapter (a fine-tuned model) onto its parent base model in the…
       tags:
       - Foundry
       requestBody:
@@ -411,7 +411,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Removes a LoRA adapter deployment from the project.
+      summary: Removes a LoRA adapter deployment from the project
       tags:
       - Foundry
     get:
@@ -442,7 +442,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns a single LoRA adapter deployment in the project.
+      summary: Returns a single LoRA adapter deployment in the project
       tags:
       - Foundry
   /projects/{project_id}/foundry/selfserve/deployments:
@@ -465,7 +465,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists the self-serve deployments in the project.
+      summary: Lists the self-serve deployments in the project
       tags:
       - Foundry
     post:
@@ -490,7 +490,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Creates a self-serve deployment in the project.
+      summary: Creates a self-serve deployment in the project
       tags:
       - Foundry
       requestBody:
@@ -527,7 +527,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Deletes a self-serve deployment from the project.
+      summary: Deletes a self-serve deployment from the project
       tags:
       - Foundry
     get:
@@ -558,7 +558,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns a single self-serve deployment in the project.
+      summary: Returns a single self-serve deployment in the project
       tags:
       - Foundry
     patch:
@@ -591,7 +591,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Updates a self-serve deployment (name and/or replica count) in the project.
+      summary: Updates a self-serve deployment (name and/or replica count) in the project
       tags:
       - Foundry
       requestBody:
@@ -628,7 +628,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns the activity feed for a self-serve deployment.
+      summary: Returns the activity feed for a self-serve deployment
       tags:
       - Foundry
   /projects/{project_id}/foundry/selfserve/deployments/{id}/progress:
@@ -660,7 +660,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns deployment progress for a self-serve deployment.
+      summary: Returns deployment progress for a self-serve deployment
       tags:
       - Foundry
   /projects/{project_id}/foundry/selfserve/deployments/{id}/progress/stream:
@@ -693,7 +693,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Streams progress for a self-serve deployment as server-sent events.
+      summary: Streams progress for a self-serve deployment as server-sent events
       tags:
       - Foundry
   /projects/{project_id}/foundry/selfserve/flavors:
@@ -716,11 +716,350 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists the self-serve deployment flavors available to the project.
+      summary: Lists the self-serve deployment flavors available to the project
       tags:
       - Foundry
 components:
+  responses:
+    foundryCredentialListResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListCredentialsResponse'
+    foundryDeploymentListResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListDeploymentsResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    foundryProgressResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeploymentProgress'
+    foundryCredentialResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CredentialResponse'
+    emptyResponse:
+      description: Empty Response
+    foundryProgressStreamResponse:
+      description: ''
+    foundryUpdateModelResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateModelResponse'
+    foundryLoraListResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/LoRAAdapterDeployment'
+            type: array
+    foundryLoraResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoRAAdapterDeployment'
+    foundryRenameModelResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenameModelResponse'
+    foundryActivityResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListActivityResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    foundryDeployedModelsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListModelsResponse'
+    foundryDeploymentAcceptedResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeploymentAcceptedResponse'
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    foundryFlavorsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListFlavorsResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    foundryDeploymentDetailResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SelfServeDeploymentDetail'
   schemas:
+    SelfServeFlavor:
+      properties:
+        flavor_type:
+          description: Flavor type identifier.
+          type: string
+          x-go-name: FlavorType
+        gpu_type:
+          description: GPU type used by this flavor.
+          type: string
+          x-go-name: GpuType
+        gpus_per_instance:
+          description: GPUs per instance.
+          format: int32
+          type: integer
+          x-go-name: GpusPerInstance
+        id:
+          description: Flavor ID.
+          type: string
+          x-go-name: ID
+        lora_suitable:
+          description: Whether the flavor is suitable for LoRA adapters.
+          type: boolean
+          x-go-name: LoraSuitable
+        model_name:
+          description: Model this flavor serves.
+          type: string
+          x-go-name: ModelName
+        price_per_hour:
+          description: Hourly price, as a decimal string.
+          type: string
+          x-go-name: PricePerHour
+        provider:
+          description: Provider serving this flavor.
+          type: string
+          x-go-name: Provider
+        quantization:
+          description: Quantization applied, if any.
+          type: string
+          x-go-name: Quantization
+      title: SelfServeFlavor describes a hardware/model flavor available for self-serve deployment.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    CreateCredentialRequest:
+      properties:
+        credentials:
+          $ref: '#/components/schemas/CredentialSecrets'
+        description:
+          description: Optional human-readable description.
+          type: string
+          x-go-name: Description
+        name:
+          description: Name of the credential.
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      - credentials
+      title: CreateCredentialRequest is the body for creating a credential.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    UpdateResponseEntry:
+      properties:
+        cluster_name:
+          description: Name of the cluster the workflow runs on.
+          type: string
+          x-go-name: ClusterName
+        error:
+          description: Error message, if the workflow could not be started.
+          type: string
+          x-go-name: Error
+        region:
+          description: Region of the cluster.
+          type: string
+          x-go-name: Region
+        run_id:
+          description: Temporal run ID.
+          type: string
+          x-go-name: RunID
+        status:
+          description: Status of the triggered workflow.
+          type: string
+          x-go-name: Status
+        workflow_id:
+          description: Temporal workflow ID.
+          type: string
+          x-go-name: WorkflowID
+      title: UpdateResponseEntry describes the workflow triggered for a single cluster by an update.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    ListActivityResponse:
+      properties:
+        events:
+          description: Activity events, most recent first.
+          items:
+            $ref: '#/components/schemas/SelfServeActivityEvent'
+          type: array
+          x-go-name: Events
+        next_cursor:
+          description: Cursor for the next page of events, if any.
+          type: string
+          x-go-name: NextCursor
+      title: ListActivityResponse is the response body for a deployment activity feed.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    ListFlavorsResponse:
+      properties:
+        flavors:
+          description: The available self-serve flavors.
+          items:
+            $ref: '#/components/schemas/SelfServeFlavor'
+          type: array
+          x-go-name: Flavors
+      title: ListFlavorsResponse is the response body for listing self-serve flavors.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    UpdateCredentialRequest:
+      properties:
+        description:
+          description: Updated description.
+          type: string
+          x-go-name: Description
+      title: UpdateCredentialRequest is the body for updating a credential.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    UpdateModelResponse:
+      properties:
+        workflows:
+          description: The per-cluster update workflows that were triggered.
+          items:
+            $ref: '#/components/schemas/UpdateResponseEntry'
+          type: array
+          x-go-name: Workflows
+      title: UpdateModelResponse is the response body for a model source update.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    RenameModelResponse:
+      properties:
+        endpoint_id:
+          description: The endpoint ID that was renamed.
+          type: string
+          x-go-name: EndpointID
+        model_alias:
+          description: The resulting model alias.
+          type: string
+          x-go-name: ModelAlias
+      title: RenameModelResponse is the response body for a model rename.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    RenameModelRequest:
+      properties:
+        model_alias:
+          description: Current alias of the model.
+          type: string
+          x-go-name: ModelAlias
+        new_alias:
+          description: New alias for the model.
+          type: string
+          x-go-name: NewAlias
+      required:
+      - model_alias
+      - new_alias
+      title: RenameModelRequest is the body for renaming a deployed model's alias.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
     DeployedModelEntry:
       properties:
         architecture:
@@ -797,97 +1136,6 @@ components:
       title: DeployedModelEntry describes a model available for inference in the project.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    RenameModelResponse:
-      properties:
-        endpoint_id:
-          description: The endpoint ID that was renamed.
-          type: string
-          x-go-name: EndpointID
-        model_alias:
-          description: The resulting model alias.
-          type: string
-          x-go-name: ModelAlias
-      title: RenameModelResponse is the response body for a model rename.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    UpdateModelResponse:
-      properties:
-        workflows:
-          description: The per-cluster update workflows that were triggered.
-          items:
-            $ref: '#/components/schemas/UpdateResponseEntry'
-          type: array
-          x-go-name: Workflows
-      title: UpdateModelResponse is the response body for a model source update.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    UpdateCredentialRequest:
-      properties:
-        description:
-          description: Updated description.
-          type: string
-          x-go-name: Description
-      title: UpdateCredentialRequest is the body for updating a credential.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    CreateCredentialRequest:
-      properties:
-        credentials:
-          $ref: '#/components/schemas/CredentialSecrets'
-        description:
-          description: Optional human-readable description.
-          type: string
-          x-go-name: Description
-        name:
-          description: Name of the credential.
-          type: string
-          x-go-name: Name
-      required:
-      - name
-      - credentials
-      title: CreateCredentialRequest is the body for creating a credential.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    UpdateResponseEntry:
-      properties:
-        cluster_name:
-          description: Name of the cluster the workflow runs on.
-          type: string
-          x-go-name: ClusterName
-        error:
-          description: Error message, if the workflow could not be started.
-          type: string
-          x-go-name: Error
-        region:
-          description: Region of the cluster.
-          type: string
-          x-go-name: Region
-        run_id:
-          description: Temporal run ID.
-          type: string
-          x-go-name: RunID
-        status:
-          description: Status of the triggered workflow.
-          type: string
-          x-go-name: Status
-        workflow_id:
-          description: Temporal workflow ID.
-          type: string
-          x-go-name: WorkflowID
-      title: UpdateResponseEntry describes the workflow triggered for a single cluster by an update.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    ListFlavorsResponse:
-      properties:
-        flavors:
-          description: The available self-serve flavors.
-          items:
-            $ref: '#/components/schemas/SelfServeFlavor'
-          type: array
-          x-go-name: Flavors
-      title: ListFlavorsResponse is the response body for listing self-serve flavors.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
     ListCredentialsResponse:
       properties:
         credentials:
@@ -899,19 +1147,155 @@ components:
       title: ListCredentialsResponse is the response body for listing credentials.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    ListActivityResponse:
+    LoadLoraRequest:
       properties:
-        events:
-          description: Activity events, most recent first.
-          items:
-            $ref: '#/components/schemas/SelfServeActivityEvent'
-          type: array
-          x-go-name: Events
-        next_cursor:
-          description: Cursor for the next page of events, if any.
+        model_id:
+          description: ID of the fine-tuned model (LoRA adapter) to deploy, as registered in the model registry.
           type: string
-          x-go-name: NextCursor
-      title: ListActivityResponse is the response body for a deployment activity feed.
+          x-go-name: ModelID
+      required:
+      - model_id
+      title: LoadLoraRequest is the body for deploying a LoRA adapter.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    CredentialResponse:
+      properties:
+        created_at:
+          description: RFC 3339 creation timestamp.
+          type: string
+          x-go-name: CreatedAt
+        credentials:
+          $ref: '#/components/schemas/CredentialSecrets'
+        description:
+          description: Human-readable description.
+          type: string
+          x-go-name: Description
+        id:
+          description: Credential ID.
+          type: string
+          x-go-name: ID
+        name:
+          description: Name of the credential.
+          type: string
+          x-go-name: Name
+        org_id:
+          description: Owning organization ID.
+          type: string
+          x-go-name: OrgID
+        project_id:
+          description: Owning project ID.
+          type: string
+          x-go-name: ProjectID
+        updated_at:
+          description: RFC 3339 last-update timestamp.
+          type: string
+          x-go-name: UpdatedAt
+        vendor:
+          description: Vendor the credential is for (e.g. "huggingface").
+          type: string
+          x-go-name: Vendor
+      title: CredentialResponse describes a stored credential.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    SelfServeActivityEvent:
+      properties:
+        event_type:
+          description: Event type identifier.
+          type: string
+          x-go-name: EventType
+        message:
+          description: Human-readable event message.
+          type: string
+          x-go-name: Message
+        timestamp:
+          description: RFC 3339 timestamp of the event.
+          type: string
+          x-go-name: Timestamp
+        title:
+          description: Short event title.
+          type: string
+          x-go-name: Title
+        updated_by:
+          description: Identity that triggered the event.
+          type: string
+          x-go-name: UpdatedBy
+      title: SelfServeActivityEvent is a single activity/audit event for a deployment.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    SelfServeDeploymentSummary:
+      properties:
+        available_replicas:
+          description: Currently available replicas.
+          format: int32
+          type: integer
+          x-go-name: AvailableReplicas
+        context_length:
+          description: Context length of the model.
+          format: int32
+          type: integer
+          x-go-name: ContextLength
+        created_at:
+          description: RFC 3339 creation timestamp.
+          type: string
+          x-go-name: CreatedAt
+        created_by:
+          description: Identity that created the deployment.
+          type: string
+          x-go-name: CreatedBy
+        deployment_name:
+          description: User-chosen deployment name.
+          type: string
+          x-go-name: DeploymentName
+        fine_tuned_model:
+          description: The fine-tuned model being served.
+          type: string
+          x-go-name: FineTunedModel
+        gpu_type:
+          description: GPU type in use.
+          type: string
+          x-go-name: GpuType
+        gpus_per_replica:
+          description: GPUs per replica.
+          format: int32
+          type: integer
+          x-go-name: GpusPerReplica
+        id:
+          description: Deployment ID.
+          type: string
+          x-go-name: ID
+        model:
+          description: The underlying model.
+          type: string
+          x-go-name: Model
+        quantization:
+          description: Quantization applied, if any.
+          type: string
+          x-go-name: Quantization
+        status:
+          description: Deployment status.
+          type: string
+          x-go-name: Status
+        target_replicas:
+          description: Target replica count.
+          format: int32
+          type: integer
+          x-go-name: TargetReplicas
+      title: SelfServeDeploymentSummary is a summary view of a self-serve deployment.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    DeploymentAcceptedResponse:
+      description: 'DeploymentAcceptedResponse is returned when a self-serve deployment
+
+        create/update/delete is accepted for asynchronous processing.'
+      properties:
+        id:
+          description: ID of the affected deployment.
+          type: string
+          x-go-name: ID
+        status:
+          description: Resulting status.
+          type: string
+          x-go-name: Status
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
     LoRAAdapterDeployment:
@@ -982,238 +1366,6 @@ components:
           description: RFC 3339 timestamp when the deployment was last updated.
           type: string
           x-go-name: UpdatedAt
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    SelfServeFlavor:
-      properties:
-        flavor_type:
-          description: Flavor type identifier.
-          type: string
-          x-go-name: FlavorType
-        gpu_type:
-          description: GPU type used by this flavor.
-          type: string
-          x-go-name: GpuType
-        gpus_per_instance:
-          description: GPUs per instance.
-          format: int32
-          type: integer
-          x-go-name: GpusPerInstance
-        id:
-          description: Flavor ID.
-          type: string
-          x-go-name: ID
-        lora_suitable:
-          description: Whether the flavor is suitable for LoRA adapters.
-          type: boolean
-          x-go-name: LoraSuitable
-        model_name:
-          description: Model this flavor serves.
-          type: string
-          x-go-name: ModelName
-        price_per_hour:
-          description: Hourly price, as a decimal string.
-          type: string
-          x-go-name: PricePerHour
-        provider:
-          description: Provider serving this flavor.
-          type: string
-          x-go-name: Provider
-        quantization:
-          description: Quantization applied, if any.
-          type: string
-          x-go-name: Quantization
-      title: SelfServeFlavor describes a hardware/model flavor available for self-serve deployment.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    CredentialResponse:
-      properties:
-        created_at:
-          description: RFC 3339 creation timestamp.
-          type: string
-          x-go-name: CreatedAt
-        credentials:
-          $ref: '#/components/schemas/CredentialSecrets'
-        description:
-          description: Human-readable description.
-          type: string
-          x-go-name: Description
-        id:
-          description: Credential ID.
-          type: string
-          x-go-name: ID
-        name:
-          description: Name of the credential.
-          type: string
-          x-go-name: Name
-        org_id:
-          description: Owning organization ID.
-          type: string
-          x-go-name: OrgID
-        project_id:
-          description: Owning project ID.
-          type: string
-          x-go-name: ProjectID
-        updated_at:
-          description: RFC 3339 last-update timestamp.
-          type: string
-          x-go-name: UpdatedAt
-        vendor:
-          description: Vendor the credential is for (e.g. "huggingface").
-          type: string
-          x-go-name: Vendor
-      title: CredentialResponse describes a stored credential.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    CredentialSecrets:
-      properties:
-        token:
-          description: Access token (e.g. a HuggingFace token). Write-only; omitted unless explicitly revealed.
-          type: string
-          x-go-name: Token
-      title: CredentialSecrets holds the secret material for a credential.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    DeploymentProgress:
-      properties:
-        message:
-          description: Human-readable progress message.
-          type: string
-          x-go-name: Message
-        percent:
-          description: Completion percentage (0-100).
-          format: int32
-          type: integer
-          x-go-name: Percent
-        updated_at:
-          description: RFC 3339 timestamp of the last progress update.
-          type: string
-          x-go-name: UpdatedAt
-      title: DeploymentProgress describes the progress of a deployment operation.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    FoundryArchitecture:
-      properties:
-        instruct_type:
-          description: Instruction tuning type (e.g. "chat").
-          type: string
-          x-go-name: InstructType
-        modality:
-          description: Model modality (e.g. "text").
-          type: string
-          x-go-name: Modality
-        parameter_count:
-          description: Number of model parameters.
-          format: int64
-          type: integer
-          x-go-name: ParameterCount
-        tokenizer:
-          description: Tokenizer identifier.
-          type: string
-          x-go-name: Tokenizer
-      title: FoundryArchitecture describes the architecture of a deployed model.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    UpdateModelRequest:
-      properties:
-        model_alias:
-          description: Customer-facing alias of the model to update.
-          type: string
-          x-go-name: ModelAlias
-        new_hugging_face_model:
-          description: New HuggingFace model to point the alias at.
-          type: string
-          x-go-name: NewHuggingFaceModel
-        region:
-          description: Region in which to perform the update. If omitted, all regions are updated.
-          type: string
-          x-go-name: Region
-        run_candidate_test:
-          description: Whether to run a candidate health-check before switching the source.
-          type: boolean
-          x-go-name: RunCandidateTest
-      required:
-      - model_alias
-      - new_hugging_face_model
-      title: UpdateModelRequest is the body for updating a deployed model's HuggingFace source.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    SelfServeActivityEvent:
-      properties:
-        event_type:
-          description: Event type identifier.
-          type: string
-          x-go-name: EventType
-        message:
-          description: Human-readable event message.
-          type: string
-          x-go-name: Message
-        timestamp:
-          description: RFC 3339 timestamp of the event.
-          type: string
-          x-go-name: Timestamp
-        title:
-          description: Short event title.
-          type: string
-          x-go-name: Title
-        updated_by:
-          description: Identity that triggered the event.
-          type: string
-          x-go-name: UpdatedBy
-      title: SelfServeActivityEvent is a single activity/audit event for a deployment.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    CreateDeploymentRequest:
-      properties:
-        deployment_name:
-          description: User-chosen deployment name.
-          type: string
-          x-go-name: DeploymentName
-        fine_tuned_model:
-          description: The fine-tuned model to deploy.
-          type: string
-          x-go-name: FineTunedModel
-        flavor_id:
-          description: ID of the flavor (hardware/model shape) to deploy on.
-          type: string
-          x-go-name: FlavorID
-        replicas:
-          description: Number of replicas to run.
-          format: int32
-          type: integer
-          x-go-name: Replicas
-      required:
-      - deployment_name
-      - fine_tuned_model
-      - flavor_id
-      title: CreateDeploymentRequest is the body for creating a self-serve deployment.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    LoadLoraRequest:
-      properties:
-        model_id:
-          description: ID of the fine-tuned model (LoRA adapter) to deploy, as registered in the model registry.
-          type: string
-          x-go-name: ModelID
-      required:
-      - model_id
-      title: LoadLoraRequest is the body for deploying a LoRA adapter.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    RenameModelRequest:
-      properties:
-        model_alias:
-          description: Current alias of the model.
-          type: string
-          x-go-name: ModelAlias
-        new_alias:
-          description: New alias for the model.
-          type: string
-          x-go-name: NewAlias
-      required:
-      - model_alias
-      - new_alias
-      title: RenameModelRequest is the body for renaming a deployed model's alias.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
     SelfServeDeploymentDetail:
@@ -1289,19 +1441,105 @@ components:
       title: SelfServeDeploymentDetail is the detailed view of a self-serve deployment.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    DeploymentAcceptedResponse:
-      description: 'DeploymentAcceptedResponse is returned when a self-serve deployment
-
-        create/update/delete is accepted for asynchronous processing.'
+    CreateDeploymentRequest:
       properties:
-        id:
-          description: ID of the affected deployment.
+        deployment_name:
+          description: User-chosen deployment name.
           type: string
-          x-go-name: ID
-        status:
-          description: Resulting status.
+          x-go-name: DeploymentName
+        fine_tuned_model:
+          description: The fine-tuned model to deploy.
           type: string
-          x-go-name: Status
+          x-go-name: FineTunedModel
+        flavor_id:
+          description: ID of the flavor (hardware/model shape) to deploy on.
+          type: string
+          x-go-name: FlavorID
+        replicas:
+          description: Number of replicas to run.
+          format: int32
+          type: integer
+          x-go-name: Replicas
+      required:
+      - deployment_name
+      - fine_tuned_model
+      - flavor_id
+      title: CreateDeploymentRequest is the body for creating a self-serve deployment.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    UpdateModelRequest:
+      properties:
+        model_alias:
+          description: Customer-facing alias of the model to update.
+          type: string
+          x-go-name: ModelAlias
+        new_hugging_face_model:
+          description: New HuggingFace model to point the alias at.
+          type: string
+          x-go-name: NewHuggingFaceModel
+        region:
+          description: Region in which to perform the update. If omitted, all regions are updated.
+          type: string
+          x-go-name: Region
+        run_candidate_test:
+          description: Whether to run a candidate health-check before switching the source.
+          type: boolean
+          x-go-name: RunCandidateTest
+      required:
+      - model_alias
+      - new_hugging_face_model
+      title: UpdateModelRequest is the body for updating a deployed model's HuggingFace source.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    FoundryArchitecture:
+      properties:
+        instruct_type:
+          description: Instruction tuning type (e.g. "chat").
+          type: string
+          x-go-name: InstructType
+        modality:
+          description: Model modality (e.g. "text").
+          type: string
+          x-go-name: Modality
+        parameter_count:
+          description: Number of model parameters.
+          format: int64
+          type: integer
+          x-go-name: ParameterCount
+        tokenizer:
+          description: Tokenizer identifier.
+          type: string
+          x-go-name: Tokenizer
+      title: FoundryArchitecture describes the architecture of a deployed model.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    DeploymentProgress:
+      properties:
+        message:
+          description: Human-readable progress message.
+          type: string
+          x-go-name: Message
+        percent:
+          description: Completion percentage (0-100).
+          format: int32
+          type: integer
+          x-go-name: Percent
+        updated_at:
+          description: RFC 3339 timestamp of the last progress update.
+          type: string
+          x-go-name: UpdatedAt
+      title: DeploymentProgress describes the progress of a deployment operation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
+    ListDeploymentsResponse:
+      properties:
+        deployments:
+          description: The self-serve deployments in the project.
+          items:
+            $ref: '#/components/schemas/SelfServeDeploymentSummary'
+          type: array
+          x-go-name: Deployments
+      title: ListDeploymentsResponse is the response body for listing self-serve deployments.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
     UpdateDeploymentRequest:
@@ -1318,15 +1556,13 @@ components:
       title: UpdateDeploymentRequest is the body for updating a self-serve deployment.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    ListDeploymentsResponse:
+    CredentialSecrets:
       properties:
-        deployments:
-          description: The self-serve deployments in the project.
-          items:
-            $ref: '#/components/schemas/SelfServeDeploymentSummary'
-          type: array
-          x-go-name: Deployments
-      title: ListDeploymentsResponse is the response body for listing self-serve deployments.
+        token:
+          description: Access token (e.g. a HuggingFace token). Write-only; omitted unless explicitly revealed.
+          type: string
+          x-go-name: Token
+      title: CredentialSecrets holds the secret material for a credential.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
     ListModelsResponse:
@@ -1340,245 +1576,6 @@ components:
       title: ListModelsResponse is the response body for listing deployed models.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-    SelfServeDeploymentSummary:
-      properties:
-        available_replicas:
-          description: Currently available replicas.
-          format: int32
-          type: integer
-          x-go-name: AvailableReplicas
-        context_length:
-          description: Context length of the model.
-          format: int32
-          type: integer
-          x-go-name: ContextLength
-        created_at:
-          description: RFC 3339 creation timestamp.
-          type: string
-          x-go-name: CreatedAt
-        created_by:
-          description: Identity that created the deployment.
-          type: string
-          x-go-name: CreatedBy
-        deployment_name:
-          description: User-chosen deployment name.
-          type: string
-          x-go-name: DeploymentName
-        fine_tuned_model:
-          description: The fine-tuned model being served.
-          type: string
-          x-go-name: FineTunedModel
-        gpu_type:
-          description: GPU type in use.
-          type: string
-          x-go-name: GpuType
-        gpus_per_replica:
-          description: GPUs per replica.
-          format: int32
-          type: integer
-          x-go-name: GpusPerReplica
-        id:
-          description: Deployment ID.
-          type: string
-          x-go-name: ID
-        model:
-          description: The underlying model.
-          type: string
-          x-go-name: Model
-        quantization:
-          description: Quantization applied, if any.
-          type: string
-          x-go-name: Quantization
-        status:
-          description: Deployment status.
-          type: string
-          x-go-name: Status
-        target_replicas:
-          description: Target replica count.
-          format: int32
-          type: integer
-          x-go-name: TargetReplicas
-      title: SelfServeDeploymentSummary is a summary view of a self-serve deployment.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/docs/v1
-  responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    foundryProgressStreamResponse:
-      description: ''
-    foundryCredentialListResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListCredentialsResponse'
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    foundryCredentialResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CredentialResponse'
-    foundryDeploymentListResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListDeploymentsResponse'
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    foundryDeployedModelsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListModelsResponse'
-    foundryUpdateModelResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateModelResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    foundryDeploymentDetailResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SelfServeDeploymentDetail'
-    foundryProgressResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DeploymentProgress'
-    foundryLoraListResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            items:
-              $ref: '#/components/schemas/LoRAAdapterDeployment'
-            type: array
-    emptyResponse:
-      description: Empty Response
-    foundryActivityResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListActivityResponse'
-    foundryFlavorsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListFlavorsResponse'
-    foundryDeploymentAcceptedResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DeploymentAcceptedResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    foundryLoraResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LoRAAdapterDeployment'
-    foundryRenameModelResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RenameModelResponse'
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
 x-tagGroups:
 - name: Compute
   tags:

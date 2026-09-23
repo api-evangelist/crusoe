@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Disks API
-  version: '1.0'
-  description: 'Operations tagged Disks across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Disks API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -57,7 +57,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists all disks in the project and returns their details.
+      summary: Lists all disks in the project and returns their details
       tags:
       - Disks
     post:
@@ -88,7 +88,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Creates a disk in the project and returns the async operation.
+      summary: Creates a disk in the project and returns the async operation
       tags:
       - Disks
       requestBody:
@@ -127,7 +127,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Deletes a disk from the project and returns the async operation.
+      summary: Deletes a disk from the project and returns the async operation
       tags:
       - Disks
     get:
@@ -159,7 +159,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns details for a single disk in the project.
+      summary: Returns details for a single disk in the project
       tags:
       - Disks
     patch:
@@ -197,7 +197,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Resizes a disk in the project and returns the async operation.
+      summary: Resizes a disk in the project and returns the async operation
       tags:
       - Disks
       requestBody:
@@ -208,141 +208,6 @@ paths:
         required: true
 components:
   schemas:
-    VMAttachmentV1:
-      properties:
-        attachment_type:
-          $ref: '#/components/schemas/VMAttachmentType'
-        mode:
-          $ref: '#/components/schemas/DiskModeType'
-        vm_id:
-          description: ID of the VM the disk is attached to.
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-          x-go-name: VMID
-      required:
-      - vm_id
-      - attachment_type
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DisksPostRequestV1:
-      properties:
-        block_size:
-          description: 'Block size for the new disk, in bytes: 512 or 4096.'
-          example: 4096
-          format: int64
-          type: integer
-          x-go-name: BlockSize
-        location:
-          description: Location to create the disk in.
-          example: us-northcentral1-a
-          type: string
-          x-go-name: Location
-        name:
-          description: Name for the new disk.
-          example: my-disk
-          type: string
-          x-go-name: Name
-        size:
-          description: Storage capacity for the new disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
-          example: 10GiB
-          type: string
-          x-go-name: Size
-        snapshot_id:
-          description: ID of a disk snapshot to create the disk from.
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-          x-go-name: DiskSnapshotID
-        type:
-          default: persistent-ssd
-          description: 'Type of disk to create: persistent-ssd or shared-volume. Defaults to persistent-ssd.'
-          enum:
-          - persistent-ssd
-          - shared-volume
-          example: persistent-ssd
-          type: string
-          x-go-name: Type
-      required:
-      - name
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListDisksResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DiskV1'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    Operation:
-      description: 'Individual resources that use Operations should populate the `metadata` field
-
-        with resource-specific information.'
-      properties:
-        completed_at:
-          example: '2021-12-03T19:59:34Z'
-          type: string
-          x-go-name: CompletedAt
-        metadata:
-          example: '{}'
-          x-go-name: Metadata
-        operation_id:
-          example: F6EF489C-086E-458D-B812-7962964A28C9
-          type: string
-          x-go-name: ID
-        result:
-          example: '{}'
-          x-go-name: Result
-        started_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: StartedAt
-        state:
-          enum:
-          - IN_PROGRESS
-          - SUCCEEDED
-          - FAILED
-          example: IN_PROGRESS
-          type: string
-          x-go-name: State
-      required:
-      - operation_id
-      - state
-      - metadata
-      - started_at
-      - completed_at
-      title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    DisksPatchRequest:
-      properties:
-        size:
-          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
-          example: 10GiB
-          type: string
-          x-go-name: Size
-      required:
-      - size
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VMAttachmentType:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DiskModeType:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     DiskV1:
       properties:
         attached_to:
@@ -424,7 +289,166 @@ components:
       - attached_to
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DisksPatchRequest:
+      properties:
+        size:
+          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+      required:
+      - size
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    VMAttachmentV1:
+      properties:
+        attachment_type:
+          $ref: '#/components/schemas/VMAttachmentType'
+        mode:
+          $ref: '#/components/schemas/DiskModeType'
+        vm_id:
+          description: ID of the VM the disk is attached to.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: VMID
+      required:
+      - vm_id
+      - attachment_type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DisksPostRequestV1:
+      properties:
+        block_size:
+          description: 'Block size for the new disk, in bytes: 512 or 4096.'
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        location:
+          description: Location to create the disk in.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name for the new disk.
+          example: my-disk
+          type: string
+          x-go-name: Name
+        size:
+          description: Storage capacity for the new disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        snapshot_id:
+          description: ID of a disk snapshot to create the disk from.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: DiskSnapshotID
+        type:
+          default: persistent-ssd
+          description: 'Type of disk to create: persistent-ssd or shared-volume. Defaults to persistent-ssd.'
+          enum:
+          - persistent-ssd
+          - shared-volume
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+      required:
+      - name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    ListDisksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DiskV1'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskModeType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VMAttachmentType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getDiskResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskV1'
     asyncOperationResponse:
       description: ''
       content:
@@ -455,48 +479,6 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getDiskResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DiskV1'
     permissionsError:
       description: Error Permissions
       content:
@@ -515,9 +497,24 @@ components:
             - code
             - message
             type: object
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

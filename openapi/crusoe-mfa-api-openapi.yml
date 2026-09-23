@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe MFA API
-  version: '1.0'
-  description: 'Operations tagged MFA across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway MFA API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -52,7 +52,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
-      summary: Get enabled MFA methods for the specified organization.
+      summary: Get enabled MFA methods for the specified organization
       tags:
       - MFA
     patch:
@@ -98,7 +98,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
-      summary: Update required MFA methods for the specified organization.
+      summary: Update required MFA methods for the specified organization
       tags:
       - MFA
       requestBody:
@@ -109,26 +109,6 @@ paths:
         required: true
 components:
   schemas:
-    protobufAny:
-      additionalProperties: {}
-      properties:
-        '@type':
-          type: string
-      type: object
-    customerOrganizationMFA:
-      description: OrganizationMFA describes a single MFA method required by an organization.
-      properties:
-        created_at:
-          format: date-time
-          readOnly: true
-          title: created_at is when this MFA method was required by the organization
-          type: string
-        method:
-          example: totp
-          readOnly: true
-          title: 'method is the required MFA method (one of: totp, webauthn)'
-          type: string
-      type: object
     OrganizationsMFAServiceUpdateOrganizationMFABody:
       description: UpdateOrganizationMFARequest is the request for setting an organization's required MFA methods.
       properties:
@@ -140,6 +120,19 @@ components:
             type: string
           title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
           type: array
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+            type: object
+          type: array
+        message:
+          type: string
       type: object
     customerUpdateOrganizationMFAResponse:
       description: 'UpdateOrganizationMFAResponse is the response for setting an organization''s required MFA methods.
@@ -157,22 +150,26 @@ components:
           title: mfa_methods is the set of MFA methods currently required by the organization
           type: array
       type: object
-    rpcStatus:
+    customerOrganizationMFA:
+      description: OrganizationMFA describes a single MFA method required by an organization.
       properties:
-        code:
-          format: int32
-          type: integer
-        details:
-          items:
-            $ref: '#/components/schemas/protobufAny'
-            type: object
-          type: array
-        message:
+        created_at:
+          format: date-time
+          readOnly: true
+          title: created_at is when this MFA method was required by the organization
+          type: string
+        method:
+          example: totp
+          readOnly: true
+          title: 'method is the required MFA method (one of: totp, webauthn)'
           type: string
       type: object
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    protobufAny:
+      additionalProperties: {}
+      properties:
+        '@type':
+          type: string
+      type: object
 x-tagGroups:
 - name: Compute
   tags:

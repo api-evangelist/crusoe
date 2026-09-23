@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe IB Networks API
-  version: '1.0'
-  description: 'Operations tagged IB Networks across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway IB Networks API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -26,7 +26,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists all InfiniBand networks and returns their details.
+      summary: Lists all InfiniBand networks and returns their details
       tags:
       - IB Networks
   /projects/{project_id}/networking/ib-networks/{ib_network_id}:
@@ -58,90 +58,11 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns details for a single InfiniBand network.
+      summary: Returns details for a single InfiniBand network
       tags:
       - IB Networks
 components:
-  responses:
-    getIbNetworkResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBNetwork'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listIbNetworksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBNetworksResponseV1'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    ListIBNetworksResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/IBNetwork'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListIBNetworksResponseV1 is the response type for GET requests to the IB Networks endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBNetworkCapacity:
       properties:
         quantity:
@@ -158,6 +79,18 @@ components:
       required:
       - quantity
       - slice_type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListIBNetworksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/IBNetwork'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListIBNetworksResponseV1 is the response type for GET requests to the IB Networks endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBNetwork:
@@ -190,9 +123,73 @@ components:
       - capacities
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+  responses:
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getIbNetworkResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBNetwork'
+    listIbNetworksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListIBNetworksResponseV1'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

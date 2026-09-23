@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe SSH Keys API
-  version: '1.0'
-  description: 'Operations tagged SSH Keys across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway SSH Keys API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Delete an SSH public key registered to the logged in user.
+      summary: Delete an SSH public key registered to the logged in user
       tags:
       - SSH Keys
     get:
@@ -42,7 +42,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve the list of SSH public keys registered to the logged in user.
+      summary: Retrieve the list of SSH public keys registered to the logged in user
       tags:
       - SSH Keys
     post:
@@ -57,7 +57,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Register a new SSH public key to the logged in user.
+      summary: Register a new SSH public key to the logged in user
       tags:
       - SSH Keys
       requestBody:
@@ -67,94 +67,18 @@ paths:
               $ref: '#/components/schemas/CreateSSHKeyRequest'
         required: true
 components:
-  responses:
-    createSSHKeysResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateSSHKeyResponse'
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getSSHKeysResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSSHKeysResponseV1'
-    emptyResponse:
-      description: Empty Response
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
+    ListSSHKeysResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SSHKey:
       properties:
         created_at:
@@ -198,14 +122,6 @@ components:
       - sha256
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateSSHKeyResponse:
-      properties:
-        ssh_key:
-          $ref: '#/components/schemas/SSHKey'
-      required:
-      - ssh_key
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateSSHKeyRequest:
       properties:
         name:
@@ -221,20 +137,101 @@ components:
       - public_key
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListSSHKeysResponseV1:
+    CreateSSHKeyResponse:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/SSHKey'
-          type: array
-          x-go-name: Items
+        ssh_key:
+          $ref: '#/components/schemas/SSHKey'
       required:
-      - items
+      - ssh_key
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+  responses:
+    getSSHKeysResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSSHKeysResponseV1'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    createSSHKeysResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSSHKeyResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe AutoCluster Operations API
-  version: '1.0'
-  description: 'Operations tagged AutoCluster Operations across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway AutoCluster Operations API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -71,7 +71,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve information about AutoCluster operations for a project.
+      summary: Retrieve information about AutoCluster operations for a project
       tags:
       - AutoCluster Operations
   /projects/{project_id}/kubernetes/autocluster-operations/{operation_id}:
@@ -103,29 +103,17 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve information about a specific AutoCluster operation.
+      summary: Retrieve information about a specific AutoCluster operation
       tags:
       - AutoCluster Operations
 components:
   responses:
-    notFoundError:
-      description: Error Not Found
+    getAutoClusterOperationResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/Operation'
     serverError:
       description: Error Internal Server
       content:
@@ -144,36 +132,24 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
+    notFoundError:
+      description: Error Not Found
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '401'
+                example: '404'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_credential
+                example: not_found
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
-    getAutoClusterOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Operation'
-    listAutoClusterOperationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListOperationsResponseV1'
     permissionsError:
       description: Error Permissions
       content:
@@ -192,18 +168,31 @@ components:
             - code
             - message
             type: object
+    listAutoClusterOperationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListOperationsResponseV1'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
-    ListOperationsResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Operation'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     Operation:
       description: 'Individual resources that use Operations should populate the `metadata` field
 
@@ -244,9 +233,17 @@ components:
       title: Operation contains the common fields for all Operation API objects.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    ListOperationsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Operation'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
 x-tagGroups:
 - name: Compute
   tags:

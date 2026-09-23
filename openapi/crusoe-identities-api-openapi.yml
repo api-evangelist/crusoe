@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Identities API
-  version: '1.0'
-  description: 'Operations tagged Identities across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Identities API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -18,7 +18,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve user details for the logged in user.
+      summary: Retrieve user details for the logged in user
       tags:
       - Identities
     put:
@@ -31,7 +31,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Update user details for the logged in user.
+      summary: Update user details for the logged in user
       tags:
       - Identities
       requestBody:
@@ -41,85 +41,65 @@ paths:
               $ref: '#/components/schemas/IdentityPutRequest'
         required: true
 components:
-  responses:
-    usersPutResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserResponse'
-    usersGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    RoleBinding:
+    IdentityCredential:
       properties:
-        customer_id:
+        created_at:
+          format: date-time
           type: string
-          x-go-name: CustomerID
-        id:
+          x-go-name: CreatedAt
+        type:
           type: string
-          x-go-name: ID
-        role_id:
+          x-go-name: Type
+        updated_at:
+          format: date-time
           type: string
-          x-go-name: RoleID
-        role_name:
-          type: string
-          x-go-name: RoleName
-        scope_object_id:
-          type: string
-          x-go-name: ScopeObjectID
-        scope_type:
-          type: string
-          x-go-name: ScopeType
+          x-go-name: UpdatedAt
       required:
-      - id
-      - customer_id
-      - role_id
-      - scope_type
-      - scope_object_id
-      - role_name
+      - type
+      - created_at
+      - updated_at
+      title: IdentityCredential represents a specific Kratos credential type, sanitized to expose to customers.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
+    UserResponse:
+      description: The Identity of a user is returned.
+      properties:
+        credentials:
+          description: Credentials will be deprecated
+          items:
+            type: string
+          type: array
+          x-go-name: Credentials
+        credentials_map:
+          additionalProperties:
+            $ref: '#/components/schemas/IdentityCredential'
+          type: object
+          x-go-name: CredentialsMap
+        identity:
+          $ref: '#/components/schemas/Identity'
+      required:
+      - identity
+      title: UserResponse is the return type from the GET and PUT handlers to User.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    IdentityPutRequest:
+      properties:
+        name:
+          example: John Doe
+          type: string
+          x-go-name: Name
+        role:
+          example: Admin
+          type: string
+          x-go-name: Role
+      required:
+      - name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UserStateEnum:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
     Identity:
       description: 'Identity contains the information stored for a User. These are
 
@@ -185,67 +165,84 @@ components:
       - role
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    IdentityCredential:
+    RoleBinding:
       properties:
-        created_at:
-          format: date-time
+        customer_id:
           type: string
-          x-go-name: CreatedAt
-        type:
+          x-go-name: CustomerID
+        id:
           type: string
-          x-go-name: Type
-        updated_at:
-          format: date-time
+          x-go-name: ID
+        role_id:
           type: string
-          x-go-name: UpdatedAt
+          x-go-name: RoleID
+        role_name:
+          type: string
+          x-go-name: RoleName
+        scope_object_id:
+          type: string
+          x-go-name: ScopeObjectID
+        scope_type:
+          type: string
+          x-go-name: ScopeType
       required:
-      - type
-      - created_at
-      - updated_at
-      title: IdentityCredential represents a specific Kratos credential type, sanitized to expose to customers.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
-    IdentityPutRequest:
-      properties:
-        name:
-          example: John Doe
-          type: string
-          x-go-name: Name
-        role:
-          example: Admin
-          type: string
-          x-go-name: Role
-      required:
-      - name
+      - id
+      - customer_id
+      - role_id
+      - scope_type
+      - scope_object_id
+      - role_name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UserResponse:
-      description: The Identity of a user is returned.
-      properties:
-        credentials:
-          description: Credentials will be deprecated
-          items:
-            type: string
-          type: array
-          x-go-name: Credentials
-        credentials_map:
-          additionalProperties:
-            $ref: '#/components/schemas/IdentityCredential'
-          type: object
-          x-go-name: CredentialsMap
-        identity:
-          $ref: '#/components/schemas/Identity'
-      required:
-      - identity
-      title: UserResponse is the return type from the GET and PUT handlers to User.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UserStateEnum:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+  responses:
+    usersPutResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    usersGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

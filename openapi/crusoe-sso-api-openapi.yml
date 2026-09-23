@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe SSO API
-  version: '1.0'
-  description: 'Operations tagged SSO across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway SSO API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns the active sso providers for a given orgID.
+      summary: Returns the active sso providers for a given orgID
       tags:
       - SSO
     post:
@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Create a new SSO provider for a specific org.
+      summary: Create a new SSO provider for a specific org
       tags:
       - SSO
       requestBody:
@@ -92,7 +92,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Delete a specific SSO provider for a specific org.
+      summary: Delete a specific SSO provider for a specific org
       tags:
       - SSO
   /users/sso-enforcement:
@@ -109,7 +109,7 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Update SSO for a user.
+      summary: Update SSO for a user
       tags:
       - SSO
       requestBody:
@@ -120,50 +120,18 @@ paths:
         required: true
 components:
   responses:
-    createSSOProviderResponse:
+    deleteSSOProviderResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/SSOProvider'
-    notFoundError:
-      description: Error Not Found
+    listSSOProvidersResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
+            $ref: '#/components/schemas/ListSSOProvidersResponse'
     badReqError:
       description: Error Bad Request
       content:
@@ -182,12 +150,50 @@ components:
             - code
             - message
             type: object
-    listSSOProvidersResponse:
+    emptyResponse:
+      description: Empty Response
+    createSSOProviderResponse:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ListSSOProvidersResponse'
+            $ref: '#/components/schemas/SSOProvider'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -206,12 +212,6 @@ components:
             - code
             - message
             type: object
-    deleteSSOProviderResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SSOProvider'
   schemas:
     ListSSOProvidersResponse:
       properties:
@@ -241,6 +241,25 @@ components:
       required:
       - user_ids
       - enforcement
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSSOProviderRequest:
+      properties:
+        client_id:
+          type: string
+          x-go-name: ClientID
+        email_domains:
+          items:
+            type: string
+          type: array
+          x-go-name: EmailDomains
+        issuer_uri:
+          type: string
+          x-go-name: IssuerURI
+      required:
+      - client_id
+      - issuer_uri
+      - email_domains
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SSOProvider:
@@ -274,28 +293,6 @@ components:
       - email_domains
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateSSOProviderRequest:
-      properties:
-        client_id:
-          type: string
-          x-go-name: ClientID
-        email_domains:
-          items:
-            type: string
-          type: array
-          x-go-name: EmailDomains
-        issuer_uri:
-          type: string
-          x-go-name: IssuerURI
-      required:
-      - client_id
-      - issuer_uri
-      - email_domains
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
 x-tagGroups:
 - name: Compute
   tags:

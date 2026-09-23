@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Crusoe S3 Keys API
-  version: '1.0'
-  description: 'Operations tagged S3Keys across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway S3 Keys API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
-- name: S3Keys
+- name: S3 Keys
 paths:
   /organizations/{org_id}/storage/s3/keys:
     get:
@@ -29,9 +29,9 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists all S3 access keys in the organization and returns their details.
+      summary: Lists all S3 access keys in the organization and returns their details
       tags:
-      - S3Keys
+      - S3 Keys
     post:
       operationId: createS3Key
       parameters:
@@ -54,9 +54,9 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Creates an S3 access key in the organization and returns the access key ID and one-time secret key.
+      summary: Creates an S3 access key in the organization and returns the access key ID and…
       tags:
-      - S3Keys
+      - S3 Keys
       requestBody:
         content:
           application/json:
@@ -93,126 +93,24 @@ paths:
           $ref: '#/components/responses/notFoundError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Deletes an S3 access key from the organization.
+      summary: Deletes an S3 access key from the organization
       tags:
-      - S3Keys
+      - S3 Keys
 components:
-  responses:
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    okEmpty:
-      description: ''
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    createS3KeyResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateS3KeyResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listS3KeysResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListS3KeysResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    ListS3KeysResponse:
+    CreateS3KeyRequest:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/S3Key'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListS3KeysResponse is the response type for GET requests to the S3 access keys endpoint.
+        alias:
+          description: Human-readable alias for the new S3 access key.
+          example: my-service-account
+          type: string
+          x-go-name: Alias
+        expire_at:
+          description: Expiration timestamp for the new S3 access key, in RFC3339 format.
+          example: '2022-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpireAt
+      title: CreateS3KeyRequest is the request body for creating a new S3 access key for a user.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     S3Key:
@@ -263,19 +161,16 @@ components:
       title: S3Key represents an S3 Access key for a user.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateS3KeyRequest:
+    ListS3KeysResponse:
       properties:
-        alias:
-          description: Human-readable alias for the new S3 access key.
-          example: my-service-account
-          type: string
-          x-go-name: Alias
-        expire_at:
-          description: Expiration timestamp for the new S3 access key, in RFC3339 format.
-          example: '2022-12-03T19:58:34Z'
-          type: string
-          x-go-name: ExpireAt
-      title: CreateS3KeyRequest is the request body for creating a new S3 access key for a user.
+        items:
+          items:
+            $ref: '#/components/schemas/S3Key'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListS3KeysResponse is the response type for GET requests to the S3 access keys endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateS3KeyResponse:
@@ -302,9 +197,111 @@ components:
       title: CreateS3KeyResponse is the response body after creating a new S3 access key for a user.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+  responses:
+    createS3KeyResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateS3KeyResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    okEmpty:
+      description: ''
+    listS3KeysResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListS3KeysResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

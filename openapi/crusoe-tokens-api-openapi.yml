@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Tokens API
-  version: '1.0'
-  description: 'Operations tagged Tokens across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Tokens API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -28,7 +28,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Delete an API token owned by the logged in user.
+      summary: Delete an API token owned by the logged in user
       tags:
       - Tokens
     get:
@@ -40,7 +40,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve all active/expired API tokens for the logged in user.
+      summary: Retrieve all active/expired API tokens for the logged in user
       tags:
       - Tokens
     post:
@@ -55,7 +55,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Create a new token owned by the logged in user.
+      summary: Create a new token owned by the logged in user
       tags:
       - Tokens
       requestBody:
@@ -66,14 +66,6 @@ paths:
         required: true
 components:
   schemas:
-    TokensPostResponse:
-      properties:
-        token:
-          $ref: '#/components/schemas/GeneratedToken'
-      required:
-      - token
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     TokenInfo:
       description: These are the fields returned from a GET request.
       properties:
@@ -117,20 +109,6 @@ components:
       - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateTokenRequest:
-      properties:
-        alias:
-          example: token1
-          type: string
-          x-go-name: Alias
-        expires_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: ExpiresAt
-      required:
-      - expires_at
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     GeneratedToken:
       description: These are the fields returned from a PUT request.
       properties:
@@ -162,7 +140,31 @@ components:
       title: GeneratedToken contains the Traits Island stores for a Token inside of Kratos.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    TokensPostResponse:
+      properties:
+        token:
+          $ref: '#/components/schemas/GeneratedToken'
+      required:
+      - token
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateTokenRequest:
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+      required:
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    emptyResponse:
+      description: Empty Response
     tokensGetResponse:
       description: A successful response from this resource will contain json-encoded array of token details, excluding the secret key.
       content:
@@ -187,32 +189,6 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
-    tokensPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TokensPostResponse'
     permissionsError:
       description: Error Permissions
       content:
@@ -231,9 +207,30 @@ components:
             - code
             - message
             type: object
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    tokensPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokensPostResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

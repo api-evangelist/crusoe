@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe NVLink Domains API
-  version: '1.0'
-  description: 'Operations tagged NVLink Domains across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway NVLink Domains API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -28,83 +28,11 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve details about all NVLink domains available for the project.
+      summary: Retrieve details about all NVLink domains available for the project
       tags:
       - NVLink Domains
 components:
-  responses:
-    listNvlinkDomainsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NvlinkDomainsSummaryListResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    NvlinkDomainsSummaryListResponse:
-      properties:
-        nvlink_domains:
-          description: List of NVLink domain summaries
-          items:
-            $ref: '#/components/schemas/NvlinkDomainSummaryResponse'
-          type: array
-          x-go-name: NvlinkDomains
-      title: NvlinkDomainsSummaryListResponse represents a list of NVLink domain summaries.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     NvlinkDomainSummaryResponse:
       properties:
         available_nodes:
@@ -137,9 +65,78 @@ components:
       title: NvlinkDomainSummaryResponse represents summary information about an NVLink domain.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    NvlinkDomainsSummaryListResponse:
+      properties:
+        nvlink_domains:
+          description: List of NVLink domain summaries
+          items:
+            $ref: '#/components/schemas/NvlinkDomainSummaryResponse'
+          type: array
+          x-go-name: NvlinkDomains
+      title: NvlinkDomainsSummaryListResponse represents a list of NVLink domain summaries.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    listNvlinkDomainsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NvlinkDomainsSummaryListResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

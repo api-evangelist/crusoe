@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Slurm Clusters API
-  version: '1.0'
-  description: 'Operations tagged Slurm Clusters across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Slurm Clusters API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve information about slurm clusters belonging to the project.
+      summary: Retrieve information about slurm clusters belonging to the project
       tags:
       - Slurm Clusters
     post:
@@ -79,7 +79,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Create a new slurm cluster owned by the logged in user.
+      summary: Create a new slurm cluster owned by the logged in user
       tags:
       - Slurm Clusters
       requestBody:
@@ -115,7 +115,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Delete a slurm cluster that the logged in user owns.
+      summary: Delete a slurm cluster that the logged in user owns
       tags:
       - Slurm Clusters
     get:
@@ -142,94 +142,23 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve information about a particular slurm cluster belonged to the project.
+      summary: Retrieve information about a particular slurm cluster belonged to the project
       tags:
       - Slurm Clusters
 components:
   schemas:
-    ListSlurmClustersResponse:
+    SlurmClusterIssue:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/SlurmCluster'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmCluster:
-      allOf:
-      - $ref: '#/components/schemas/SlurmClusterConfig'
-      - $ref: '#/components/schemas/SlurmClusterStatus'
-      - properties:
-          created_at:
-            description: Created at timestamp of the cluster.
-            type: string
-            x-go-name: CreatedAt
-          id:
-            description: ID of the Slurm cluster.
-            example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
-            type: string
-            x-go-name: ID
-          updated_at:
-            description: Updated at timestamp of the cluster.
-            type: string
-            x-go-name: UpdatedAt
-          version:
-            description: Version of the cluster.
-            type: string
-            x-go-name: Version
-        required:
-        - id
-        type: object
-      title: SlurmCluster defines the specifications of the slurm cluster.
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmClusterStatus:
-      properties:
-        issues:
-          description: Issues describing why the cluster is not in RUNNING.
-          items:
-            $ref: '#/components/schemas/SlurmClusterIssue'
-          type: array
-          x-go-name: Issues
-        login_node_endpoint:
-          description: Login node Endpoint (IP).
+        code:
+          description: Machine-readable issue code.
           type: string
-          x-go-name: LoginNodeEndpoint
-        nodesets:
-          description: Nodeset IDs running the Slurm Workers.
-          items:
-            type: string
-          type: array
-          x-go-name: Nodesets
-        state:
-          description: State of the slurm cluster.
-          enum:
-          - PROVISIONING
-          - RUNNING
-          - DELETING
-          - DELETED
-          - FAILED
-          - UPDATING
-          - UNHEALTHY
-          - CREATE_FAILED
-          - DELETE_FAILED
+          x-go-name: Code
+        message:
+          description: Human-readable description.
           type: string
-          x-go-name: State
-      required:
-      - state
-      title: Non-configurable, changing fields relating the current state of the cluster.
+          x-go-name: Message
+      title: SlurmClusterIssue describes a problem preventing the cluster from reaching RUNNING state.
       type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmClusterPostRequest:
-      allOf:
-      - $ref: '#/components/schemas/SlurmClusterConfig'
-      - properties:
-          internal_config:
-            $ref: '#/components/schemas/SlurmClusterInternalConfig'
-        type: object
-      title: SlurmClusterPostRequest defines the specifications of the cluster to be created.
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SlurmClusterInternalConfig:
       additionalProperties:
@@ -298,19 +227,6 @@ components:
       title: Configurable fields of the Slurm Cluster.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmClusterIssue:
-      properties:
-        code:
-          description: Machine-readable issue code.
-          type: string
-          x-go-name: Code
-        message:
-          description: Human-readable description.
-          type: string
-          x-go-name: Message
-      title: SlurmClusterIssue describes a problem preventing the cluster from reaching RUNNING state.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Operation:
       description: 'Individual resources that use Operations should populate the `metadata` field
 
@@ -351,7 +267,115 @@ components:
       title: Operation contains the common fields for all Operation API objects.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    ListSlurmClustersResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SlurmCluster'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmClusterPostRequest:
+      allOf:
+      - $ref: '#/components/schemas/SlurmClusterConfig'
+      - properties:
+          internal_config:
+            $ref: '#/components/schemas/SlurmClusterInternalConfig'
+        type: object
+      title: SlurmClusterPostRequest defines the specifications of the cluster to be created.
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmCluster:
+      allOf:
+      - $ref: '#/components/schemas/SlurmClusterConfig'
+      - $ref: '#/components/schemas/SlurmClusterStatus'
+      - properties:
+          created_at:
+            description: Created at timestamp of the cluster.
+            type: string
+            x-go-name: CreatedAt
+          id:
+            description: ID of the Slurm cluster.
+            example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+            type: string
+            x-go-name: ID
+          updated_at:
+            description: Updated at timestamp of the cluster.
+            type: string
+            x-go-name: UpdatedAt
+          version:
+            description: Version of the cluster.
+            type: string
+            x-go-name: Version
+        required:
+        - id
+        type: object
+      title: SlurmCluster defines the specifications of the slurm cluster.
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmClusterStatus:
+      properties:
+        issues:
+          description: Issues describing why the cluster is not in RUNNING.
+          items:
+            $ref: '#/components/schemas/SlurmClusterIssue'
+          type: array
+          x-go-name: Issues
+        login_node_endpoint:
+          description: Login node Endpoint (IP).
+          type: string
+          x-go-name: LoginNodeEndpoint
+        nodesets:
+          description: Nodeset IDs running the Slurm Workers.
+          items:
+            type: string
+          type: array
+          x-go-name: Nodesets
+        state:
+          description: State of the slurm cluster.
+          enum:
+          - PROVISIONING
+          - RUNNING
+          - DELETING
+          - DELETED
+          - FAILED
+          - UPDATING
+          - UNHEALTHY
+          - CREATE_FAILED
+          - DELETE_FAILED
+          type: string
+          x-go-name: State
+      required:
+      - state
+      title: Non-configurable, changing fields relating the current state of the cluster.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    listSlurmClustersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSlurmClustersResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     asyncOperationResponse:
       description: ''
       content:
@@ -370,48 +394,6 @@ components:
                 x-go-name: Code
               message:
                 example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listSlurmClustersResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSlurmClustersResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
                 type: string
                 x-go-name: Message
             required:
@@ -442,9 +424,24 @@ components:
             - code
             - message
             type: object
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

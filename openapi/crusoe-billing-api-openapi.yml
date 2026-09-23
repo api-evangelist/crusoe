@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Billing API
-  version: '1.0'
-  description: 'Operations tagged Billing across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Billing API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Get the daily spend for a specified organization by project.
+      summary: Get the daily spend for a specified organization by project
       tags:
       - Billing
   /organizations/{organization_id}/billing/export-productline:
@@ -96,7 +96,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Return a CSV containing the costs for resources in a given period.
+      summary: Return a CSV containing the costs for resources in a given period
       tags:
       - Billing
   /organizations/{organization_id}/billing/options:
@@ -133,10 +133,125 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Retrieve data about an organizations recent Non-Reservation costs.
+      summary: Retrieve data about an organizations recent Non-Reservation costs
       tags:
       - Billing
 components:
+  schemas:
+    BillingCostData:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BillingCostDatum'
+          type: array
+          x-go-name: Data
+        last_updated:
+          type: string
+          x-go-name: LastUpdated
+      required:
+      - data
+      title: UsageByProjectGetResponse is the response type for GET requests to the usage.usageByProject endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UsageOptions:
+      description: 'UsageOptions contains the values which exist for the fields which we allow filtering
+
+        on for the usageByProjectGet endpoint.'
+      properties:
+        end_date:
+          example: '"2023-08-08"'
+          type: string
+          x-go-name: EndDate
+        product_lines:
+          example:
+          - a40
+          - h200
+          items:
+            type: string
+          type: array
+          x-go-name: ProductLines
+        projects:
+          example:
+          - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          items:
+            type: string
+          type: array
+          x-go-name: Projects
+        regions:
+          example:
+          - us-east1
+          - us-northcentral1
+          items:
+            type: string
+          type: array
+          x-go-name: Regions
+        resource_types:
+          example:
+          - persistent-ssd
+          - a40.1x
+          items:
+            type: string
+          type: array
+          x-go-name: ResourceTypes
+        start_date:
+          example: '"2022-07-01"'
+          type: string
+          x-go-name: StartDate
+      required:
+      - projects
+      - resource_types
+      - product_lines
+      - regions
+      - start_date
+      - end_date
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    BillingCostDatum:
+      properties:
+        billable_metric:
+          example: '"gpu-hours"'
+          type: string
+          x-go-name: BillableMetric
+        cost:
+          example: 12.34
+          format: double
+          type: number
+          x-go-name: Cost
+        date:
+          example: '"2022-07-01"'
+          type: string
+          x-go-name: Date
+        project_id:
+          example: '"d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"'
+          type: string
+          x-go-name: ProjectID
+        quantity:
+          example: 2.123
+          format: double
+          type: number
+          x-go-name: Quantity
+        region:
+          example: '"us-northcentral1"'
+          type: string
+          x-go-name: Region
+        resource_type:
+          example: '"a40.1x"'
+          type: string
+          x-go-name: ResourceType
+        unit_price:
+          example: 1.23
+          format: double
+          type: number
+          x-go-name: UnitPrice
+      required:
+      - resource_type
+      - project_id
+      - region
+      - date
+      - quantity
+      - billable_metric
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
     billingOptionsGetResponse:
       description: ''
@@ -144,60 +259,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UsageOptions'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     getBillingExportProductlineResponse:
       description: ''
       headers:
@@ -252,6 +313,48 @@ components:
           example: '"2025-02-14"'
           schema:
             type: string
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    billingCostsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BillingCostData'
     permissionsError:
       description: Error Permissions
       content:
@@ -270,130 +373,24 @@ components:
             - code
             - message
             type: object
-    billingCostsGetResponse:
-      description: ''
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/BillingCostData'
-  schemas:
-    UsageOptions:
-      description: 'UsageOptions contains the values which exist for the fields which we allow filtering
-
-        on for the usageByProjectGet endpoint.'
-      properties:
-        end_date:
-          example: '"2023-08-08"'
-          type: string
-          x-go-name: EndDate
-        product_lines:
-          example:
-          - a40
-          - h200
-          items:
-            type: string
-          type: array
-          x-go-name: ProductLines
-        projects:
-          example:
-          - d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
-          items:
-            type: string
-          type: array
-          x-go-name: Projects
-        regions:
-          example:
-          - us-east1
-          - us-northcentral1
-          items:
-            type: string
-          type: array
-          x-go-name: Regions
-        resource_types:
-          example:
-          - persistent-ssd
-          - a40.1x
-          items:
-            type: string
-          type: array
-          x-go-name: ResourceTypes
-        start_date:
-          example: '"2022-07-01"'
-          type: string
-          x-go-name: StartDate
-      required:
-      - projects
-      - resource_types
-      - product_lines
-      - regions
-      - start_date
-      - end_date
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    BillingCostData:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/BillingCostDatum'
-          type: array
-          x-go-name: Data
-        last_updated:
-          type: string
-          x-go-name: LastUpdated
-      required:
-      - data
-      title: UsageByProjectGetResponse is the response type for GET requests to the usage.usageByProject endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    BillingCostDatum:
-      properties:
-        billable_metric:
-          example: '"gpu-hours"'
-          type: string
-          x-go-name: BillableMetric
-        cost:
-          example: 12.34
-          format: double
-          type: number
-          x-go-name: Cost
-        date:
-          example: '"2022-07-01"'
-          type: string
-          x-go-name: Date
-        project_id:
-          example: '"d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb"'
-          type: string
-          x-go-name: ProjectID
-        quantity:
-          example: 2.123
-          format: double
-          type: number
-          x-go-name: Quantity
-        region:
-          example: '"us-northcentral1"'
-          type: string
-          x-go-name: Region
-        resource_type:
-          example: '"a40.1x"'
-          type: string
-          x-go-name: ResourceType
-        unit_price:
-          example: 1.23
-          format: double
-          type: number
-          x-go-name: UnitPrice
-      required:
-      - resource_type
-      - project_id
-      - region
-      - date
-      - quantity
-      - billable_metric
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

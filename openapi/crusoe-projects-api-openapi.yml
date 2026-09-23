@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Crusoe Projects API
-  version: '1.0'
-  description: 'Operations tagged Projects across 2 of this provider''s published API definitions: crusoe-cloud-api-gateway-v1-openapi.json, crusoe-cloud-api-gateway-v1alpha5-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
+  title: Crusoe Cloud API Gateway Projects API
+  version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
 tags:
@@ -41,7 +41,7 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Lists all projects the logged-in user belongs to or owns and returns their details.
+      summary: Lists all projects the logged-in user belongs to or owns and returns their…
       tags:
       - Projects
     post:
@@ -60,7 +60,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Creates a project and returns the created project.
+      summary: Creates a project and returns the created project
       tags:
       - Projects
       requestBody:
@@ -94,7 +94,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Updates a project and returns the updated project.
+      summary: Updates a project and returns the updated project
       tags:
       - Projects
       requestBody:
@@ -124,7 +124,7 @@ paths:
           $ref: '#/components/responses/permissionsError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Deletes a project.
+      summary: Deletes a project
       tags:
       - Projects
     get:
@@ -145,103 +145,10 @@ paths:
           $ref: '#/components/responses/authError'
         '500':
           $ref: '#/components/responses/serverError'
-      summary: Returns details for a single project.
+      summary: Returns details for a single project
       tags:
       - Projects
 components:
-  responses:
-    projectsPutPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectsPutPostResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getProjectResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Project'
-    listProjectsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListProjectsResponseV1'
-    emptyResponse:
-      description: Empty Response
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
     Project:
       properties:
@@ -276,6 +183,31 @@ components:
       title: Project contains identifying information for a project.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPutRequest:
+      properties:
+        name:
+          description: New name for the project.
+          example: Admin
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      title: ProjectsPutRequest is the request type for PUT requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectResourceDetails:
+      properties:
+        count:
+          description: Number of resources of this type in the project.
+          example: 5
+          format: int64
+          type: integer
+          x-go-name: Count
+      required:
+      - count
+      title: ProjectResourceDetails contains a count of resources of a single type within a project.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ProjectsPostRequest:
       properties:
         name:
@@ -292,6 +224,27 @@ components:
       - organization_id
       - name
       title: ProjectsPostRequest is the request type for POST requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPutPostResponseV1:
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      required:
+      - project
+      title: ProjectsPutPostResponseV1 is the response type for PUT and POST requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListProjectsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListProjectsResponseV1 is the response type for GET requests to the projects endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ProjectResources:
@@ -315,55 +268,99 @@ components:
       title: ProjectResources contains information about resources within a project.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectsPutPostResponseV1:
-      properties:
-        project:
-          $ref: '#/components/schemas/Project'
-      required:
-      - project
-      title: ProjectsPutPostResponseV1 is the response type for PUT and POST requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectResourceDetails:
-      properties:
-        count:
-          description: Number of resources of this type in the project.
-          example: 5
-          format: int64
-          type: integer
-          x-go-name: Count
-      required:
-      - count
-      title: ProjectResourceDetails contains a count of resources of a single type within a project.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectsPutRequest:
-      properties:
-        name:
-          description: New name for the project.
-          example: Admin
-          type: string
-          x-go-name: Name
-      required:
-      - name
-      title: ProjectsPutRequest is the request type for PUT requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListProjectsResponseV1:
-      properties:
-        items:
-          items:
+  responses:
+    getProjectResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
             $ref: '#/components/schemas/Project'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListProjectsResponseV1 is the response type for GET requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-x-refined-from:
-- crusoe-cloud-api-gateway-v1-openapi.json
-- crusoe-cloud-api-gateway-v1alpha5-openapi.json
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    listProjectsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListProjectsResponseV1'
+    projectsPutPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectsPutPostResponseV1'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:
