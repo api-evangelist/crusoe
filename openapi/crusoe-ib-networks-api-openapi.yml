@@ -124,24 +124,12 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    badReqError:
-      description: Error Bad Request
+    listIbNetworksResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/ListIBNetworksResponseV1'
     serverError:
       description: Error Internal Server
       content:
@@ -160,18 +148,6 @@ components:
             - code
             - message
             type: object
-    getIbNetworkResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBNetwork'
-    listIbNetworksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBNetworksResponseV1'
     authError:
       description: Error Authentication Failed
       content:
@@ -184,6 +160,30 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getIbNetworkResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBNetwork'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:

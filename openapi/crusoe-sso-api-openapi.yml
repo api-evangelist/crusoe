@@ -120,38 +120,54 @@ paths:
         required: true
 components:
   responses:
-    deleteSSOProviderResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SSOProvider'
     listSSOProvidersResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListSSOProvidersResponse'
-    badReqError:
-      description: Error Bad Request
+    notFoundError:
+      description: Error Not Found
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '400'
+                example: '404'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_request
+                example: not_found
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
-    emptyResponse:
-      description: Empty Response
+    deleteSSOProviderResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SSOProvider'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     createSSOProviderResponse:
       description: ''
       content:
@@ -176,36 +192,20 @@ components:
             - code
             - message
             type: object
-    notFoundError:
-      description: Error Not Found
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '404'
+                example: '400'
                 type: string
                 x-go-name: Code
               message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:
@@ -222,25 +222,6 @@ components:
           x-go-name: SsoProviders
       required:
       - sso_providers
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UpdateUserSSOEnforcementRequest:
-      properties:
-        enforcement:
-          enum:
-          - none
-          - required
-          type: string
-          x-go-name: Enforcement
-        user_ids:
-          example: d62a74a8-e14e-41fd-81b6-9983f7ab9ba8
-          items:
-            type: string
-          type: array
-          x-go-name: UserIDs
-      required:
-      - user_ids
-      - enforcement
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateSSOProviderRequest:
@@ -291,6 +272,25 @@ components:
       - issuer_uri
       - created_at
       - email_domains
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UpdateUserSSOEnforcementRequest:
+      properties:
+        enforcement:
+          enum:
+          - none
+          - required
+          type: string
+          x-go-name: Enforcement
+        user_ids:
+          example: d62a74a8-e14e-41fd-81b6-9983f7ab9ba8
+          items:
+            type: string
+          type: array
+          x-go-name: UserIDs
+      required:
+      - user_ids
+      - enforcement
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

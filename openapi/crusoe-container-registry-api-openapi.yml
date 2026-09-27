@@ -528,143 +528,7 @@ paths:
       tags:
       - Container Registry
 components:
-  responses:
-    ccrListRepositoriesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListRepositoriesResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    ccrListImagesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListCcrImagesResponse'
-    ccrTokenResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CCRTokenResponse'
-    emptyResponse:
-      description: Empty Response
-    ccrListSupportedProvidersResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSupportedProvidersResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    ccrRepositoryResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Repository'
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    ccrListManifestsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListManifestsResponse'
-    ccrListSupportedLocationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSupportedLocationsResponse'
-    ccrRepositoryQuotaResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RepositoryQuota'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    UpstreamRegistryCredentials:
-      properties:
-        password:
-          description: Password used to authenticate to the upstream registry.
-          type: string
-          x-go-name: Password
-        username:
-          description: Username used to authenticate to the upstream registry.
-          example: my-registry-user
-          type: string
-          x-go-name: Username
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CCRTokenRequest:
       properties:
         alias:
@@ -677,6 +541,26 @@ components:
           example: '2026-12-03T19:58:34Z'
           type: string
           x-go-name: ExpiresAt
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListManifestsResponse:
+      properties:
+        items:
+          description: List of manifests.
+          items:
+            $ref: '#/components/schemas/Manifest'
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListCcrImagesResponse:
+      properties:
+        items:
+          description: List of images.
+          items:
+            $ref: '#/components/schemas/CcrImage'
+          type: array
+          x-go-name: Items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     UpstreamRegistry:
@@ -694,64 +578,17 @@ components:
           x-go-name: URL
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CcrImage:
+    UpstreamRegistryCredentials:
       properties:
-        manifest_count:
-          description: Number of manifests in the image.
-          example: 3
-          format: int64
-          type: integer
-          x-go-name: ManifestCount
-        name:
-          description: Name of the image.
-          example: my-image
+        password:
+          description: Password used to authenticate to the upstream registry.
           type: string
-          x-go-name: Name
-        pull_count:
-          description: Number of times the image has been pulled.
-          example: 100
-          format: int64
-          type: integer
-          x-go-name: PullCount
-        updated_at:
-          description: Last update timestamp of the image, in RFC3339 format.
-          example: '2021-12-03T19:58:34Z'
-          format: date-time
+          x-go-name: Password
+        username:
+          description: Username used to authenticate to the upstream registry.
+          example: my-registry-user
           type: string
-          x-go-name: LastUpdatedTimestampUTC
-        url:
-          description: URL at which the image can be accessed.
-          type: string
-          x-go-name: URL
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListCcrImagesResponse:
-      properties:
-        items:
-          description: List of images.
-          items:
-            $ref: '#/components/schemas/CcrImage'
-          type: array
-          x-go-name: Items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    RepositoryQuota:
-      properties:
-        last_requested_timestamp_utc:
-          description: Timestamp at which the usage data was last computed, in RFC3339 format.
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: LastRequestedTimestampUTC
-        max_size_bytes:
-          description: Maximum total size allowed for the repository, in bytes.
-          example: '10737418240'
-          type: string
-          x-go-name: MaxSizeBytes
-        used_size_bytes:
-          description: Total size currently used by the repository, in bytes.
-          example: '5368709120'
-          type: string
-          x-go-name: UsedSizeBytes
+          x-go-name: Username
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListSupportedProvidersResponse:
@@ -762,14 +599,6 @@ components:
             type: string
           type: array
           x-go-name: Items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CCRTokenResponse:
-      properties:
-        token:
-          description: Token used to authenticate to the container registry.
-          type: string
-          x-go-name: Token
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Manifest:
@@ -805,64 +634,6 @@ components:
             type: string
           type: array
           x-go-name: Tags
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    RepositoryRequest:
-      properties:
-        location:
-          description: Location to create the repository in.
-          example: us-east1
-          type: string
-          x-go-name: Location
-        max_size_bytes:
-          description: Maximum total size for the new repository, in bytes.
-          example: '10737418240'
-          type: string
-          x-go-name: MaxSizeBytes
-        mode:
-          description: Mode for the new repository, which determines how images are stored and served.
-          type: string
-          x-go-name: Mode
-        name:
-          description: Name for the new repository.
-          example: my-repository
-          type: string
-          x-go-name: Name
-        upstream_registry:
-          $ref: '#/components/schemas/UpstreamRegistry'
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListManifestsResponse:
-      properties:
-        items:
-          description: List of manifests.
-          items:
-            $ref: '#/components/schemas/Manifest'
-          type: array
-          x-go-name: Items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListRepositoriesResponse:
-      properties:
-        items:
-          description: List of repositories.
-          items:
-            $ref: '#/components/schemas/Repository'
-          type: array
-          x-go-name: Items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListSupportedLocationsResponse:
-      properties:
-        items:
-          description: List of locations where the container registry is available.
-          example:
-          - us-east1
-          - us-northcentral1
-          items:
-            type: string
-          type: array
-          x-go-name: Items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Repository:
@@ -909,6 +680,235 @@ components:
           x-go-name: URL
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CcrImage:
+      properties:
+        manifest_count:
+          description: Number of manifests in the image.
+          example: 3
+          format: int64
+          type: integer
+          x-go-name: ManifestCount
+        name:
+          description: Name of the image.
+          example: my-image
+          type: string
+          x-go-name: Name
+        pull_count:
+          description: Number of times the image has been pulled.
+          example: 100
+          format: int64
+          type: integer
+          x-go-name: PullCount
+        updated_at:
+          description: Last update timestamp of the image, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          format: date-time
+          type: string
+          x-go-name: LastUpdatedTimestampUTC
+        url:
+          description: URL at which the image can be accessed.
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CCRTokenResponse:
+      properties:
+        token:
+          description: Token used to authenticate to the container registry.
+          type: string
+          x-go-name: Token
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSupportedLocationsResponse:
+      properties:
+        items:
+          description: List of locations where the container registry is available.
+          example:
+          - us-east1
+          - us-northcentral1
+          items:
+            type: string
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RepositoryRequest:
+      properties:
+        location:
+          description: Location to create the repository in.
+          example: us-east1
+          type: string
+          x-go-name: Location
+        max_size_bytes:
+          description: Maximum total size for the new repository, in bytes.
+          example: '10737418240'
+          type: string
+          x-go-name: MaxSizeBytes
+        mode:
+          description: Mode for the new repository, which determines how images are stored and served.
+          type: string
+          x-go-name: Mode
+        name:
+          description: Name for the new repository.
+          example: my-repository
+          type: string
+          x-go-name: Name
+        upstream_registry:
+          $ref: '#/components/schemas/UpstreamRegistry'
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RepositoryQuota:
+      properties:
+        last_requested_timestamp_utc:
+          description: Timestamp at which the usage data was last computed, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: LastRequestedTimestampUTC
+        max_size_bytes:
+          description: Maximum total size allowed for the repository, in bytes.
+          example: '10737418240'
+          type: string
+          x-go-name: MaxSizeBytes
+        used_size_bytes:
+          description: Total size currently used by the repository, in bytes.
+          example: '5368709120'
+          type: string
+          x-go-name: UsedSizeBytes
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListRepositoriesResponse:
+      properties:
+        items:
+          description: List of repositories.
+          items:
+            $ref: '#/components/schemas/Repository'
+          type: array
+          x-go-name: Items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    ccrRepositoryResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Repository'
+    ccrListManifestsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListManifestsResponse'
+    ccrTokenResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CCRTokenResponse'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ccrRepositoryQuotaResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RepositoryQuota'
+    ccrListImagesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListCcrImagesResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    ccrListSupportedLocationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSupportedLocationsResponse'
+    ccrListRepositoriesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListRepositoriesResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ccrListSupportedProvidersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSupportedProvidersResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

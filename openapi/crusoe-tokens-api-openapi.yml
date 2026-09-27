@@ -66,6 +66,14 @@ paths:
         required: true
 components:
   schemas:
+    TokensPostResponse:
+      properties:
+        token:
+          $ref: '#/components/schemas/GeneratedToken'
+      required:
+      - token
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     TokenInfo:
       description: These are the fields returned from a GET request.
       properties:
@@ -140,14 +148,6 @@ components:
       title: GeneratedToken contains the Traits Island stores for a Token inside of Kratos.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    TokensPostResponse:
-      properties:
-        token:
-          $ref: '#/components/schemas/GeneratedToken'
-      required:
-      - token
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateTokenRequest:
       properties:
         alias:
@@ -163,32 +163,6 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    emptyResponse:
-      description: Empty Response
-    tokensGetResponse:
-      description: A successful response from this resource will contain json-encoded array of token details, excluding the secret key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListTokensResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -213,6 +187,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/TokensPostResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    tokensGetResponse:
+      description: A successful response from this resource will contain json-encoded array of token details, excluding the secret key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListTokensResponseV1'
     authError:
       description: Error Authentication Failed
       content:
@@ -231,6 +229,8 @@ components:
             - code
             - message
             type: object
+    emptyResponse:
+      description: Empty Response
 x-tagGroups:
 - name: Compute
   tags:

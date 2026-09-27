@@ -67,7 +67,7 @@
     "crusoe-vpc-subnets-api-openapi.yml"
   ],
   "archived": [
-    "deleted 3 superseded output(s) from the previous generation"
+    "deleted 2 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
@@ -136,8 +136,8 @@
     "crusoe-cloud-api-gateway-v1-openapi.json: declared missing tag: VPC Networks",
     "crusoe-cloud-api-gateway-v1-openapi.json: declared missing tag: VPC Subnet Operations",
     "crusoe-cloud-api-gateway-v1-openapi.json: declared missing tag: VPC Subnets",
-    "superseded outputs removed: crusoe-s3-buckets-api-openapi.yml, crusoe-s3-keys-api-openapi.yml, crusoe-v-ms-api-openapi.yml",
-    "apis.yml register: written (+3 apis, 64 total)"
+    "superseded outputs removed: crusoe-s3-buckets-api-openapi.yml, crusoe-s3-keys-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 64 total)"
   ],
   "skipped": [
     "_original/crusoe-cloud-api-gateway-v1alpha5-openapi.json: archived document superseded by a larger archived document",
@@ -194,8 +194,8 @@
     "crusoe-sso-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "crusoe-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "crusoe-usage-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "crusoe-v-ms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "crusoe-vm-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "crusoe-vms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "crusoe-vpc-firewall-rule-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "crusoe-vpc-firewall-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "crusoe-vpc-network-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/",

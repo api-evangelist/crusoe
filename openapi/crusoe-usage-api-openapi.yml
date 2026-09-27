@@ -224,17 +224,6 @@ components:
           title: resource_type is the product type the usage was incurred for
           type: string
       type: object
-    customerOrganizationUsage:
-      description: OrganizationUsage is the project-level usage of products across an organization.
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/customerProductProjectUsage'
-            type: object
-          readOnly: true
-          title: items is the list of per-project usage line items
-          type: array
-      type: object
     UsageOptions:
       description: 'UsageOptions contains the values which exist for the fields which we allow filtering
 
@@ -288,6 +277,23 @@ components:
       - end_date
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    protobufAny:
+      additionalProperties: {}
+      properties:
+        '@type':
+          type: string
+      type: object
+    customerOrganizationUsage:
+      description: OrganizationUsage is the project-level usage of products across an organization.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/customerProductProjectUsage'
+            type: object
+          readOnly: true
+          title: items is the list of per-project usage line items
+          type: array
+      type: object
     rpcStatus:
       properties:
         code:
@@ -301,31 +307,13 @@ components:
         message:
           type: string
       type: object
-    protobufAny:
-      additionalProperties: {}
-      properties:
-        '@type':
-          type: string
-      type: object
   responses:
-    badReqError:
-      description: Error Bad Request
+    usageOptionsGetResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/UsageOptions'
     serverError:
       description: Error Internal Server
       content:
@@ -344,12 +332,6 @@ components:
             - code
             - message
             type: object
-    usageOptionsGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UsageOptions'
     usageExportGetResponse:
       description: ''
       headers:
@@ -382,6 +364,24 @@ components:
           example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
           schema:
             type: string
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

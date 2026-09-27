@@ -150,6 +150,91 @@ paths:
       - Projects
 components:
   schemas:
+    ProjectsPutRequest:
+      properties:
+        name:
+          description: New name for the project.
+          example: Admin
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      title: ProjectsPutRequest is the request type for PUT requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPutPostResponseV1:
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      required:
+      - project
+      title: ProjectsPutPostResponseV1 is the response type for PUT and POST requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectResources:
+      properties:
+        disks:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        images:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        instances:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        snapshots:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+        vpc_networks:
+          $ref: '#/components/schemas/ProjectResourceDetails'
+      required:
+      - instances
+      - disks
+      - snapshots
+      - images
+      - vpc_networks
+      title: ProjectResources contains information about resources within a project.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListProjectsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListProjectsResponseV1 is the response type for GET requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectsPostRequest:
+      properties:
+        name:
+          description: Name for the new project.
+          example: Admin
+          type: string
+          x-go-name: Name
+        organization_id:
+          description: ID of the organization that will own the new project.
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          type: string
+          x-go-name: OrganizationID
+      required:
+      - organization_id
+      - name
+      title: ProjectsPostRequest is the request type for POST requests to the projects endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ProjectResourceDetails:
+      properties:
+        count:
+          description: Number of resources of this type in the project.
+          example: 5
+          format: int64
+          type: integer
+          x-go-name: Count
+      required:
+      - count
+      title: ProjectResourceDetails contains a count of resources of a single type within a project.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Project:
       properties:
         id:
@@ -183,148 +268,7 @@ components:
       title: Project contains identifying information for a project.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectsPutRequest:
-      properties:
-        name:
-          description: New name for the project.
-          example: Admin
-          type: string
-          x-go-name: Name
-      required:
-      - name
-      title: ProjectsPutRequest is the request type for PUT requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectResourceDetails:
-      properties:
-        count:
-          description: Number of resources of this type in the project.
-          example: 5
-          format: int64
-          type: integer
-          x-go-name: Count
-      required:
-      - count
-      title: ProjectResourceDetails contains a count of resources of a single type within a project.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectsPostRequest:
-      properties:
-        name:
-          description: Name for the new project.
-          example: Admin
-          type: string
-          x-go-name: Name
-        organization_id:
-          description: ID of the organization that will own the new project.
-          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
-          type: string
-          x-go-name: OrganizationID
-      required:
-      - organization_id
-      - name
-      title: ProjectsPostRequest is the request type for POST requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectsPutPostResponseV1:
-      properties:
-        project:
-          $ref: '#/components/schemas/Project'
-      required:
-      - project
-      title: ProjectsPutPostResponseV1 is the response type for PUT and POST requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListProjectsResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Project'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListProjectsResponseV1 is the response type for GET requests to the projects endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ProjectResources:
-      properties:
-        disks:
-          $ref: '#/components/schemas/ProjectResourceDetails'
-        images:
-          $ref: '#/components/schemas/ProjectResourceDetails'
-        instances:
-          $ref: '#/components/schemas/ProjectResourceDetails'
-        snapshots:
-          $ref: '#/components/schemas/ProjectResourceDetails'
-        vpc_networks:
-          $ref: '#/components/schemas/ProjectResourceDetails'
-      required:
-      - instances
-      - disks
-      - snapshots
-      - images
-      - vpc_networks
-      title: ProjectResources contains information about resources within a project.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    getProjectResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Project'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
-    listProjectsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListProjectsResponseV1'
-    projectsPutPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectsPutPostResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -343,6 +287,36 @@ components:
             - code
             - message
             type: object
+    projectsPutPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectsPutPostResponseV1'
+    getProjectResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Project'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     authError:
       description: Error Authentication Failed
       content:
@@ -355,6 +329,32 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    listProjectsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListProjectsResponseV1'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:

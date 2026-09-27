@@ -68,15 +68,12 @@ paths:
         required: true
 components:
   schemas:
-    ListSSHKeysResponseV1:
+    CreateSSHKeyResponse:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/SSHKey'
-          type: array
-          x-go-name: Items
+        ssh_key:
+          $ref: '#/components/schemas/SSHKey'
       required:
-      - items
+      - ssh_key
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SSHKey:
@@ -107,21 +104,6 @@ components:
       - fingerprints
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    Fingerprints:
-      properties:
-        md5:
-          example: bf:60:fa:cc:9f:42:1f:5e:23:9e:ed:d2:69:d8:76:93
-          type: string
-          x-go-name: MD5
-        sha256:
-          example: tARFxQkVHeqm6TzqpI897QsHVdgZlxgL2/YhVltmEUk
-          type: string
-          x-go-name: SHA256
-      required:
-      - md5
-      - sha256
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateSSHKeyRequest:
       properties:
         name:
@@ -137,12 +119,30 @@ components:
       - public_key
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateSSHKeyResponse:
+    ListSSHKeysResponseV1:
       properties:
-        ssh_key:
-          $ref: '#/components/schemas/SSHKey'
+        items:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+          x-go-name: Items
       required:
-      - ssh_key
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Fingerprints:
+      properties:
+        md5:
+          example: bf:60:fa:cc:9f:42:1f:5e:23:9e:ed:d2:69:d8:76:93
+          type: string
+          x-go-name: MD5
+        sha256:
+          example: tARFxQkVHeqm6TzqpI897QsHVdgZlxgL2/YhVltmEUk
+          type: string
+          x-go-name: SHA256
+      required:
+      - md5
+      - sha256
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
@@ -152,44 +152,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ListSSHKeysResponseV1'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     notFoundError:
       description: Error Not Found
       content:
@@ -214,6 +176,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateSSHKeyResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     authError:
       description: Error Authentication Failed
       content:
@@ -226,6 +206,26 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:

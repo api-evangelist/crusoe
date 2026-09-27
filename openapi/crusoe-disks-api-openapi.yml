@@ -208,6 +208,20 @@ paths:
         required: true
 components:
   schemas:
+    DisksPatchRequest:
+      properties:
+        size:
+          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+      required:
+      - size
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskModeType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     DiskV1:
       properties:
         attached_to:
@@ -289,17 +303,6 @@ components:
       - attached_to
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DisksPatchRequest:
-      properties:
-        size:
-          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
-          example: 10GiB
-          type: string
-          x-go-name: Size
-      required:
-      - size
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     AsyncOperationResponse:
       properties:
         operation:
@@ -324,6 +327,9 @@ components:
       - vm_id
       - attachment_type
       type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VMAttachmentType:
+      type: string
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     DisksPostRequestV1:
       properties:
@@ -418,67 +424,13 @@ components:
       title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DiskModeType:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VMAttachmentType:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getDiskResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DiskV1'
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
     listDisksResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListDisksResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -491,6 +443,24 @@ components:
                 x-go-name: Code
               message:
                 example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
                 type: string
                 x-go-name: Message
             required:
@@ -515,6 +485,36 @@ components:
             - code
             - message
             type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getDiskResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskV1'
 x-tagGroups:
 - name: Compute
   tags:

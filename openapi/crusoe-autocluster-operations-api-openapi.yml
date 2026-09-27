@@ -108,30 +108,6 @@ paths:
       - AutoCluster Operations
 components:
   responses:
-    getAutoClusterOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Operation'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     notFoundError:
       description: Error Not Found
       content:
@@ -168,12 +144,24 @@ components:
             - code
             - message
             type: object
-    listAutoClusterOperationsResponse:
-      description: ''
+    serverError:
+      description: Error Internal Server
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ListOperationsResponseV1'
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     authError:
       description: Error Authentication Failed
       content:
@@ -192,7 +180,30 @@ components:
             - code
             - message
             type: object
+    getAutoClusterOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Operation'
+    listAutoClusterOperationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListOperationsResponseV1'
   schemas:
+    ListOperationsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Operation'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     Operation:
       description: 'Individual resources that use Operations should populate the `metadata` field
 
@@ -231,17 +242,6 @@ components:
       - started_at
       - completed_at
       title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    ListOperationsResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Operation'
-          type: array
-          x-go-name: Items
-      required:
-      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
 x-tagGroups:

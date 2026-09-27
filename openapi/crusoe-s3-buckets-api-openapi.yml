@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: The API Gateway exposes all publicly available API endpoints for Crusoe Cloud products.
-  title: Crusoe Cloud API Gateway S3 Buckets API
+  title: Crusoe Cloud API Gateway S3Buckets API
   version: v1
 servers:
 - url: https://api.cloud.crusoe.ai/v1
@@ -337,135 +337,34 @@ paths:
       tags:
       - S3 Buckets
 components:
-  responses:
-    listS3BucketsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListS3BucketsResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listS3SupportedLocationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListS3SupportedLocationsResponse'
-    okEmpty:
-      description: ''
-    getS3BucketResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/S3Bucket'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getS3BucketsCountResponse:
-      description: ''
-    getS3BucketsQuotaResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/QuotaValidationResult'
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    S3RetentionPeriodUnit:
-      description: 'enum: days,years'
-      title: 'Unit of measurement for an object lock retention period: days or years.'
-      type: string
+    EnableS3BucketObjectLockRequest:
+      properties:
+        retention_period:
+          description: Length of the object lock retention period, in the unit given by retention_period_unit.
+          example: 30
+          format: int32
+          type: integer
+          x-go-name: RetentionPeriod
+        retention_period_unit:
+          $ref: '#/components/schemas/S3RetentionPeriodUnit'
+      title: EnableS3BucketObjectLockRequest defines the body for enabling object lock.
+      type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    S3RetentionMode:
-      description: 'enum: governance,compliance'
-      title: 'Object lock retention mode for an S3 bucket: governance or compliance.'
-      type: string
+    QuotaValidationResult:
+      properties:
+        ActualUsed:
+          description: Amount of quota consumed by current usage.
+          format: int64
+          type: integer
+        LimitReached:
+          description: Whether usage is at or above the quota limit.
+          type: boolean
+        QuotaLimit:
+          description: Amount of quota allocated for the resource.
+          format: int64
+          type: integer
+      type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     S3Bucket:
       description: This is the REST-friendly model for the `BucketInfo` proto.
@@ -551,6 +450,24 @@ components:
       title: S3Bucket represents information about a single S3 bucket.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3RetentionPeriodUnit:
+      description: 'enum: days,years'
+      title: 'Unit of measurement for an object lock retention period: days or years.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UpdateS3BucketTagsRequest:
+      properties:
+        tags:
+          additionalProperties:
+            type: string
+          description: New set of tags for the bucket, as key-value pairs. Replaces all existing tags.
+          type: object
+          x-go-name: Tags
+      required:
+      - tags
+      title: UpdateS3BucketTagsRequest is the request body for updating S3 bucket tags.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateS3BucketRequest:
       properties:
         location:
@@ -592,18 +509,10 @@ components:
       title: CreateS3BucketRequest is the request body for creating a new S3 bucket.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UpdateS3BucketTagsRequest:
-      properties:
-        tags:
-          additionalProperties:
-            type: string
-          description: New set of tags for the bucket, as key-value pairs. Replaces all existing tags.
-          type: object
-          x-go-name: Tags
-      required:
-      - tags
-      title: UpdateS3BucketTagsRequest is the request body for updating S3 bucket tags.
-      type: object
+    S3RetentionMode:
+      description: 'enum: governance,compliance'
+      title: 'Object lock retention mode for an S3 bucket: governance or compliance.'
+      type: string
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListS3BucketsResponse:
       properties:
@@ -626,39 +535,6 @@ components:
       title: ListS3BucketsResponse is the response type for GET requests to the S3 buckets endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    S3VersioningState:
-      description: 'enum: disabled,enabled,suspended'
-      title: 'Versioning state of an S3 bucket: disabled, enabled, or suspended.'
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    EnableS3BucketObjectLockRequest:
-      properties:
-        retention_period:
-          description: Length of the object lock retention period, in the unit given by retention_period_unit.
-          example: 30
-          format: int32
-          type: integer
-          x-go-name: RetentionPeriod
-        retention_period_unit:
-          $ref: '#/components/schemas/S3RetentionPeriodUnit'
-      title: EnableS3BucketObjectLockRequest defines the body for enabling object lock.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    QuotaValidationResult:
-      properties:
-        ActualUsed:
-          description: Amount of quota consumed by current usage.
-          format: int64
-          type: integer
-        LimitReached:
-          description: Whether usage is at or above the quota limit.
-          type: boolean
-        QuotaLimit:
-          description: Amount of quota allocated for the resource.
-          format: int64
-          type: integer
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListS3SupportedLocationsResponse:
       properties:
         items:
@@ -675,6 +551,130 @@ components:
       title: ListS3SupportedLocationsResponse is the response type for GET requests to the S3 supported-locations endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3VersioningState:
+      description: 'enum: disabled,enabled,suspended'
+      title: 'Versioning state of an S3 bucket: disabled, enabled, or suspended.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getS3BucketsCountResponse:
+      description: ''
+    listS3BucketsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListS3BucketsResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listS3SupportedLocationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListS3SupportedLocationsResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getS3BucketResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/S3Bucket'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    okEmpty:
+      description: ''
+    getS3BucketsQuotaResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QuotaValidationResult'
 x-tagGroups:
 - name: Compute
   tags:

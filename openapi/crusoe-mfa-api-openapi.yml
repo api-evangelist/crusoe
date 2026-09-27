@@ -109,17 +109,17 @@ paths:
         required: true
 components:
   schemas:
-    OrganizationsMFAServiceUpdateOrganizationMFABody:
-      description: UpdateOrganizationMFARequest is the request for setting an organization's required MFA methods.
+    customerUpdateOrganizationMFAResponse:
+      description: 'UpdateOrganizationMFAResponse is the response for setting an organization''s required MFA methods.
+
+
+        Successful update calls return an empty body'
+      type: object
+    protobufAny:
+      additionalProperties: {}
       properties:
-        intended_methods:
-          example:
-          - totp
-          - webauthn
-          items:
-            type: string
-          title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
-          type: array
+        '@type':
+          type: string
       type: object
     rpcStatus:
       properties:
@@ -133,12 +133,6 @@ components:
           type: array
         message:
           type: string
-      type: object
-    customerUpdateOrganizationMFAResponse:
-      description: 'UpdateOrganizationMFAResponse is the response for setting an organization''s required MFA methods.
-
-
-        Successful update calls return an empty body'
       type: object
     customerGetOrganizationMFAResponse:
       description: GetOrganizationMFAResponse is the response containing an organization's required MFA methods.
@@ -164,11 +158,17 @@ components:
           title: 'method is the required MFA method (one of: totp, webauthn)'
           type: string
       type: object
-    protobufAny:
-      additionalProperties: {}
+    OrganizationsMFAServiceUpdateOrganizationMFABody:
+      description: UpdateOrganizationMFARequest is the request for setting an organization's required MFA methods.
       properties:
-        '@type':
-          type: string
+        intended_methods:
+          example:
+          - totp
+          - webauthn
+          items:
+            type: string
+          title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
+          type: array
       type: object
 x-tagGroups:
 - name: Compute

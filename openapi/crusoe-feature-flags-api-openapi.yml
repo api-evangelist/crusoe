@@ -59,6 +59,17 @@ components:
         '@type':
           type: string
       type: object
+    customerListFeatureFlagsResponse:
+      properties:
+        feature_flags:
+          additionalProperties: {}
+          example:
+            curated-images: true
+            infiniband: false
+          title: feature_flags is a map of feature flag names to their values
+          type: object
+      title: ListFeatureFlagsResponse is the list feature flags response
+      type: object
     rpcStatus:
       properties:
         code:
@@ -71,17 +82,6 @@ components:
           type: array
         message:
           type: string
-      type: object
-    customerListFeatureFlagsResponse:
-      properties:
-        feature_flags:
-          additionalProperties: {}
-          example:
-            curated-images: true
-            infiniband: false
-          title: feature_flags is a map of feature flag names to their values
-          type: object
-      title: ListFeatureFlagsResponse is the list feature flags response
       type: object
 x-tagGroups:
 - name: Compute

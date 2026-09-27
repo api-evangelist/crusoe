@@ -173,22 +173,40 @@ paths:
       - Reservations
 components:
   schemas:
-    GPUTrackingDatumMod:
+    LatestGPUTracking:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GPUTrackingDatumMod'
+          type: array
+          x-go-name: Data
+        reservation_id:
+          items:
+            type: string
+          type: array
+          x-go-name: ReservationID
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GPUTrackingDatum:
       properties:
         event_time:
           type: string
           x-go-name: EventTime
-        global_reservation_capacity:
+        global_capacity:
           format: int64
           type: integer
           x-go-name: GlobalCapacity
-        organization_id:
-          type: string
-          x-go-name: OrganizationID
-        overage_count:
+        gpu_usage:
+          format: int64
+          type: integer
+          x-go-name: GPUUsage
+        on_demand_count:
           format: int64
           type: integer
           x-go-name: OnDemandCount
+        organization_id:
+          type: string
+          x-go-name: OrganizationID
         price:
           format: double
           type: number
@@ -199,14 +217,19 @@ components:
         region:
           type: string
           x-go-name: Region
-        regional_reservation_capacity:
+        regional_capacity:
           format: int64
           type: integer
           x-go-name: RegionalCapacity
-        running_compute_unit_count:
-          format: int64
-          type: integer
-          x-go-name: GPUUsage
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GPUTrackingResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GPUTrackingDatum'
+          type: array
+          x-go-name: Data
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Reservation:
@@ -295,26 +318,22 @@ components:
       title: Reservation contains information about a customer reservation.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    GPUTrackingDatum:
+    GPUTrackingDatumMod:
       properties:
         event_time:
           type: string
           x-go-name: EventTime
-        global_capacity:
+        global_reservation_capacity:
           format: int64
           type: integer
           x-go-name: GlobalCapacity
-        gpu_usage:
-          format: int64
-          type: integer
-          x-go-name: GPUUsage
-        on_demand_count:
-          format: int64
-          type: integer
-          x-go-name: OnDemandCount
         organization_id:
           type: string
           x-go-name: OrganizationID
+        overage_count:
+          format: int64
+          type: integer
+          x-go-name: OnDemandCount
         price:
           format: double
           type: number
@@ -325,10 +344,14 @@ components:
         region:
           type: string
           x-go-name: Region
-        regional_capacity:
+        regional_reservation_capacity:
           format: int64
           type: integer
           x-go-name: RegionalCapacity
+        running_compute_unit_count:
+          format: int64
+          type: integer
+          x-go-name: GPUUsage
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ReservationsGetResponse:
@@ -343,78 +366,13 @@ components:
       title: ReservationsGetResponse is the response type for GET requests to the reservations endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LatestGPUTracking:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/GPUTrackingDatumMod'
-          type: array
-          x-go-name: Data
-        reservation_id:
-          items:
-            type: string
-          type: array
-          x-go-name: ReservationID
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    GPUTrackingResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/GPUTrackingDatum'
-          type: array
-          x-go-name: Data
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    reservationsResponse:
+    latestGPUTrackingResponse:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReservationsGetResponse'
-    reservationsGPUTrackingResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GPUTrackingResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/LatestGPUTracking'
     permissionsError:
       description: Error Permissions
       content:
@@ -433,6 +391,36 @@ components:
             - code
             - message
             type: object
+    reservationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReservationsGetResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    reservationsGPUTrackingResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GPUTrackingResponse'
     authError:
       description: Error Authentication Failed
       content:
@@ -451,12 +439,24 @@ components:
             - code
             - message
             type: object
-    latestGPUTrackingResponse:
-      description: ''
+    badReqError:
+      description: Error Bad Request
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/LatestGPUTracking'
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

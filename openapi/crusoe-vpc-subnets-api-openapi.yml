@@ -171,60 +171,6 @@ paths:
         required: true
 components:
   responses:
-    getVpcSubnetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VPCSubnet'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    listVpcSubnetsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListVPCSubnetsResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     notFoundError:
       description: Error Not Found
       content:
@@ -243,12 +189,6 @@ components:
             - code
             - message
             type: object
-    vpcSubnetPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VPCSubnetPostResponse'
     permissionsError:
       description: Error Permissions
       content:
@@ -267,6 +207,30 @@ components:
             - code
             - message
             type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getVpcSubnetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VPCSubnet'
     authError:
       description: Error Authentication Failed
       content:
@@ -285,16 +249,43 @@ components:
             - code
             - message
             type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listVpcSubnetsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListVPCSubnetsResponseV1'
+    vpcSubnetPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VPCSubnetPostResponse'
   schemas:
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     VPCSubnetPostRequest:
       properties:
         cidr:
@@ -331,46 +322,6 @@ components:
       title: VPCSubnetPostRequest is the request type for POST requests to the VPC Subnet endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    Operation:
-      description: 'Individual resources that use Operations should populate the `metadata` field
-
-        with resource-specific information.'
-      properties:
-        completed_at:
-          example: '2021-12-03T19:59:34Z'
-          type: string
-          x-go-name: CompletedAt
-        metadata:
-          example: '{}'
-          x-go-name: Metadata
-        operation_id:
-          example: F6EF489C-086E-458D-B812-7962964A28C9
-          type: string
-          x-go-name: ID
-        result:
-          example: '{}'
-          x-go-name: Result
-        started_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: StartedAt
-        state:
-          enum:
-          - IN_PROGRESS
-          - SUCCEEDED
-          - FAILED
-          example: IN_PROGRESS
-          type: string
-          x-go-name: State
-      required:
-      - operation_id
-      - state
-      - metadata
-      - started_at
-      - completed_at
-      title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     NATGateway:
       properties:
         id:
@@ -394,6 +345,15 @@ components:
       - public_ipv4_address
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     VPCSubnetPostResponse:
       properties:
         subnet:
@@ -401,6 +361,49 @@ components:
       required:
       - subnet
       title: VPCSubnetPostResponse is the response type for POST requests to the VPC Subnets endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VPCSubnetPatchRequest:
+      properties:
+        name:
+          description: New name for the VPC subnet.
+          example: my-cool-vpc-subnet
+          type: string
+          x-go-name: Name
+        nat_gateway_action:
+          description: 'Action to take on the subnet''s NAT gateway. "enable" creates a NAT gateway if one does not
+
+            exist; "disable" deletes the NAT gateway if one exists. If omitted, the subnet''s NAT gateway
+
+            is left unchanged.
+
+            enable NATGatewayActionEnable
+
+            disable NATGatewayActionDisable'
+          enum:
+          - enable
+          - disable
+          example: enable
+          type: string
+          x-go-enum-desc: 'enable NATGatewayActionEnable
+
+            disable NATGatewayActionDisable'
+          x-go-name: NATGatewayAction
+      required:
+      - name
+      title: VPCSubnetPatchRequest is the request type for PATCH requests to the VPC Subnets endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListVPCSubnetsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/VPCSubnet'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListVPCSubnetsResponseV1 is the response type for GET requests to the VPC Subnets endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     VPCSubnet:
@@ -444,49 +447,46 @@ components:
       - location
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListVPCSubnetsResponseV1:
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/VPCSubnet'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListVPCSubnetsResponseV1 is the response type for GET requests to the VPC Subnets endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VPCSubnetPatchRequest:
-      properties:
-        name:
-          description: New name for the VPC subnet.
-          example: my-cool-vpc-subnet
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
           type: string
-          x-go-name: Name
-        nat_gateway_action:
-          description: 'Action to take on the subnet''s NAT gateway. "enable" creates a NAT gateway if one does not
-
-            exist; "disable" deletes the NAT gateway if one exists. If omitted, the subnet''s NAT gateway
-
-            is left unchanged.
-
-            enable NATGatewayActionEnable
-
-            disable NATGatewayActionDisable'
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
           enum:
-          - enable
-          - disable
-          example: enable
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
           type: string
-          x-go-enum-desc: 'enable NATGatewayActionEnable
-
-            disable NATGatewayActionDisable'
-          x-go-name: NATGatewayAction
+          x-go-name: State
       required:
-      - name
-      title: VPCSubnetPatchRequest is the request type for PATCH requests to the VPC Subnets endpoint.
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
       type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
 x-tagGroups:
 - name: Compute
   tags:

@@ -153,6 +153,18 @@ components:
       - ib_network_id
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListIBPartitionsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/IBPartition'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListIBPartitionsResponseV1 is the response type for GET requests to the IB Partitions endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBPartitionsPostRequestV1:
       properties:
         ib_network_id:
@@ -171,57 +183,13 @@ components:
       title: IBPartitionsPostRequestV1 is the request type for POST requests to the IB Partitions endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListIBPartitionsResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/IBPartition'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListIBPartitionsResponseV1 is the response type for GET requests to the IB Partitions endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    badReqError:
-      description: Error Bad Request
+    listIBPartitionsResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/ListIBPartitionsResponseV1'
     permissionsError:
       description: Error Permissions
       content:
@@ -240,24 +208,30 @@ components:
             - code
             - message
             type: object
-    ibPartitionsPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBPartition'
-    listIBPartitionsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBPartitionsResponseV1'
     getIbPartitionResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/IBPartition'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     authError:
       description: Error Authentication Failed
       content:
@@ -270,6 +244,32 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ibPartitionsPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBPartition'
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:

@@ -83,6 +83,36 @@ paths:
         required: true
 components:
   schemas:
+    KubernetesClusterSupportSettingsResponse:
+      description: 'KubernetesClusterSupportSettingsResponse defines the response for getting
+
+        or setting support access settings for a Kubernetes cluster.'
+      properties:
+        access_enabled:
+          description: Master toggle for whether support access is enabled.
+          example: true
+          type: boolean
+          x-go-name: AccessEnabled
+        active_requests:
+          description: Currently active support access requests.
+          items:
+            $ref: '#/components/schemas/KubernetesSupportAccessRequest'
+          type: array
+          x-go-name: ActiveRequests
+        enabled_roles:
+          description: Enabled support access roles.
+          example:
+          - operator
+          - readonly
+          items:
+            type: string
+          type: array
+          x-go-name: EnabledRoles
+      required:
+      - access_enabled
+      - enabled_roles
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     KubernetesClusterSupportSettingsRequest:
       description: 'KubernetesClusterSupportSettingsRequest defines the request for updating
 
@@ -168,49 +198,25 @@ components:
       title: KubernetesSupportAccessRequest defines the information about a support access request.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    KubernetesClusterSupportSettingsResponse:
-      description: 'KubernetesClusterSupportSettingsResponse defines the response for getting
-
-        or setting support access settings for a Kubernetes cluster.'
-      properties:
-        access_enabled:
-          description: Master toggle for whether support access is enabled.
-          example: true
-          type: boolean
-          x-go-name: AccessEnabled
-        active_requests:
-          description: Currently active support access requests.
-          items:
-            $ref: '#/components/schemas/KubernetesSupportAccessRequest'
-          type: array
-          x-go-name: ActiveRequests
-        enabled_roles:
-          description: Enabled support access roles.
-          example:
-          - operator
-          - readonly
-          items:
-            type: string
-          type: array
-          x-go-name: EnabledRoles
-      required:
-      - access_enabled
-      - enabled_roles
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    badReqError:
-      description: Error Bad Request
+    getSupportSettingsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesClusterSupportSettingsResponse'
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '400'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_request
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
@@ -241,24 +247,6 @@ components:
             - code
             - message
             type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     authError:
       description: Error Authentication Failed
       content:
@@ -277,12 +265,24 @@ components:
             - code
             - message
             type: object
-    getSupportSettingsResponse:
-      description: ''
+    badReqError:
+      description: Error Bad Request
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/KubernetesClusterSupportSettingsResponse'
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

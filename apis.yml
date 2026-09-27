@@ -42,11 +42,14 @@ x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-24
 tags:
 - AI Infrastructure
 - Cloud Computing
 - GPU Compute
-- Machine-Learning
+- Machine Learning
 - Inference
 - Kubernetes
 - Object Storage
@@ -64,6 +67,7 @@ tags_raw:
 - infrastructure-as-a-service
 - energy
 - mcp
+- Machine-Learning
 apis:
 - name: Crusoe Managed Inference API
   description: >-
@@ -77,7 +81,7 @@ apis:
   baseURL: https://api.inference.crusoecloud.com/v1
   tags:
   - Inference
-  - Machine-Learning
+  - Machine Learning
   - OpenAI-Compatible
   - Fine-Tuning
   tags_raw:
@@ -85,6 +89,7 @@ apis:
   - machine-learning
   - openai-compatible
   - fine-tuning
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://docs.crusoecloud.com/serverless-inference/overview
@@ -107,7 +112,7 @@ apis:
   baseURL: https://api.crusoecloud.com/v1
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - AI Infrastructure
   - Cloud Computing
   tags_raw:

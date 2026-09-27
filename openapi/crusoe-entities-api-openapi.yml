@@ -53,7 +53,113 @@ paths:
               $ref: '#/components/schemas/EntitiesPutPostRequest'
         required: true
 components:
+  responses:
+    organizationsPutPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EntitiesPutPostResponse'
+    organizationsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListEntitiesResponseV1'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
+    EntitiesPutPostResponse:
+      properties:
+        entity:
+          $ref: '#/components/schemas/Entity'
+      required:
+      - entity
+      title: EntitiesPutPostResponse is the response type for PUT and POST requests to the entities endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListEntitiesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Entity'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListEntitiesResponseV1 is the response type for GET requests to the entities endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     OrganizationMFA:
       properties:
         created_at:
@@ -70,6 +176,31 @@ components:
       - method
       - created_at
       title: OrganizationMFA contains details about a single required MFA method.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    EntitiesPutPostRequest:
+      properties:
+        billing_addr:
+          $ref: '#/components/schemas/BillingAddress'
+        company_name:
+          example: mycompany
+          type: string
+          x-go-name: CompanyName
+        organization_name:
+          example: Crusoe Energy
+          type: string
+          x-go-name: OrganizationName
+        tax_id:
+          example: 51-2144346
+          type: string
+          x-go-name: TaxID
+        tax_id_type:
+          enum:
+          - EIN
+          - VAT
+          type: string
+          x-go-name: TaxIDType
+      title: EntitiesPutPostRequest is the request type for PUT and POST requests to the entities endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Billing:
@@ -97,31 +228,6 @@ components:
       - has_valid_payment_method
       - delinquent
       title: Billing contains information about the billing status of an organization.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    EntitiesPutPostRequest:
-      properties:
-        billing_addr:
-          $ref: '#/components/schemas/BillingAddress'
-        company_name:
-          example: mycompany
-          type: string
-          x-go-name: CompanyName
-        organization_name:
-          example: Crusoe Energy
-          type: string
-          x-go-name: OrganizationName
-        tax_id:
-          example: 51-2144346
-          type: string
-          x-go-name: TaxID
-        tax_id_type:
-          enum:
-          - EIN
-          - VAT
-          type: string
-          x-go-name: TaxIDType
-      title: EntitiesPutPostRequest is the request type for PUT and POST requests to the entities endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Entity:
@@ -193,15 +299,6 @@ components:
       title: Entity contains identifying information for an organization.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    EntitiesPutPostResponse:
-      properties:
-        entity:
-          $ref: '#/components/schemas/Entity'
-      required:
-      - entity
-      title: EntitiesPutPostResponse is the response type for PUT and POST requests to the entities endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     BillingAddress:
       properties:
         address_line1:
@@ -237,103 +334,6 @@ components:
       title: BillingAddress contains sensitive information related to the billing address for an entity.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListEntitiesResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Entity'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListEntitiesResponseV1 is the response type for GET requests to the entities endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    organizationsGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListEntitiesResponseV1'
-    organizationsPutPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EntitiesPutPostResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
 x-tagGroups:
 - name: Compute
   tags:

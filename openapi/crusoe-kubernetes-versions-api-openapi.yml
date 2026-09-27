@@ -50,6 +50,19 @@ paths:
       - Kubernetes Versions
 components:
   schemas:
+    VersionDetails:
+      properties:
+        BuildVersion:
+          description: Build version component.
+          type: string
+        MajorMinorVersion:
+          description: Major and minor version components, for example "1.30".
+          type: string
+        PatchVersion:
+          description: Patch version component.
+          type: string
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListKubernetesVersionsResponse:
       properties:
         kubernetes_cluster_versions:
@@ -131,32 +144,19 @@ components:
       - supported_features
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VersionDetails:
-      properties:
-        BuildVersion:
-          description: Build version component.
-          type: string
-        MajorMinorVersion:
-          description: Major and minor version components, for example "1.30".
-          type: string
-        PatchVersion:
-          description: Patch version component.
-          type: string
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    badReqError:
-      description: Error Bad Request
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '400'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_request
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
@@ -181,30 +181,6 @@ components:
             - code
             - message
             type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listKubernetesVersionsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
     authError:
       description: Error Authentication Failed
       content:
@@ -217,6 +193,30 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listKubernetesVersionsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:

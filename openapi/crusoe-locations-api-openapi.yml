@@ -55,6 +55,12 @@ components:
             - code
             - message
             type: object
+    locationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListLocationsResponseV1'
     authError:
       description: Error Authentication Failed
       content:
@@ -73,12 +79,6 @@ components:
             - code
             - message
             type: object
-    locationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListLocationsResponseV1'
 x-tagGroups:
 - name: Compute
   tags:

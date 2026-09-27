@@ -160,86 +160,32 @@ paths:
       tags:
       - Audit Logs
 components:
-  responses:
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    auditLogsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuditLogsGetResponse'
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
+    AuditLogsGetResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LogEntry'
+          type: array
+          x-go-name: Items
+        next_page_token:
+          description: 'Base64 encoded token representing the starting of the next page of log entry.
+
+            Empty if currently on the last page.'
+          example: bXktbGFzdC12bQ
+          type: string
+          x-go-name: NextPageToken
+        prev_page_token:
+          description: 'Base64 encoded token representing the starting previous page of log entry.
+
+            Empty if currently on the first page.'
+          example: bXktZmlyc3Qtdm0
+          type: string
+          x-go-name: PrevPageToken
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     LogEntry:
       properties:
         action:
@@ -359,31 +305,85 @@ components:
       - surface
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AuditLogsGetResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/LogEntry'
-          type: array
-          x-go-name: Items
-        next_page_token:
-          description: 'Base64 encoded token representing the starting of the next page of log entry.
-
-            Empty if currently on the last page.'
-          example: bXktbGFzdC12bQ
-          type: string
-          x-go-name: NextPageToken
-        prev_page_token:
-          description: 'Base64 encoded token representing the starting previous page of log entry.
-
-            Empty if currently on the first page.'
-          example: bXktZmlyc3Qtdm0
-          type: string
-          x-go-name: PrevPageToken
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    auditLogsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuditLogsGetResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:
