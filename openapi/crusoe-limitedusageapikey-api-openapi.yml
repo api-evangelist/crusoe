@@ -76,30 +76,6 @@ paths:
         required: true
 components:
   responses:
-    limitedUsageAPIKeyPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LimitedUsageAPIKeyPostResponse'
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     limitedUsageAPIKeyGetResponse:
       description: A successful response from this resource will contain json-encoded array of token details, excluding the api key.
       content:
@@ -124,6 +100,32 @@ components:
             - code
             - message
             type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    limitedUsageAPIKeyPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyPostResponse'
+    emptyResponse:
+      description: Empty Response
     authError:
       description: Error Authentication Failed
       content:
@@ -142,9 +144,56 @@ components:
             - code
             - message
             type: object
-    emptyResponse:
-      description: Empty Response
   schemas:
+    LimitedUsageAPIKeyPostResponse:
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+      required:
+      - api_key_info
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GeneratedLimitedUsageAPIKey:
+      properties:
+        alias:
+          example: newAPIKey
+          type: string
+          x-go-name: Alias
+        api_key:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: APIKey
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        key_id:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: KeyID
+        project_id:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+        usage:
+          enum:
+          - inference
+          - observability
+          example: inference
+          type: string
+          x-go-name: Usage
+      required:
+      - usage
+      - key_id
+      - api_key
+      - created_at
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     LimitedUsageAPIKeyInfo:
       description: These are the fields returned from a GET request.
       properties:
@@ -189,45 +238,15 @@ components:
       title: TokenInfo contains the Traits Island stores for a Token inside of Kratos.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    GeneratedLimitedUsageAPIKey:
+    ListLimitedUsageAPIKeysResponseV1:
       properties:
-        alias:
-          example: newAPIKey
-          type: string
-          x-go-name: Alias
-        api_key:
-          example: R7p5XctCQMuGlpVBmVdqzA
-          type: string
-          x-go-name: APIKey
-        created_at:
-          example: '2021-11-03T22:16:27Z'
-          type: string
-          x-go-name: CreatedAt
-        expires_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: ExpiresAt
-        key_id:
-          example: R7p5XctCQMuGlpVBmVdqzA
-          type: string
-          x-go-name: KeyID
-        project_id:
-          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
-          type: string
-          x-go-name: ProjectID
-        usage:
-          enum:
-          - inference
-          - observability
-          example: inference
-          type: string
-          x-go-name: Usage
+        items:
+          items:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyInfo'
+          type: array
+          x-go-name: Items
       required:
-      - usage
-      - key_id
-      - api_key
-      - created_at
-      - expires_at
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateLimitedUsageAPIKeyRequest:
@@ -247,25 +266,6 @@ components:
           x-go-name: ProjectID
       required:
       - expires_at
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LimitedUsageAPIKeyPostResponse:
-      properties:
-        api_key_info:
-          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
-      required:
-      - api_key_info
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListLimitedUsageAPIKeysResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/LimitedUsageAPIKeyInfo'
-          type: array
-          x-go-name: Items
-      required:
-      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

@@ -33,24 +33,6 @@ paths:
       - NVLink Domains
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     serverError:
       description: Error Internal Server
       content:
@@ -63,6 +45,24 @@ components:
                 x-go-name: Code
               message:
                 example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
@@ -94,6 +94,17 @@ components:
           schema:
             $ref: '#/components/schemas/NvlinkDomainsSummaryListResponse'
   schemas:
+    NvlinkDomainsSummaryListResponse:
+      properties:
+        nvlink_domains:
+          description: List of NVLink domain summaries
+          items:
+            $ref: '#/components/schemas/NvlinkDomainSummaryResponse'
+          type: array
+          x-go-name: NvlinkDomains
+      title: NvlinkDomainsSummaryListResponse represents a list of NVLink domain summaries.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     NvlinkDomainSummaryResponse:
       properties:
         available_nodes:
@@ -124,17 +135,6 @@ components:
           type: integer
           x-go-name: TotalNodes
       title: NvlinkDomainSummaryResponse represents summary information about an NVLink domain.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    NvlinkDomainsSummaryListResponse:
-      properties:
-        nvlink_domains:
-          description: List of NVLink domain summaries
-          items:
-            $ref: '#/components/schemas/NvlinkDomainSummaryResponse'
-          type: array
-          x-go-name: NvlinkDomains
-      title: NvlinkDomainsSummaryListResponse represents a list of NVLink domain summaries.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

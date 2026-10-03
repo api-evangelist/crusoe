@@ -53,6 +53,19 @@ paths:
       - Feature Flags
 components:
   schemas:
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+            type: object
+          type: array
+        message:
+          type: string
+      type: object
     protobufAny:
       additionalProperties: {}
       properties:
@@ -69,19 +82,6 @@ components:
           title: feature_flags is a map of feature flag names to their values
           type: object
       title: ListFeatureFlagsResponse is the list feature flags response
-      type: object
-    rpcStatus:
-      properties:
-        code:
-          format: int32
-          type: integer
-        details:
-          items:
-            $ref: '#/components/schemas/protobufAny'
-            type: object
-          type: array
-        message:
-          type: string
       type: object
 x-tagGroups:
 - name: Compute

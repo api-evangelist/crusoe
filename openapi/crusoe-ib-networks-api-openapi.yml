@@ -62,37 +62,74 @@ paths:
       tags:
       - IB Networks
 components:
-  schemas:
-    IBNetworkCapacity:
-      properties:
-        quantity:
-          description: Number of slices of the given slice type.
-          example: 8
-          format: uint32
-          type: integer
-          x-go-name: Quantity
-        slice_type:
-          description: VM slice type the capacity applies to.
-          example: 16 vCPUs & 125GB RAM & 1 A100 (40GB) GPU
-          type: string
-          x-go-name: SliceType
-      required:
-      - quantity
-      - slice_type
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListIBNetworksResponseV1:
-      properties:
-        items:
-          items:
+  responses:
+    getIbNetworkResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
             $ref: '#/components/schemas/IBNetwork'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListIBNetworksResponseV1 is the response type for GET requests to the IB Networks endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listIbNetworksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListIBNetworksResponseV1'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+  schemas:
     IBNetwork:
       properties:
         capacities:
@@ -123,73 +160,36 @@ components:
       - capacities
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    listIbNetworksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBNetworksResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getIbNetworkResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
+    ListIBNetworksResponseV1:
+      properties:
+        items:
+          items:
             $ref: '#/components/schemas/IBNetwork'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListIBNetworksResponseV1 is the response type for GET requests to the IB Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    IBNetworkCapacity:
+      properties:
+        quantity:
+          description: Number of slices of the given slice type.
+          example: 8
+          format: uint32
+          type: integer
+          x-go-name: Quantity
+        slice_type:
+          description: VM slice type the capacity applies to.
+          example: 16 vCPUs & 125GB RAM & 1 A100 (40GB) GPU
+          type: string
+          x-go-name: SliceType
+      required:
+      - quantity
+      - slice_type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute
   tags:

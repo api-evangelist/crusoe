@@ -50,17 +50,35 @@ paths:
       - Kubernetes Versions
 components:
   schemas:
-    VersionDetails:
+    KubernetesClustersVersionInfo:
       properties:
-        BuildVersion:
-          description: Build version component.
+        cluster_version_name:
+          description: Version name of the Crusoe Kubernetes cluster image.
           type: string
-        MajorMinorVersion:
-          description: Major and minor version components, for example "1.30".
-          type: string
-        PatchVersion:
-          description: Patch version component.
-          type: string
+          x-go-name: ClusterVersionName
+        supported_features:
+          description: 'Features supported by this cluster version. Possible values today: "oidc",
+
+            "autoclusters", "active_health_checks". New feature names may be added over time.
+
+            API consumers should ignore unrecognized feature names.'
+          items:
+            type: string
+          type: array
+          x-go-name: SupportedFeatures
+        tags:
+          description: Tags associated with the version.
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+        version_details:
+          $ref: '#/components/schemas/VersionDetails'
+      required:
+      - cluster_version_name
+      - tags
+      - version_details
+      - supported_features
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListKubernetesVersionsResponse:
@@ -113,35 +131,17 @@ components:
       - supported_features
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    KubernetesClustersVersionInfo:
+    VersionDetails:
       properties:
-        cluster_version_name:
-          description: Version name of the Crusoe Kubernetes cluster image.
+        BuildVersion:
+          description: Build version component.
           type: string
-          x-go-name: ClusterVersionName
-        supported_features:
-          description: 'Features supported by this cluster version. Possible values today: "oidc",
-
-            "autoclusters", "active_health_checks". New feature names may be added over time.
-
-            API consumers should ignore unrecognized feature names.'
-          items:
-            type: string
-          type: array
-          x-go-name: SupportedFeatures
-        tags:
-          description: Tags associated with the version.
-          items:
-            type: string
-          type: array
-          x-go-name: Tags
-        version_details:
-          $ref: '#/components/schemas/VersionDetails'
-      required:
-      - cluster_version_name
-      - tags
-      - version_details
-      - supported_features
+        MajorMinorVersion:
+          description: Major and minor version components, for example "1.30".
+          type: string
+        PatchVersion:
+          description: Patch version component.
+          type: string
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
@@ -163,6 +163,12 @@ components:
             - code
             - message
             type: object
+    listKubernetesVersionsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
     serverError:
       description: Error Internal Server
       content:
@@ -181,30 +187,6 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listKubernetesVersionsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
     badReqError:
       description: Error Bad Request
       content:
@@ -217,6 +199,24 @@ components:
                 x-go-name: Code
               message:
                 example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
                 type: string
                 x-go-name: Message
             required:

@@ -130,6 +130,18 @@ paths:
       - IB Partitions
 components:
   schemas:
+    ListIBPartitionsResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/IBPartition'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListIBPartitionsResponseV1 is the response type for GET requests to the IB Partitions endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBPartition:
       properties:
         ib_network_id:
@@ -153,18 +165,6 @@ components:
       - ib_network_id
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListIBPartitionsResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/IBPartition'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListIBPartitionsResponseV1 is the response type for GET requests to the IB Partitions endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBPartitionsPostRequestV1:
       properties:
         ib_network_id:
@@ -184,36 +184,6 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    listIBPartitionsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBPartitionsResponseV1'
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getIbPartitionResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBPartition'
     serverError:
       description: Error Internal Server
       content:
@@ -232,30 +202,30 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '401'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_credential
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
-    ibPartitionsPostResponse:
+    listIBPartitionsResponse:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/IBPartition'
+            $ref: '#/components/schemas/ListIBPartitionsResponseV1'
     emptyResponse:
       description: Empty Response
     badReqError:
@@ -276,6 +246,36 @@ components:
             - code
             - message
             type: object
+    ibPartitionsPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBPartition'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getIbPartitionResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBPartition'
 x-tagGroups:
 - name: Compute
   tags:

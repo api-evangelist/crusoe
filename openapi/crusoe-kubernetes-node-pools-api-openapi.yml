@@ -352,76 +352,108 @@ paths:
       - Kubernetes Node Pools
 components:
   schemas:
-    AttachedDiskV1:
+    KubernetesCancelNodePoolRotateResponse:
       properties:
-        attachment_type:
-          description: 'How the disk is attached to the VM: os (boot disk) or data.'
-          example: os | data
+        no_rotate_in_progress:
+          description: Whether there was no rotation in progress to cancel.
+          type: boolean
+          x-go-name: NoRotateInProgress
+      required:
+      - no_rotate_in_progress
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    HostChannelAdapter:
+      properties:
+        guid:
+          description: Globally unique identifier (GUID) of the host channel adapter.
+          example: 946d:ae03:0021:69aa
           type: string
-          x-go-name: AttachmentType
-        block_size:
-          description: Block size of the disk, in bytes.
-          example: 4096
-          format: int64
-          type: integer
-          x-go-name: BlockSize
-        created_at:
-          description: Creation timestamp of the disk, in RFC3339 format.
-          example: '2021-12-03T19:58:34Z'
+          x-go-name: GUID
+        ib_network_id:
           type: string
-          x-go-name: CreatedAt
-        id:
-          description: ID of the disk.
-          example: 123e4567-e89b-12d3-a456-426614174000
+          x-go-name: IBNetworkID
+        ib_partition_id:
           type: string
-          x-go-name: ID
-        location:
-          description: Location of the disk.
-          example: us-northcentral1-a
+          x-go-name: IBPartitionID
+        transport_network_id:
+          description: ID of the transport network the host channel adapter is attached to.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
           type: string
-          x-go-name: Location
-        mode:
-          description: 'Access mode the disk is attached with: read-write or read-only.'
-          example: read-write | read-only
+          x-go-name: TransportNetworkID
+        transport_partition_id:
+          description: ID of the transport partition the host channel adapter is attached to.
+          example: ca39e669-47ee-456b-968d-303234fbf99f
           type: string
-          x-go-name: Mode
-        name:
-          description: Name of the disk.
-          example: my-disk
-          type: string
-          x-go-name: Name
-        serial_number:
-          description: Serial number of the disk.
-          example: 96FD14FDBCF7E21E8EC
-          type: string
-          x-go-name: SerialNumber
-        size:
-          description: Size of the disk.
-          example: 10GiB
-          type: string
-          x-go-name: Size
+          x-go-name: TransportPartitionID
         type:
-          description: Storage type of the disk.
-          example: persistent-ssd
+          description: Transport type of the host channel adapter.
+          example: infiniband
           type: string
           x-go-name: Type
-        updated_at:
-          description: Last update timestamp of the disk, in RFC3339 format.
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: UpdatedAt
       required:
-      - id
-      - name
       - type
-      - size
-      - location
-      - block_size
-      - created_at
-      - updated_at
-      - serial_number
-      - attachment_type
-      - mode
+      - guid
+      - ib_network_id
+      - ib_partition_id
+      - transport_network_id
+      - transport_partition_id
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesNodeTaint:
+      description: 'A taint allows a node to repel a set of pods unless those pods
+
+        tolerate the taint. Taints follow standard Kubernetes semantics
+
+        (see https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).'
+      properties:
+        effect:
+          description: 'Taint effect, controlling how pods are treated on
+
+            matching nodes:
+
+            NoSchedule: new pods are not scheduled unless they tolerate.
+
+            PreferNoSchedule: new pods avoid the node if possible.
+
+            NoExecute: new pods are not scheduled AND existing non-tolerating
+
+            pods are evicted.'
+          enum:
+          - NoSchedule
+          - PreferNoSchedule
+          - NoExecute
+          example: NoSchedule
+          type: string
+          x-go-name: Effect
+        key:
+          description: 'Taint key. Follows the Kubernetes qualified-name
+
+            format: an optional DNS subdomain prefix (up to 253 characters)
+
+            followed by a ''/'', then a name segment (up to 63 characters).
+
+            Allowed characters: alphanumerics, ''-'', ''_'', and ''.''. Must start
+
+            and end with an alphanumeric character.
+
+            Keys beginning with "crusoe.ai/" are reserved for internal use.'
+          example: gpu-type
+          type: string
+          x-go-name: Key
+        value:
+          description: 'Taint value. May be empty. Follows the same format
+
+            rules as a Kubernetes label value: up to 63 characters, alphanumerics
+
+            and ''-'', ''_'', ''.''.'
+          example: h100
+          maxLength: 63
+          type: string
+          x-go-name: Value
+      required:
+      - key
+      - effect
+      title: KubernetesNodeTaint represents a Kubernetes node taint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     KubernetesNodePoolPostRequest:
@@ -535,35 +567,23 @@ components:
       - cluster_id
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ReservationSpecification:
+    KubernetesGetNodePoolRotateStatusResponse:
       properties:
-        id:
-          description: ID of the reservation to use for the VM. Incompatible with selection_strategy.
-          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
+        out_of_sync_instances:
+          description: IDs of instances that are out of sync with the node pool configuration.
+          items:
+            type: string
+          type: array
+          x-go-name: OutOfSyncInstances
+        state:
+          description: Current rotation state of the node pool.
           type: string
-          x-go-name: ID
-        selection_strategy:
-          default: lowest_cost
-          description: 'Strategy for automatically selecting a reservation: lowest_cost or on_demand. Use on_demand
-
-            to opt out of reservation usage. Incompatible with id.'
-          enum:
-          - lowest_cost
-          - on_demand
-          example: lowest_cost
-          type: string
-          x-go-name: SelectionStrategy
+          x-go-name: State
+      required:
+      - state
+      - out_of_sync_instances
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     KubernetesNodePoolPatchRequest:
       properties:
         action:
@@ -661,46 +681,15 @@ components:
       - ssh_public_key
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    PublicIPv4Address:
+    AsyncOperationResponse:
       properties:
-        address:
-          description: Public IPv4 address.
-          example: 121.0.0.0
-          type: string
-          x-go-name: Address
-        id:
-          description: ID of the public IPv4 address.
-          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
-          type: string
-          x-go-name: ID
-        type:
-          description: Allocation type of the public IPv4 address (for example, dynamic).
-          example: dynamic
-          type: string
-          x-go-name: Type
+        operation:
+          $ref: '#/components/schemas/Operation'
       required:
-      - address
-      - id
-      - type
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
       type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    KubernetesGetNodePoolRotateStatusResponse:
-      properties:
-        out_of_sync_instances:
-          description: IDs of instances that are out of sync with the node pool configuration.
-          items:
-            type: string
-          type: array
-          x-go-name: OutOfSyncInstances
-        state:
-          description: Current rotation state of the node pool.
-          type: string
-          x-go-name: State
-      required:
-      - state
-      - out_of_sync_instances
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     KubernetesNodePool:
       properties:
         cluster_id:
@@ -831,49 +820,35 @@ components:
       - ephemeral_storage_for_containerd
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListKubernetesNodePoolsResponse:
+    PrivateIPv4Address:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/KubernetesNodePool'
-          type: array
-          x-go-name: Items
+        address:
+          description: Private IPv4 address.
+          example: 10.1.2.3
+          type: string
+          x-go-name: Address
       required:
-      - items
+      - address
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListKubernetesNodePoolVMsResponse:
-      description: 'ListKubernetesNodePoolVMsResponse is the response type for
-
-        GET /projects/{project_id}/kubernetes/nodepools/{node_pool_id}/vms. Uses the
-
-        canonical short-form `next_token` / `prev_token` field names that match
-
-        `fetch`''s request params, rather than the legacy `*_page_token` naming used
-
-        by /compute/vms/instances.'
+    ReservationSpecification:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/InstanceV1'
-          type: array
-          x-go-name: Items
-        next_token:
-          description: 'Base64 encoded token representing the next page of instances. Empty if
-
-            currently on the last page.'
-          example: bXktbGFzdC12bQ
+        id:
+          description: ID of the reservation to use for the VM. Incompatible with selection_strategy.
+          example: 804bf3a2-81f2-4d78-9a9e-dc6a55ed33d8
           type: string
-          x-go-name: NextToken
-        prev_token:
-          description: 'Base64 encoded token representing the previous page of instances. Empty
+          x-go-name: ID
+        selection_strategy:
+          default: lowest_cost
+          description: 'Strategy for automatically selecting a reservation: lowest_cost or on_demand. Use on_demand
 
-            if currently on the first page.'
-          example: bXktZmlyc3Qtdm0
+            to opt out of reservation usage. Incompatible with id.'
+          enum:
+          - lowest_cost
+          - on_demand
+          example: lowest_cost
           type: string
-          x-go-name: PrevToken
-      required:
-      - items
+          x-go-name: SelectionStrategy
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     InstanceDetails:
@@ -893,114 +868,38 @@ components:
       - using_latest_config
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    NetworkInterface:
+    PublicIPv4Address:
       properties:
-        external_dns_name:
-          description: External DNS name of the network interface.
+        address:
+          description: Public IPv4 address.
+          example: 121.0.0.0
           type: string
-          x-go-name: ExternalDNSName
+          x-go-name: Address
         id:
-          description: ID of the network interface.
-          example: ca39e669-47ee-456b-968d-303234fbf99f
+          description: ID of the public IPv4 address.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
           type: string
           x-go-name: ID
-        interface_type:
-          description: Type of the network interface.
-          example: ethernet
+        type:
+          description: Allocation type of the public IPv4 address (for example, dynamic).
+          example: dynamic
           type: string
-          x-go-name: InterfaceType
-        ips:
-          description: IP addresses assigned to the network interface.
-          items:
-            $ref: '#/components/schemas/IPAddresses'
-          type: array
-          x-go-name: IPs
-        mac_address:
-          description: MAC address of the network interface.
-          example: 00:00:5e:00:53:af
-          type: string
-          x-go-name: MACAddress
-        name:
-          description: Name of the network interface.
-          example: network-interface-1
-          type: string
-          x-go-name: Name
-        network:
-          description: ID of the VPC network the interface is attached to.
-          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
-          type: string
-          x-go-name: Network
-        subnet:
-          description: ID of the VPC subnet the interface is attached to.
-          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
-          type: string
-          x-go-name: Subnet
+          x-go-name: Type
       required:
+      - address
       - id
-      - name
-      - network
-      - subnet
-      - interface_type
-      - mac_address
-      - ips
-      - external_dns_name
+      - type
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    KubernetesNodeTaint:
-      description: 'A taint allows a node to repel a set of pods unless those pods
-
-        tolerate the taint. Taints follow standard Kubernetes semantics
-
-        (see https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).'
+    ListKubernetesNodePoolsResponse:
       properties:
-        effect:
-          description: 'Taint effect, controlling how pods are treated on
-
-            matching nodes:
-
-            NoSchedule: new pods are not scheduled unless they tolerate.
-
-            PreferNoSchedule: new pods avoid the node if possible.
-
-            NoExecute: new pods are not scheduled AND existing non-tolerating
-
-            pods are evicted.'
-          enum:
-          - NoSchedule
-          - PreferNoSchedule
-          - NoExecute
-          example: NoSchedule
-          type: string
-          x-go-name: Effect
-        key:
-          description: 'Taint key. Follows the Kubernetes qualified-name
-
-            format: an optional DNS subdomain prefix (up to 253 characters)
-
-            followed by a ''/'', then a name segment (up to 63 characters).
-
-            Allowed characters: alphanumerics, ''-'', ''_'', and ''.''. Must start
-
-            and end with an alphanumeric character.
-
-            Keys beginning with "crusoe.ai/" are reserved for internal use.'
-          example: gpu-type
-          type: string
-          x-go-name: Key
-        value:
-          description: 'Taint value. May be empty. Follows the same format
-
-            rules as a Kubernetes label value: up to 63 characters, alphanumerics
-
-            and ''-'', ''_'', ''.''.'
-          example: h100
-          maxLength: 63
-          type: string
-          x-go-name: Value
+        items:
+          items:
+            $ref: '#/components/schemas/KubernetesNodePool'
+          type: array
+          x-go-name: Items
       required:
-      - key
-      - effect
-      title: KubernetesNodeTaint represents a Kubernetes node taint.
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IPAddresses:
@@ -1140,99 +1039,91 @@ components:
       - maintenance_policy
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VirtualizationFeatures:
+    ListKubernetesNodePoolVMsResponse:
+      description: 'ListKubernetesNodePoolVMsResponse is the response type for
+
+        GET /projects/{project_id}/kubernetes/nodepools/{node_pool_id}/vms. Uses the
+
+        canonical short-form `next_token` / `prev_token` field names that match
+
+        `fetch`''s request params, rather than the legacy `*_page_token` naming used
+
+        by /compute/vms/instances.'
       properties:
-        nested_virtualization:
-          description: Whether nested virtualization is enabled, allowing a VM to run inside this VM.
-          example: true
-          type: boolean
-          x-go-name: NestedVirtualization
+        items:
+          items:
+            $ref: '#/components/schemas/InstanceV1'
+          type: array
+          x-go-name: Items
+        next_token:
+          description: 'Base64 encoded token representing the next page of instances. Empty if
+
+            currently on the last page.'
+          example: bXktbGFzdC12bQ
+          type: string
+          x-go-name: NextToken
+        prev_token:
+          description: 'Base64 encoded token representing the previous page of instances. Empty
+
+            if currently on the first page.'
+          example: bXktZmlyc3Qtdm0
+          type: string
+          x-go-name: PrevToken
+      required:
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    HostChannelAdapter:
+    NetworkInterface:
       properties:
-        guid:
-          description: Globally unique identifier (GUID) of the host channel adapter.
-          example: 946d:ae03:0021:69aa
+        external_dns_name:
+          description: External DNS name of the network interface.
           type: string
-          x-go-name: GUID
-        ib_network_id:
-          type: string
-          x-go-name: IBNetworkID
-        ib_partition_id:
-          type: string
-          x-go-name: IBPartitionID
-        transport_network_id:
-          description: ID of the transport network the host channel adapter is attached to.
+          x-go-name: ExternalDNSName
+        id:
+          description: ID of the network interface.
           example: ca39e669-47ee-456b-968d-303234fbf99f
           type: string
-          x-go-name: TransportNetworkID
-        transport_partition_id:
-          description: ID of the transport partition the host channel adapter is attached to.
-          example: ca39e669-47ee-456b-968d-303234fbf99f
+          x-go-name: ID
+        interface_type:
+          description: Type of the network interface.
+          example: ethernet
           type: string
-          x-go-name: TransportPartitionID
-        type:
-          description: Transport type of the host channel adapter.
-          example: infiniband
+          x-go-name: InterfaceType
+        ips:
+          description: IP addresses assigned to the network interface.
+          items:
+            $ref: '#/components/schemas/IPAddresses'
+          type: array
+          x-go-name: IPs
+        mac_address:
+          description: MAC address of the network interface.
+          example: 00:00:5e:00:53:af
           type: string
-          x-go-name: Type
-      required:
-      - type
-      - guid
-      - ib_network_id
-      - ib_partition_id
-      - transport_network_id
-      - transport_partition_id
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    PrivateIPv4Address:
-      properties:
-        address:
-          description: Private IPv4 address.
-          example: 10.1.2.3
+          x-go-name: MACAddress
+        name:
+          description: Name of the network interface.
+          example: network-interface-1
           type: string
-          x-go-name: Address
-      required:
-      - address
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    KubernetesNodePoolRotateStartRequest:
-      properties:
-        count:
-          description: Number of nodes to replace at a time when the strategy is 'count'.
-          example: 2
-          format: int64
-          type: integer
-          x-go-name: Count
-        percentage:
-          description: Percentage of nodes to replace at a time when the strategy is 'percentage'.
-          example: 20
-          format: int64
-          type: integer
-          x-go-name: Percentage
-        strategy:
-          description: 'Strategy for the rotation to perform: count or percentage.'
-          enum:
-          - count
-          - percentage
-          example: count
+          x-go-name: Name
+        network:
+          description: ID of the VPC network the interface is attached to.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
           type: string
-          x-go-name: Strategy
+          x-go-name: Network
+        subnet:
+          description: ID of the VPC subnet the interface is attached to.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: Subnet
       required:
-      - strategy
-      - count
-      - percentage
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    KubernetesCancelNodePoolRotateResponse:
-      properties:
-        no_rotate_in_progress:
-          description: Whether there was no rotation in progress to cancel.
-          type: boolean
-          x-go-name: NoRotateInProgress
-      required:
-      - no_rotate_in_progress
+      - id
+      - name
+      - network
+      - subnet
+      - interface_type
+      - mac_address
+      - ips
+      - external_dns_name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Operation:
@@ -1275,25 +1166,122 @@ components:
       title: Operation contains the common fields for all Operation API objects.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    KubernetesNodePoolRotateStartRequest:
+      properties:
+        count:
+          description: Number of nodes to replace at a time when the strategy is 'count'.
+          example: 2
+          format: int64
+          type: integer
+          x-go-name: Count
+        percentage:
+          description: Percentage of nodes to replace at a time when the strategy is 'percentage'.
+          example: 20
+          format: int64
+          type: integer
+          x-go-name: Percentage
+        strategy:
+          description: 'Strategy for the rotation to perform: count or percentage.'
+          enum:
+          - count
+          - percentage
+          example: count
+          type: string
+          x-go-name: Strategy
+      required:
+      - strategy
+      - count
+      - percentage
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VirtualizationFeatures:
+      properties:
+        nested_virtualization:
+          description: Whether nested virtualization is enabled, allowing a VM to run inside this VM.
+          example: true
+          type: boolean
+          x-go-name: NestedVirtualization
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AttachedDiskV1:
+      properties:
+        attachment_type:
+          description: 'How the disk is attached to the VM: os (boot disk) or data.'
+          example: os | data
+          type: string
+          x-go-name: AttachmentType
+        block_size:
+          description: Block size of the disk, in bytes.
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        created_at:
+          description: Creation timestamp of the disk, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: CreatedAt
+        id:
+          description: ID of the disk.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: ID
+        location:
+          description: Location of the disk.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        mode:
+          description: 'Access mode the disk is attached with: read-write or read-only.'
+          example: read-write | read-only
+          type: string
+          x-go-name: Mode
+        name:
+          description: Name of the disk.
+          example: my-disk
+          type: string
+          x-go-name: Name
+        serial_number:
+          description: Serial number of the disk.
+          example: 96FD14FDBCF7E21E8EC
+          type: string
+          x-go-name: SerialNumber
+        size:
+          description: Size of the disk.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        type:
+          description: Storage type of the disk.
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+        updated_at:
+          description: Last update timestamp of the disk, in RFC3339 format.
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: UpdatedAt
+      required:
+      - id
+      - name
+      - type
+      - size
+      - location
+      - block_size
+      - created_at
+      - updated_at
+      - serial_number
+      - attachment_type
+      - mode
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    notFoundError:
-      description: Error Not Found
+    getKubernetesNodePoolResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/KubernetesNodePool'
     permissionsError:
       description: Error Permissions
       content:
@@ -1312,12 +1300,6 @@ components:
             - code
             - message
             type: object
-    getNodePoolRotateStatusResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/KubernetesGetNodePoolRotateStatusResponse'
     listKubernetesNodePoolsResponse:
       description: ''
       content:
@@ -1330,54 +1312,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/KubernetesCancelNodePoolRotateResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getKubernetesNodePoolResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/KubernetesNodePool'
     badReqError:
       description: Error Bad Request
       content:
@@ -1396,12 +1330,78 @@ components:
             - code
             - message
             type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     listKubernetesNodePoolVMsResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListKubernetesNodePoolVMsResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getNodePoolRotateStatusResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesGetNodePoolRotateStatusResponse'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
 x-tagGroups:
 - name: Compute
   tags:

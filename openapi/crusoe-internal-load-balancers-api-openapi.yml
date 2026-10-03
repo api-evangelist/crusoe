@@ -166,6 +166,43 @@ paths:
         required: true
 components:
   schemas:
+    LoadBalancersPatchRequestV1:
+      properties:
+        destinations:
+          description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
+          items:
+            $ref: '#/components/schemas/NetworkTarget'
+          type: array
+          x-go-name: Destinations
+        health_check:
+          $ref: '#/components/schemas/HealthCheckOptions'
+        name:
+          description: New name for the load balancer.
+          example: my-load-balancer
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    PrivateIPv4Address:
+      properties:
+        address:
+          description: Private IPv4 address.
+          example: 10.1.2.3
+          type: string
+          x-go-name: Address
+      required:
+      - address
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     NetworkTarget:
       properties:
         cidr:
@@ -180,15 +217,6 @@ components:
           x-go-name: ResourceID
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     PublicIPv4Address:
       properties:
         address:
@@ -212,6 +240,99 @@ components:
       - type
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    IPAddresses:
+      properties:
+        private_ipv4:
+          $ref: '#/components/schemas/PrivateIPv4Address'
+        public_ipv4:
+          $ref: '#/components/schemas/PublicIPv4Address'
+      required:
+      - private_ipv4
+      - public_ipv4
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListLoadBalancersResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    HealthCheckOptions:
+      properties:
+        failure_count:
+          description: Number of allowed failures before considering a backend unhealthy.
+          example: '3'
+          type: string
+          x-go-name: FailureCount
+        interval:
+          description: Interval between health checks, in seconds.
+          example: '60'
+          type: string
+          x-go-name: Interval
+        port:
+          description: Port on which to perform health checks.
+          example: '8080'
+          type: string
+          x-go-name: Port
+        success_count:
+          description: Number of successful checks required to consider a backend healthy.
+          example: '2'
+          type: string
+          x-go-name: SuccessCount
+        timeout:
+          description: Timeout for a health check response, in seconds.
+          example: '20'
+          type: string
+          x-go-name: Timeout
+      required:
+      - port
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     LoadBalancer:
       properties:
         algorithm:
@@ -329,17 +450,6 @@ components:
       - algorithm
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    IPAddresses:
-      properties:
-        private_ipv4:
-          $ref: '#/components/schemas/PrivateIPv4Address'
-        public_ipv4:
-          $ref: '#/components/schemas/PublicIPv4Address'
-      required:
-      - private_ipv4
-      - public_ipv4
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     LoadBalancerNetworkInterface:
       properties:
         network:
@@ -354,116 +464,6 @@ components:
           x-go-name: Subnet
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    HealthCheckOptions:
-      properties:
-        failure_count:
-          description: Number of allowed failures before considering a backend unhealthy.
-          example: '3'
-          type: string
-          x-go-name: FailureCount
-        interval:
-          description: Interval between health checks, in seconds.
-          example: '60'
-          type: string
-          x-go-name: Interval
-        port:
-          description: Port on which to perform health checks.
-          example: '8080'
-          type: string
-          x-go-name: Port
-        success_count:
-          description: Number of successful checks required to consider a backend healthy.
-          example: '2'
-          type: string
-          x-go-name: SuccessCount
-        timeout:
-          description: Timeout for a health check response, in seconds.
-          example: '20'
-          type: string
-          x-go-name: Timeout
-      required:
-      - port
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    PrivateIPv4Address:
-      properties:
-        address:
-          description: Private IPv4 address.
-          example: 10.1.2.3
-          type: string
-          x-go-name: Address
-      required:
-      - address
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LoadBalancersPatchRequestV1:
-      properties:
-        destinations:
-          description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
-          items:
-            $ref: '#/components/schemas/NetworkTarget'
-          type: array
-          x-go-name: Destinations
-        health_check:
-          $ref: '#/components/schemas/HealthCheckOptions'
-        name:
-          description: New name for the load balancer.
-          example: my-load-balancer
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListLoadBalancersResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/LoadBalancer'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    Operation:
-      description: 'Individual resources that use Operations should populate the `metadata` field
-
-        with resource-specific information.'
-      properties:
-        completed_at:
-          example: '2021-12-03T19:59:34Z'
-          type: string
-          x-go-name: CompletedAt
-        metadata:
-          example: '{}'
-          x-go-name: Metadata
-        operation_id:
-          example: F6EF489C-086E-458D-B812-7962964A28C9
-          type: string
-          x-go-name: ID
-        result:
-          example: '{}'
-          x-go-name: Result
-        started_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: StartedAt
-        state:
-          enum:
-          - IN_PROGRESS
-          - SUCCEEDED
-          - FAILED
-          example: IN_PROGRESS
-          type: string
-          x-go-name: State
-      required:
-      - operation_id
-      - state
-      - metadata
-      - started_at
-      - completed_at
-      title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
   responses:
     permissionsError:
       description: Error Permissions
@@ -477,60 +477,6 @@ components:
                 x-go-name: Code
               message:
                 example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listLoadBalancersResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListLoadBalancersResponseV1'
-    getLoadBalancerResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LoadBalancer'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
                 type: string
                 x-go-name: Message
             required:
@@ -555,6 +501,60 @@ components:
             - code
             - message
             type: object
+    listLoadBalancersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListLoadBalancersResponseV1'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getLoadBalancerResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoadBalancer'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
 x-tagGroups:
 - name: Compute
   tags:

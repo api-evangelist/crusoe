@@ -161,31 +161,6 @@ paths:
       - Audit Logs
 components:
   schemas:
-    AuditLogsGetResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/LogEntry'
-          type: array
-          x-go-name: Items
-        next_page_token:
-          description: 'Base64 encoded token representing the starting of the next page of log entry.
-
-            Empty if currently on the last page.'
-          example: bXktbGFzdC12bQ
-          type: string
-          x-go-name: NextPageToken
-        prev_page_token:
-          description: 'Base64 encoded token representing the starting previous page of log entry.
-
-            Empty if currently on the first page.'
-          example: bXktZmlyc3Qtdm0
-          type: string
-          x-go-name: PrevPageToken
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     LogEntry:
       properties:
         action:
@@ -305,7 +280,50 @@ components:
       - surface
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AuditLogsGetResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LogEntry'
+          type: array
+          x-go-name: Items
+        next_page_token:
+          description: 'Base64 encoded token representing the starting of the next page of log entry.
+
+            Empty if currently on the last page.'
+          example: bXktbGFzdC12bQ
+          type: string
+          x-go-name: NextPageToken
+        prev_page_token:
+          description: 'Base64 encoded token representing the starting previous page of log entry.
+
+            Empty if currently on the first page.'
+          example: bXktZmlyc3Qtdm0
+          type: string
+          x-go-name: PrevPageToken
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -330,18 +348,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AuditLogsGetResponse'
-    serverError:
-      description: Error Internal Server
+    badReqError:
+      description: Error Bad Request
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '500'
+                example: '400'
                 type: string
                 x-go-name: Code
               message:
-                example: internal_error
+                example: bad_request
                 type: string
                 x-go-name: Message
             required:
@@ -360,24 +378,6 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
                 type: string
                 x-go-name: Message
             required:

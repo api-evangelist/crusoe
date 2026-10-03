@@ -208,20 +208,58 @@ paths:
         required: true
 components:
   schemas:
-    DisksPatchRequest:
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
       properties:
-        size:
-          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
-          example: 10GiB
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
           type: string
-          x-go-name: Size
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
       required:
-      - size
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
       type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DiskModeType:
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    VMAttachmentType:
       type: string
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     DiskV1:
       properties:
         attached_to:
@@ -303,15 +341,6 @@ components:
       - attached_to
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     VMAttachmentV1:
       properties:
         attachment_type:
@@ -328,8 +357,19 @@ components:
       - attachment_type
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VMAttachmentType:
+    DiskModeType:
       type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DisksPatchRequest:
+      properties:
+        size:
+          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+      required:
+      - size
+      type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     DisksPostRequestV1:
       properties:
@@ -372,46 +412,6 @@ components:
       - name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    Operation:
-      description: 'Individual resources that use Operations should populate the `metadata` field
-
-        with resource-specific information.'
-      properties:
-        completed_at:
-          example: '2021-12-03T19:59:34Z'
-          type: string
-          x-go-name: CompletedAt
-        metadata:
-          example: '{}'
-          x-go-name: Metadata
-        operation_id:
-          example: F6EF489C-086E-458D-B812-7962964A28C9
-          type: string
-          x-go-name: ID
-        result:
-          example: '{}'
-          x-go-name: Result
-        started_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: StartedAt
-        state:
-          enum:
-          - IN_PROGRESS
-          - SUCCEEDED
-          - FAILED
-          example: IN_PROGRESS
-          type: string
-          x-go-name: State
-      required:
-      - operation_id
-      - state
-      - metadata
-      - started_at
-      - completed_at
-      title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     ListDisksResponseV1:
       properties:
         items:
@@ -425,12 +425,6 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    listDisksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListDisksResponseV1'
     permissionsError:
       description: Error Permissions
       content:
@@ -467,6 +461,36 @@ components:
             - code
             - message
             type: object
+    listDisksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListDisksResponseV1'
+    getDiskResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskV1'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     authError:
       description: Error Authentication Failed
       content:
@@ -491,30 +515,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AsyncOperationResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getDiskResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DiskV1'
 x-tagGroups:
 - name: Compute
   tags:

@@ -123,132 +123,7 @@ paths:
       tags:
       - Instance Templates
 components:
-  responses:
-    getInstanceTemplateResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InstanceTemplate'
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listInstanceTemplatesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListInstanceTemplatesResponseV1'
-    createInstanceTemplateResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InstanceTemplate'
   schemas:
-    ListInstanceTemplatesResponseV1:
-      description: 'ListInstanceTemplatesResponseV1 is the resource response type for GET
-
-        requests to the InstanceTemplates endpoint.'
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/InstanceTemplate'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     InstanceTemplatePostRequestV1:
       properties:
         custom_image_name:
@@ -357,34 +232,18 @@ components:
       title: InstanceTemplatePostRequestV1 defines the specifications of VMs to be created during bulk VM creation.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VirtualizationFeatures:
+    ListInstanceTemplatesResponseV1:
+      description: 'ListInstanceTemplatesResponseV1 is the resource response type for GET
+
+        requests to the InstanceTemplates endpoint.'
       properties:
-        nested_virtualization:
-          description: Whether nested virtualization is enabled, allowing a VM to run inside this VM.
-          example: true
-          type: boolean
-          x-go-name: NestedVirtualization
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DiskTemplate:
-      properties:
-        size:
-          description: Size of the disk, including a unit suffix.
-          example: 10GiB
-          type: string
-          x-go-name: Size
-        type:
-          description: 'Type of disk to create: persistent-ssd or shared-volume.'
-          enum:
-          - persistent-ssd
-          - shared-volume
-          example: persistent-ssd
-          type: string
-          x-go-name: Type
+        items:
+          items:
+            $ref: '#/components/schemas/InstanceTemplate'
+          type: array
+          x-go-name: Items
       required:
-      - size
-      - type
-      title: DiskTemplate defines a disk to create for each VM during bulk VM creation.
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     InstanceTemplate:
@@ -525,6 +384,147 @@ components:
       title: InstanceTemplate defines the specifications of VMs to be created during bulk VM creation.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VirtualizationFeatures:
+      properties:
+        nested_virtualization:
+          description: Whether nested virtualization is enabled, allowing a VM to run inside this VM.
+          example: true
+          type: boolean
+          x-go-name: NestedVirtualization
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DiskTemplate:
+      properties:
+        size:
+          description: Size of the disk, including a unit suffix.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        type:
+          description: 'Type of disk to create: persistent-ssd or shared-volume.'
+          enum:
+          - persistent-ssd
+          - shared-volume
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+      required:
+      - size
+      - type
+      title: DiskTemplate defines a disk to create for each VM during bulk VM creation.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    createInstanceTemplateResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceTemplate'
+    listInstanceTemplatesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListInstanceTemplatesResponseV1'
+    getInstanceTemplateResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceTemplate'
+    emptyResponse:
+      description: Empty Response
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

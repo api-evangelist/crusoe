@@ -190,6 +190,81 @@ paths:
       tags:
       - Usage
 components:
+  responses:
+    usageOptionsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UsageOptions'
+    usageExportGetResponse:
+      description: ''
+      headers:
+        metric:
+          example: instance-hours
+          schema:
+            type: string
+        project_id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          schema:
+            type: string
+        quantity:
+          example: '261.271111'
+          schema:
+            type: number
+            format: double
+        region:
+          example: us-east1
+          schema:
+            type: string
+        resource_id:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          schema:
+            type: string
+        resource_type:
+          example: a40.1x
+          schema:
+            type: string
+        usage_date:
+          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+          schema:
+            type: string
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
     customerProductProjectUsage:
       description: ProductProjectUsage is the usage of a product within a project for a single date.
@@ -307,81 +382,6 @@ components:
         message:
           type: string
       type: object
-  responses:
-    usageOptionsGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UsageOptions'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    usageExportGetResponse:
-      description: ''
-      headers:
-        metric:
-          example: instance-hours
-          schema:
-            type: string
-        project_id:
-          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
-          schema:
-            type: string
-        quantity:
-          example: '261.271111'
-          schema:
-            type: number
-            format: double
-        region:
-          example: us-east1
-          schema:
-            type: string
-        resource_id:
-          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
-          schema:
-            type: string
-        resource_type:
-          example: a40.1x
-          schema:
-            type: string
-        usage_date:
-          example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
-          schema:
-            type: string
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
 x-tagGroups:
 - name: Compute
   tags:

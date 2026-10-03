@@ -117,6 +117,20 @@ components:
       - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateTokenRequest:
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+      required:
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     GeneratedToken:
       description: These are the fields returned from a PUT request.
       properties:
@@ -148,21 +162,13 @@ components:
       title: GeneratedToken contains the Traits Island stores for a Token inside of Kratos.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateTokenRequest:
-      properties:
-        alias:
-          example: token1
-          type: string
-          x-go-name: Alias
-        expires_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: ExpiresAt
-      required:
-      - expires_at
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    tokensPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokensPostResponse'
     permissionsError:
       description: Error Permissions
       content:
@@ -181,12 +187,6 @@ components:
             - code
             - message
             type: object
-    tokensPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TokensPostResponse'
     serverError:
       description: Error Internal Server
       content:
@@ -205,6 +205,8 @@ components:
             - code
             - message
             type: object
+    emptyResponse:
+      description: Empty Response
     tokensGetResponse:
       description: A successful response from this resource will contain json-encoded array of token details, excluding the secret key.
       content:
@@ -229,8 +231,6 @@ components:
             - code
             - message
             type: object
-    emptyResponse:
-      description: Empty Response
 x-tagGroups:
 - name: Compute
   tags:
