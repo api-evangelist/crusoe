@@ -25,24 +25,6 @@ paths:
       - Roles
 components:
   responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -79,6 +61,24 @@ components:
                 x-go-name: Code
               message:
                 example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
                 type: string
                 x-go-name: Message
             required:

@@ -229,24 +229,6 @@ components:
           example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
           schema:
             type: string
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     badReqError:
       description: Error Bad Request
       content:
@@ -265,39 +247,41 @@ components:
             - code
             - message
             type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
-    customerProductProjectUsage:
-      description: ProductProjectUsage is the usage of a product within a project for a single date.
+    protobufAny:
+      additionalProperties: {}
       properties:
-        billable_metric:
-          example: gpu-hours
-          title: billable_metric is the unit the quantity is measured in
+        '@type':
           type: string
-        date:
-          example: '2022-07-01'
-          title: date is the date the usage was incurred, formatted YYYY-MM-DD
-          type: string
-        project_id:
-          example: d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
-          title: project_id is the ID of the project the usage was incurred in
-          type: string
-        quantity:
-          example: 2.123
-          format: double
-          title: quantity is the amount of the product used
-          type: number
-        region:
-          example: us-northcentral1
-          title: region is the region the usage was incurred in
-          type: string
-        reservation_id:
-          example: d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
-          title: reservation_id is the ID of the reservation the usage was incurred under
-          type: string
-        resource_type:
-          example: a40.1x
-          title: resource_type is the product type the usage was incurred for
-          type: string
+      type: object
+    customerOrganizationUsage:
+      description: OrganizationUsage is the project-level usage of products across an organization.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/customerProductProjectUsage'
+            type: object
+          readOnly: true
+          title: items is the list of per-project usage line items
+          type: array
       type: object
     UsageOptions:
       description: 'UsageOptions contains the values which exist for the fields which we allow filtering
@@ -352,23 +336,6 @@ components:
       - end_date
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    protobufAny:
-      additionalProperties: {}
-      properties:
-        '@type':
-          type: string
-      type: object
-    customerOrganizationUsage:
-      description: OrganizationUsage is the project-level usage of products across an organization.
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/customerProductProjectUsage'
-            type: object
-          readOnly: true
-          title: items is the list of per-project usage line items
-          type: array
-      type: object
     rpcStatus:
       properties:
         code:
@@ -380,6 +347,39 @@ components:
             type: object
           type: array
         message:
+          type: string
+      type: object
+    customerProductProjectUsage:
+      description: ProductProjectUsage is the usage of a product within a project for a single date.
+      properties:
+        billable_metric:
+          example: gpu-hours
+          title: billable_metric is the unit the quantity is measured in
+          type: string
+        date:
+          example: '2022-07-01'
+          title: date is the date the usage was incurred, formatted YYYY-MM-DD
+          type: string
+        project_id:
+          example: d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          title: project_id is the ID of the project the usage was incurred in
+          type: string
+        quantity:
+          example: 2.123
+          format: double
+          title: quantity is the amount of the product used
+          type: number
+        region:
+          example: us-northcentral1
+          title: region is the region the usage was incurred in
+          type: string
+        reservation_id:
+          example: d8f58dfd-dd86-4ee4-8f01-643e6d0f15bb
+          title: reservation_id is the ID of the reservation the usage was incurred under
+          type: string
+        resource_type:
+          example: a40.1x
+          title: resource_type is the product type the usage was incurred for
           type: string
       type: object
 x-tagGroups:

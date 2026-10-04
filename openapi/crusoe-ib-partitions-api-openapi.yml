@@ -129,6 +129,99 @@ paths:
       tags:
       - IB Partitions
 components:
+  responses:
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    ibPartitionsPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBPartition'
+    getIbPartitionResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IBPartition'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listIBPartitionsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListIBPartitionsResponseV1'
+    emptyResponse:
+      description: Empty Response
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
     ListIBPartitionsResponseV1:
       properties:
@@ -140,6 +233,24 @@ components:
       required:
       - items
       title: ListIBPartitionsResponseV1 is the response type for GET requests to the IB Partitions endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    IBPartitionsPostRequestV1:
+      properties:
+        ib_network_id:
+          description: ID of the InfiniBand network to create the partition in.
+          example: 36c0b0d9-8b68-4869-addb-227b06b64ee0
+          type: string
+          x-go-name: IBNetworkID
+        name:
+          description: Name for the new InfiniBand partition.
+          example: my-ib-partition
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      - ib_network_id
+      title: IBPartitionsPostRequestV1 is the request type for POST requests to the IB Partitions endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBPartition:
@@ -165,117 +276,6 @@ components:
       - ib_network_id
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    IBPartitionsPostRequestV1:
-      properties:
-        ib_network_id:
-          description: ID of the InfiniBand network to create the partition in.
-          example: 36c0b0d9-8b68-4869-addb-227b06b64ee0
-          type: string
-          x-go-name: IBNetworkID
-        name:
-          description: Name for the new InfiniBand partition.
-          example: my-ib-partition
-          type: string
-          x-go-name: Name
-      required:
-      - name
-      - ib_network_id
-      title: IBPartitionsPostRequestV1 is the request type for POST requests to the IB Partitions endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listIBPartitionsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBPartitionsResponseV1'
-    emptyResponse:
-      description: Empty Response
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    ibPartitionsPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBPartition'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getIbPartitionResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBPartition'
 x-tagGroups:
 - name: Compute
   tags:

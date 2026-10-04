@@ -83,24 +83,6 @@ paths:
         required: true
 components:
   responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -143,6 +125,12 @@ components:
             - code
             - message
             type: object
+    getSupportSettingsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KubernetesClusterSupportSettingsResponse'
     authError:
       description: Error Authentication Failed
       content:
@@ -161,12 +149,24 @@ components:
             - code
             - message
             type: object
-    getSupportSettingsResponse:
-      description: ''
+    serverError:
+      description: Error Internal Server
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/KubernetesClusterSupportSettingsResponse'
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
     KubernetesClusterSupportSettingsResponse:
       description: 'KubernetesClusterSupportSettingsResponse defines the response for getting

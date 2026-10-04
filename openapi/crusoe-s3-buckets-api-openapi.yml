@@ -338,30 +338,12 @@ paths:
       - S3 Buckets
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getS3BucketResponse:
+    getS3BucketsQuotaResponse:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/S3Bucket'
+            $ref: '#/components/schemas/QuotaValidationResult'
     badReqError:
       description: Error Bad Request
       content:
@@ -398,34 +380,46 @@ components:
             - code
             - message
             type: object
-    getS3BucketsCountResponse:
+    getS3BucketResponse:
       description: ''
-    okEmpty:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/S3Bucket'
+    listS3SupportedLocationsResponse:
       description: ''
-    authError:
-      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListS3SupportedLocationsResponse'
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '401'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_credential
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
+    getS3BucketsCountResponse:
+      description: ''
     listS3BucketsResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListS3BucketsResponse'
+    okEmpty:
+      description: ''
     serverError:
       description: Error Internal Server
       content:
@@ -444,19 +438,125 @@ components:
             - code
             - message
             type: object
-    getS3BucketsQuotaResponse:
-      description: ''
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/QuotaValidationResult'
-    listS3SupportedLocationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListS3SupportedLocationsResponse'
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
+    S3RetentionPeriodUnit:
+      description: 'enum: days,years'
+      title: 'Unit of measurement for an object lock retention period: days or years.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateS3BucketRequest:
+      properties:
+        location:
+          description: Location to create the bucket in.
+          example: us-eaststaging1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: 'Name for the new bucket. Must be DNS-compliant: 3-63 characters, using lowercase letters, numbers, and hyphens.'
+          example: my-new-bucket
+          type: string
+          x-go-name: Name
+        object_lock_enabled:
+          description: 'Whether to enable object lock on the new bucket. Requires versioning to be
+
+            enabled and cannot be disabled once enabled.'
+          example: false
+          type: boolean
+          x-go-name: ObjectLockEnabled
+        retention_period:
+          description: Length of the object lock retention period, in the unit given by retention_period_unit.
+          example: 30
+          format: int32
+          type: integer
+          x-go-name: RetentionPeriod
+        retention_period_unit:
+          $ref: '#/components/schemas/S3RetentionPeriodUnit'
+        tags:
+          additionalProperties:
+            type: string
+          description: Tags to apply to the new bucket as key-value pairs.
+          type: object
+          x-go-name: Tags
+        versioning_state:
+          $ref: '#/components/schemas/S3VersioningState'
+      required:
+      - name
+      - location
+      title: CreateS3BucketRequest is the request body for creating a new S3 bucket.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3RetentionMode:
+      description: 'enum: governance,compliance'
+      title: 'Object lock retention mode for an S3 bucket: governance or compliance.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListS3SupportedLocationsResponse:
+      properties:
+        items:
+          description: Locations where object storage (S3) is available.
+          example:
+          - us-east1-a
+          - us-northcentral1-a
+          items:
+            type: string
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListS3SupportedLocationsResponse is the response type for GET requests to the S3 supported-locations endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    QuotaValidationResult:
+      properties:
+        ActualUsed:
+          description: Amount of quota consumed by current usage.
+          format: int64
+          type: integer
+        LimitReached:
+          description: Whether usage is at or above the quota limit.
+          type: boolean
+        QuotaLimit:
+          description: Amount of quota allocated for the resource.
+          format: int64
+          type: integer
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    S3VersioningState:
+      description: 'enum: disabled,enabled,suspended'
+      title: 'Versioning state of an S3 bucket: disabled, enabled, or suspended.'
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    EnableS3BucketObjectLockRequest:
+      properties:
+        retention_period:
+          description: Length of the object lock retention period, in the unit given by retention_period_unit.
+          example: 30
+          format: int32
+          type: integer
+          x-go-name: RetentionPeriod
+        retention_period_unit:
+          $ref: '#/components/schemas/S3RetentionPeriodUnit'
+      title: EnableS3BucketObjectLockRequest defines the body for enabling object lock.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListS3BucketsResponse:
       properties:
         items:
@@ -476,32 +576,6 @@ components:
       required:
       - items
       title: ListS3BucketsResponse is the response type for GET requests to the S3 buckets endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UpdateS3BucketTagsRequest:
-      properties:
-        tags:
-          additionalProperties:
-            type: string
-          description: New set of tags for the bucket, as key-value pairs. Replaces all existing tags.
-          type: object
-          x-go-name: Tags
-      required:
-      - tags
-      title: UpdateS3BucketTagsRequest is the request body for updating S3 bucket tags.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    EnableS3BucketObjectLockRequest:
-      properties:
-        retention_period:
-          description: Length of the object lock retention period, in the unit given by retention_period_unit.
-          example: 30
-          format: int32
-          type: integer
-          x-go-name: RetentionPeriod
-        retention_period_unit:
-          $ref: '#/components/schemas/S3RetentionPeriodUnit'
-      title: EnableS3BucketObjectLockRequest defines the body for enabling object lock.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     S3Bucket:
@@ -588,92 +662,18 @@ components:
       title: S3Bucket represents information about a single S3 bucket.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    S3RetentionMode:
-      description: 'enum: governance,compliance'
-      title: 'Object lock retention mode for an S3 bucket: governance or compliance.'
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    QuotaValidationResult:
+    UpdateS3BucketTagsRequest:
       properties:
-        ActualUsed:
-          description: Amount of quota consumed by current usage.
-          format: int64
-          type: integer
-        LimitReached:
-          description: Whether usage is at or above the quota limit.
-          type: boolean
-        QuotaLimit:
-          description: Amount of quota allocated for the resource.
-          format: int64
-          type: integer
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListS3SupportedLocationsResponse:
-      properties:
-        items:
-          description: Locations where object storage (S3) is available.
-          example:
-          - us-east1-a
-          - us-northcentral1-a
-          items:
-            type: string
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListS3SupportedLocationsResponse is the response type for GET requests to the S3 supported-locations endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    S3VersioningState:
-      description: 'enum: disabled,enabled,suspended'
-      title: 'Versioning state of an S3 bucket: disabled, enabled, or suspended.'
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateS3BucketRequest:
-      properties:
-        location:
-          description: Location to create the bucket in.
-          example: us-eaststaging1-a
-          type: string
-          x-go-name: Location
-        name:
-          description: 'Name for the new bucket. Must be DNS-compliant: 3-63 characters, using lowercase letters, numbers, and hyphens.'
-          example: my-new-bucket
-          type: string
-          x-go-name: Name
-        object_lock_enabled:
-          description: 'Whether to enable object lock on the new bucket. Requires versioning to be
-
-            enabled and cannot be disabled once enabled.'
-          example: false
-          type: boolean
-          x-go-name: ObjectLockEnabled
-        retention_period:
-          description: Length of the object lock retention period, in the unit given by retention_period_unit.
-          example: 30
-          format: int32
-          type: integer
-          x-go-name: RetentionPeriod
-        retention_period_unit:
-          $ref: '#/components/schemas/S3RetentionPeriodUnit'
         tags:
           additionalProperties:
             type: string
-          description: Tags to apply to the new bucket as key-value pairs.
+          description: New set of tags for the bucket, as key-value pairs. Replaces all existing tags.
           type: object
           x-go-name: Tags
-        versioning_state:
-          $ref: '#/components/schemas/S3VersioningState'
       required:
-      - name
-      - location
-      title: CreateS3BucketRequest is the request body for creating a new S3 bucket.
+      - tags
+      title: UpdateS3BucketTagsRequest is the request body for updating S3 bucket tags.
       type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    S3RetentionPeriodUnit:
-      description: 'enum: days,years'
-      title: 'Unit of measurement for an object lock retention period: days or years.'
-      type: string
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute

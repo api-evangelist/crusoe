@@ -44,30 +44,6 @@ paths:
       - Capacities
 components:
   responses:
-    capacitiesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListCapacitiesResponseV1'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -104,6 +80,30 @@ components:
             - code
             - message
             type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    capacitiesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListCapacitiesResponseV1'
     authError:
       description: Error Authentication Failed
       content:
@@ -123,17 +123,6 @@ components:
             - message
             type: object
   schemas:
-    ListCapacitiesResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/CapacityV1'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CapacityV1:
       properties:
         location:
@@ -163,6 +152,17 @@ components:
       required:
       - location
       - quantity
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListCapacitiesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CapacityV1'
+          type: array
+          x-go-name: Items
+      required:
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

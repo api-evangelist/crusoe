@@ -57,6 +57,66 @@ paths:
       - Images
 components:
   responses:
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getImageResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Image'
     serverError:
       description: Error Internal Server
       content:
@@ -81,66 +141,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ListImagesResponseV1'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getImageResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Image'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
     Image:
       properties:

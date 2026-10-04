@@ -83,24 +83,6 @@ paths:
         required: true
 components:
   responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -113,32 +95,6 @@ components:
                 x-go-name: Code
               message:
                 example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    emptyResponse:
-      description: Empty Response
-    listRoleBindingsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListRoleBindingsResponse'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
                 type: string
                 x-go-name: Message
             required:
@@ -163,6 +119,50 @@ components:
             - code
             - message
             type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    emptyResponse:
+      description: Empty Response
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listRoleBindingsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListRoleBindingsResponse'
   schemas:
     ApplyRoleBindingRequest:
       properties:
@@ -179,6 +179,30 @@ components:
       required:
       - bindings_to_create
       - bindings_to_delete
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    RoleBindingInput:
+      properties:
+        customer_id:
+          type: string
+          x-go-name: CustomerID
+        role_id:
+          type: string
+          x-go-name: RoleID
+        scope_object_id:
+          type: string
+          x-go-name: ScopeObjectID
+        scope_type:
+          enum:
+          - org
+          - project
+          type: string
+          x-go-name: ScopeType
+      required:
+      - customer_id
+      - role_id
+      - scope_type
+      - scope_object_id
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     RoleBinding:
@@ -208,30 +232,6 @@ components:
       - scope_type
       - scope_object_id
       - role_name
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    RoleBindingInput:
-      properties:
-        customer_id:
-          type: string
-          x-go-name: CustomerID
-        role_id:
-          type: string
-          x-go-name: RoleID
-        scope_object_id:
-          type: string
-          x-go-name: ScopeObjectID
-        scope_type:
-          enum:
-          - org
-          - project
-          type: string
-          x-go-name: ScopeType
-      required:
-      - customer_id
-      - role_id
-      - scope_type
-      - scope_object_id
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListRoleBindingsResponse:

@@ -22,25 +22,27 @@ paths:
       tags:
       - Locations
 components:
+  schemas:
+    ListLocationsResponseV1:
+      properties:
+        items:
+          example:
+          - us-northcentral1-a
+          items:
+            type: string
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    authError:
-      description: Error Authentication Failed
+    locationsResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/ListLocationsResponseV1'
     serverError:
       description: Error Internal Server
       content:
@@ -59,26 +61,24 @@ components:
             - code
             - message
             type: object
-    locationsResponse:
-      description: ''
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ListLocationsResponseV1'
-  schemas:
-    ListLocationsResponseV1:
-      properties:
-        items:
-          example:
-          - us-northcentral1-a
-          items:
-            type: string
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

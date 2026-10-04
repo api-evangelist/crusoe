@@ -214,99 +214,116 @@ paths:
               $ref: '#/components/schemas/CustomImageEditTagsRequest'
         required: true
 components:
+  responses:
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listImagesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListImagesResponseV1'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    getImageResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Image'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
-    Operation:
-      description: 'Individual resources that use Operations should populate the `metadata` field
-
-        with resource-specific information.'
-      properties:
-        completed_at:
-          example: '2021-12-03T19:59:34Z'
-          type: string
-          x-go-name: CompletedAt
-        metadata:
-          example: '{}'
-          x-go-name: Metadata
-        operation_id:
-          example: F6EF489C-086E-458D-B812-7962964A28C9
-          type: string
-          x-go-name: ID
-        result:
-          example: '{}'
-          x-go-name: Result
-        started_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: StartedAt
-        state:
-          enum:
-          - IN_PROGRESS
-          - SUCCEEDED
-          - FAILED
-          example: IN_PROGRESS
-          type: string
-          x-go-name: State
-      required:
-      - operation_id
-      - state
-      - metadata
-      - started_at
-      - completed_at
-      title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    CustomImageEditTagsRequest:
-      properties:
-        tags:
-          description: New set of tags to associate with the custom image.
-          example: '[latest]'
-          items:
-            type: string
-          type: array
-          x-go-name: Tags
-      required:
-      - tags
-      title: CustomImagesEditTagsRequest is the request type for PATCH requests to the /custom-images{id}/edit-tags endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    CustomImagePostRequest:
-      properties:
-        DiskID:
-          description: ID of the disk to create the custom image from.
-          example: 182d01c7-d3fe-424b-af13-8775aeead194
-          type: string
-        description:
-          description: Description for the new custom image.
-          example: Ubuntu is the modern, open source operating system on Linux for ...
-          type: string
-          x-go-name: Description
-        name:
-          description: Name for the new custom image.
-          example: ubuntu
-          type: string
-          x-go-name: Name
-        tags:
-          description: Tags to associate with the new custom image.
-          example: 22.04,latest
-          items:
-            type: string
-          type: array
-          x-go-name: Tags
-      required:
-      - DiskID
-      - name
-      title: CustomImagePostRequest is the request type for POST requests to the /custom-images endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Image:
       properties:
         created_at:
@@ -352,18 +369,15 @@ components:
       - locations
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CustomImagePatchRequest:
+    AsyncOperationResponse:
       properties:
-        description:
-          description: New description for the custom image.
-          example: '"Ubuntu is the modern, open source operating system on Linux for ..."'
-          type: string
-          x-go-name: Description
+        operation:
+          $ref: '#/components/schemas/Operation'
       required:
-      - description
-      title: CustomImagePatchRequest is the request type for PATCH requests to the /custom-images/{id} endpoint.
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
       type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     ListImagesResponseV1:
       properties:
         items:
@@ -376,115 +390,101 @@ components:
       title: ListImagesResponseV1 is the resource response type for GET requests to the Images endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listImagesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListImagesResponseV1'
-    getImageResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Image'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+    CustomImagePatchRequest:
+      properties:
+        description:
+          description: New description for the custom image.
+          example: '"Ubuntu is the modern, open source operating system on Linux for ..."'
+          type: string
+          x-go-name: Description
+      required:
+      - description
+      title: CustomImagePatchRequest is the request type for PATCH requests to the /custom-images/{id} endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    CustomImagePostRequest:
+      properties:
+        DiskID:
+          description: ID of the disk to create the custom image from.
+          example: 182d01c7-d3fe-424b-af13-8775aeead194
+          type: string
+        description:
+          description: Description for the new custom image.
+          example: Ubuntu is the modern, open source operating system on Linux for ...
+          type: string
+          x-go-name: Description
+        name:
+          description: Name for the new custom image.
+          example: ubuntu
+          type: string
+          x-go-name: Name
+        tags:
+          description: Tags to associate with the new custom image.
+          example: 22.04,latest
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+      required:
+      - DiskID
+      - name
+      title: CustomImagePostRequest is the request type for POST requests to the /custom-images endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CustomImageEditTagsRequest:
+      properties:
+        tags:
+          description: New set of tags to associate with the custom image.
+          example: '[latest]'
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+      required:
+      - tags
+      title: CustomImagesEditTagsRequest is the request type for PATCH requests to the /custom-images{id}/edit-tags endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute
   tags:

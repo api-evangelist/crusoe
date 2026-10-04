@@ -207,7 +207,125 @@ paths:
               $ref: '#/components/schemas/DisksPatchRequest'
         required: true
 components:
+  responses:
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listDisksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListDisksResponseV1'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getDiskResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskV1'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
+    VMAttachmentType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListDisksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DiskV1'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    DiskModeType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Operation:
       description: 'Individual resources that use Operations should populate the `metadata` field
 
@@ -246,18 +364,6 @@ components:
       - started_at
       - completed_at
       title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    VMAttachmentType:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     DiskV1:
@@ -341,25 +447,6 @@ components:
       - attached_to
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VMAttachmentV1:
-      properties:
-        attachment_type:
-          $ref: '#/components/schemas/VMAttachmentType'
-        mode:
-          $ref: '#/components/schemas/DiskModeType'
-        vm_id:
-          description: ID of the VM the disk is attached to.
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-          x-go-name: VMID
-      required:
-      - vm_id
-      - attachment_type
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DiskModeType:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     DisksPatchRequest:
       properties:
         size:
@@ -412,109 +499,22 @@ components:
       - name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListDisksResponseV1:
+    VMAttachmentV1:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DiskV1'
-          type: array
-          x-go-name: Items
+        attachment_type:
+          $ref: '#/components/schemas/VMAttachmentType'
+        mode:
+          $ref: '#/components/schemas/DiskModeType'
+        vm_id:
+          description: ID of the VM the disk is attached to.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: VMID
       required:
-      - items
-      title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
+      - vm_id
+      - attachment_type
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listDisksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListDisksResponseV1'
-    getDiskResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DiskV1'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
 x-tagGroups:
 - name: Compute
   tags:

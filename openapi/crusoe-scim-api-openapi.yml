@@ -277,30 +277,6 @@ paths:
       - SCIM
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listSCIMIntegrationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSCIMIntegrationsResponse'
     badReqError:
       description: Error Bad Request
       content:
@@ -319,6 +295,20 @@ components:
             - code
             - message
             type: object
+    emptyResponse:
+      description: Empty Response
+    listSCIMIntegrationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSCIMIntegrationsResponse'
+    createSCIMIntegrationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateSCIMIntegrationResponse'
     notFoundError:
       description: Error Not Found
       content:
@@ -337,50 +327,30 @@ components:
             - code
             - message
             type: object
-    emptyResponse:
-      description: Empty Response
-    createSCIMIntegrationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateSCIMIntegrationResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     getSCIMIntegrationResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/SCIMIntegrationResponse'
-    serverError:
-      description: Error Internal Server
+    updateSCIMIntegrationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SCIMIntegrationResponse'
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '500'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: internal_error
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
@@ -399,72 +369,43 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ListSCIMIntegrationTokensResponse'
-    updateSCIMIntegrationResponse:
-      description: ''
+    serverError:
+      description: Error Internal Server
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SCIMIntegrationResponse'
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
-    CreateSCIMIntegrationRequestBody:
-      properties:
-        identity_provider:
-          example: okta
-          type: string
-          x-go-name: IdentityProvider
-        name:
-          example: Okta SCIM Integration
-          type: string
-          x-go-name: Name
-        token:
-          $ref: '#/components/schemas/CreateSCIMTokenRequestBody'
-      required:
-      - name
-      - identity_provider
-      title: CreateSCIMIntegrationRequestBody is the JSON request body for creating a SCIM integration.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    GeneratedLimitedUsageAPIKey:
-      properties:
-        alias:
-          example: newAPIKey
-          type: string
-          x-go-name: Alias
-        api_key:
-          example: R7p5XctCQMuGlpVBmVdqzA
-          type: string
-          x-go-name: APIKey
-        created_at:
-          example: '2021-11-03T22:16:27Z'
-          type: string
-          x-go-name: CreatedAt
-        expires_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: ExpiresAt
-        key_id:
-          example: R7p5XctCQMuGlpVBmVdqzA
-          type: string
-          x-go-name: KeyID
-        project_id:
-          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
-          type: string
-          x-go-name: ProjectID
-        usage:
-          enum:
-          - inference
-          - observability
-          example: inference
-          type: string
-          x-go-name: Usage
-      required:
-      - usage
-      - key_id
-      - api_key
-      - created_at
-      - expires_at
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateSCIMTokenRequestBody:
       properties:
         alias:
@@ -479,52 +420,6 @@ components:
       - alias
       - expires_at
       title: CreateSCIMTokenRequestBody is the JSON request body for creating a SCIM integration token.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateSCIMIntegrationResponse:
-      description: optionally including an inline token when requested.
-      properties:
-        api_key_info:
-          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
-        integration:
-          $ref: '#/components/schemas/SCIMIntegrationResponse'
-      required:
-      - integration
-      title: CreateSCIMIntegrationResponse is the JSON response for creating a SCIM integration,
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UpdateSCIMIntegrationRequestBody:
-      properties:
-        status:
-          description: The new status for the integration.
-          example: active
-          type: string
-          x-go-name: Status
-      title: UpdateSCIMIntegrationRequestBody is the JSON request body for updating a SCIM integration.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListSCIMIntegrationsResponse:
-      properties:
-        integrations:
-          items:
-            $ref: '#/components/schemas/SCIMIntegrationResponse'
-          type: array
-          x-go-name: Integrations
-      required:
-      - integrations
-      title: ListSCIMIntegrationsResponse wraps a list of SCIM integration responses.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListSCIMIntegrationTokensResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/SCIMIntegrationTokenInfo'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListSCIMIntegrationTokensResponse wraps a list of SCIM integration token responses.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SCIMIntegrationTokenInfo:
@@ -573,14 +468,6 @@ components:
       - last_used
       - user_id
       title: SCIMIntegrationTokenInfo extends LimitedUsageAPIKeyInfo with a user ID.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LimitedUsageAPIKeyPostResponse:
-      properties:
-        api_key_info:
-          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
-      required:
-      - api_key_info
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SCIMIntegrationResponse:
@@ -643,6 +530,119 @@ components:
       - updated_at
       - created_by
       title: SCIMIntegrationResponse is the JSON representation of a SCIM integration.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSCIMIntegrationResponse:
+      description: optionally including an inline token when requested.
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+        integration:
+          $ref: '#/components/schemas/SCIMIntegrationResponse'
+      required:
+      - integration
+      title: CreateSCIMIntegrationResponse is the JSON response for creating a SCIM integration,
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    GeneratedLimitedUsageAPIKey:
+      properties:
+        alias:
+          example: newAPIKey
+          type: string
+          x-go-name: Alias
+        api_key:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: APIKey
+        created_at:
+          example: '2021-11-03T22:16:27Z'
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        key_id:
+          example: R7p5XctCQMuGlpVBmVdqzA
+          type: string
+          x-go-name: KeyID
+        project_id:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+        usage:
+          enum:
+          - inference
+          - observability
+          example: inference
+          type: string
+          x-go-name: Usage
+      required:
+      - usage
+      - key_id
+      - api_key
+      - created_at
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateSCIMIntegrationRequestBody:
+      properties:
+        identity_provider:
+          example: okta
+          type: string
+          x-go-name: IdentityProvider
+        name:
+          example: Okta SCIM Integration
+          type: string
+          x-go-name: Name
+        token:
+          $ref: '#/components/schemas/CreateSCIMTokenRequestBody'
+      required:
+      - name
+      - identity_provider
+      title: CreateSCIMIntegrationRequestBody is the JSON request body for creating a SCIM integration.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSCIMIntegrationsResponse:
+      properties:
+        integrations:
+          items:
+            $ref: '#/components/schemas/SCIMIntegrationResponse'
+          type: array
+          x-go-name: Integrations
+      required:
+      - integrations
+      title: ListSCIMIntegrationsResponse wraps a list of SCIM integration responses.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LimitedUsageAPIKeyPostResponse:
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+      required:
+      - api_key_info
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSCIMIntegrationTokensResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SCIMIntegrationTokenInfo'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListSCIMIntegrationTokensResponse wraps a list of SCIM integration token responses.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UpdateSCIMIntegrationRequestBody:
+      properties:
+        status:
+          description: The new status for the integration.
+          example: active
+          type: string
+          x-go-name: Status
+      title: UpdateSCIMIntegrationRequestBody is the JSON request body for updating a SCIM integration.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

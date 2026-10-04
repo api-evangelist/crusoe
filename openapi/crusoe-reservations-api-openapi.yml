@@ -173,36 +173,6 @@ paths:
       - Reservations
 components:
   responses:
-    latestGPUTrackingResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LatestGPUTracking'
-    reservationsGPUTrackingResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GPUTrackingResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -239,12 +209,18 @@ components:
             - code
             - message
             type: object
-    reservationsResponse:
+    latestGPUTrackingResponse:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReservationsGetResponse'
+            $ref: '#/components/schemas/LatestGPUTracking'
+    reservationsGPUTrackingResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GPUTrackingResponse'
     authError:
       description: Error Authentication Failed
       content:
@@ -263,17 +239,65 @@ components:
             - code
             - message
             type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    reservationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReservationsGetResponse'
   schemas:
-    ReservationsGetResponse:
+    GPUTrackingDatum:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Reservation'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ReservationsGetResponse is the response type for GET requests to the reservations endpoint.
+        event_time:
+          type: string
+          x-go-name: EventTime
+        global_capacity:
+          format: int64
+          type: integer
+          x-go-name: GlobalCapacity
+        gpu_usage:
+          format: int64
+          type: integer
+          x-go-name: GPUUsage
+        on_demand_count:
+          format: int64
+          type: integer
+          x-go-name: OnDemandCount
+        organization_id:
+          type: string
+          x-go-name: OrganizationID
+        price:
+          format: double
+          type: number
+          x-go-name: Price
+        product_line:
+          type: string
+          x-go-name: ProductLine
+        region:
+          type: string
+          x-go-name: Region
+        regional_capacity:
+          format: int64
+          type: integer
+          x-go-name: RegionalCapacity
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     GPUTrackingDatumMod:
@@ -310,56 +334,6 @@ components:
           format: int64
           type: integer
           x-go-name: GPUUsage
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LatestGPUTracking:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/GPUTrackingDatumMod'
-          type: array
-          x-go-name: Data
-        reservation_id:
-          items:
-            type: string
-          type: array
-          x-go-name: ReservationID
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    GPUTrackingDatum:
-      properties:
-        event_time:
-          type: string
-          x-go-name: EventTime
-        global_capacity:
-          format: int64
-          type: integer
-          x-go-name: GlobalCapacity
-        gpu_usage:
-          format: int64
-          type: integer
-          x-go-name: GPUUsage
-        on_demand_count:
-          format: int64
-          type: integer
-          x-go-name: OnDemandCount
-        organization_id:
-          type: string
-          x-go-name: OrganizationID
-        price:
-          format: double
-          type: number
-          x-go-name: Price
-        product_line:
-          type: string
-          x-go-name: ProductLine
-        region:
-          type: string
-          x-go-name: Region
-        regional_capacity:
-          format: int64
-          type: integer
-          x-go-name: RegionalCapacity
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Reservation:
@@ -448,6 +422,20 @@ components:
       title: Reservation contains information about a customer reservation.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LatestGPUTracking:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/GPUTrackingDatumMod'
+          type: array
+          x-go-name: Data
+        reservation_id:
+          items:
+            type: string
+          type: array
+          x-go-name: ReservationID
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     GPUTrackingResponse:
       properties:
         data:
@@ -455,6 +443,18 @@ components:
             $ref: '#/components/schemas/GPUTrackingDatum'
           type: array
           x-go-name: Data
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ReservationsGetResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Reservation'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ReservationsGetResponse is the response type for GET requests to the reservations endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

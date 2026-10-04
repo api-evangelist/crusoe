@@ -108,6 +108,48 @@ paths:
       - AutoCluster Operations
 components:
   responses:
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listAutoClusterOperationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListOperationsResponseV1'
     getAutoClusterOperationResponse:
       description: ''
       content:
@@ -132,30 +174,6 @@ components:
             - code
             - message
             type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listAutoClusterOperationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListOperationsResponseV1'
     authError:
       description: Error Authentication Failed
       content:
@@ -168,24 +186,6 @@ components:
                 x-go-name: Code
               message:
                 example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
                 type: string
                 x-go-name: Message
             required:

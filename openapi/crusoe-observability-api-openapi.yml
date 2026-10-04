@@ -376,14 +376,6 @@ paths:
       - Observability
 components:
   responses:
-    scrapeMetricsResponse:
-      description: ''
-    timeseriesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ObservabilityMetrics'
     permissionsError:
       description: Error Permissions
       content:
@@ -402,18 +394,24 @@ components:
             - code
             - message
             type: object
-    serverError:
-      description: Error Internal Server
+    timeseriesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ObservabilityMetrics'
+    rateLimitError:
+      description: Error Rate Limit Exceeded
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '500'
+                example: '429'
                 type: string
                 x-go-name: Code
               message:
-                example: internal_error
+                example: too_many_requests
                 type: string
                 x-go-name: Message
             required:
@@ -438,18 +436,20 @@ components:
             - code
             - message
             type: object
-    rateLimitError:
-      description: Error Rate Limit Exceeded
+    scrapeMetricsResponse:
+      description: ''
+    serverError:
+      description: Error Internal Server
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '429'
+                example: '500'
                 type: string
                 x-go-name: Code
               message:
-                example: too_many_requests
+                example: internal_error
                 type: string
                 x-go-name: Message
             required:

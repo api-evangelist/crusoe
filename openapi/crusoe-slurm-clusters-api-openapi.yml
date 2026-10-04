@@ -147,30 +147,6 @@ paths:
       - Slurm Clusters
 components:
   responses:
-    getSlurmClusterResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SlurmCluster'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -189,6 +165,12 @@ components:
             - code
             - message
             type: object
+    listSlurmClustersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSlurmClustersResponse'
     badReqError:
       description: Error Bad Request
       content:
@@ -207,12 +189,36 @@ components:
             - code
             - message
             type: object
-    listSlurmClustersResponse:
+    asyncOperationResponse:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ListSlurmClustersResponse'
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getSlurmClusterResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SlurmCluster'
     authError:
       description: Error Authentication Failed
       content:
@@ -231,62 +237,7 @@ components:
             - code
             - message
             type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
   schemas:
-    Operation:
-      description: 'Individual resources that use Operations should populate the `metadata` field
-
-        with resource-specific information.'
-      properties:
-        completed_at:
-          example: '2021-12-03T19:59:34Z'
-          type: string
-          x-go-name: CompletedAt
-        metadata:
-          example: '{}'
-          x-go-name: Metadata
-        operation_id:
-          example: F6EF489C-086E-458D-B812-7962964A28C9
-          type: string
-          x-go-name: ID
-        result:
-          example: '{}'
-          x-go-name: Result
-        started_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: StartedAt
-        state:
-          enum:
-          - IN_PROGRESS
-          - SUCCEEDED
-          - FAILED
-          example: IN_PROGRESS
-          type: string
-          x-go-name: State
-      required:
-      - operation_id
-      - state
-      - metadata
-      - started_at
-      - completed_at
-      title: Operation contains the common fields for all Operation API objects.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     SlurmClusterConfig:
       properties:
         home_volume_size:
@@ -337,6 +288,114 @@ components:
       title: Configurable fields of the Slurm Cluster.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmClusterInternalConfig:
+      additionalProperties:
+        type: string
+      description: 'SlurmClusterInternalConfig holds internal-only configuration that is used
+
+        for support and development purposes only.'
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    SlurmClusterIssue:
+      properties:
+        code:
+          description: Machine-readable issue code.
+          type: string
+          x-go-name: Code
+        message:
+          description: Human-readable description.
+          type: string
+          x-go-name: Message
+      title: SlurmClusterIssue describes a problem preventing the cluster from reaching RUNNING state.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    SlurmCluster:
+      allOf:
+      - $ref: '#/components/schemas/SlurmClusterConfig'
+      - $ref: '#/components/schemas/SlurmClusterStatus'
+      - properties:
+          created_at:
+            description: Created at timestamp of the cluster.
+            type: string
+            x-go-name: CreatedAt
+          id:
+            description: ID of the Slurm cluster.
+            example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
+            type: string
+            x-go-name: ID
+          updated_at:
+            description: Updated at timestamp of the cluster.
+            type: string
+            x-go-name: UpdatedAt
+          version:
+            description: Version of the cluster.
+            type: string
+            x-go-name: Version
+        required:
+        - id
+        type: object
+      title: SlurmCluster defines the specifications of the slurm cluster.
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Operation:
+      description: 'Individual resources that use Operations should populate the `metadata` field
+
+        with resource-specific information.'
+      properties:
+        completed_at:
+          example: '2021-12-03T19:59:34Z'
+          type: string
+          x-go-name: CompletedAt
+        metadata:
+          example: '{}'
+          x-go-name: Metadata
+        operation_id:
+          example: F6EF489C-086E-458D-B812-7962964A28C9
+          type: string
+          x-go-name: ID
+        result:
+          example: '{}'
+          x-go-name: Result
+        started_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: StartedAt
+        state:
+          enum:
+          - IN_PROGRESS
+          - SUCCEEDED
+          - FAILED
+          example: IN_PROGRESS
+          type: string
+          x-go-name: State
+      required:
+      - operation_id
+      - state
+      - metadata
+      - started_at
+      - completed_at
+      title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    ListSlurmClustersResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SlurmCluster'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SlurmClusterStatus:
       properties:
         issues:
@@ -382,65 +441,6 @@ components:
             $ref: '#/components/schemas/SlurmClusterInternalConfig'
         type: object
       title: SlurmClusterPostRequest defines the specifications of the cluster to be created.
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmClusterInternalConfig:
-      additionalProperties:
-        type: string
-      description: 'SlurmClusterInternalConfig holds internal-only configuration that is used
-
-        for support and development purposes only.'
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmClusterIssue:
-      properties:
-        code:
-          description: Machine-readable issue code.
-          type: string
-          x-go-name: Code
-        message:
-          description: Human-readable description.
-          type: string
-          x-go-name: Message
-      title: SlurmClusterIssue describes a problem preventing the cluster from reaching RUNNING state.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListSlurmClustersResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/SlurmCluster'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    SlurmCluster:
-      allOf:
-      - $ref: '#/components/schemas/SlurmClusterConfig'
-      - $ref: '#/components/schemas/SlurmClusterStatus'
-      - properties:
-          created_at:
-            description: Created at timestamp of the cluster.
-            type: string
-            x-go-name: CreatedAt
-          id:
-            description: ID of the Slurm cluster.
-            example: ab4a6b00-aa5f-408e-a9fb-ac6de5eb45ab
-            type: string
-            x-go-name: ID
-          updated_at:
-            description: Updated at timestamp of the cluster.
-            type: string
-            x-go-name: UpdatedAt
-          version:
-            description: Version of the cluster.
-            type: string
-            x-go-name: Version
-        required:
-        - id
-        type: object
-      title: SlurmCluster defines the specifications of the slurm cluster.
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute

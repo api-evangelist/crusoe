@@ -170,7 +170,155 @@ paths:
               $ref: '#/components/schemas/VPCNetworkPatchRequest'
         required: true
 components:
+  responses:
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getVPCNetworkResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VPCNetwork'
+    listVPCNetworksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListVPCNetworksResponseV1'
+    vpcNetworkPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VPCNetworkPostResponse'
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
+    ListVPCNetworksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/VPCNetwork'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListVPCNetworksResponseV1 is the response type for GET requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VPCNetworkPatchRequest:
+      properties:
+        name:
+          description: New name for the VPC network.
+          example: my-cool-vpc-network
+          type: string
+          x-go-name: Name
+      required:
+      - name
+      title: VPCNetworkPatchRequest is the request type for PATCH requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     VPCNetworkPostResponse:
       properties:
         network:
@@ -178,6 +326,43 @@ components:
       required:
       - network
       title: VPCNetworkPostResponse is the response type for POST requests to the VPC Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VPCNetwork:
+      properties:
+        cidr:
+          description: Address range of the VPC network, in CIDR notation.
+          example: 121.0.0.0/20
+          type: string
+          x-go-name: CIDR
+        gateway:
+          description: ID of the VPC network's gateway.
+          example: 11bf5b4c-e0e5-4017-bdb8-3861f3acedc1
+          type: string
+          x-go-name: Gateway
+        id:
+          description: ID of the VPC network.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: ID
+        name:
+          description: Name of the VPC network.
+          example: default-ethernet
+          type: string
+          x-go-name: Name
+        subnets:
+          description: IDs of the subnets that belong to the VPC network. Empty if the network has none.
+          example: '[1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc]'
+          items:
+            type: string
+          type: array
+          x-go-name: Subnets
+      required:
+      - id
+      - name
+      - subnets
+      - gateway
+      - cidr
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Operation:
@@ -220,76 +405,6 @@ components:
       title: Operation contains the common fields for all Operation API objects.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    VPCNetwork:
-      properties:
-        cidr:
-          description: Address range of the VPC network, in CIDR notation.
-          example: 121.0.0.0/20
-          type: string
-          x-go-name: CIDR
-        gateway:
-          description: ID of the VPC network's gateway.
-          example: 11bf5b4c-e0e5-4017-bdb8-3861f3acedc1
-          type: string
-          x-go-name: Gateway
-        id:
-          description: ID of the VPC network.
-          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
-          type: string
-          x-go-name: ID
-        name:
-          description: Name of the VPC network.
-          example: default-ethernet
-          type: string
-          x-go-name: Name
-        subnets:
-          description: IDs of the subnets that belong to the VPC network. Empty if the network has none.
-          example: '[1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc]'
-          items:
-            type: string
-          type: array
-          x-go-name: Subnets
-      required:
-      - id
-      - name
-      - subnets
-      - gateway
-      - cidr
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VPCNetworkPatchRequest:
-      properties:
-        name:
-          description: New name for the VPC network.
-          example: my-cool-vpc-network
-          type: string
-          x-go-name: Name
-      required:
-      - name
-      title: VPCNetworkPatchRequest is the request type for PATCH requests to the VPC Networks endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListVPCNetworksResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/VPCNetwork'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListVPCNetworksResponseV1 is the response type for GET requests to the VPC Networks endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     VPCNetworkPostRequest:
       properties:
         cidr:
@@ -308,121 +423,6 @@ components:
       title: VPCNetworkPostRequest is the request type for POST requests to the VPC Networks endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listVPCNetworksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListVPCNetworksResponseV1'
-    vpcNetworkPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VPCNetworkPostResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getVPCNetworkResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VPCNetwork'
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
 x-tagGroups:
 - name: Compute
   tags:

@@ -42,45 +42,18 @@ paths:
         required: true
 components:
   schemas:
-    IdentityCredential:
+    IdentityPutRequest:
       properties:
-        created_at:
-          format: date-time
+        name:
+          example: John Doe
           type: string
-          x-go-name: CreatedAt
-        type:
+          x-go-name: Name
+        role:
+          example: Admin
           type: string
-          x-go-name: Type
-        updated_at:
-          format: date-time
-          type: string
-          x-go-name: UpdatedAt
+          x-go-name: Role
       required:
-      - type
-      - created_at
-      - updated_at
-      title: IdentityCredential represents a specific Kratos credential type, sanitized to expose to customers.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
-    UserResponse:
-      description: The Identity of a user is returned.
-      properties:
-        credentials:
-          description: Credentials will be deprecated
-          items:
-            type: string
-          type: array
-          x-go-name: Credentials
-        credentials_map:
-          additionalProperties:
-            $ref: '#/components/schemas/IdentityCredential'
-          type: object
-          x-go-name: CredentialsMap
-        identity:
-          $ref: '#/components/schemas/Identity'
-      required:
-      - identity
-      title: UserResponse is the return type from the GET and PUT handlers to User.
+      - name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Identity:
@@ -148,6 +121,27 @@ components:
       - role
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UserResponse:
+      description: The Identity of a user is returned.
+      properties:
+        credentials:
+          description: Credentials will be deprecated
+          items:
+            type: string
+          type: array
+          x-go-name: Credentials
+        credentials_map:
+          additionalProperties:
+            $ref: '#/components/schemas/IdentityCredential'
+          type: object
+          x-go-name: CredentialsMap
+        identity:
+          $ref: '#/components/schemas/Identity'
+      required:
+      - identity
+      title: UserResponse is the return type from the GET and PUT handlers to User.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     RoleBinding:
       properties:
         customer_id:
@@ -177,24 +171,42 @@ components:
       - role_name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    IdentityPutRequest:
-      properties:
-        name:
-          example: John Doe
-          type: string
-          x-go-name: Name
-        role:
-          example: Admin
-          type: string
-          x-go-name: Role
-      required:
-      - name
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     UserStateEnum:
       type: string
       x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
+    IdentityCredential:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
+        type:
+          type: string
+          x-go-name: Type
+        updated_at:
+          format: date-time
+          type: string
+          x-go-name: UpdatedAt
+      required:
+      - type
+      - created_at
+      - updated_at
+      title: IdentityCredential represents a specific Kratos credential type, sanitized to expose to customers.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
   responses:
+    usersGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserResponse'
+    usersPutResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserResponse'
     serverError:
       description: Error Internal Server
       content:
@@ -213,18 +225,6 @@ components:
             - code
             - message
             type: object
-    usersGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserResponse'
-    usersPutResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserResponse'
     authError:
       description: Error Authentication Failed
       content:

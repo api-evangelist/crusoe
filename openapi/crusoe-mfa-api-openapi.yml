@@ -109,6 +109,35 @@ paths:
         required: true
 components:
   schemas:
+    customerGetOrganizationMFAResponse:
+      description: GetOrganizationMFAResponse is the response containing an organization's required MFA methods.
+      properties:
+        mfa_methods:
+          items:
+            $ref: '#/components/schemas/customerOrganizationMFA'
+            type: object
+          title: mfa_methods is the set of MFA methods currently required by the organization
+          type: array
+      type: object
+    protobufAny:
+      additionalProperties: {}
+      properties:
+        '@type':
+          type: string
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+            type: object
+          type: array
+        message:
+          type: string
+      type: object
     customerOrganizationMFA:
       description: OrganizationMFA describes a single MFA method required by an organization.
       properties:
@@ -140,35 +169,6 @@ components:
             type: string
           title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
           type: array
-      type: object
-    protobufAny:
-      additionalProperties: {}
-      properties:
-        '@type':
-          type: string
-      type: object
-    customerGetOrganizationMFAResponse:
-      description: GetOrganizationMFAResponse is the response containing an organization's required MFA methods.
-      properties:
-        mfa_methods:
-          items:
-            $ref: '#/components/schemas/customerOrganizationMFA'
-            type: object
-          title: mfa_methods is the set of MFA methods currently required by the organization
-          type: array
-      type: object
-    rpcStatus:
-      properties:
-        code:
-          format: int32
-          type: integer
-        details:
-          items:
-            $ref: '#/components/schemas/protobufAny'
-            type: object
-          type: array
-        message:
-          type: string
       type: object
 x-tagGroups:
 - name: Compute
