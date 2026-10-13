@@ -39,6 +39,26 @@ edges:
   matched_by: verified-token-table
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
+- partner_name: Amazon Web Services
+  partner: amazon-web-services
+  partner_match: shape-anchor
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  shape: aws-s3
+  type: docs
+  degree: declared-subset
+  evidence: https://docs.crusoecloud.com/storage/object-storage/overview
+  evidence_kind: own-docs
+  evidence_file: https://github.com/api-evangelist/crusoe/blob/main/evidence/compatibility/crusoe-aws-s3-1.md
+  quote: Crusoe Cloud Object Storage provides high-performance, S3-compatible object storage designed for AI/ML
+    workloads. Store and retrieve datasets, model checkpoints, training artifacts, and other unstructured data with
+    the standard S3 format. I
+  supported_operations: []
+  unsupported_operations: []
+  supported_share: 0.0
+  detected_by: sweep-shape-compat.py
+  first_seen: '2026-10-13'
 generated: '2026-10-13'
 method: searched
 checked:

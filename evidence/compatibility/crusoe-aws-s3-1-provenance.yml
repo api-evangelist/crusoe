@@ -1,0 +1,14 @@
+fetched: '2026-10-13'
+method: fetched
+source: https://docs.crusoecloud.com/storage/object-storage/overview
+page: https://docs.crusoecloud.com/storage/object-storage/overview
+file: crusoe-aws-s3-1.md
+bytes: 8518
+sha256: a476a6d37799aa724d59abe43b728b95c1e9287cf5efcd725d92645cba9f7ce1
+anchor: amazon-web-services
+shape: aws-s3
+classification: declares-compatibility
+quote: Crusoe Cloud Object Storage provides high-performance, S3-compatible object storage designed for AI/ML workloads.
+  Store and retrieve datasets, model checkpoints, training artifacts, and other unstructured data with the standard
+  S3 format. It is ideal for petabyte-scale datasets and can be used to mi
+note: text extracted from the provider's own page (tags stripped), saved for evidence
