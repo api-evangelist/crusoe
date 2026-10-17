@@ -165,27 +165,187 @@ paths:
               $ref: '#/components/schemas/LoadBalancersPatchRequestV1'
         required: true
 components:
+  responses:
+    getLoadBalancerResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoadBalancer'
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listLoadBalancersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListLoadBalancersResponseV1'
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
-    PrivateIPv4Address:
+    HealthCheckOptions:
       properties:
-        address:
-          description: Private IPv4 address.
-          example: 10.1.2.3
+        failure_count:
+          description: Number of allowed failures before considering a backend unhealthy.
+          example: '3'
           type: string
-          x-go-name: Address
+          x-go-name: FailureCount
+        interval:
+          description: Interval between health checks, in seconds.
+          example: '60'
+          type: string
+          x-go-name: Interval
+        port:
+          description: Port on which to perform health checks.
+          example: '8080'
+          type: string
+          x-go-name: Port
+        success_count:
+          description: Number of successful checks required to consider a backend healthy.
+          example: '2'
+          type: string
+          x-go-name: SuccessCount
+        timeout:
+          description: Timeout for a health check response, in seconds.
+          example: '20'
+          type: string
+          x-go-name: Timeout
       required:
-      - address
+      - port
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListLoadBalancersResponseV1:
+    AsyncOperationResponse:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/LoadBalancer'
-          type: array
-          x-go-name: Items
+        operation:
+          $ref: '#/components/schemas/Operation'
       required:
-      - items
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    PublicIPv4Address:
+      properties:
+        address:
+          description: Public IPv4 address.
+          example: 121.0.0.0
+          type: string
+          x-go-name: Address
+        id:
+          description: ID of the public IPv4 address.
+          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
+          type: string
+          x-go-name: ID
+        type:
+          description: Allocation type of the public IPv4 address (for example, dynamic).
+          example: dynamic
+          type: string
+          x-go-name: Type
+      required:
+      - address
+      - id
+      - type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    NetworkTarget:
+      properties:
+        cidr:
+          description: CIDR block, or an IP address that is converted to a CIDR. Mutually exclusive with resource_id.
+          example: 10.1.2.3/24
+          type: string
+          x-go-name: CIDR
+        resource_id:
+          description: ID of a backend resource. Mutually exclusive with cidr.
+          example: 306aa10d-5570-4e47-88c9-46bf11bd8737
+          type: string
+          x-go-name: ResourceID
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LoadBalancerNetworkInterface:
+      properties:
+        network:
+          description: ID of the VPC network for the interface.
+          example: dbaafd53-96ea-4754-9cce-78e7f08ac151
+          type: string
+          x-go-name: Network
+        subnet:
+          description: ID of the subnet for the interface.
+          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
+          type: string
+          x-go-name: Subnet
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Operation:
@@ -228,47 +388,13 @@ components:
       title: Operation contains the common fields for all Operation API objects.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    IPAddresses:
+    LoadBalancersPostRequest:
       properties:
-        private_ipv4:
-          $ref: '#/components/schemas/PrivateIPv4Address'
-        public_ipv4:
-          $ref: '#/components/schemas/PublicIPv4Address'
-      required:
-      - private_ipv4
-      - public_ipv4
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LoadBalancerNetworkInterface:
-      properties:
-        network:
-          description: ID of the VPC network for the interface.
-          example: dbaafd53-96ea-4754-9cce-78e7f08ac151
+        algorithm:
+          description: Load balancing algorithm used to distribute traffic across destinations (for example, random).
+          example: random
           type: string
-          x-go-name: Network
-        subnet:
-          description: ID of the subnet for the interface.
-          example: 09ae8411-0fbb-411c-898c-2b8f19622ae1
-          type: string
-          x-go-name: Subnet
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    NetworkTarget:
-      properties:
-        cidr:
-          description: CIDR block, or an IP address that is converted to a CIDR. Mutually exclusive with resource_id.
-          example: 10.1.2.3/24
-          type: string
-          x-go-name: CIDR
-        resource_id:
-          description: ID of a backend resource. Mutually exclusive with cidr.
-          example: 306aa10d-5570-4e47-88c9-46bf11bd8737
-          type: string
-          x-go-name: ResourceID
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LoadBalancersPatchRequestV1:
-      properties:
+          x-go-name: Algorithm
         destinations:
           description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
           items:
@@ -277,42 +403,41 @@ components:
           x-go-name: Destinations
         health_check:
           $ref: '#/components/schemas/HealthCheckOptions'
+        location:
+          description: Location to create the load balancer in.
+          example: us-northcentraleast1-a
+          type: string
+          x-go-name: Location
         name:
-          description: New name for the load balancer.
+          description: Name for the new load balancer.
           example: my-load-balancer
           type: string
           x-go-name: Name
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    HealthCheckOptions:
-      properties:
-        failure_count:
-          description: Number of allowed failures before considering a backend unhealthy.
-          example: '3'
+        network_interfaces:
+          description: Network interfaces to attach the load balancer to.
+          items:
+            $ref: '#/components/schemas/LoadBalancerNetworkInterface'
+          type: array
+          x-go-name: NetworkInterfaces
+        protocols:
+          description: 'Network protocols the load balancer handles. Currently only one of: tcp, udp.'
+          example: '[tcp]'
+          items:
+            type: string
+          type: array
+          x-go-name: Protocols
+        type:
+          description: Type of the load balancer (for example, internal_ipv4).
+          example: internal_ipv4
           type: string
-          x-go-name: FailureCount
-        interval:
-          description: Interval between health checks, in seconds.
-          example: '60'
-          type: string
-          x-go-name: Interval
-        port:
-          description: Port on which to perform health checks.
-          example: '8080'
-          type: string
-          x-go-name: Port
-        success_count:
-          description: Number of successful checks required to consider a backend healthy.
-          example: '2'
-          type: string
-          x-go-name: SuccessCount
-        timeout:
-          description: Timeout for a health check response, in seconds.
-          example: '20'
-          type: string
-          x-go-name: Timeout
+          x-go-name: Type
       required:
-      - port
+      - name
+      - destinations
+      - location
+      - protocols
+      - network_interfaces
+      - algorithm
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     LoadBalancer:
@@ -380,45 +505,30 @@ components:
       - ips
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
+    ListLoadBalancersResponseV1:
       properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
+        items:
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+          type: array
+          x-go-name: Items
       required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
-    PublicIPv4Address:
-      properties:
-        address:
-          description: Public IPv4 address.
-          example: 121.0.0.0
-          type: string
-          x-go-name: Address
-        id:
-          description: ID of the public IPv4 address.
-          example: 1ce839b7-3fab-46f9-8e54-7a6bb4ac1ffc
-          type: string
-          x-go-name: ID
-        type:
-          description: Allocation type of the public IPv4 address (for example, dynamic).
-          example: dynamic
-          type: string
-          x-go-name: Type
-      required:
-      - address
-      - id
-      - type
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LoadBalancersPostRequest:
+    PrivateIPv4Address:
       properties:
-        algorithm:
-          description: Load balancing algorithm used to distribute traffic across destinations (for example, random).
-          example: random
+        address:
+          description: Private IPv4 address.
+          example: 10.1.2.3
           type: string
-          x-go-name: Algorithm
+          x-go-name: Address
+      required:
+      - address
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LoadBalancersPatchRequestV1:
+      properties:
         destinations:
           description: Backend targets the load balancer forwards traffic to, given as CIDR blocks or resource IDs.
           items:
@@ -427,134 +537,24 @@ components:
           x-go-name: Destinations
         health_check:
           $ref: '#/components/schemas/HealthCheckOptions'
-        location:
-          description: Location to create the load balancer in.
-          example: us-northcentraleast1-a
-          type: string
-          x-go-name: Location
         name:
-          description: Name for the new load balancer.
+          description: New name for the load balancer.
           example: my-load-balancer
           type: string
           x-go-name: Name
-        network_interfaces:
-          description: Network interfaces to attach the load balancer to.
-          items:
-            $ref: '#/components/schemas/LoadBalancerNetworkInterface'
-          type: array
-          x-go-name: NetworkInterfaces
-        protocols:
-          description: 'Network protocols the load balancer handles. Currently only one of: tcp, udp.'
-          example: '[tcp]'
-          items:
-            type: string
-          type: array
-          x-go-name: Protocols
-        type:
-          description: Type of the load balancer (for example, internal_ipv4).
-          example: internal_ipv4
-          type: string
-          x-go-name: Type
-      required:
-      - name
-      - destinations
-      - location
-      - protocols
-      - network_interfaces
-      - algorithm
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    listLoadBalancersResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListLoadBalancersResponseV1'
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getLoadBalancerResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LoadBalancer'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+    IPAddresses:
+      properties:
+        private_ipv4:
+          $ref: '#/components/schemas/PrivateIPv4Address'
+        public_ipv4:
+          $ref: '#/components/schemas/PublicIPv4Address'
+      required:
+      - private_ipv4
+      - public_ipv4
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute
   tags:

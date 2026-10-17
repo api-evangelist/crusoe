@@ -207,100 +207,33 @@ paths:
               $ref: '#/components/schemas/DisksPatchRequest'
         required: true
 components:
-  responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listDisksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListDisksResponseV1'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getDiskResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DiskV1'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    VMAttachmentType:
-      type: string
+    VMAttachmentV1:
+      properties:
+        attachment_type:
+          $ref: '#/components/schemas/VMAttachmentType'
+        mode:
+          $ref: '#/components/schemas/DiskModeType'
+        vm_id:
+          description: ID of the VM the disk is attached to.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: VMID
+      required:
+      - vm_id
+      - attachment_type
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    DisksPatchRequest:
+      properties:
+        size:
+          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+      required:
+      - size
+      type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListDisksResponseV1:
       properties:
@@ -314,16 +247,10 @@ components:
       title: ListDisksResponseV1 is the response type for GET requests to the disks endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     DiskModeType:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    VMAttachmentType:
       type: string
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     Operation:
@@ -366,6 +293,56 @@ components:
       title: Operation contains the common fields for all Operation API objects.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    DisksPostRequestV1:
+      properties:
+        block_size:
+          description: 'Block size for the new disk, in bytes: 512 or 4096.'
+          example: 4096
+          format: int64
+          type: integer
+          x-go-name: BlockSize
+        location:
+          description: Location to create the disk in.
+          example: us-northcentral1-a
+          type: string
+          x-go-name: Location
+        name:
+          description: Name for the new disk.
+          example: my-disk
+          type: string
+          x-go-name: Name
+        size:
+          description: Storage capacity for the new disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
+          example: 10GiB
+          type: string
+          x-go-name: Size
+        snapshot_id:
+          description: ID of a disk snapshot to create the disk from.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+          x-go-name: DiskSnapshotID
+        type:
+          default: persistent-ssd
+          description: 'Type of disk to create: persistent-ssd or shared-volume. Defaults to persistent-ssd.'
+          enum:
+          - persistent-ssd
+          - shared-volume
+          example: persistent-ssd
+          type: string
+          x-go-name: Type
+      required:
+      - name
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     DiskV1:
       properties:
         attached_to:
@@ -447,74 +424,97 @@ components:
       - attached_to
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DisksPatchRequest:
-      properties:
-        size:
-          description: New storage capacity for the disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
-          example: 10GiB
-          type: string
-          x-go-name: Size
-      required:
-      - size
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    DisksPostRequestV1:
-      properties:
-        block_size:
-          description: 'Block size for the new disk, in bytes: 512 or 4096.'
-          example: 4096
-          format: int64
-          type: integer
-          x-go-name: BlockSize
-        location:
-          description: Location to create the disk in.
-          example: us-northcentral1-a
-          type: string
-          x-go-name: Location
-        name:
-          description: Name for the new disk.
-          example: my-disk
-          type: string
-          x-go-name: Name
-        size:
-          description: Storage capacity for the new disk, given as a size and unit in the format [Size][Unit], for example 100GiB or 1TiB.
-          example: 10GiB
-          type: string
-          x-go-name: Size
-        snapshot_id:
-          description: ID of a disk snapshot to create the disk from.
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-          x-go-name: DiskSnapshotID
-        type:
-          default: persistent-ssd
-          description: 'Type of disk to create: persistent-ssd or shared-volume. Defaults to persistent-ssd.'
-          enum:
-          - persistent-ssd
-          - shared-volume
-          example: persistent-ssd
-          type: string
-          x-go-name: Type
-      required:
-      - name
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    VMAttachmentV1:
-      properties:
-        attachment_type:
-          $ref: '#/components/schemas/VMAttachmentType'
-        mode:
-          $ref: '#/components/schemas/DiskModeType'
-        vm_id:
-          description: ID of the VM the disk is attached to.
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-          x-go-name: VMID
-      required:
-      - vm_id
-      - attachment_type
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    getDiskResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DiskV1'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listDisksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListDisksResponseV1'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
 x-tagGroups:
 - name: Compute
   tags:

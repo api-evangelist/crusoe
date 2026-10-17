@@ -33,24 +33,30 @@ paths:
       - NVLink Domains
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '403'
+                example: '401'
                 type: string
                 x-go-name: Code
               message:
-                example: unauthorized
+                example: bad_credential
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
+    listNvlinkDomainsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NvlinkDomainsSummaryListResponse'
     serverError:
       description: Error Internal Server
       content:
@@ -69,24 +75,18 @@ components:
             - code
             - message
             type: object
-    listNvlinkDomainsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NvlinkDomainsSummaryListResponse'
-    authError:
-      description: Error Authentication Failed
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '401'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_credential
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:

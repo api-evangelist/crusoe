@@ -43,7 +43,86 @@ paths:
       tags:
       - Capacities
 components:
+  schemas:
+    ListCapacitiesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CapacityV1'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CapacityV1:
+      properties:
+        location:
+          example: us-east
+          type: string
+          x-go-name: Location
+        num_slices:
+          description: NumSlices is the number of slices that make up the resource
+          example: 1
+          format: uint32
+          type: integer
+          x-go-name: NumSlices
+        quantity:
+          example: 8
+          format: uint32
+          type: integer
+          x-go-name: Quantity
+        quota_type:
+          description: QuotaType is the enum string for the quota type consumed by this resource
+          example: PROJECT_QUOTA_TYPE_MAXIMUM_VM_SLICES_VCPU_6_MEM_60_A40_PCIE_48GB_1
+          type: string
+          x-go-name: QuotaType
+        type:
+          example: a100.2x
+          type: string
+          x-go-name: Type
+      required:
+      - location
+      - quantity
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -80,91 +159,12 @@ components:
             - code
             - message
             type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     capacitiesResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListCapacitiesResponseV1'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-  schemas:
-    CapacityV1:
-      properties:
-        location:
-          example: us-east
-          type: string
-          x-go-name: Location
-        num_slices:
-          description: NumSlices is the number of slices that make up the resource
-          example: 1
-          format: uint32
-          type: integer
-          x-go-name: NumSlices
-        quantity:
-          example: 8
-          format: uint32
-          type: integer
-          x-go-name: Quantity
-        quota_type:
-          description: QuotaType is the enum string for the quota type consumed by this resource
-          example: PROJECT_QUOTA_TYPE_MAXIMUM_VM_SLICES_VCPU_6_MEM_60_A40_PCIE_48GB_1
-          type: string
-          x-go-name: QuotaType
-        type:
-          example: a100.2x
-          type: string
-          x-go-name: Type
-      required:
-      - location
-      - quantity
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListCapacitiesResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/CapacityV1'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute
   tags:

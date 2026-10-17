@@ -56,6 +56,30 @@ components:
       - name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UserResponse:
+      description: The Identity of a user is returned.
+      properties:
+        credentials:
+          description: Credentials will be deprecated
+          items:
+            type: string
+          type: array
+          x-go-name: Credentials
+        credentials_map:
+          additionalProperties:
+            $ref: '#/components/schemas/IdentityCredential'
+          type: object
+          x-go-name: CredentialsMap
+        identity:
+          $ref: '#/components/schemas/Identity'
+      required:
+      - identity
+      title: UserResponse is the return type from the GET and PUT handlers to User.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    UserStateEnum:
+      type: string
+      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
     Identity:
       description: 'Identity contains the information stored for a User. These are
 
@@ -121,27 +145,6 @@ components:
       - role
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UserResponse:
-      description: The Identity of a user is returned.
-      properties:
-        credentials:
-          description: Credentials will be deprecated
-          items:
-            type: string
-          type: array
-          x-go-name: Credentials
-        credentials_map:
-          additionalProperties:
-            $ref: '#/components/schemas/IdentityCredential'
-          type: object
-          x-go-name: CredentialsMap
-        identity:
-          $ref: '#/components/schemas/Identity'
-      required:
-      - identity
-      title: UserResponse is the return type from the GET and PUT handlers to User.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     RoleBinding:
       properties:
         customer_id:
@@ -171,9 +174,6 @@ components:
       - role_name
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    UserStateEnum:
-      type: string
-      x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
     IdentityCredential:
       properties:
         created_at:
@@ -195,13 +195,25 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/auth-gateway/pkg/authmodels
   responses:
-    usersGetResponse:
-      description: ''
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/UserResponse'
-    usersPutResponse:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    usersGetResponse:
       description: ''
       content:
         application/json:
@@ -225,24 +237,12 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
+    usersPutResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/UserResponse'
 x-tagGroups:
 - name: Compute
   tags:

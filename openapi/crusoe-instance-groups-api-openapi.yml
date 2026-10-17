@@ -157,6 +157,105 @@ paths:
               $ref: '#/components/schemas/InstanceGroupPatchRequest'
         required: true
 components:
+  responses:
+    emptyResponse:
+      description: Empty Response
+    patchInstanceGroupResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceGroup'
+    getInstanceGroupResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceGroup'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listInstanceGroupsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListInstanceGroupsResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    createInstanceGroupResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InstanceGroup'
   schemas:
     DesiredCount:
       properties:
@@ -167,31 +266,6 @@ components:
           type: integer
           x-go-name: Value
       title: DesiredCount defines a wrapper struct for the desired count of VMs in the instance group.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    InstanceGroupPostRequest:
-      properties:
-        desired_count:
-          description: Desired number of instances for the new instance group.
-          example: 3
-          format: int64
-          type: integer
-          x-go-name: DesiredCount
-        name:
-          description: Name for the new instance group.
-          example: my-instance-group
-          type: string
-          x-go-name: Name
-        template_id:
-          description: ID of the instance template to create the group's instances from.
-          example: 7e6a6c5a-1314-409a-9e4f-3cc9f2a68fcc
-          type: string
-          x-go-name: TemplateID
-      required:
-      - name
-      - template_id
-      - desired_count
-      title: InstanceGroupPostRequest defines the specifications of the instance group to be created.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     InstanceGroup:
@@ -317,105 +391,31 @@ components:
       title: InstanceGroupPatchRequest defines the specifications of the updates to be made to the instance group.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-  responses:
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getInstanceGroupResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InstanceGroup'
-    patchInstanceGroupResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InstanceGroup'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listInstanceGroupsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListInstanceGroupsResponse'
-    emptyResponse:
-      description: Empty Response
-    createInstanceGroupResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InstanceGroup'
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+    InstanceGroupPostRequest:
+      properties:
+        desired_count:
+          description: Desired number of instances for the new instance group.
+          example: 3
+          format: int64
+          type: integer
+          x-go-name: DesiredCount
+        name:
+          description: Name for the new instance group.
+          example: my-instance-group
+          type: string
+          x-go-name: Name
+        template_id:
+          description: ID of the instance template to create the group's instances from.
+          example: 7e6a6c5a-1314-409a-9e4f-3cc9f2a68fcc
+          type: string
+          x-go-name: TemplateID
+      required:
+      - name
+      - template_id
+      - desired_count
+      title: InstanceGroupPostRequest defines the specifications of the instance group to be created.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:
 - name: Compute
   tags:

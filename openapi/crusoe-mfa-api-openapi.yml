@@ -119,11 +119,23 @@ components:
           title: mfa_methods is the set of MFA methods currently required by the organization
           type: array
       type: object
-    protobufAny:
-      additionalProperties: {}
+    customerUpdateOrganizationMFAResponse:
+      description: 'UpdateOrganizationMFAResponse is the response for setting an organization''s required MFA methods.
+
+
+        Successful update calls return an empty body'
+      type: object
+    OrganizationsMFAServiceUpdateOrganizationMFABody:
+      description: UpdateOrganizationMFARequest is the request for setting an organization's required MFA methods.
       properties:
-        '@type':
-          type: string
+        intended_methods:
+          example:
+          - totp
+          - webauthn
+          items:
+            type: string
+          title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
+          type: array
       type: object
     rpcStatus:
       properties:
@@ -152,23 +164,11 @@ components:
           title: 'method is the required MFA method (one of: totp, webauthn)'
           type: string
       type: object
-    customerUpdateOrganizationMFAResponse:
-      description: 'UpdateOrganizationMFAResponse is the response for setting an organization''s required MFA methods.
-
-
-        Successful update calls return an empty body'
-      type: object
-    OrganizationsMFAServiceUpdateOrganizationMFABody:
-      description: UpdateOrganizationMFARequest is the request for setting an organization's required MFA methods.
+    protobufAny:
+      additionalProperties: {}
       properties:
-        intended_methods:
-          example:
-          - totp
-          - webauthn
-          items:
-            type: string
-          title: 'intended_methods is the full set of MFA methods the organization should require (one of: totp, webauthn)'
-          type: array
+        '@type':
+          type: string
       type: object
 x-tagGroups:
 - name: Compute

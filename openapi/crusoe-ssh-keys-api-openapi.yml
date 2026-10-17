@@ -68,48 +68,6 @@ paths:
         required: true
 components:
   responses:
-    notFoundError:
-      description: Error Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '404'
-                type: string
-                x-go-name: Code
-              message:
-                example: not_found
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    getSSHKeysResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSSHKeysResponseV1'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     createSSHKeysResponse:
       description: ''
       content:
@@ -118,24 +76,12 @@ components:
             $ref: '#/components/schemas/CreateSSHKeyResponse'
     emptyResponse:
       description: Empty Response
-    serverError:
-      description: Error Internal Server
+    getSSHKeysResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/ListSSHKeysResponseV1'
     authError:
       description: Error Authentication Failed
       content:
@@ -154,20 +100,78 @@ components:
             - code
             - message
             type: object
+    notFoundError:
+      description: Error Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '404'
+                type: string
+                x-go-name: Code
+              message:
+                example: not_found
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
   schemas:
-    Fingerprints:
+    CreateSSHKeyResponse:
       properties:
-        md5:
-          example: bf:60:fa:cc:9f:42:1f:5e:23:9e:ed:d2:69:d8:76:93
-          type: string
-          x-go-name: MD5
-        sha256:
-          example: tARFxQkVHeqm6TzqpI897QsHVdgZlxgL2/YhVltmEUk
-          type: string
-          x-go-name: SHA256
+        ssh_key:
+          $ref: '#/components/schemas/SSHKey'
       required:
-      - md5
-      - sha256
+      - ssh_key
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSSHKeysResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+          x-go-name: Items
+      required:
+      - items
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     SSHKey:
@@ -198,25 +202,6 @@ components:
       - fingerprints
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListSSHKeysResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/SSHKey'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateSSHKeyResponse:
-      properties:
-        ssh_key:
-          $ref: '#/components/schemas/SSHKey'
-      required:
-      - ssh_key
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateSSHKeyRequest:
       properties:
         name:
@@ -230,6 +215,21 @@ components:
       required:
       - name
       - public_key
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    Fingerprints:
+      properties:
+        md5:
+          example: bf:60:fa:cc:9f:42:1f:5e:23:9e:ed:d2:69:d8:76:93
+          type: string
+          x-go-name: MD5
+        sha256:
+          example: tARFxQkVHeqm6TzqpI897QsHVdgZlxgL2/YhVltmEUk
+          type: string
+          x-go-name: SHA256
+      required:
+      - md5
+      - sha256
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
 x-tagGroups:

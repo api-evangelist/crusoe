@@ -108,18 +108,30 @@ paths:
       - AutoCluster Operations
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
+    getAutoClusterOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Operation'
+    listAutoClusterOperationsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListOperationsResponseV1'
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '403'
+                example: '401'
                 type: string
                 x-go-name: Code
               message:
-                example: unauthorized
+                example: bad_credential
                 type: string
                 x-go-name: Message
             required:
@@ -144,18 +156,6 @@ components:
             - code
             - message
             type: object
-    listAutoClusterOperationsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListOperationsResponseV1'
-    getAutoClusterOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Operation'
     serverError:
       description: Error Internal Server
       content:
@@ -174,18 +174,18 @@ components:
             - code
             - message
             type: object
-    authError:
-      description: Error Authentication Failed
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '401'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_credential
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:

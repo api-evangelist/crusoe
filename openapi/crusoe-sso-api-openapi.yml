@@ -120,17 +120,6 @@ paths:
         required: true
 components:
   schemas:
-    ListSSOProvidersResponse:
-      properties:
-        sso_providers:
-          items:
-            $ref: '#/components/schemas/SSOProvider'
-          type: array
-          x-go-name: SsoProviders
-      required:
-      - sso_providers
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     CreateSSOProviderRequest:
       properties:
         client_id:
@@ -181,6 +170,17 @@ components:
       - email_domains
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListSSOProvidersResponse:
+      properties:
+        sso_providers:
+          items:
+            $ref: '#/components/schemas/SSOProvider'
+          type: array
+          x-go-name: SsoProviders
+      required:
+      - sso_providers
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     UpdateUserSSOEnforcementRequest:
       properties:
         enforcement:
@@ -201,6 +201,20 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
+    emptyResponse:
+      description: Empty Response
+    createSSOProviderResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SSOProvider'
+    listSSOProvidersResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListSSOProvidersResponse'
     notFoundError:
       description: Error Not Found
       content:
@@ -237,18 +251,6 @@ components:
             - code
             - message
             type: object
-    deleteSSOProviderResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SSOProvider'
-    createSSOProviderResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SSOProvider'
     serverError:
       description: Error Internal Server
       content:
@@ -267,6 +269,12 @@ components:
             - code
             - message
             type: object
+    deleteSSOProviderResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SSOProvider'
     badReqError:
       description: Error Bad Request
       content:
@@ -285,14 +293,6 @@ components:
             - code
             - message
             type: object
-    emptyResponse:
-      description: Empty Response
-    listSSOProvidersResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListSSOProvidersResponse'
 x-tagGroups:
 - name: Compute
   tags:

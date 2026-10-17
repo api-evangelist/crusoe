@@ -25,6 +25,30 @@ paths:
       - Roles
 components:
   responses:
+    listRolesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListRolesResponse'
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
     permissionsError:
       description: Error Permissions
       content:
@@ -43,12 +67,6 @@ components:
             - code
             - message
             type: object
-    listRolesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListRolesResponse'
     badReqError:
       description: Error Bad Request
       content:
@@ -61,24 +79,6 @@ components:
                 x-go-name: Code
               message:
                 example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
                 type: string
                 x-go-name: Message
             required:

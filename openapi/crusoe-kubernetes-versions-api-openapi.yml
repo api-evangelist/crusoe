@@ -49,117 +49,7 @@ paths:
       tags:
       - Kubernetes Versions
 components:
-  responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listKubernetesVersionsResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    KubernetesClustersVersionInfo:
-      properties:
-        cluster_version_name:
-          description: Version name of the Crusoe Kubernetes cluster image.
-          type: string
-          x-go-name: ClusterVersionName
-        supported_features:
-          description: 'Features supported by this cluster version. Possible values today: "oidc",
-
-            "autoclusters", "active_health_checks". New feature names may be added over time.
-
-            API consumers should ignore unrecognized feature names.'
-          items:
-            type: string
-          type: array
-          x-go-name: SupportedFeatures
-        tags:
-          description: Tags associated with the version.
-          items:
-            type: string
-          type: array
-          x-go-name: Tags
-        version_details:
-          $ref: '#/components/schemas/VersionDetails'
-      required:
-      - cluster_version_name
-      - tags
-      - version_details
-      - supported_features
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     VersionDetails:
       properties:
         BuildVersion:
@@ -204,6 +94,37 @@ components:
       - supported_features
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    KubernetesClustersVersionInfo:
+      properties:
+        cluster_version_name:
+          description: Version name of the Crusoe Kubernetes cluster image.
+          type: string
+          x-go-name: ClusterVersionName
+        supported_features:
+          description: 'Features supported by this cluster version. Possible values today: "oidc",
+
+            "autoclusters", "active_health_checks". New feature names may be added over time.
+
+            API consumers should ignore unrecognized feature names.'
+          items:
+            type: string
+          type: array
+          x-go-name: SupportedFeatures
+        tags:
+          description: Tags associated with the version.
+          items:
+            type: string
+          type: array
+          x-go-name: Tags
+        version_details:
+          $ref: '#/components/schemas/VersionDetails'
+      required:
+      - cluster_version_name
+      - tags
+      - version_details
+      - supported_features
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     ListKubernetesVersionsResponse:
       properties:
         kubernetes_cluster_versions:
@@ -223,6 +144,85 @@ components:
       - kubernetes_node_pool_versions
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    listKubernetesVersionsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListKubernetesVersionsResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

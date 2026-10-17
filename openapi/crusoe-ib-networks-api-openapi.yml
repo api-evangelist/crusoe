@@ -62,73 +62,6 @@ paths:
       tags:
       - IB Networks
 components:
-  responses:
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    listIbNetworksResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListIBNetworksResponseV1'
-    getIbNetworkResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IBNetwork'
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
     IBNetwork:
       properties:
@@ -160,6 +93,18 @@ components:
       - capacities
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListIBNetworksResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/IBNetwork'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListIBNetworksResponseV1 is the response type for GET requests to the IB Networks endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     IBNetworkCapacity:
       properties:
         quantity:
@@ -178,18 +123,73 @@ components:
       - slice_type
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListIBNetworksResponseV1:
-      properties:
-        items:
-          items:
+  responses:
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    getIbNetworkResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
             $ref: '#/components/schemas/IBNetwork'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListIBNetworksResponseV1 is the response type for GET requests to the IB Networks endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    listIbNetworksResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListIBNetworksResponseV1'
 x-tagGroups:
 - name: Compute
   tags:

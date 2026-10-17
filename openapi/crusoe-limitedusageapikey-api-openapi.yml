@@ -75,114 +75,7 @@ paths:
               $ref: '#/components/schemas/CreateLimitedUsageAPIKeyRequest'
         required: true
 components:
-  responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    limitedUsageAPIKeyGetResponse:
-      description: A successful response from this resource will contain json-encoded array of token details, excluding the api key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListLimitedUsageAPIKeysResponseV1'
-    limitedUsageAPIKeyPostResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LimitedUsageAPIKeyPostResponse'
-    emptyResponse:
-      description: Empty Response
-    serverError:
-      description: Error Internal Server
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '500'
-                type: string
-                x-go-name: Code
-              message:
-                example: internal_error
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    authError:
-      description: Error Authentication Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '401'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_credential
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
   schemas:
-    ListLimitedUsageAPIKeysResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/LimitedUsageAPIKeyInfo'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    CreateLimitedUsageAPIKeyRequest:
-      properties:
-        alias:
-          example: token1
-          type: string
-          x-go-name: Alias
-        expires_at:
-          example: '2021-12-03T19:58:34Z'
-          type: string
-          x-go-name: ExpiresAt
-        project_id:
-          description: Optional project ID the token is scoped to
-          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
-          type: string
-          x-go-name: ProjectID
-      required:
-      - expires_at
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    LimitedUsageAPIKeyPostResponse:
-      properties:
-        api_key_info:
-          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
-      required:
-      - api_key_info
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     LimitedUsageAPIKeyInfo:
       description: These are the fields returned from a GET request.
       properties:
@@ -227,6 +120,25 @@ components:
       title: TokenInfo contains the Traits Island stores for a Token inside of Kratos.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    ListLimitedUsageAPIKeysResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyInfo'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    LimitedUsageAPIKeyPostResponse:
+      properties:
+        api_key_info:
+          $ref: '#/components/schemas/GeneratedLimitedUsageAPIKey'
+      required:
+      - api_key_info
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     GeneratedLimitedUsageAPIKey:
       properties:
         alias:
@@ -268,6 +180,94 @@ components:
       - expires_at
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    CreateLimitedUsageAPIKeyRequest:
+      properties:
+        alias:
+          example: token1
+          type: string
+          x-go-name: Alias
+        expires_at:
+          example: '2021-12-03T19:58:34Z'
+          type: string
+          x-go-name: ExpiresAt
+        project_id:
+          description: Optional project ID the token is scoped to
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
+          x-go-name: ProjectID
+      required:
+      - expires_at
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+  responses:
+    emptyResponse:
+      description: Empty Response
+    limitedUsageAPIKeyGetResponse:
+      description: A successful response from this resource will contain json-encoded array of token details, excluding the api key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListLimitedUsageAPIKeysResponseV1'
+    limitedUsageAPIKeyPostResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LimitedUsageAPIKeyPostResponse'
+    authError:
+      description: Error Authentication Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '401'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_credential
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    serverError:
+      description: Error Internal Server
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '500'
+                type: string
+                x-go-name: Code
+              message:
+                example: internal_error
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
 x-tagGroups:
 - name: Compute
   tags:

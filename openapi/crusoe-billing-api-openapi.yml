@@ -138,30 +138,24 @@ paths:
       - Billing
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
+    authError:
+      description: Error Authentication Failed
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '403'
+                example: '401'
                 type: string
                 x-go-name: Code
               message:
-                example: unauthorized
+                example: bad_credential
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
-    billingCostsGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BillingCostData'
     getBillingExportProductlineResponse:
       description: ''
       headers:
@@ -216,24 +210,12 @@ components:
           example: '"2025-02-14"'
           schema:
             type: string
-    badReqError:
-      description: Error Bad Request
+    billingCostsGetResponse:
+      description: ''
       content:
         application/json:
           schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
+            $ref: '#/components/schemas/BillingCostData'
     serverError:
       description: Error Internal Server
       content:
@@ -252,31 +234,64 @@ components:
             - code
             - message
             type: object
-    billingOptionsGetResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UsageOptions'
-    authError:
-      description: Error Authentication Failed
+    permissionsError:
+      description: Error Permissions
       content:
         application/json:
           schema:
             properties:
               code:
-                example: '401'
+                example: '403'
                 type: string
                 x-go-name: Code
               message:
-                example: bad_credential
+                example: unauthorized
                 type: string
                 x-go-name: Message
             required:
             - code
             - message
             type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    billingOptionsGetResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UsageOptions'
   schemas:
+    BillingCostData:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BillingCostDatum'
+          type: array
+          x-go-name: Data
+        last_updated:
+          type: string
+          x-go-name: LastUpdated
+      required:
+      - data
+      title: UsageByProjectGetResponse is the response type for GET requests to the usage.usageByProject endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     UsageOptions:
       description: 'UsageOptions contains the values which exist for the fields which we allow filtering
 
@@ -328,21 +343,6 @@ components:
       - regions
       - start_date
       - end_date
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    BillingCostData:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/BillingCostDatum'
-          type: array
-          x-go-name: Data
-        last_updated:
-          type: string
-          x-go-name: LastUpdated
-      required:
-      - data
-      title: UsageByProjectGetResponse is the response type for GET requests to the usage.usageByProject endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     BillingCostDatum:

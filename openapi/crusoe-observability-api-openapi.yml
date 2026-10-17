@@ -376,66 +376,6 @@ paths:
       - Observability
 components:
   responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    timeseriesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ObservabilityMetrics'
-    rateLimitError:
-      description: Error Rate Limit Exceeded
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '429'
-                type: string
-                x-go-name: Code
-              message:
-                example: too_many_requests
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     scrapeMetricsResponse:
       description: ''
     serverError:
@@ -474,6 +414,66 @@ components:
             - code
             - message
             type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    rateLimitError:
+      description: Error Rate Limit Exceeded
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '429'
+                type: string
+                x-go-name: Code
+              message:
+                example: too_many_requests
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    timeseriesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ObservabilityMetrics'
   schemas:
     ObservabilityMetrics:
       description: see also https://prometheus.io/docs/prometheus/latest/querying/api/

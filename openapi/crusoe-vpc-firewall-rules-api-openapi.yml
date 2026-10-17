@@ -165,28 +165,6 @@ paths:
         required: true
 components:
   schemas:
-    FirewallRuleObject:
-      description: 'It has two fields: CIDR and ResourceID. The CIDR field may either be a
-
-        CIDR or an IP address. If an IP, it will be converted to a CIDR. Resource IDs
-
-        of VPC networks, Subnets, and VMs are the only ones allowed. Only one of the two
-
-        fields can be non-empty.'
-      properties:
-        cidr:
-          description: CIDR block, or an IP address that is converted to a CIDR. Mutually exclusive with resource_id.
-          example: 10.1.2.3/24
-          type: string
-          x-go-name: CIDR
-        resource_id:
-          description: ID of a VPC network, subnet, or VM. Mutually exclusive with cidr.
-          example: 306aa10d-5570-4e47-88c9-46bf11bd8737
-          type: string
-          x-go-name: ResourceID
-      title: FirewallRuleObject specifies the source or destination of a firewall rule.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     VPCFirewallRule:
       properties:
         action:
@@ -275,6 +253,28 @@ components:
       - protocols
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    FirewallRuleObject:
+      description: 'It has two fields: CIDR and ResourceID. The CIDR field may either be a
+
+        CIDR or an IP address. If an IP, it will be converted to a CIDR. Resource IDs
+
+        of VPC networks, Subnets, and VMs are the only ones allowed. Only one of the two
+
+        fields can be non-empty.'
+      properties:
+        cidr:
+          description: CIDR block, or an IP address that is converted to a CIDR. Mutually exclusive with resource_id.
+          example: 10.1.2.3/24
+          type: string
+          x-go-name: CIDR
+        resource_id:
+          description: ID of a VPC network, subnet, or VM. Mutually exclusive with cidr.
+          example: 306aa10d-5570-4e47-88c9-46bf11bd8737
+          type: string
+          x-go-name: ResourceID
+      title: FirewallRuleObject specifies the source or destination of a firewall rule.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
     VPCFirewallRulesPatchRequest:
       properties:
         destination_ports:
@@ -318,27 +318,6 @@ components:
       title: VPCFirewallRulesPatchRequest is the request type for PATCH requests to the VPC Firewall Rules endpoint.
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    ListVPCFirewallRulesResponseV1:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/VPCFirewallRule'
-          type: array
-          x-go-name: Items
-      required:
-      - items
-      title: ListVPCFirewallRulesResponseV1 is the response type for GET requests to the VPC Firewall Rules endpoint.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
-    AsyncOperationResponse:
-      properties:
-        operation:
-          $ref: '#/components/schemas/Operation'
-      required:
-      - operation
-      title: AsyncOperationResponse is the response type for endpoints which return async operations.
-      type: object
-      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     Operation:
       description: 'Individual resources that use Operations should populate the `metadata` field
 
@@ -377,6 +356,27 @@ components:
       - started_at
       - completed_at
       title: Operation contains the common fields for all Operation API objects.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
+    ListVPCFirewallRulesResponseV1:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/VPCFirewallRule'
+          type: array
+          x-go-name: Items
+      required:
+      - items
+      title: ListVPCFirewallRulesResponseV1 is the response type for GET requests to the VPC Firewall Rules endpoint.
+      type: object
+      x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
+    AsyncOperationResponse:
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+      required:
+      - operation
+      title: AsyncOperationResponse is the response type for endpoints which return async operations.
       type: object
       x-go-package: gitlab.com/crusoeenergy/schemas/utils/fetch
     VPCFirewallRulesPostRequestV1:
@@ -452,60 +452,12 @@ components:
       type: object
       x-go-package: gitlab.com/crusoeenergy/island/rest-gateway/internal/models
   responses:
-    permissionsError:
-      description: Error Permissions
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '403'
-                type: string
-                x-go-name: Code
-              message:
-                example: unauthorized
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
     getVpcFirewallRuleResponse:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/VPCFirewallRule'
-    listVpcFirewallRulesResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListVPCFirewallRulesResponseV1'
-    badReqError:
-      description: Error Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              code:
-                example: '400'
-                type: string
-                x-go-name: Code
-              message:
-                example: bad_request
-                type: string
-                x-go-name: Message
-            required:
-            - code
-            - message
-            type: object
-    asyncOperationResponse:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncOperationResponse'
     serverError:
       description: Error Internal Server
       content:
@@ -542,6 +494,54 @@ components:
             - code
             - message
             type: object
+    permissionsError:
+      description: Error Permissions
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '403'
+                type: string
+                x-go-name: Code
+              message:
+                example: unauthorized
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    badReqError:
+      description: Error Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: '400'
+                type: string
+                x-go-name: Code
+              message:
+                example: bad_request
+                type: string
+                x-go-name: Message
+            required:
+            - code
+            - message
+            type: object
+    asyncOperationResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncOperationResponse'
+    listVpcFirewallRulesResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListVPCFirewallRulesResponseV1'
 x-tagGroups:
 - name: Compute
   tags:
