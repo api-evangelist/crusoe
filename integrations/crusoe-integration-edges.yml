@@ -19,6 +19,36 @@ edges:
   supported_share: 0.0
   detected_by: sweep-shape-compat.py
   first_seen: '2026-10-13'
+- partner_name: Go module proxy
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official SDK (Go)
+  evidence: https://pkg.go.dev/github.com/crusoecloud/client-go
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/crusoecloud/client-go
+      version: v1.0.19
+      released: '2026-10-11'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/github.com/crusoecloud/client-go
+      repo_leg: github-org:crusoecloud
+      publisher_leg: org:crusoecloud
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 - partner_name: OpenRouter
   partner: openrouter
   partner_match: router
@@ -31,7 +61,7 @@ edges:
   - inference-host
   router_signals:
     inference-host:
-      models: 6
+      models: 9
       router_ids:
       - Crusoe
       tools_share: 1.0
@@ -65,11 +95,11 @@ edges:
   type: register
   direction: partner-built
   category: Cloud native landscape
-  evidence: https://github.com/cncf/landscape/blob/3a7d378b1824b82e729a453bb03fa6f1e37557e1/landscape.yml
+  evidence: https://github.com/cncf/landscape/blob/42dd4cd91dad8ec8558ac02467a43f0805b9957a/landscape.yml
   channel: standard-directory
   relationship: standard-participant
   contract_reference:
-    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @3a7d378b18)
+    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @42dd4cd91d)
     spec_file: null
     standard: Cloud Native (CNCF)
     role: cncf-member (Silver)
@@ -88,39 +118,9 @@ edges:
     signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
       categories, tier and projects are CONTEXT, never read (breadth is not credit)'
     detected_by: sweep-cloud-native.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-cloud-native.py
   first_seen: '2026-10-15'
-- partner_name: Go module proxy
-  partner: null
-  partner_match: null
-  type: register
-  direction: provider-built
-  category: official SDK (Go)
-  evidence: https://pkg.go.dev/github.com/crusoecloud/client-go
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: Go module proxy (public registry JSON)
-    spec_file: null
-    language: Go
-    packages:
-    - name: github.com/crusoecloud/client-go
-      version: v1.0.19
-      released: '2026-10-11'
-      released_field: Time
-      lapsed: false
-      page: https://pkg.go.dev/github.com/crusoecloud/client-go
-      repo_leg: github-org:crusoecloud
-      publisher_leg: org:crusoecloud
-      matched_by: github-org
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
 generated: '2026-10-13'
 method: searched
 checked:
