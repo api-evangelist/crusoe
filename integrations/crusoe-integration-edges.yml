@@ -152,6 +152,42 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-network-edge.py
   first_seen: '2026-10-20'
+- partner_name: MLCommons MLPerf
+  partner: mlcommons
+  partner_match: register-name
+  type: register
+  direction: partner-built
+  category: ML benchmark results
+  evidence: https://github.com/mlcommons/inference_results_v6.1/tree/main/closed/Crusoe
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: MLCommons MLPerf results (github.com/mlcommons/<family>_results_v<round>, closed/ + open/ submitter
+      directories)
+    spec_file: null
+    standard: MLPerf (MLCommons)
+    role: mlperf-submitter
+    registered_name: Crusoe
+    register_directories:
+    - Crusoe
+    matched_domain: null
+    matched_by: register-name
+    identity_source: register-name
+    identity_note: 'MLPerf publishes names only: exact normalised match of the submitter name to the repo''s apis.yml
+      name, one repo, Wikidata P856 not contradicting (Kin 2026-10-20 decision 2)'
+    certified_products:
+    - product: MLPerf Inference (closed division)
+      newest_round: v6.1
+      lapsed: false
+    open_division_only: []
+    current_window: each family's newest 2 rounds
+    signal_note: certified_products = one entry per benchmark FAMILY with a closed-division (peer-reviewed, reference-rules)
+      result, lapsed outside the current window; open-division families, rounds and result counts are context, never
+      read
+    detected_by: sweep-mlops.py
+    detected: '2026-10-20'
+  detected_by: sweep-mlops.py
+  first_seen: '2026-10-20'
 generated: '2026-10-13'
 method: searched
 checked:
@@ -171,6 +207,9 @@ checked:
 - https://www.peeringdb.com/api/fac
 - https://www.peeringdb.com/api/ix
 - https://www.peeringdb.com/api/net
+- https://github.com/kubeflow/website
+- https://github.com/lfai/landscape
+- https://github.com/mlcommons
 source:
 - https://github.com/cncf/landscape
 - https://github.com/cncf/k8s-conformance
