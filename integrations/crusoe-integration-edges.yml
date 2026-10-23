@@ -188,6 +188,32 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-mlops.py
   first_seen: '2026-10-20'
+- partner_name: Open Compute Project Foundation
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.opencompute.org/membership/membership-directory
+  category: open data center hardware standards membership
+  contract_reference:
+    register: Open Compute Project membership directory (opencompute.org/membership/membership-directory)
+    standard: Open Compute Project (OCP) specifications
+    spec_file: null
+    role: ocp-member
+    registered_name: Crusoe
+    register_id: https://www.crusoe.ai/
+    matched_domain: crusoe.ai
+    matched_by: domain
+    member_since: '2026'
+    signal_note: 'participation only: corporate membership of the Open Compute Project (level recorded as partner_tier);
+      membership is not product conformance (OCP Accepted / Inspired products are a separate marketplace, not read)'
+    detected_by: sweep-data-center-tier-certification.py
+    detected: '2026-10-21'
+  detected_by: sweep-data-center-tier-certification.py
+  first_seen: '2026-10-21'
+  partner_tier: Silver
 - partner_name: OpenTofu (opentofu-registry)
   partner: opentofu
   partner_match: mirror
@@ -222,32 +248,40 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: infrastructure-as-code provider registry listing
-- partner_name: Open Compute Project Foundation
-  partner: null
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://www.opencompute.org/membership/membership-directory
-  category: open data center hardware standards membership
-  contract_reference:
-    register: Open Compute Project membership directory (opencompute.org/membership/membership-directory)
-    standard: Open Compute Project (OCP) specifications
-    spec_file: null
-    role: ocp-member
-    registered_name: Crusoe
-    register_id: https://www.crusoe.ai/
-    matched_domain: crusoe.ai
-    matched_by: domain
-    member_since: '2026'
-    signal_note: 'participation only: corporate membership of the Open Compute Project (level recorded as partner_tier);
-      membership is not product conformance (OCP Accepted / Inspired products are a separate marketplace, not read)'
-    detected_by: sweep-data-center-tier-certification.py
-    detected: '2026-10-21'
-  detected_by: sweep-data-center-tier-certification.py
-  first_seen: '2026-10-21'
-  partner_tier: Silver
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/crusoeai
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - crusoeai/dolphin-2.9.3-qwen2-1.5b-GGUF
+  - crusoeai/Llama-3-8B-Instruct-Gradient-1048k-GGUF
+  - crusoeai/Llama-3-8B-Instruct-262k-GGUF
+  - crusoeai/Arcee-Agent-GGUF
+  - crusoeai/dolphin-2.9.2-mixtral-8x22b-GGUF
+  - crusoeai/dolphin-2.9.3-Yi-1.5-34B-32k-GGUF
+  - crusoeai/dolphin-2.9.2-Phi-3-Medium-GGUF
+  - crusoeai/Dolphin-2.9.1-Phi-3-Kensho-4.5B-GGUF
+  - crusoeai/foundry-model-arena
+  - crusoeai/doc_analysis
+  - crusoeai/crusoe_nvidia_nemotron_demo
+  - crusoeai/personal-fashion-advisor
+  - crusoeai/fake-podcast
+  - crusoeai/snake-battle-ai
+  - crusoeai/crusoe-voice-agent
+  - crusoeai/call-in-podcast
+  listing_count: 2
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub models
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-13'
 method: searched
 checked:
@@ -276,6 +310,7 @@ checked:
 - https://www.climateneutraldatacentre.net/signatories/
 - https://www.opencompute.org/membership/membership-directory
 - https://www.thegreengrid.org/en/about-us/members
+- hugging-face/integrations/hugging-face-integration-edges.yml
 source:
 - https://github.com/cncf/landscape
 - https://github.com/cncf/k8s-conformance
